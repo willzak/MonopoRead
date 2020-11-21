@@ -12,6 +12,8 @@ class Api::BoardsControllerTest < ActionDispatch::IntegrationTest
     
     get "/api/boards/#{@board[:id]}/board_tiles"
     body = JSON.parse(response.body)
-    puts body.inspect
+    assert_equal body["board_tiles"][0]["tile"]["name"], 'Number in Title'
+    assert_equal body["board_tiles"][0]["books"][0]["name"], '1Q84'
+    assert_equal body["board_tiles"][0]["recommendations"][0]["book"]["name"], '1Q84'
   end
 end
