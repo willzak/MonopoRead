@@ -8,7 +8,8 @@
     "test": "test"
   },
   "engines": {
-    "node": "6.3.1"
+    "node": "10.17.0",
+    "npm": "6.14.8"
   },
   "scripts": {
     "build": "cd client && npm install && npm run build && cd ..",
