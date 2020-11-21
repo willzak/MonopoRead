@@ -4,12 +4,18 @@ Rails.application.routes.draw do
   namespace :api do
     
     resources :users 
-    resources :players
-    resources :games
-    resources :boards
+    resources :games do
+      resources :players
+    end
+    resources :boards do
+      resources :board_tiles
+    end
     resources :books
     resources :tile_groups
     resources :tiles
+
+    get '/boards/:board_id/player_tiles' => 'boards#player_tiles'
+    get '/boards/:board_id/players/:player_id/player_tiles' => 'players#player_tiles'
 
   end
 
