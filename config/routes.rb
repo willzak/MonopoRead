@@ -5,7 +5,13 @@ Rails.application.routes.draw do
 
     get '/data', to: 'tests#index'
     
-    resources :dogs
+    resources :users 
+    resources :players
+    resources :games
+    resources :boards
+    resources :books
+    resources :tile_groups
+    resources :tiles
 
   end
 
