@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     resources :tile_groups
     resources :tiles
 
+    get '/boards/:board_id/users' => 'boards#users'
+    get '/games/:game_id/users' => 'games#users'
+    get '/users/:user_id/games' => 'users#games'
     get '/boards/:board_id/player_tiles' => 'boards#player_tiles'
     get '/boards/:board_id/players/:player_id/player_tiles' => 'players#player_tiles'
 
