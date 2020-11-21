@@ -52,6 +52,15 @@ class Api::BoardsController < ApplicationController
     }
   end
 
+  def users
+    @board = Board.find(params[:id])
+    @users = Game.find(@board[:game_id]).players.all.map { |player| User.find(player[:user_id]) }
+
+    render :json => {
+      users: @users
+    }
+  end
+
   def player_tiles
     @board = Board.find(params[:id])
     @game = Game.find(@board[:game_id])

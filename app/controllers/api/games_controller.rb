@@ -52,6 +52,14 @@ class Api::GamesController < ApplicationController
     }
   end
 
+  def users
+    @users = Game.find(params[:id]).players.all.map { |player| User.find(player[:user_id]) }
+
+    render :json => {
+      users: @users
+    }
+  end
+
   private
     def game_params
       params.require(:game).permit(:name, :password_digest, :max_players, :ended_at, :user_id)
