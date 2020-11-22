@@ -7,14 +7,16 @@
 player_tile1:
   board_tile: tile1
   book: book1
-  user: me
+  player: my_player
+  ended_at: '2020-11-22T04:35:08.468Z'
 
 player_tile2:
   board_tile: tile2
   book: book2
-  user: me
+  player: my_player
+  ended_at: '2020-11-22T04:35:08.468Z'
 
 player_tile3:
   board_tile: tile3
   book: book3
-  user: me
+  player: my_player
