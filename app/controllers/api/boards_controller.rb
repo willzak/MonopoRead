@@ -74,6 +74,6 @@ class Api::BoardsController < ApplicationController
 
   private
     def board_params
-      params.require(:board).permit(:win_requirement, :win_points, :isbn_trust, :isbn_master, :isbn_vote, :turn_delay, :turn_reminder, :ended_at, :game_id)
+      params.permit(:win_requirement, :win_points, :isbn_trust, :isbn_master, :isbn_vote, :turn_delay, :turn_reminder, :ended_at, :game_id)
     end
 end

@@ -75,6 +75,6 @@ class Api::PlayersController < ApplicationController
 
   private
     def player_params
-      params.require(:player).permit(:user_id, :game_id, :color_id, :token_id)
+      params.permit(:user_id, :game_id, :color_id, :token_id)
     end
 end

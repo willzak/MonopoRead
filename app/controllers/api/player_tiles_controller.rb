@@ -52,6 +52,6 @@ class Api::PlayerTileTilesController < ApplicationController
 
   private
     def player_tile_params
-      params.require(:player_tile).permit(:ended_at, :player_tile_id, :board_tile_id, :book_id, :review_id)
+      params.permit(:ended_at, :player_tile_id, :board_tile_id, :book_id, :review_id)
     end
 end

@@ -62,6 +62,6 @@ class Api::GamesController < ApplicationController
 
   private
     def game_params
-      params.require(:game).permit(:name, :password_digest, :max_players, :ended_at, :user_id)
+      params.permit(:name, :password_digest, :max_players, :ended_at, :user_id)
     end
 end

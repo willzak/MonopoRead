@@ -59,6 +59,6 @@ class Api::BoardTilesController < ApplicationController
 
   private
     def board_tile_params
-      params.require(:board_tile).permit(:board_id, :tile_id)
+      params.permit(:board_id, :tile_id)
     end
 end
