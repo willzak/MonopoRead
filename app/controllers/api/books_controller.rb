@@ -1,3 +1,7 @@
+require 'open-uri'
+require 'json'
+require 'active_support/core_ext'
+
 class Api::BooksController < ApplicationController
   def index
     @books = Book.all
@@ -49,6 +53,47 @@ class Api::BooksController < ApplicationController
 
     render :json => {
       message: 'Book was destroyed'
+    }
+  end
+
+  def goodreads
+    @book = Book.find(params[:book_id])
+    @goodread = info_by_isbn(@book[:isbn])[:goodread]
+
+    render :json => {
+      goodread: @goodread
+    }
+  end
+
+  def google
+    @book = Book.find(params[:book_id])
+    @google = info_by_isbn(@book[:isbn])[:google]
+
+    render :json => {
+      google: @google
+    }
+  end
+
+  def info_by_isbn(isbn)
+    @google = JSON.parse(open("https://www.googleapis.com/books/v1/volumes?q=isbn:#{isbn}").read)
+    @goodread = JSON.parse(Hash.from_xml(open("https://www.goodreads.com/search/search.xml?q=#{isbn}&key=hfvqo7Dwujbu5U0V5coh4w").read).to_json)
+
+    info = { google: @google, goodread: @goodread}
+  end
+
+  def goodreads_search
+    @goodread = JSON.parse(Hash.from_xml(open("https://www.goodreads.com/search/search.xml?q=#{params[:search]}&key=hfvqo7Dwujbu5U0V5coh4w").read).to_json)
+
+    render :json => {
+      goodread: @goodread
+    }
+  end
+
+  def google_search
+    @google = JSON.parse(open("https://www.googleapis.com/books/v1/volumes?q=#{params[:search]}").read)
+
+    render :json => {
+      google: @google
     }
   end
 
