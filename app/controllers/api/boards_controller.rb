@@ -52,8 +52,17 @@ class Api::BoardsController < ApplicationController
     }
   end
 
+  def players
+    @board = Board.find(params[:board_id])
+    @players = Game.find(@board[:game_id]).players.all
+
+    render :json => {
+      players: @players
+    }
+  end
+
   def users
-    @board = Board.find(params[:id])
+    @board = Board.find(params[:board_id])
     @users = Game.find(@board[:game_id]).players.all.map { |player| User.find(player[:user_id]) }
 
     render :json => {
@@ -62,10 +71,11 @@ class Api::BoardsController < ApplicationController
   end
 
   def player_tiles
-    @board = Board.find(params[:id])
+    @board = Board.find(params[:board_id])
+    @board_tiles = BoardTile.where(board: @board)
     @game = Game.find(@board[:game_id])
     @players = Player.where(game: @game)
-    @player_tiles = @players.map { |player| { player: player, player_tiles: PlayerTiles.where(player: player, board: @board) } }
+    @player_tiles = @players.map { |player| { player: player, player_tiles: PlayerTile.where(player: player, board_tile: @board_tiles) } }
 
     render :json => {
       player_tiles: @player_tiles

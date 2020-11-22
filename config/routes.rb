@@ -16,12 +16,14 @@ Rails.application.routes.draw do
     resources :tile_groups
     resources :tiles
 
+    get '/boards/:board_id/players' => 'boards#players'
+    get '/games/:game_id/players' => 'games#players'
     get '/boards/:board_id/users' => 'boards#users'
     get '/games/:game_id/users' => 'games#users'
     get '/users/:user_id/games' => 'users#games'
     get '/boards/:board_id/player_tiles' => 'boards#player_tiles'
     get '/boards/:board_id/players/:player_id/player_tiles' => 'players#player_tiles'
-    get '/players/:player_id/current_tile' => 'players#current_tile'
+    get '/boards/:board_id/players/:player_id/current_tile' => 'players#current_tile'
     get '/tile_groups/:tile_group_id/tiles' => 'tile_groups#tiles'
 
   end
