@@ -1,17 +1,27 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  namespace :api do # /api/data
-
-    get '/data', to: 'tests#index'
+  namespace :api do
     
     resources :users 
-    resources :players
-    resources :games
-    resources :boards
+    resources :games do
+      resources :players do
+        resources :player_tiles
+      end
+    end
+    resources :boards do
+      resources :board_tiles
+    end
     resources :books
     resources :tile_groups
     resources :tiles
+
+    get '/boards/:board_id/users' => 'boards#users'
+    get '/games/:game_id/users' => 'games#users'
+    get '/users/:user_id/games' => 'users#games'
+    get '/boards/:board_id/player_tiles' => 'boards#player_tiles'
+    get '/boards/:board_id/players/:player_id/player_tiles' => 'players#player_tiles'
+    get '/players/:player_id/current_tile' => 'players#current_tile'
 
   end
 
