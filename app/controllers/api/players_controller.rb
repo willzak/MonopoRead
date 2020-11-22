@@ -52,6 +52,18 @@ class Api::PlayersController < ApplicationController
     }
   end
 
+  def current_tile
+    @player = Player.find(params[:id])
+    @current_tile = @player.player_tiles.where(ended_at: nil)
+    if !@current_tile
+      @current_tile = @player.player_tiles.order("ended_at").last
+    end
+
+    render :json => {
+      current_tile: @current_tile
+    }
+  end
+
   def player_tiles
     @player_tiles = PlayerTiles.where(player_id: params[:player_id], board_id: params[:board_id])
 
