@@ -1,6 +1,7 @@
 class Api::TilesController < ApplicationController
   def index
     @tiles = Tile.all
+    @tiles = @tiles.map { |tile| { tile: tile, tile_group: TileGroup.find(tile[:tile_group_id]), color: Color.find(TileGroup.find(tile[:tile_group_id])[:color_id]) } }
 
     render :json => {
       tiles: @tiles
@@ -9,6 +10,7 @@ class Api::TilesController < ApplicationController
 
   def show
     @tile = Tile.find(params[:id])
+    @tile = { tile: @tile, tile_group: TileGroup.find(@tile[:tile_group_id]), color: Color.find(TileGroup.find(@tile[:tile_group_id])[:color_id]) }
 
     render :json => {
       tile: @tile
@@ -54,6 +56,6 @@ class Api::TilesController < ApplicationController
 
   private
     def tile_params
-      params.require(:tile).permit(:name, :description, :tile_group_id)
+      params.permit(:name, :description, :tile_group_id)
     end
 end
