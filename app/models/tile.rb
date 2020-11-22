@@ -3,4 +3,7 @@ class Tile < ApplicationRecord
 
   has_many :recommendations
   has_many :board_tiles
+
+  validates :name, presence: true
+  validates :description, presence: true
 end
