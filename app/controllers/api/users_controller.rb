@@ -53,7 +53,7 @@ class Api::UsersController < ApplicationController
   end
 
   def games
-    @games = User.find(params[:id]).players.all.map { |player| Game.find(player[:game_id]) }
+    @games = User.find(params[:user_id]).players.all.map { |player| Game.find(player[:game_id]) }
 
     render :json => {
       games: @games
