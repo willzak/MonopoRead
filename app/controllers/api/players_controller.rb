@@ -9,6 +9,7 @@ class Api::PlayersController < ApplicationController
 
   def show
     @player = Player.find(params[:id])
+    @player = { player: @player, color: Color.find(@player[:color_id])}
 
     render :json => {
       player: @player
