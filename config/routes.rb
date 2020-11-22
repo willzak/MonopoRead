@@ -21,7 +21,13 @@ Rails.application.routes.draw do
     get '/boards/:board_id/users' => 'boards#users'
     get '/games/:game_id/users' => 'games#users'
     get '/users/:user_id/games' => 'users#games'
+    get '/games/:game_id/boards' => 'games#boards'
+
+    get '/games/:game_id/free_colors' => 'games#free_colors'
+    get '/games/:game_id/current_board' => 'games#current_board'
+
     get '/boards/:board_id/player_tiles' => 'boards#player_tiles'
+    get '/boards/:board_id/current_tiles' => 'boards#current_tiles'
     get '/boards/:board_id/players/:player_id/player_tiles' => 'players#player_tiles'
     get '/boards/:board_id/players/:player_id/current_tile' => 'players#current_tile'
     get '/tile_groups/:tile_group_id/tiles' => 'tile_groups#tiles'

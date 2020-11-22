@@ -68,6 +68,37 @@ class Api::GamesController < ApplicationController
     }
   end
 
+  def free_colors
+    @game = Game.find(params[:game_id])
+    @used_colors = Game.find(params[:game_id]).players.all.pluck(:color_id)
+    @colors = Color.all.select { |color| !@used_colors.include?(color[:id])}
+
+    render :json => {
+      colors: @colors
+    }
+  end
+
+  def boards
+    @game = Game.find(params[:game_id])
+    @boards = Board.where(game: @game)
+
+    render :json => {
+      boards: @boards
+    }
+  end
+
+  def current_board
+    @game = Game.find(params[:game_id])
+    @current_board = Board.where(game: @game, ended_at: nil)
+    if @current_board.empty?
+      @current_board = Board.where(game: @game, ended_at: nil).order("ended_at").last
+    end
+
+    render :json => {
+      current_board: @current_board
+    }
+  end
+
   private
     def game_params
       params.permit(:name, :password_digest, :max_players, :ended_at, :user_id)
