@@ -4,8 +4,14 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+tile1:
+  board: my_board
+  tile: number
+
+tile2:
+  board: my_board
+  tile: number
+
+tile3:
+  board: my_board
+  tile: number
