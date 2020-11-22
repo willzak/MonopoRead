@@ -58,7 +58,7 @@ class Api::BooksController < ApplicationController
 
   def goodreads
     @book = Book.find(params[:book_id])
-    @goodread = info_by_isbn(@book[:isbn])[:goodread]
+    @goodread = JSON.parse(Hash.from_xml(open("https://www.goodreads.com/search/search.xml?q=#{@book[:isbn]}&key=hfvqo7Dwujbu5U0V5coh4w").read).to_json)
 
     render :json => {
       goodread: @goodread
@@ -67,18 +67,11 @@ class Api::BooksController < ApplicationController
 
   def google
     @book = Book.find(params[:book_id])
-    @google = info_by_isbn(@book[:isbn])[:google]
+    @google = JSON.parse(open("https://www.googleapis.com/books/v1/volumes?q=isbn:#{@book[:isbn]}").read)
 
     render :json => {
       google: @google
     }
-  end
-
-  def info_by_isbn(isbn)
-    @google = JSON.parse(open("https://www.googleapis.com/books/v1/volumes?q=isbn:#{isbn}").read)
-    @goodread = JSON.parse(Hash.from_xml(open("https://www.goodreads.com/search/search.xml?q=#{isbn}&key=hfvqo7Dwujbu5U0V5coh4w").read).to_json)
-
-    info = { google: @google, goodread: @goodread}
   end
 
   def goodreads_search
