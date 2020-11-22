@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     
     resources :users 
     resources :games do
-      resources :players
+      resources :players do
+        resources :player_tiles
+      end
     end
     resources :boards do
       resources :board_tiles
