@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get '/boards/:board_id/player_tiles' => 'boards#player_tiles'
     get '/boards/:board_id/players/:player_id/player_tiles' => 'players#player_tiles'
     get '/players/:player_id/current_tile' => 'players#current_tile'
+    get '/tile_groups/:tile_group_id/tiles' => 'tile_groups#tiles'
 
   end
 

@@ -52,8 +52,17 @@ class Api::TileGroupsController < ApplicationController
     }
   end
 
+  def tiles
+    @tile_group = TileGroup.find(params[:tile_group_id])
+    @tiles = @tile_group.tiles
+
+    render :json => {
+      tiles: @tiles
+    }
+  end
+
   private
     def tile_group_params
-      params.require(:tile_group).permit(:name, :description, :color_id)
+      params.permit(:name, :description, :color_id)
     end
 end
