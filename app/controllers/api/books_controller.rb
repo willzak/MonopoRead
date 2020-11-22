@@ -58,20 +58,32 @@ class Api::BooksController < ApplicationController
 
   def goodreads
     @book = Book.find(params[:book_id])
-    @goodread = JSON.parse(Hash.from_xml(open("https://www.goodreads.com/search/search.xml?q=#{@book[:isbn]}&key=hfvqo7Dwujbu5U0V5coh4w").read).to_json)
+    if @book[:isbn]
+      @goodread = JSON.parse(Hash.from_xml(open("https://www.goodreads.com/search/search.xml?q=#{@book[:isbn]}&key=hfvqo7Dwujbu5U0V5coh4w").read).to_json)
 
-    render :json => {
-      goodread: @goodread
-    }
+      render :json => {
+        goodread: @goodread
+      }
+    else
+      render :json => {
+        message: 'Book does not have ISBN'
+      }
+    end
   end
 
   def google
     @book = Book.find(params[:book_id])
-    @google = JSON.parse(open("https://www.googleapis.com/books/v1/volumes?q=isbn:#{@book[:isbn]}").read)
+    if @book[:isbn]
+      @google = JSON.parse(open("https://www.googleapis.com/books/v1/volumes?q=isbn:#{@book[:isbn]}").read)
 
-    render :json => {
-      google: @google
-    }
+      render :json => {
+        google: @google
+      }
+    else
+      render :json => {
+        message: 'Book does not have ISBN'
+      }
+    end
   end
 
   def goodreads_search
