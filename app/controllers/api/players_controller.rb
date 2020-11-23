@@ -1,6 +1,7 @@
 class Api::PlayersController < ApplicationController
   def index
     @players = Player.where(game_id: params[:game_id])
+    @players = @players.map { |player| { player: player, color: Color.find(player[:color_id]) } }
 
     render :json => {
       players: @players

@@ -54,6 +54,7 @@ class Api::GamesController < ApplicationController
 
   def players
     @players = Game.find(params[:game_id]).players.all
+    @players = @players.map { |player| { player: player, color: Color.find(player[:color_id]) } }
 
     render :json => {
       players: @players
