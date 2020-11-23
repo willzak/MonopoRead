@@ -14,6 +14,9 @@ export default function Chance(props) {
   }
 
   return (
-    <div class={type}>{props.player}?</div>
+    <div class={type}>
+      {props.player}
+      <div class="chance-default"><strong>?</strong></div>
+    </div>
   )
 }

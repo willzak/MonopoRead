@@ -36,11 +36,11 @@ export default function Board(props) {
       </div>
       <div class="bottom-row">
         <Corner player={null}/>
-        <Tile colour="brown-tile" player={null} direction="bottom"/>
-        <Tile colour="brown-tile" player={null} direction="bottom"/>
+        <Tile colour="skyblue-tile" player={null} direction="bottom"/>
+        <Tile colour="skyblue-tile" player={null} direction="bottom"/>
         <Chance player={null} direction="bottom"/>
-        <Tile colour="skyblue-tile" player={null} direction="bottom"/>
-        <Tile colour="skyblue-tile" player={null} direction="bottom"/>
+        <Tile colour="brown-tile" player={null} direction="bottom"/>
+        <Tile colour="brown-tile" player={null} direction="bottom"/>
         <Corner player={null}/>
       </div>
     </div>
