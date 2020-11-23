@@ -1,0 +1,11 @@
+.indvidual-tile {
+  margin: 50px;
+  width: 70%;
+  height: 300px;
+  border: solid;
+  background-color: white;
+}
+
+/* .individual-tile-header {
+  background-color: orange; 
+} */

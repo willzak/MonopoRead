@@ -19,11 +19,11 @@ export default function Board(props) {
       </div>
       <div class="column-organiser">
         <div>
-          <Tile colour="fuchsia-tile" player={null} direction="left"/>
-          <Tile colour="fuchsia-tile" player={null} direction="left"/>
+          <Tile colour="fuchsia-tile" player={null} direction="left" id = "1" name = "Read A Poetry Book"/>
+          <Tile colour="fuchsia-tile" player={null} direction="left" id = "2" name = "Read A Sci-Fi Book"/>
           <Chance player={null} direction="left" />
-          <Tile colour="orange-tile" player={null} direction="left"/>
-          <Tile colour="orange-tile" player={null} direction="left"/>
+          <Tile colour="orange-tile" player={null} direction="left" id = "3" name = "Read A Horror Book"/>
+          <Tile colour="orange-tile" player={null} direction="left" id = "4" name = "Read A Fantasy Book"/>
         </div>
         <Console/>
         <div>
