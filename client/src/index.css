@@ -12,174 +12,171 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-/* SIDE BAR */
+/* GAME VIEW */
 
 .game-view {
   background-color: bisque;
   display: flex;
   flex-direction: row;
+  height: 100vh;
 }
 
 .game-play {
   margin: 20px;
-  margin-left: 0px;
+}
+
+.game-board {
+  font-size: 0.6em;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .side-bar {
   margin: 20px;
-  width: 300px;
+  width: 20vw;
   background-color: #BFDBAE;
   opacity: 60%;
   border-radius: 10px;
-  margin-right: 20px;
 }
 
-/* GAME TILES  */
+/* PROPERTY TILES  */
 
-.brown-tile {
+.colour {
   outline:1px solid black;
   margin: 0;
+  padding: 0;
+}
+
+.brown-tile {
   background-color: saddlebrown;
   height: 3em;
   width: 9em;
-}
-
-.side-brown-tile {
-  outline:1px solid black;
-  background-color: saddlebrown;
-  height: 9em;
-  width: 3em;
 }
 
 .skyblue-tile {
-  outline:1px solid black;
-  margin: 0;
   background-color: skyblue;
   height: 3em;
   width: 9em;
 }
 
-.side-skyblue-tile {
-  outline:1px solid black;
-  margin: 0;
-  background-color: skyblue;
-  height: 9em;
-  width: 3em;
-}
-
-.fuschia-tile {
-  outline:1px solid black;
-  background-color: fuchsia;
-  height: 3em;
-  width: 9em;
-}
-
-.side-fuchsia-tile {
-  outline:1px solid black;
+.fuchsia-tile {
   background-color: fuchsia;
   height: 9em;
   width: 3em;
 }
 
 .orange-tile {
-  outline:1px solid black;
-  background-color: orange;
-  height: 3em;
-  width: 9em;
-}
-
-.side-orange-tile {
-  outline:1px solid black;
   background-color: orange;
   height: 9em;
   width: 3em;
 }
 
 .red-tile {
-  outline:1px solid black;
   background-color: red;
   height: 3em;
   width: 9em;
-}
-
-.side-red-tile {
-  outline:1px solid black;
-  background-color: red;
-  height: 9em;
-  width: 3em;
 }
 
 .yellow-tile {
-  outline:1px solid black;
   background-color: yellow;
   height: 3em;
   width: 9em;
-}
-
-.side-yellow-tile {
-  outline:1px solid black;
-  background-color: yellow;
-  height: 9em;
-  width: 3em;
 }
 
 .green-tile {
-  outline:1px solid black;
-  background-color: green;
-  height: 3em;
-  width: 9em;
-}
-
-.side-green-tile {
-  outline:1px solid black;
   background-color: green;
   height: 9em;
   width: 3em;
 }
 
 .blue-tile {
-  outline:1px solid black;
-  background-color: blue;
-  height: 3em;
-  width: 9em;
-}
-
-.side-blue-tile {
-  outline:1px solid black;
   background-color: blue;
   height: 9em;
   width: 3em;
 }
 
-.tile-body {
-  outline:1px solid black;
+.top-game-tile {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+}
+
+.bottom-game-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.right-game-tile {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.left-game-tile {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.square {
   background-color: white;
+  outline: black solid 1px;
+}
+
+.top-square {
   height: 12em;
   width: 9em;
 }
 
-.side-tile {
-  outline:1px solid black;
-  background-color: white;
+.bottom-square {
+  height: 12em;
+  width: 9em;
+}
+
+.left-square {
   height: 9em;
   width: 12em;
 }
 
-.side {
-  display: flex;
-  flex-direction: row;
+.right-square {
+  height: 9em;
+  width: 12em;
 }
+
+/* CHANCE CARDS */
+.chance {
+  outline:1px solid black;
+  background-color:  #BFDBAE;
+}
+
+.chance-bottom {
+  height: 15em;
+  width: 9em;
+}
+
+.chance-top {
+  height: 15em;
+  width: 9em;
+}
+
+.chance-left {
+  height: 9em;
+  width: 15em;
+}
+
+.chance-right {
+  height: 9em;
+  width: 15em;
+}
+
+/* OTHER BOARD ELEMENTS */
 
 .bottom-row {
   display: flex;
   flex-direction: row;
-}
-
-.console {
-  outline:1px solid black;
-  width: 45em;
-  height: 45em;
-  background-color: #BFDBAE;
 }
 
 .column-organiser {
@@ -187,39 +184,17 @@ code {
   flex-direction: row;
 }
 
+.console {
+  width: 45em;
+  height: 45em;
+  outline:1px solid black;
+  background-color: #BFDBAE;
+}
+
 .corner {
+  height: 15em;
+  width: 15em;
   outline:1px solid black;
   background-color: burlywood;
-  height: 15em;
-  width: 15em;
 }
 
-.chance {
-  outline:1px solid black;
-  height: 15em;
-  width: 9em;
-  background-color:  #BFDBAE;
-}
-
-.chance-top {
-  outline:1px solid black;
-  height: 15em;
-  width: 9em;
-  background-color:  #BFDBAE;
-  transform: rotateX(180deg);
-}
-
-.chance-left {
-  outline:1px solid black;
-  height: 9em;
-  width: 15em;
-  background-color:  #BFDBAE;
-}
-
-.chance-right {
-  outline:1px solid black;
-  height: 9em;
-  width: 15em;
-  background-color:  #BFDBAE;
-  rotate: 270;
-}

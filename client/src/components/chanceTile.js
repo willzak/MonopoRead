@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Chance(props) {
-  let type = "chance";
+  let type = "chance chance";
 
   if (props.direction === 'left') {
     type += '-left';
@@ -9,6 +9,8 @@ export default function Chance(props) {
     type += '-right';
   } else if (props.direction === 'top') {
     type += '-top';
+  } else {
+    type += '-bottom'
   }
 
   return (

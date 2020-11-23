@@ -1,39 +1,15 @@
 
 import React from "react";
+import Colour from "./colourTile";
+import Square from "./square";
 
 export default function Tile(props) {
+  let type = props.direction + "-game-tile";
 
-  if (props.direction === 'bottom') {
-    return (
-      <div>
-        <div class={props.colour}></div>
-        <div class="tile-body">{props.player}</div>
-      </div>
-    )
-  } else if (props.direction === 'top') {
-    return (
-      <div>
-        <div class="tile-body">{props.player}</div>
-        <div class={props.colour}></div>
-      </div>
-    )
-  } else if (props.direction === 'left') {
-    let colour = "side-";
-    colour += props.colour;
-    return (
-      <div class="side">
-        <div class="side-tile">{props.player}</div>
-        <div class={colour}></div>
-      </div>
-    )
-  } else {
-    let colour = "side-";
-    colour += props.colour;
-    return (
-      <div class="side">
-        <div class={colour}></div>
-        <div class="side-tile">{props.player}</div>
-      </div>
-    )
-  }
+  return (
+    <div class={type}>
+      <Colour colour={props.colour} />
+      <Square direction={props.direction}/>
+    </div>
+  )
 };
