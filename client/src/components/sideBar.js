@@ -1,5 +1,6 @@
 import React from "react";
-import Dice from 'react-dice-roll';
+
+import Roll from "./dice";
 
 export default function SideBar(props) {
   return (
@@ -40,9 +41,7 @@ export default function SideBar(props) {
           • Last Move: 7 hours ago
         </div>
       </div>
-      <div class="dice">
-        <Dice onRoll={(value) => console.log(value)} size={100}/>
-      </div>
+      <Roll />
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Board from "./gameBoard";
-import SideBar from "../sideBar";
+import SideBar from "./sideBar";
 
 export default function Game(props) {
   return (
@@ -10,7 +10,7 @@ export default function Game(props) {
       <SideBar />
       <div class="game-play">
         <Router>
-        <Board />
+          <Board />
         </Router>
       </div>
     </body>
