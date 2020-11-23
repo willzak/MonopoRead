@@ -33,8 +33,9 @@ Rails.application.routes.draw do
 
     get '/boards/:board_id/player_tiles' => 'boards#player_tiles' # All player tiles for all players for a board
     get '/boards/:board_id/current_tiles' => 'boards#current_tiles' # Current tiles for all players for a board
+    get '/boards/:board_id/player_stats' => 'boards#player_stats' # Books read and last play for all players for a board
     get '/boards/:board_id/players/:player_id/player_tiles' => 'players#player_tiles' # All player tiles for a player for a board
-    get '/boards/:board_id/players/:player_id/current_tile' => 'players#current_tile' # Current tiles for a player for a board
+    get '/boards/:board_id/players/:player_id/current_tile' => 'players#current_tile' # Current tile for a player for a board
 
     get '/tile_groups/:tile_group_id/tiles' => 'tile_groups#tiles' # All games for a user
 

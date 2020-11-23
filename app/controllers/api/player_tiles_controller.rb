@@ -8,18 +8,14 @@ class Api::PlayerTileTilesController < ApplicationController
   def show
     @player_tile = PlayerTile.find(params[:id])
 
-    render :json => {
-      player_tile: @player_tile
-    }
+    render :json => @player_tile
   end
 
   def create
     @player_tile = PlayerTileTile.new(player_tile_params)
 
     if @player_tile.save
-      render :json => {
-        player_tile: @player_tile
-      }
+      render :json => @player_tile
     else
       render :json => {
         error: 'Player Tile was not saved'
@@ -31,9 +27,7 @@ class Api::PlayerTileTilesController < ApplicationController
     @player_tile = PlayerTileTile.find(params[:player_tile_id])
 
     if @player_tile.update(player_tile_params)
-      render :json => {
-        player_tile: @player_tile
-      }
+      render :json => @player_tile
     else
       render :json => {
         error: 'Player Tile was not updated'

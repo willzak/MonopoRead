@@ -3,27 +3,21 @@ class Api::TilesController < ApplicationController
     @tiles = Tile.all
     @tiles = @tiles.map { |tile| { tile: tile, tile_group: TileGroup.find(tile[:tile_group_id]), color: Color.find(TileGroup.find(tile[:tile_group_id])[:color_id]) } }
 
-    render :json => {
-      tiles: @tiles
-    }
+    render :json => @tiles
   end
 
   def show
     @tile = Tile.find(params[:id])
     @tile = { tile: @tile, tile_group: TileGroup.find(@tile[:tile_group_id]), color: Color.find(TileGroup.find(@tile[:tile_group_id])[:color_id]) }
 
-    render :json => {
-      tile: @tile
-    }
+    render :json => @tile
   end
 
   def create
     @tile = Tile.new(tile_params)
 
     if @tile.save
-      render :json => {
-        tile: @tile
-      }
+      render :json => @tile
     else
       render :json => {
         error: 'Tile was not saved'
@@ -35,9 +29,7 @@ class Api::TilesController < ApplicationController
     @tile = Tile.find(params[:id])
 
     if @tile.update(tile_params)
-      render :json => {
-        tile: @tile
-      }
+      render :json => @tile
     else
       render :json => {
         error: 'Tile was not updated'

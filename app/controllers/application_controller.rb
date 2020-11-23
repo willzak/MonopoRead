@@ -3,8 +3,8 @@ class ApplicationController < ActionController::API
     @board = Board.find(board_id)
     @board_tiles = BoardTile.where(board: @board)
     @player = Player.find(player_id)
-    @current_tile = @player.player_tiles.where(ended_at: nil, board_tile: @board_tiles)
-    if @current_tile.empty?
+    @current_tile = @player.player_tiles.where(ended_at: nil, board_tile: @board_tiles).first
+    if @current_tile
       @current_tile = @player.player_tiles.where(board_tile: @board_tiles).order("ended_at").last
     end
 
