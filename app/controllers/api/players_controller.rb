@@ -9,6 +9,7 @@ class Api::PlayersController < ApplicationController
 
   def show
     @player = Player.find(params[:id])
+    @player = { player: @player, color: Color.find(@player[:color_id])}
 
     render :json => {
       player: @player
@@ -53,11 +54,7 @@ class Api::PlayersController < ApplicationController
   end
 
   def current_tile
-    @player = Player.find(params[:id])
-    @current_tile = @player.player_tiles.where(ended_at: nil)
-    if !@current_tile
-      @current_tile = @player.player_tiles.order("ended_at").last
-    end
+    @current_tile = current_tile_for_player(params[:board_id], params[:player_id])
 
     render :json => {
       current_tile: @current_tile
@@ -65,7 +62,9 @@ class Api::PlayersController < ApplicationController
   end
 
   def player_tiles
-    @player_tiles = PlayerTiles.where(player_id: params[:player_id], board_id: params[:board_id])
+    @board = Board.find(params[:board_id])
+    @board_tiles = BoardTile.where(board: @board)
+    @player_tiles = PlayerTile.where(player_id: params[:player_id], board_tile: @board_tiles)
 
     render :json => {
       player_tiles: @player_tiles
@@ -74,6 +73,6 @@ class Api::PlayersController < ApplicationController
 
   private
     def player_params
-      params.require(:player).permit(:user_id, :game_id, :color_id, :token_id)
+      params.permit(:user_id, :game_id, :color_id, :token_id)
     end
 end

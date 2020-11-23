@@ -4,8 +4,23 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+book1:
+  name: '1Q84'
+  author: 'Haruki Murakami'
+  cover_image: ''
+  genre: ''
+  isbn: '9780099549062'
+
+book2:
+  name: 'Station 11'
+  author: 'Emily St John Mandel'
+  cover_image: ''
+  genre: ''
+  isbn: '9781447268987'
+
+book3:
+  name: 'Life of Pi'
+  author: 'Yann Martel'
+  cover_image: ''
+  genre: ''
+  isbn: '9780156030205'

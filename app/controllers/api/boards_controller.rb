@@ -52,8 +52,17 @@ class Api::BoardsController < ApplicationController
     }
   end
 
+  def players
+    @board = Board.find(params[:board_id])
+    @players = Game.find(@board[:game_id]).players.all
+
+    render :json => {
+      players: @players
+    }
+  end
+
   def users
-    @board = Board.find(params[:id])
+    @board = Board.find(params[:board_id])
     @users = Game.find(@board[:game_id]).players.all.map { |player| User.find(player[:user_id]) }
 
     render :json => {
@@ -62,18 +71,29 @@ class Api::BoardsController < ApplicationController
   end
 
   def player_tiles
-    @board = Board.find(params[:id])
+    @board = Board.find(params[:board_id])
+    @board_tiles = BoardTile.where(board: @board)
     @game = Game.find(@board[:game_id])
     @players = Player.where(game: @game)
-    @player_tiles = @players.map { |player| { player: player, player_tiles: PlayerTiles.where(player: player, board: @board) } }
+    @player_tiles = @players.map { |player| { player: player, player_tiles: PlayerTile.where(player: player, board_tile: @board_tiles) } }
 
     render :json => {
       player_tiles: @player_tiles
     }
   end
 
+  def current_tiles
+    @board = Board.find(params[:board_id])
+    @game = Game.find(@board[:game_id])
+    @current_tiles = Player.where(game: @game).map { |player| { player: player, current_tile: current_tile_for_player(params[:board_id], player[:id]) } }
+
+    render :json => {
+      current_tiles: @current_tiles
+    }
+  end
+
   private
     def board_params
-      params.require(:board).permit(:win_requirement, :win_points, :isbn_trust, :isbn_master, :isbn_vote, :turn_delay, :turn_reminder, :ended_at, :game_id)
+      params.permit(:win_requirement, :win_points, :isbn_trust, :isbn_master, :isbn_vote, :turn_delay, :turn_reminder, :ended_at, :game_id)
     end
 end

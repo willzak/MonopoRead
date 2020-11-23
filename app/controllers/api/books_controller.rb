@@ -1,3 +1,7 @@
+require 'open-uri'
+require 'json'
+require 'active_support/core_ext'
+
 class Api::BooksController < ApplicationController
   def index
     @books = Book.all
@@ -52,8 +56,54 @@ class Api::BooksController < ApplicationController
     }
   end
 
+  def goodreads
+    @book = Book.find(params[:book_id])
+    if @book[:isbn]
+      @goodread = JSON.parse(Hash.from_xml(open("https://www.goodreads.com/search/search.xml?q=#{@book[:isbn]}&key=hfvqo7Dwujbu5U0V5coh4w").read).to_json)
+
+      render :json => {
+        goodread: @goodread
+      }
+    else
+      render :json => {
+        message: 'Book does not have ISBN'
+      }
+    end
+  end
+
+  def google
+    @book = Book.find(params[:book_id])
+    if @book[:isbn]
+      @google = JSON.parse(open("https://www.googleapis.com/books/v1/volumes?q=isbn:#{@book[:isbn]}").read)
+
+      render :json => {
+        google: @google
+      }
+    else
+      render :json => {
+        message: 'Book does not have ISBN'
+      }
+    end
+  end
+
+  def goodreads_search
+    @goodread = JSON.parse(Hash.from_xml(open("https://www.goodreads.com/search/search.xml?q=#{params[:search]}&key=hfvqo7Dwujbu5U0V5coh4w").read).to_json)
+
+    render :json => {
+      goodread: @goodread
+    }
+  end
+
+  def google_search
+    @google = JSON.parse(open("https://www.googleapis.com/books/v1/volumes?q=#{params[:search]}").read)
+
+    render :json => {
+      google: @google
+    }
+  end
+
   private
     def book_params
-      params.require(:book).permit(:name, :author, :cover_image, :genre, :isbn)
+      params.permit(:name, :author, :cover_image, :genre, :isbn)
     end
 end
