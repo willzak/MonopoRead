@@ -1,7 +1,7 @@
 import React from "react";
 
 import Board from "./gameBoard";
-import SideBar from "./sideBar";
+import SideBar from "../sideBar";
 
 export default function Game(props) {
   return (

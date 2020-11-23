@@ -37,8 +37,10 @@ code {
   margin: 20px;
   width: 20vw;
   background-color: #BFDBAE;
-  opacity: 100%;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .player-status {
@@ -49,6 +51,10 @@ code {
 
 .stats {
   margin-left: 20px;
+}
+
+.dice {
+  margin-top: 10em;
 }
 
 /* PROPERTY TILES  */
