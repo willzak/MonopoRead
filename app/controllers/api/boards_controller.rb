@@ -92,6 +92,20 @@ class Api::BoardsController < ApplicationController
     }
   end
 
+  def player_stats
+    @board = Board.find(params[:board_id])
+    @board_tiles = BoardTile.where(board: @board)
+    @game = Game.find(@board[:game_id])
+    @players = Player.where(game: @game).map { |player| {
+      books: PlayerTile.where.not(ended_at: nil).where(player: player, board_tile: @board_tiles).length,
+      last_play: current_tile_for_player(params[:board_id], player[:id])[:ended_at] || current_tile_for_player(params[:board_id], player[:id])[:created_at]
+    } }
+
+    render :json => {
+      players: @players
+    }
+  end
+
   private
     def board_params
       params.permit(:win_requirement, :win_points, :isbn_trust, :isbn_master, :isbn_vote, :turn_delay, :turn_reminder, :ended_at, :game_id)
