@@ -2,26 +2,20 @@ class Api::GamesController < ApplicationController
   def index
     @games = Game.all
 
-    render :json => {
-      games: @games
-    }
+    render :json => @games
   end
 
   def show
     @game = Game.find(params[:id])
 
-    render :json => {
-      game: @game
-    }
+    render :json => @game
   end
 
   def create
     @game = Game.new(game_params)
 
     if @game.save
-      render :json => {
-        game: @game
-      }
+      render :json => @game
     else
       render :json => {
         error: 'Game was not saved'
@@ -33,9 +27,7 @@ class Api::GamesController < ApplicationController
     @game = Game.find(params[:id])
 
     if @game.update(game_params)
-      render :json => {
-        game: @game
-      }
+      render :json => @game
     else
       render :json => {
         error: 'Game was not updated'
@@ -56,17 +48,13 @@ class Api::GamesController < ApplicationController
     @players = Game.find(params[:game_id]).players.all
     @players = @players.map { |player| { player: player, color: Color.find(player[:color_id]) } }
 
-    render :json => {
-      players: @players
-    }
+    render :json => @players
   end
 
   def users
     @users = Game.find(params[:game_id]).players.all.map { |player| User.find(player[:user_id]) }
 
-    render :json => {
-      users: @users
-    }
+    render :json => @users
   end
 
   def free_colors
@@ -74,18 +62,14 @@ class Api::GamesController < ApplicationController
     @used_colors = Game.find(params[:game_id]).players.all.pluck(:color_id)
     @colors = Color.all.select { |color| !@used_colors.include?(color[:id])}
 
-    render :json => {
-      colors: @colors
-    }
+    render :json => @colors
   end
 
   def boards
     @game = Game.find(params[:game_id])
     @boards = Board.where(game: @game)
 
-    render :json => {
-      boards: @boards
-    }
+    render :json => @boards
   end
 
   def current_board
@@ -95,9 +79,7 @@ class Api::GamesController < ApplicationController
       @current_board = Board.where(game: @game, ended_at: nil).order("ended_at").last
     end
 
-    render :json => {
-      current_board: @current_board
-    }
+    render :json => @current_board
   end
 
   private

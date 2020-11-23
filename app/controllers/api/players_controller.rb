@@ -3,27 +3,21 @@ class Api::PlayersController < ApplicationController
     @players = Player.where(game_id: params[:game_id])
     @players = @players.map { |player| { player: player, color: Color.find(player[:color_id]) } }
 
-    render :json => {
-      players: @players
-    }
+    render :json => @players
   end
 
   def show
     @player = Player.find(params[:id])
     @player = { player: @player, color: Color.find(@player[:color_id])}
 
-    render :json => {
-      player: @player
-    }
+    render :json => @player
   end
 
   def create
     @player = Player.new(player_params)
 
     if @player.save
-      render :json => {
-        player: @player
-      }
+      render :json => @player
     else
       render :json => {
         error: 'Player was not saved'
@@ -35,9 +29,7 @@ class Api::PlayersController < ApplicationController
     @player = Player.find(params[:id])
 
     if @player.update(player_params)
-      render :json => {
-        player: @player
-      }
+      render :json => @player
     else
       render :json => {
         error: 'Player was not updated'
@@ -57,9 +49,7 @@ class Api::PlayersController < ApplicationController
   def current_tile
     @current_tile = current_tile_for_player(params[:board_id], params[:player_id])
 
-    render :json => {
-      current_tile: @current_tile
-    }
+    render :json => @current_tile
   end
 
   def player_tiles
@@ -67,9 +57,7 @@ class Api::PlayersController < ApplicationController
     @board_tiles = BoardTile.where(board: @board)
     @player_tiles = PlayerTile.where(player_id: params[:player_id], board_tile: @board_tiles)
 
-    render :json => {
-      player_tiles: @player_tiles
-    }
+    render :json => @player_tiles
   end
 
   private

@@ -8,26 +8,20 @@ class Api::BoardTilesController < ApplicationController
       recommendations: Tile.find(board_tile[:tile_id]).recommendations.all.map { |recommendation| { recommendation: recommendation, book: Book.find(recommendation[:book_id]) } }
     } }
 
-    render :json => {
-      board_tiles: @board_tiles
-    }
+    render :json => @board_tiles
   end
 
   def show
     @board_tile = BoardTile.find(params[:id])
 
-    render :json => {
-      board_tile: @board_tile
-    }
+    render :json => @board_tile
   end
 
   def create
     @board_tile = BoardTile.new(board_tile_params)
 
     if @board_tile.save
-      render :json => {
-        board_tile: @board_tile
-      }
+      render :json => @board_tile
     else
       render :json => {
         error: 'Board Tile was not saved'
@@ -39,9 +33,7 @@ class Api::BoardTilesController < ApplicationController
     @board_tile = BoardTile.find(params[:id])
 
     if @board_tile.update(board_tile_params)
-      render :json => {
-        board_tile: @board_tile
-      }
+      render :json => @board_tile
     else
       render :json => {
         error: 'Board Tile was not updated'
