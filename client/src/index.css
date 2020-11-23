@@ -12,147 +12,188 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+/* GAME VIEW */
 
-/* GAME TILES  */
+.game-view {
+  background-color: #FFF4E5;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.game-play {
+  margin: 20px;
+}
+
+.game-board {
+  font-size: 0.6em;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-bar {
+  margin: 20px;
+  width: 20vw;
+  background-color: #BFDBAE;
+  opacity: 100%;
+  border-radius: 10px;
+}
+
+.player-status {
+  margin: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: black;
+}
+
+.stats {
+  margin-left: 20px;
+}
+
+/* PROPERTY TILES  */
+
+.colour {
+  outline:1px solid black;
+  margin: 0;
+  padding: 0;
+}
 
 .brown-tile {
   background-color: saddlebrown;
-  border: black solid 2px;
-  height: 50px;
-  width: 150px;
-}
-
-.side-brown-tile {
-  background-color: saddlebrown;
-  border: black solid 2px;
-  height: 150px;
-  width: 50px;
+  height: 3em;
+  width: 9em;
 }
 
 .skyblue-tile {
   background-color: skyblue;
-  border: black solid 2px;
-  height: 50px;
-  width: 150px;
+  height: 3em;
+  width: 9em;
 }
 
-.side-skyblue-tile {
-  background-color: skyblue;
-  border: black solid 2px;
-  height: 150px;
-  width: 50px;
-}
-
-.fuschia-tile {
+.fuchsia-tile {
   background-color: fuchsia;
-  border: black solid 2px;
-  height: 50px;
-  width: 150px;
-}
-
-.side-fuchsia-tile {
-  background-color: fuchsia;
-  border: black solid 2px;
-  height: 150px;
-  width: 50px;
+  height: 9em;
+  width: 3em;
 }
 
 .orange-tile {
   background-color: orange;
-  border: black solid 2px;
-  height: 50px;
-  width: 150px;
-}
-
-.side-orange-tile {
-  background-color: orange;
-  border: black solid 2px;
-  height: 150px;
-  width: 50px;
+  height: 9em;
+  width: 3em;
 }
 
 .red-tile {
   background-color: red;
-  border: black solid 2px;
-  height: 50px;
-  width: 150px;
-}
-
-.side-red-tile {
-  background-color: red;
-  border: black solid 2px;
-  height: 150px;
-  width: 50px;
+  height: 3em;
+  width: 9em;
 }
 
 .yellow-tile {
   background-color: yellow;
-  border: black solid 2px;
-  height: 50px;
-  width: 150px;
-}
-
-.side-yellow-tile {
-  background-color: yellow;
-  border: black solid 2px;
-  height: 150px;
-  width: 50px;
+  height: 3em;
+  width: 9em;
 }
 
 .green-tile {
   background-color: green;
-  border: black solid 2px;
-  height: 50px;
-  width: 150px;
-}
-
-.side-green-tile {
-  background-color: green;
-  border: black solid 2px;
-  height: 150px;
-  width: 50px;
+  height: 9em;
+  width: 3em;
 }
 
 .blue-tile {
   background-color: blue;
-  border: black solid 2px;
-  height: 50px;
-  width: 150px;
+  height: 9em;
+  width: 3em;
 }
 
-.side-blue-tile {
-  background-color: blue;
-  border: black solid 2px;
-  height: 150px;
-  width: 50px;
+.top-game-tile {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
 }
 
-.tile-body {
-  border: black solid 2px;
-  height: 200px;
-  width: 150px;
+.bottom-game-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-.side-tile {
-  border: black solid 2px;
-  height: 150px;
-  width: 200px;
-}
-
-.side {
+.right-game-tile {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
 }
+
+.left-game-tile {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.square {
+  background-color: white;
+  outline: black solid 1px;
+}
+
+.top-square {
+  height: 12em;
+  width: 9em;
+}
+
+.bottom-square {
+  height: 12em;
+  width: 9em;
+}
+
+.left-square {
+  height: 9em;
+  width: 12em;
+}
+
+.right-square {
+  height: 9em;
+  width: 12em;
+}
+
+/* CHANCE CARDS */
+.chance {
+  outline:1px solid black;
+  background-color:  #BFDBAE;
+}
+
+.chance-bottom {
+  height: 15em;
+  width: 9em;
+}
+
+.chance-top {
+  height: 15em;
+  width: 9em;
+}
+
+.chance-left {
+  height: 9em;
+  width: 15em;
+}
+
+.chance-right {
+  height: 9em;
+  width: 15em;
+}
+
+.chance-default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+}
+
+/* OTHER BOARD ELEMENTS */
 
 .bottom-row {
   display: flex;
   flex-direction: row;
-}
-
-.console {
-  width: 770px;
-  height: 770px;
-  background-color: #BFDBAE;
 }
 
 .column-organiser {
@@ -160,41 +201,17 @@ code {
   flex-direction: row;
 }
 
+.console {
+  width: 45em;
+  height: 45em;
+  outline:1px solid black;
+  background-color: #BFDBAE;
+}
+
 .corner {
-  border: black solid 2px;
+  height: 15em;
+  width: 15em;
+  outline:1px solid black;
   background-color: burlywood;
-  height: 254px;
-  width: 254px;
 }
-
-.chance {
-  height: 254px;
-  width: 150px;
-  border: black solid 2px;
-  background-color:  #BFDBAE;
-}
-
-.chance-top {
-  height: 254px;
-  width: 150px;
-  border: black solid 2px;
-  background-color:  #BFDBAE;
-  transform: rotateX(180deg);
-}
-
-.chance-left {
-  height: 150px;
-  width: 254px;
-  border: black solid 2px;
-  background-color:  #BFDBAE;
-}
-
-.chance-right {
-  height: 150px;
-  width: 254px;
-  border: black solid 2px;
-  background-color:  #BFDBAE;
-  rotate: 270;
-}
-
 
