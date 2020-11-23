@@ -47,7 +47,7 @@ class Api::BoardsController < ApplicationController
   def players
     @board = Board.find(params[:board_id])
     @players = Game.find(@board[:game_id]).players.all
-    @players = @players.map { |player| { player: player, color: Color.find(player[:color_id]) } }
+    @players = @players.map { |player| { player: player, color: Color.find(player[:color_id]), user: User.find(player[:user_id]) } }
 
     render :json => @players
   end
@@ -84,6 +84,7 @@ class Api::BoardsController < ApplicationController
     @players = Player.where(game: @game).map { |player| {
       player: player,
       color: Color.find(player[:color_id]),
+      user: User.find(player[:user_id]),
       books: PlayerTile.where.not(ended_at: nil).where(player: player, board_tile: @board_tiles).length,
       last_play: current_tile_for_player(params[:board_id], player[:id])[:ended_at] || current_tile_for_player(params[:board_id], player[:id])[:created_at]
     } }

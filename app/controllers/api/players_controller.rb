@@ -1,14 +1,14 @@
 class Api::PlayersController < ApplicationController
   def index
     @players = Player.where(game_id: params[:game_id])
-    @players = @players.map { |player| { player: player, color: Color.find(player[:color_id]) } }
+    @players = @players.map { |player| { player: player, color: Color.find(player[:color_id]), user: User.find(player[:user_id]) } }
 
     render :json => @players
   end
 
   def show
     @player = Player.find(params[:id])
-    @player = { player: @player, color: Color.find(@player[:color_id])}
+    @player = { player: @player, color: Color.find(@player[:color_id]), user: User.find(player[:user_id]) }
 
     render :json => @player
   end
