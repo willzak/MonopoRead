@@ -13,6 +13,18 @@ class Api::BoardsController < ApplicationController
 
   def create
     @board = Board.new(board_params)
+    @board_tiles = []
+    @tile_groups = TileGroup.all.pluck(:id)
+    i = 0
+    while i < 16 do
+      if i == 0
+        @tile = Tile.where(tile_group_id: @tile_groups[(i / 2).floor]).order(Arel.sql('random()')).first
+      else
+        @tile = Tile.where.not(id: @board_tiles[i - 1][:tile_id]).where(tile_group_id: @tile_groups[(i / 2).floor]).order(Arel.sql('random()')).first
+      end
+      @board_tiles.push(BoardTile.create(board: @board, tile: @tile))
+      i += 1
+    end
 
     if @board.save
       render :json => @board
@@ -86,7 +98,7 @@ class Api::BoardsController < ApplicationController
       color: Color.find(player[:color_id]),
       user: User.find(player[:user_id]),
       books: PlayerTile.where.not(ended_at: nil).where(player: player, board_tile: @board_tiles).length,
-      last_play: current_tile_for_player(params[:board_id], player[:id])[:ended_at] || current_tile_for_player(params[:board_id], player[:id])[:created_at]
+      last_play: current_tile_for_player(params[:board_id], player[:id]) ? (current_tile_for_player(params[:board_id], player[:id])[:ended_at] || current_tile_for_player(params[:board_id], player[:id])[:created_at]) : @player[:created_at]
     } }
 
     render :json => @players
