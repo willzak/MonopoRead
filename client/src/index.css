@@ -106,49 +106,49 @@ a {
 }
 
 .brown-tile {
-  background-color: saddlebrown;
+  background-color: #945336;
   height: 3em;
   width: 9em;
 }
 
 .skyblue-tile {
-  background-color: skyblue;
+  background-color: #AAE0F7;
   height: 3em;
   width: 9em;
 }
 
 .fuchsia-tile {
-  background-color: fuchsia;
+  background-color: #FF00FF;
   height: 9em;
   width: 3em;
 }
 
 .orange-tile {
-  background-color: orange;
+  background-color: #FB971D;
   height: 9em;
   width: 3em;
 }
 
 .red-tile {
-  background-color: red;
+  background-color: #ED1B23;
   height: 3em;
   width: 9em;
 }
 
 .yellow-tile {
-  background-color: yellow;
+  background-color: #FFFF00;
   height: 3em;
   width: 9em;
 }
 
 .green-tile {
-  background-color: green;
+  background-color: #008000;
   height: 9em;
   width: 3em;
 }
 
 .blue-tile {
-  background-color: blue;
+  background-color: #1245A8;
   height: 9em;
   width: 3em;
 }
