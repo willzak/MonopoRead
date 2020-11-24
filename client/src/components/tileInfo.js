@@ -12,12 +12,12 @@ export default function TileInfo( {data}, props ) {
 
   if (tile) {
     tileData = (
-      <div class = "indvidual-tile" >
-        <div class = "individual-tile-header" style={ {background: `${tile.colour}`} } >
+      <div className="indvidual-tile" >
+        <div className="individual-tile-header" style={ {background: `${tile.colour}`} } >
         <h2> This is ID: {tileId}</h2>
         <h1> {tile.name}</h1>
         </div>
-        <div class = "individual-tile-body">
+        <div className="individual-tile-body">
         <h3> {tile.description}</h3>
         <h2> We Recommend: </h2>
         <h3> {tile.recommendation[0]} </h3>

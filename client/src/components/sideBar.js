@@ -41,10 +41,10 @@ export default function SideBar(props) {
             <strong>{player.name}</strong>
           </div>
           <br></br>
-          <div class="stats">
+          <div className="stats">
             • Books Read: {player.books}
           </div>
-          <div class="stats">
+          <div className="stats">
             • Last Move: {last_move}
           </div>
         </div>
