@@ -145,6 +145,17 @@ will = User.create({ name: 'Will', email: 'email@email.com', password_digest: 'p
 
 game = Game.create({ user: marcello, name: 'My Game' })
 
-player = Player.create({user: marcello, game: game, color: light_blue})
-player = Player.create({user: avvai, game: game, color: yellow})
-player = Player.create({user: will, game: game, color: green})
+player1 = Player.create({user: marcello, game: game, color: light_blue})
+player2 = Player.create({user: avvai, game: game, color: yellow})
+player3 = Player.create({user: will, game: game, color: green})
+
+papercut = Card.create({name: 'Papercut', description: 'OW! You got a papercut and lost track of what page you are on.', effect: 'Points', outcome: -2 })
+spelling = Card.create({name: 'Spelling', description: 'Your latest book gets published! But it looks like there are a few spelling mistakes on the cover…', effect: 'Points', outcome: -2 })
+coffee = Card.create({name: 'Coffee', description: 'Ugh oh! You drink some coffee while reading and spill it all over yourself.', effect: 'Points', outcome: -1 })
+late_fees = Card.create({name: 'Late Fees', description: 'Late fees add up! Time to pay them back!', effect: 'Points', outcome: -1 })
+no_sales = Card.create({name: 'No Sales', description: 'Congratulations you just got published! But no one buys your book…', effect: 'Points', outcome: -1 })
+speed_reading = Card.create({name: 'Speed Reading', description: 'You win the speed reading championship!', effect: 'Points', outcome: 2 })
+library_card = Card.create({name: 'Library Card', description: 'Yay! You got a library card!', effect: 'Points', outcome: 1 })
+rain = Card.create({name: 'Rain', description: 'It starts to rain so you spend the day inside reading, nice work!', effect: 'Points', outcome: 2 })
+reading_to_children = Card.create({name: 'Reading to Children', description: 'You spend the afternoon reading to children, very saintly of you!', effect: 'Points', outcome: 1 })
+published = Card.create({name: 'Published', description: 'Congratulations you just got published! It’s a hit!', effect: 'Points', outcome: 2 })

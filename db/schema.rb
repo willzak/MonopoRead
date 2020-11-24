@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_21_001052) do
+ActiveRecord::Schema.define(version: 2020_11_24_212514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(version: 2020_11_21_001052) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cards", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "effect"
+    t.integer "outcome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "colors", force: :cascade do |t|
     t.string "name"
     t.string "hexcode"
@@ -84,6 +93,17 @@ ActiveRecord::Schema.define(version: 2020_11_21_001052) do
     t.index ["badge_id"], name: "index_player_badges_on_badge_id"
     t.index ["board_id"], name: "index_player_badges_on_board_id"
     t.index ["player_id"], name: "index_player_badges_on_player_id"
+  end
+
+  create_table "player_cards", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "player_id"
+    t.bigint "board_id"
+    t.bigint "card_id"
+    t.index ["board_id"], name: "index_player_cards_on_board_id"
+    t.index ["card_id"], name: "index_player_cards_on_card_id"
+    t.index ["player_id"], name: "index_player_cards_on_player_id"
   end
 
   create_table "player_tiles", force: :cascade do |t|
@@ -172,6 +192,9 @@ ActiveRecord::Schema.define(version: 2020_11_21_001052) do
   add_foreign_key "player_badges", "badges"
   add_foreign_key "player_badges", "boards"
   add_foreign_key "player_badges", "players"
+  add_foreign_key "player_cards", "boards"
+  add_foreign_key "player_cards", "cards"
+  add_foreign_key "player_cards", "players"
   add_foreign_key "player_tiles", "board_tiles"
   add_foreign_key "player_tiles", "books"
   add_foreign_key "player_tiles", "players"
