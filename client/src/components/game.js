@@ -11,17 +11,25 @@ export default function Game(props) {
   useEffect(() => {
     axios.get(`/api/games`)
     .then((response) => {
-      // handle success
-      setGame(response.data[0].id);
-    }) 
+      setGame(response.data[0].id)
+    })
   }, [])
 
   useEffect(() => {
-    axios.get(`/api/games/${game}/current_board`)
-    .then((response) => {
-      // handle success
-      setBoard(response.data.id);
-    }) 
+    if (game !== 0) {
+      axios.get(`/api/games/${game}`)
+      .then(() => {
+        return axios.get(`/api/games/${game}/current_board`)
+      })
+      .then((response) => {
+        if (!response.data) return axios.post(`/api/boards`, {game_id: game})
+        return response
+      })
+      .then((response) => {
+        if (!response.data) return
+        setBoard(response.data.id);
+      })
+    }
   }, [game])
 
   return (
