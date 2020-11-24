@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include ActionController::Helpers
+
   def current_tile_for_player(board_id, player_id)
     @board = Board.find(board_id)
     @board_tiles = BoardTile.where(board: @board)
@@ -7,7 +9,7 @@ class ApplicationController < ActionController::API
     if !@current_tile
       @current_tile = @player.player_tiles.where(board_tile: @board_tiles).order("ended_at").last
     end
-
+    
     return @current_tile
   end
   helper_method :current_tile_for_player
