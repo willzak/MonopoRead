@@ -9,7 +9,7 @@ export default function Board(props) {
   const [tiles, setTiles] = useState([])
 
   useEffect(() => {
-    axios.get(`/api/boards/${props.board_id || 881891715}/board_tiles`)
+    axios.get(`/api/boards/${props.board}/board_tiles`)
     .then((response) => {
       // handle success
       setTiles(response.data.map(tile => {
@@ -23,7 +23,7 @@ export default function Board(props) {
         }
       }));
     }) 
-  }, [])
+  }, [props.board])
 
   return (
     <div className="game-board">
