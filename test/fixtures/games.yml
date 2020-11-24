@@ -7,3 +7,9 @@
 my_game:
   name: 'My Game'
   user: me 
+
+my_game2:
+  name: 'My Game'
+  user: me 
+
+

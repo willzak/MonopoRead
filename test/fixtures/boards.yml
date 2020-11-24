@@ -5,4 +5,4 @@
 # below each fixture, per the syntax in the comments below
 #
 my_board:
-  game: my_game
+  game: my_game2
