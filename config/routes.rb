@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :books
     resources :tile_groups
     resources :tiles
+    resources :cards
 
     get '/users/:user_id/games' => 'users#games' # All games for a user
     get '/games/:game_id/users' => 'games#users' # All users for a game
