@@ -5,14 +5,14 @@ import Roll from "./dice";
 import './sideBar.css'
 
 export default function SideBar(props) {
-  const [players, setPlayers] = useState([])
+  const [playerStats, setPlayerStats] = useState([])
 
   useEffect(() => {
     if (props.board !== 0) {
       axios.get(`/api/boards/${props.board}/player_stats`)
       .then((response) => {
         // handle success
-        setPlayers(response.data.map(player => {
+        setPlayerStats(response.data.map(player => {
           return {
             player: player,
             id: player.player.id,
@@ -29,7 +29,7 @@ export default function SideBar(props) {
   const playerData = function() {
     const now = new Date();
 
-    return players.map(player => {
+    return playerStats.map(player => {
       const then = new Date(player.last_play);
       let last_move = 0;
       if (Math.round((now - then)/(1000*60*60*24)) < 2) last_move = `${Math.round((now - then)/(1000*60*60))} hours ago`
@@ -55,7 +55,7 @@ export default function SideBar(props) {
   return (
     <div className="side-bar">
       {playerData()}
-      <Roll />
+      <Roll players={props.players} rollDice={props.rollDice} board={props.board} />
     </div>
   )
 }
