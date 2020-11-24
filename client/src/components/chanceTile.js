@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Chance(props) {
-  let type = "chance chance";
+  let type = "tile chance chance";
   let text = "chance-icon-";
   let label = "label-";
 

@@ -4,7 +4,7 @@ import Colour from "./colourTile";
 import Square from "./square";
 
 export default function Tile(props) {
-  let type = props.direction + "-game-tile";
+  let type = props.direction + "-game-tile tile";
 
   return (
     <div class={type}>

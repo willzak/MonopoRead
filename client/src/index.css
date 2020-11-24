@@ -36,8 +36,31 @@ code {
   box-shadow:         3px 3px 5px 6px  rgb(221, 221, 221);
 }
 
+.side-console {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.title {
+  width: 20vw;
+  padding: 0.25em;
+  min-width: 270px;
+  font-size: 3em;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-align: center;
+  text-shadow: 5px 5px 5px #000000;
+  color: white;
+  background-color: red;
+  border-radius: 10px;
+  box-shadow: 3px 5px 10px #888888;
+}
+
 .side-bar {
   margin: 20px;
+  padding: 0.5em;
   width: 20vw;
   min-width: 250px;
   background-color: #BFDBAE;
@@ -45,6 +68,7 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 3px 5px 10px #888888;
 }
 
 .player-status {
@@ -57,8 +81,13 @@ code {
   margin-left: 20px;
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
 .dice {
-  margin-top: 10em;
+  margin: 5em;
 }
 
 ._3dface {
@@ -207,6 +236,32 @@ code {
   text-align: center;
 }
 
+.click-view {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  -ms-transform: translate(-50%, 100%);
+  text-align: center;
+}
+
+.tile:hover .link-text {
+  opacity: 0.3;
+}
+
+.tile:hover .click-view {
+  opacity: 2;
+}
+
+.hidden {
+  background-color: #BFDBAE;
+  color: black;
+  font-size: 1em;
+  padding: 8px 16px;
+}
+
 /* CHANCE CARDS */
 .chance {
   outline:1px solid black;
@@ -242,6 +297,7 @@ code {
 
 .chance-icon-top {
   font-size: 60px;
+  transform-origin: center;
   transform: rotateZ(180deg);
 }
 
@@ -260,11 +316,13 @@ code {
 
 .chance-icon-left {
   font-size: 60px;
+  transform-origin: 0.1em 0.45em;
   transform: rotateZ(90deg);
 }
 
 .label-left {
   font-size: 1.5em;
+  transform-origin: 1.1em 0em;
   transform: rotateZ(90deg);
 }
 
@@ -278,11 +336,13 @@ code {
 
 .chance-icon-right {
   font-size: 60px;
+  transform-origin: 0.4em 0.45em;
   transform: rotateZ(270deg);
 }
 
 .label-right {
   font-size: 1.5em;
+  transform-origin: 2.5em 0;
   transform: rotateZ(270deg);
 }
 

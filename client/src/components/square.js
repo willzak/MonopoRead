@@ -13,11 +13,16 @@ export default function Square(props) {
 
   return (
     <div className={type}>
-      <div className={textType}>
-        <Link to = {`/tiles/${props.id}`}>
-        <h4>{text}</h4>
-        </Link>
-      </div>
+      <Link to = {`/tiles/${props.id}`}>
+        <div className={textType}>
+          <div className="link-text">
+            <h4>{text}</h4>
+          </div>
+          <div class="click-view">
+            <div class="hidden">View</div>
+          </div>
+        </div>
+      </Link>
     </div>
   )
 }
