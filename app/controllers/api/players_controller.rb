@@ -60,6 +60,13 @@ class Api::PlayersController < ApplicationController
     render :json => @player_tiles
   end
 
+  def player_chance
+    @board = Board.find(params[:board_id])
+    @player_cards = PlayerCard.where(player_id: params[:player_id], board: @board)
+
+    render :json => @player_cards
+  end
+
   private
     def player_params
       params.permit(:user_id, :game_id, :color_id, :token_id)
