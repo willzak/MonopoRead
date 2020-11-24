@@ -5,11 +5,12 @@ import Token from "./token";
 
 export default function Tile(props) {
   let type = props.direction + "-game-tile";
-
+  
   return (
     <div class={type}>
-      <Colour colour={props.colour} />
-      <Square direction={props.direction} name = {props.name} id = {props.id} player = {props.player}/>
+      <Colour  colour={props.colour} />
+      <Square direction={props.direction} name = {props.name} id = {props.id} player = {props.player}>
+      </Square>
     </div>
   )
 };
