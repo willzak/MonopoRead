@@ -2,12 +2,13 @@ import React, {useState, useEffect} from "react";
 import axios from 'axios';
 
 import Roll from "./dice";
+import './sideBar.css'
 
 export default function SideBar(props) {
   const [players, setPlayers] = useState([])
 
   useEffect(() => {
-    axios.get(`/api/boards/${props.board_id || 881891715}/player_stats`)
+    axios.get(`/api/boards/${props.board}/player_stats`)
     .then((response) => {
       // handle success
       setPlayers(response.data.map(player => {
@@ -21,7 +22,7 @@ export default function SideBar(props) {
         }
       }));
     }) 
-  }, [])
+  }, [props.board])
 
   const playerData = function() {
     const now = new Date();
