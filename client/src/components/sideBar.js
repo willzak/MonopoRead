@@ -8,20 +8,22 @@ export default function SideBar(props) {
   const [players, setPlayers] = useState([])
 
   useEffect(() => {
-    axios.get(`/api/boards/${props.board}/player_stats`)
-    .then((response) => {
-      // handle success
-      setPlayers(response.data.map(player => {
-        return {
-          player: player,
-          id: player.player.id,
-          color: player.color.hexcode,
-          name: player.user.name,
-          books: player.books,
-          last_play: player.last_play
-        }
-      }));
-    }) 
+    if (props.board !== 0) {
+      axios.get(`/api/boards/${props.board}/player_stats`)
+      .then((response) => {
+        // handle success
+        setPlayers(response.data.map(player => {
+          return {
+            player: player,
+            id: player.player.id,
+            color: player.color.hexcode,
+            name: player.user.name,
+            books: player.books,
+            last_play: player.last_play
+          }
+        }));
+      })
+    }
   }, [props.board])
 
   const playerData = function() {

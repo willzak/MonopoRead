@@ -9,20 +9,22 @@ export default function Board(props) {
   const [tiles, setTiles] = useState([])
 
   useEffect(() => {
-    axios.get(`/api/boards/${props.board}/board_tiles`)
-    .then((response) => {
-      // handle success
-      setTiles(response.data.map(tile => {
-        return {
-          tile: tile,
-          id: tile.tile.id,
-          name: tile.tile.name,
-          colour: tile.color.hexcode,
-          description: tile.tile.description,
-          recommendation: tile.recommendations.map(rec => rec.book.name)
-        }
-      }));
-    }) 
+    if (props.board !== 0) {
+      axios.get(`/api/boards/${props.board}/board_tiles`)
+      .then((response) => {
+        // handle success
+        setTiles(response.data.map(tile => {
+          return {
+            tile: tile,
+            id: tile.tile.id,
+            name: tile.tile.name,
+            colour: tile.color.hexcode,
+            description: tile.tile.description,
+            recommendation: tile.recommendations.map(rec => rec.book.name)
+          }
+        }));
+      })
+    }
   }, [props.board])
 
   return (
