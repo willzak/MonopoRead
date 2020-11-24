@@ -1,80 +1,48 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import Tile from "./gameTile";
 import Console from "./console";
 import Corner from "./cornerTile";
 import Chance from "./chanceTile";
-import axios from 'axios';
 
 export default function Board(props) {
-  const [tiles, setTiles] = useState([])
-  const [players, setPlayers] = useState([])
-
-  useEffect(() => {
-    if (props.board !== 0) {
-      axios.get(`/api/boards/${props.board}/board_tiles`)
-      .then((response) => {
-        // handle success
-        setTiles(response.data.map(tile => {
-          return {
-            tile: tile,
-            id: tile.tile.id,
-            name: tile.tile.name,
-            colour: tile.color.hexcode,
-            description: tile.tile.description,
-            recommendation: tile.recommendations.map(rec => rec.book.name)
-          }
-        }));
-      })
-    }
-  }, [props.board])
-
-  useEffect(() => {
-    if (props.board !== 0) {
-      axios.get(`/api/boards/${props.board}/current_tiles`)
-      .then((response) => {
-        // handle success
-        setPlayers(response.data);
-      })
-    }
-  }, [props.board])
 
   return (
     <div className="game-board">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <div className="bottom-row">
-        <Corner id="Corner1" players={players}/>
-        <Tile colour="red-tile" players={players} direction="top" id ={tiles[0] ? tiles[0].id : ""} name ={tiles[0] ? tiles[0].name : ""}/>
-        <Tile colour="red-tile" players={players} direction="top" id ={tiles[1] ? tiles[1].id : ""} name ={tiles[1] ? tiles[1].name : ""}/>
-        <Chance id="Chance1" players={players} direction="top" />
-        <Tile colour="yellow-tile" players={players} direction="top" id ={tiles[2] ? tiles[2].id : ""} name ={tiles[2] ? tiles[2].name : ""}/>
-        <Tile colour="yellow-tile" players={players} direction="top" id ={tiles[3] ? tiles[3].id : ""} name ={tiles[3] ? tiles[3].name : ""}/>
-        <Corner id="Corner2" players={players}/>
+        <Corner pos={12} id="Corner1" players={props.players}/>
+        <Tile pos={13} colour="red-tile" players={props.players} direction="top" id={props.tiles[0] ? props.tiles[0].id : ""} name ={props.tiles[0] ? props.tiles[0].name : ""}/>
+        <Tile pos={14} colour="red-tile" players={props.players} direction="top" id={props.tiles[1] ? props.tiles[1].id : ""} name ={props.tiles[1] ? props.tiles[1].name : ""}/>
+        <Chance pos={15} id="Chance1" players={props.players} direction="top" />
+        <Tile pos={16} colour="yellow-tile" players={props.players} direction="top" id={props.tiles[2] ? props.tiles[2].id : ""} name ={props.tiles[2] ? props.tiles[2].name : ""}/>
+        <Tile pos={17} colour="yellow-tile" players={props.players} direction="top" id={props.tiles[3] ? props.tiles[3].id : ""} name ={props.tiles[3] ? props.tiles[3].name : ""}/>
+        <Corner pos={18} id="Corner2" players={props.players}/>
       </div>
       <div className="column-organiser">
         <div>
-          <Tile colour="fuchsia-tile" players={players} direction="left" id ={tiles[4] ? tiles[4].id : ""} name ={tiles[4] ? tiles[4].name : ""}/>
-          <Tile colour="fuchsia-tile" players={players} direction="left" id ={tiles[5] ? tiles[5].id : ""} name ={tiles[5] ? tiles[5].name : ""}/>
-          <Chance id="Chance2" players={players} direction="left" />
-          <Tile colour="orange-tile" players={players} direction="left" id ={tiles[6] ? tiles[6].id : ""} name ={tiles[6] ? tiles[6].name : ""}/>
-          <Tile colour="orange-tile" players={players} direction="left" id ={tiles[7] ? tiles[7].id : ""} name ={tiles[7] ? tiles[7].name : ""}/>
+          <Tile pos={11} colour="fuchsia-tile" players={props.players} direction="left" id={props.tiles[4] ? props.tiles[4].id : ""} name ={props.tiles[4] ? props.tiles[4].name : ""}/>
+          <Tile pos={10} colour="fuchsia-tile" players={props.players} direction="left" id={props.tiles[5] ? props.tiles[5].id : ""} name ={props.tiles[5] ? props.tiles[5].name : ""}/>
+          <Chance pos={9} id="Chance2" players={props.players} direction="left" />
+          <Tile pos={8} colour="orange-tile" players={props.players} direction="left" id={props.tiles[6] ? props.tiles[6].id : ""} name ={props.tiles[6] ? props.tiles[6].name : ""}/>
+          <Tile pos={7} colour="orange-tile" players={props.players} direction="left" id={props.tiles[7] ? props.tiles[7].id : ""} name ={props.tiles[7] ? props.tiles[7].name : ""}/>
         </div>
-        <Console tiles={tiles}/>
+        <Console tiles={props.tiles}/>
         <div>
-          <Tile colour="green-tile" players={players} direction="right" id ={tiles[8] ? tiles[8].id : ""} name ={tiles[8] ? tiles[8].name : ""}/>
-          <Tile colour="green-tile" players={players} direction="right" id ={tiles[9] ? tiles[9].id : ""} name ={tiles[9] ? tiles[9].name : ""}/>
-          <Chance id="Chance3" players={players} direction="right" />
-          <Tile colour="blue-tile" players={players} direction="right" id ={tiles[10] ? tiles[10].id : ""} name ={tiles[10] ? tiles[10].name : ""}/>
-          <Tile colour="blue-tile" players={players} direction="right" id ={tiles[11] ? tiles[11].id : ""} name ={tiles[11] ? tiles[11].name : ""}/>
+          <Tile pos={19} colour="green-tile" players={props.players} direction="right" id={props.tiles[8] ? props.tiles[8].id : ""} name ={props.tiles[8] ? props.tiles[8].name : ""}/>
+          <Tile pos={20} colour="green-tile" players={props.players} direction="right" id={props.tiles[9] ? props.tiles[9].id : ""} name ={props.tiles[9] ? props.tiles[9].name : ""}/>
+          <Chance pos={21} id="Chance3" players={props.players} direction="right" />
+          <Tile pos={22} colour="blue-tile" players={props.players} direction="right" id={props.tiles[10] ? props.tiles[10].id : ""} name ={props.tiles[10] ? props.tiles[10].name : ""}/>
+          <Tile pos={23} colour="blue-tile" players={props.players} direction="right" id={props.tiles[11] ? props.tiles[11].id : ""} name ={props.tiles[11] ? props.tiles[11].name : ""}/>
         </div>
       </div>
       <div className="bottom-row">
-        <Corner id="Corner3" players={players}/>
-        <Tile colour="skyblue-tile" players={players} direction="bottom" id ={tiles[12] ? tiles[12].id : ""} name ={tiles[12] ? tiles[12].name : ""}/>
-        <Tile colour="skyblue-tile" players={players} direction="bottom" id ={tiles[13] ? tiles[13].id : ""} name ={tiles[13] ? tiles[13].name : ""}/>
-        <Chance id="Chance4" players={players} direction="bottom"/>
-        <Tile colour="brown-tile" players={players} direction="bottom" id ={tiles[14] ? tiles[14].id : ""} name ={tiles[14] ? tiles[14].name : ""}/>
-        <Tile colour="brown-tile" players={players} direction="bottom" id ={tiles[15] ? tiles[15].id : ""} name ={tiles[15] ? tiles[15].name : ""}/>
-        <Corner id="Corner4" players={players}/>
+        <Corner pos={6} id="Corner3" players={props.players}/>
+        <Tile pos={5} colour="skyblue-tile" players={props.players} direction="bottom" id={props.tiles[12] ? props.tiles[12].id : ""} name ={props.tiles[12] ? props.tiles[12].name : ""}/>
+        <Tile pos={4} colour="skyblue-tile" players={props.players} direction="bottom" id={props.tiles[13] ? props.tiles[13].id : ""} name ={props.tiles[13] ? props.tiles[13].name : ""}/>
+        <Chance pos={3} id="Chance4" players={props.players} direction="bottom"/>
+        <Tile pos={2} colour="brown-tile" players={props.players} direction="bottom" id={props.tiles[14] ? props.tiles[14].id : ""} name ={props.tiles[14] ? props.tiles[14].name : ""}/>
+        <Tile pos={1} colour="brown-tile" players={props.players} direction="bottom" id={props.tiles[15] ? props.tiles[15].id : ""} name ={props.tiles[15] ? props.tiles[15].name : ""}/>
+        <Corner pos={0} id="Corner4" players={props.players}/>
       </div>
     </div>
   )
