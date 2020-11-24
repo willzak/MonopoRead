@@ -84,7 +84,7 @@ class Api::BoardsController < ApplicationController
   def current_tiles
     @board = Board.find(params[:board_id])
     @game = Game.find(@board[:game_id])
-    @current_tiles = Player.where(game: @game).map { |player| { player: player, current_tile: current_tile_for_player(params[:board_id], player[:id]) } }
+    @current_tiles = Player.where(game: @game).map { |player| { player: player, color: Color.find(player[:color_id]), current_tile: current_tile_for_player(params[:board_id], player[:id]) } }
 
     render :json => @current_tiles
   end
