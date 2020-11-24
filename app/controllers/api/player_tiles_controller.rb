@@ -12,7 +12,7 @@ class Api::PlayerTileTilesController < ApplicationController
   end
 
   def create
-    @player_tile = PlayerTileTile.new(player_tile_params)
+    @player_tile = PlayerTile.new(player_tile_params)
 
     if @player_tile.save
       render :json => @player_tile
@@ -24,7 +24,7 @@ class Api::PlayerTileTilesController < ApplicationController
   end
 
   def update
-    @player_tile = PlayerTileTile.find(params[:player_tile_id])
+    @player_tile = PlayerTile.find(params[:player_tile_id])
 
     if @player_tile.update(player_tile_params)
       render :json => @player_tile
@@ -46,6 +46,6 @@ class Api::PlayerTileTilesController < ApplicationController
 
   private
     def player_tile_params
-      params.permit(:ended_at, :player_tile_id, :board_tile_id, :book_id, :review_id)
+      params.permit(:ended_at, :player_id, :board_tile_id, :book_id, :review_id)
     end
 end
