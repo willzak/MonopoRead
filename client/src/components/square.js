@@ -12,6 +12,8 @@ export default function Square(props) {
   let view = "click-view";
   if (props.direction === 'right' || props.direction === 'top') {
     view += '-v2';
+  } if (props.direction === 'bottom') {
+    view += '-v3';
   }
 
   let text = props.name;
@@ -23,8 +25,8 @@ export default function Square(props) {
   const playerActive = props.player ? <Token /> : null
   
   return (
-    <div className={type}>
-      <Link to = {`/tiles/${props.id}`}>
+    <Link to = {`/tiles/${props.id}`}>
+      <div className={type}>
         <div className={textType}>
           <div className="link-text">
             <h4>{text}</h4>
@@ -33,9 +35,9 @@ export default function Square(props) {
             <div className="hidden">View</div>
           </div>
         </div>
-      </Link>
-      {playerActive}
-    </div>
+        {playerActive}
+      </div>
+    </Link>
   )
 }
 
