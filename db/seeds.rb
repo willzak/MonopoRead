@@ -140,7 +140,11 @@ nicholsonR = Recommendation.create({ tile: fantasy, book: nicholson })
 moreon_garciaR = Recommendation.create({ tile: fantasy, book: moreon_garcia })
 
 marcello = User.create({ name: 'Marcello', email: 'email@email.com', password_digest: 'password' })
+avvai = User.create({ name: 'Avvai', email: 'email@email.com', password_digest: 'password' })
+will = User.create({ name: 'Will', email: 'email@email.com', password_digest: 'password' })
 
 game = Game.create({ user: marcello, name: 'My Game' })
 
 player = Player.create({user: marcello, game: game, color: light_blue})
+player = Player.create({user: avvai, game: game, color: yellow})
+player = Player.create({user: will, game: game, color: green})
