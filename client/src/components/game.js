@@ -13,19 +13,25 @@ export default function Game(props) {
   const [chance, setChance] =useState(0)
   const [chanceUsed, setChanceUsed] = useState([])
 
-  const rollDice = function(number, player) {
+  const drawChance = function(player) {
     setChanceUsed((current) => current + 1)
+  }
+
+  const rollDice = function(number, player) {
+    // setChanceUsed((current) => current + 1)
 
     let ran = 0;
 
     const interval = setInterval(() => {
+      ran++;
+
       setPositions((current) => {
         const newPositions = [...current]
-        newPositions[player] = {...newPositions[player], current_tile: ((newPositions[player].current_tile + 1) % 24) }
+        newPositions[player] = {...newPositions[player], current_tile: ((newPositions[player].current_tile + 1) % 24), done: (ran === number) ? true : false }
         return newPositions
       })
 
-      if (++ran === number) {
+      if (ran === number) {
           window.clearInterval(interval);
       }
     }, 300);
@@ -115,7 +121,7 @@ export default function Game(props) {
       </div>
       <div className="game-play">
         <Router>
-          <Board tiles={tiles} players={positions} board={board} />
+          <Board drawChance={drawChance} tiles={tiles} players={positions} board={board} />
         </Router>
       </div>
     </section>
