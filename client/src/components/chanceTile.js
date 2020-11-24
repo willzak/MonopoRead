@@ -1,4 +1,5 @@
 import React from "react";
+import Token from './token'
 
 export default function Chance(props) {
   let type = "tile chance chance";
@@ -23,6 +24,13 @@ export default function Chance(props) {
     label += 'bottom';
   }
 
+  const activePlayers = function() {
+    return props.players.map((player) => {
+      if (props.pos === player.current_tile) return <Token key={player.player.player.id} color={player.player.color.hexcode} />
+      else return null
+    })
+  }
+
   return (
     <div className={type}>
       <div className={text}>
@@ -31,6 +39,7 @@ export default function Chance(props) {
       <div className={label}>
         Chance
       </div>
+      {activePlayers()}
     </div>
   )
 }
