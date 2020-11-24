@@ -6,6 +6,6 @@
   background-color: white;
 }
 
-/* .individual-tile-header {
-  background-color: orange; 
-} */
+.individual-tile-header {
+  margin-top: -4%;
+}

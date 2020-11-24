@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
     @board_tiles = BoardTile.where(board: @board)
     @player = Player.find(player_id)
     @current_tile = @player.player_tiles.where(ended_at: nil, board_tile: @board_tiles).first
-    if @current_tile
+    if !@current_tile
       @current_tile = @player.player_tiles.where(board_tile: @board_tiles).order("ended_at").last
     end
 
