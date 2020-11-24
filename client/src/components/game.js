@@ -10,15 +10,18 @@ export default function Game(props) {
   const [players, setPlayers] = useState([])
   const [positions, setPositions] = useState([])
   const [tiles, setTiles] = useState([])
+  const [chance, setChance] =useState(0)
+  const [chanceUsed, setChanceUsed] = useState([])
 
   const rollDice = function(number, player) {
+    setChanceUsed((current) => current + 1)
+
     let ran = 0;
 
     const interval = setInterval(() => {
       setPositions((current) => {
         const newPositions = [...current]
         newPositions[player] = {...newPositions[player], current_tile: ((newPositions[player].current_tile + 1) % 24) }
-        console.log(newPositions)
         return newPositions
       })
 
@@ -34,6 +37,16 @@ export default function Game(props) {
       setGame(response.data[0].id)
     })
   }, [])
+
+  useEffect(() => {
+    if (players.length > 0) {
+      axios.get(`/api/boards/${board}/players/${players[0].player.id}/draw_chance`)
+      .then((response) => {
+        setChance(response.data)
+        console.log(response.data)
+      })
+    }
+  }, [chanceUsed])
 
   useEffect(() => {
     if (game !== 0) {
@@ -98,7 +111,7 @@ export default function Game(props) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <div className="side-console">
         <div className='title' >MONOPOREAD</div>
-        <SideBar players={players} rollDice={rollDice} board={board} />
+        <SideBar chance={chance} players={players} rollDice={rollDice} board={board} />
       </div>
       <div className="game-play">
         <Router>

@@ -18,13 +18,13 @@ export default function SideBar(props) {
             id: player.player.id,
             color: player.color.hexcode,
             name: player.user.name,
-            books: player.books,
+            points: player.points,
             last_play: player.last_play
           }
         }));
       })
     }
-  }, [props.board])
+  }, [props.board, props.chance])
 
   const playerData = function() {
     const now = new Date();
@@ -42,7 +42,7 @@ export default function SideBar(props) {
           </div>
           <br></br>
           <div className="stats">
-            • Books Read: {player.books}
+            • Books Read: {player.points}
           </div>
           <div className="stats">
             • Last Move: {last_move}
