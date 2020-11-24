@@ -41,7 +41,7 @@ export default function Board(props) {
       </div>
       <div className="column-organiser">
         <div>
-          <Tile colour="fuchsia-tile" player={null} direction="left" id ={tiles[4] ? tiles[4].id : ""} name ={tiles[4] ? tiles[4].name : ""}/>
+          <Tile colour="fuchsia-tile" player={true} direction="left" id ={tiles[4] ? tiles[4].id : ""} name ={tiles[4] ? tiles[4].name : ""}/>
           <Tile colour="fuchsia-tile" player={null} direction="left" id ={tiles[5] ? tiles[5].id : ""} name ={tiles[5] ? tiles[5].name : ""}/>
           <Chance player={null} direction="left" />
           <Tile colour="orange-tile" player={null} direction="left" id ={tiles[6] ? tiles[6].id : ""} name ={tiles[6] ? tiles[6].name : ""}/>

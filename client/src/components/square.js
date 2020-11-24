@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useRouteMatch } from "react-router-dom";
+import Token from "./token";
+
+
+
 
 export default function Square(props) {
   let type = "square " + props.direction + "-square";
@@ -16,6 +19,9 @@ export default function Square(props) {
     text.replace(/(.{12})/g, "\n");
   }
 
+  //if props.player is true render the token component in the square component
+  const playerActive = props.player ? <Token /> : null
+  
   return (
     <div className={type}>
       <Link to = {`/tiles/${props.id}`}>
@@ -28,6 +34,8 @@ export default function Square(props) {
           </div>
         </div>
       </Link>
+      {playerActive}
     </div>
   )
 }
+
