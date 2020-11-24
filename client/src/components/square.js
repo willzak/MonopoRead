@@ -6,6 +6,11 @@ export default function Square(props) {
   let type = "square " + props.direction + "-square";
   let textType = "square-text-" + props.direction;
 
+  let view = "click-view";
+  if (props.direction === 'right' || props.direction === 'top') {
+    view += '-v2';
+  }
+
   let text = props.name;
   if (text && text.length > 13) {
     text.replace(/(.{12})/g, "\n");
@@ -18,7 +23,7 @@ export default function Square(props) {
           <div className="link-text">
             <h4>{text}</h4>
           </div>
-          <div className="click-view">
+          <div className={view}>
             <div className="hidden">View</div>
           </div>
         </div>
