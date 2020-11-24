@@ -8,7 +8,6 @@ import Token from "./token.js";
 export default function Board(props) {
   return (
     <>
-    <Token />
     <div class="game-board">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <div class="bottom-row">
@@ -22,7 +21,7 @@ export default function Board(props) {
       </div>
       <div class="column-organiser">
         <div>
-          <Tile colour="fuchsia-tile" player={null} direction="left" id = "1" name = "Read A Poetry Book"/>
+          <Tile colour="fuchsia-tile" player={true} direction="left" id = "1" name = "Read A Poetry Book"/>
           <Tile colour="fuchsia-tile" player={null} direction="left" id = "2" name = "Read A Sci-Fi Book"/>
           <Chance player={null} direction="left" />
           <Tile colour="orange-tile" player={null} direction="left" id = "3" name = "Read A Horror Book"/>
