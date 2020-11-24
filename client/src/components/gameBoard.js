@@ -3,9 +3,12 @@ import Tile from "./gameTile";
 import Console from "./console";
 import Corner from "./cornerTile";
 import Chance from "./chanceTile";
+import Token from "./token.js";
 
 export default function Board(props) {
   return (
+    <>
+    <Token />
     <div class="game-board">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <div class="bottom-row">
@@ -44,5 +47,6 @@ export default function Board(props) {
         <Corner player={null}/>
       </div>
     </div>
+    </>
   )
 }

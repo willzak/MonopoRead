@@ -1,0 +1,7 @@
+.small-token {
+  border: solid;
+  background-color: black; 
+  height: 20px; 
+  width: 20px; 
+  border-radius: 15px;
+}
