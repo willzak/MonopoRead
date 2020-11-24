@@ -37,7 +37,7 @@ export default function Game(props) {
       <meta nameName="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <div className="side-console">
         <div className='title' >MONOPOREAD</div>
-        <SideBar />
+        <SideBar board={board} />
       </div>
       <div class="game-play">
         <Router>
