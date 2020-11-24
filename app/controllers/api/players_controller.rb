@@ -67,6 +67,21 @@ class Api::PlayersController < ApplicationController
     render :json => @player_cards
   end
 
+  def draw_chance
+    @board = Board.find(params[:board_id])
+    @player = Player.find(params[:player_id])
+    @card = Card.order(Arel.sql('random()')).first
+    @player_card = PlayerCard.new(player: @player, board: @board, card: @card)
+
+    if @player_card.save
+      render :json => @player_card
+    else
+      render :json => {
+        error: 'Player Card was not saved'
+      }
+    end
+  end
+
   private
     def player_params
       params.permit(:user_id, :game_id, :color_id, :token_id)
