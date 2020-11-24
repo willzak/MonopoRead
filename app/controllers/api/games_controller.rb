@@ -74,9 +74,9 @@ class Api::GamesController < ApplicationController
 
   def current_board
     @game = Game.find(params[:game_id])
-    @current_board = Board.where(game: @game, ended_at: nil)
-    if @current_board.empty?
-      @current_board = Board.where(game: @game, ended_at: nil).order("ended_at").last
+    @current_board = Board.where(game: @game, ended_at: nil).first
+    if !@current_board
+      @current_board = Board.where(game: @game).order("ended_at").last
     end
 
     render :json => @current_board
