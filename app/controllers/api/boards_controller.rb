@@ -102,11 +102,15 @@ class Api::BoardsController < ApplicationController
     @board = Board.find(params[:board_id])
     @board_tiles = BoardTile.where(board: @board)
     @game = Game.find(@board[:game_id])
-    @players = Player.where(game: @game).map { |player| {
+    @players = Player.where(game: @game)
+    @cards = @players.map { |player| PlayerCard.where(player: player, board: @board) }
+    @cards = @cards.map { |player| player.empty? ? [] : player.map { |card| Card.where(id: card[:card_id], effect: 'Points').first ? Card.where(id: card[:card_id], effect: 'Points').first[:outcome] : 0 } }
+    @cards = @cards.map { |player| player.inject(0){|sum,x| sum + x }}
+    @players = @players.map.with_index { |player, index| {
       player: player,
       color: Color.find(player[:color_id]),
       user: User.find(player[:user_id]),
-      books: PlayerTile.where.not(ended_at: nil).where(player: player, board_tile: @board_tiles).length,
+      points: PlayerTile.where.not(ended_at: nil).where(player: player, board_tile: @board_tiles).length + @cards[index],
       last_play: current_tile_for_player(params[:board_id], player[:id]) ? (current_tile_for_player(params[:board_id], player[:id])[:ended_at] || current_tile_for_player(params[:board_id], player[:id])[:created_at]) : @player[:created_at]
     } }
 
