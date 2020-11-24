@@ -24,11 +24,11 @@ export default function Chance(props) {
   }
 
   return (
-    <div class={type}>
-      <div class={text}>
+    <div className={type}>
+      <div className={text}>
         <strong>?</strong>
       </div>
-      <div class={label}>
+      <div className={label}>
         Chance
       </div>
     </div>

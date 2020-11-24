@@ -38,7 +38,7 @@ export default function Console(props) {
     },
   ];
   return (
-    <div class="console">
+    <div className="console">
        <Route path="/tiles/:tileId"><TileInfo data={props.tiles.length > 0 ? props.tiles : tileData} /></Route>
     </div>
   )

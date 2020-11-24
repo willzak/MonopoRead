@@ -33,17 +33,17 @@ export default function Game(props) {
   }, [game])
 
   return (
-    <body className="game-view">
-      <meta nameName="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <section className="game-view">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <div className="side-console">
         <div className='title' >MONOPOREAD</div>
         <SideBar board={board} />
       </div>
-      <div class="game-play">
+      <div className="game-play">
         <Router>
           <Board board={board} />
         </Router>
       </div>
-    </body>
+    </section>
   )
 }

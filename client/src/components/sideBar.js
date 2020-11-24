@@ -36,7 +36,7 @@ export default function SideBar(props) {
       else last_move = `${Math.round((now - then)/(1000*60*60*24))} days ago`
 
       return (
-        <div class="player-status" style={{backgroundColor: player.color}} key={player.id}>
+        <div className="player-status" style={{backgroundColor: player.color}} key={player.id}>
           <div>
             <strong>{player.name}</strong>
           </div>
@@ -53,7 +53,7 @@ export default function SideBar(props) {
   } 
 
   return (
-    <div class="side-bar">
+    <div className="side-bar">
       {playerData()}
       <Roll />
     </div>

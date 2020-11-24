@@ -6,7 +6,7 @@ import './dice.css'
 
 export default function Roll(props) {
   return(
-    <div class="dice">
+    <div className="dice">
       <Dice onRoll={(value) => console.log(value)} size={100}/>
     </div>
   )

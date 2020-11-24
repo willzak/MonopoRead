@@ -18,8 +18,8 @@ export default function Square(props) {
           <div className="link-text">
             <h4>{text}</h4>
           </div>
-          <div class="click-view">
-            <div class="hidden">View</div>
+          <div className="click-view">
+            <div className="hidden">View</div>
           </div>
         </div>
       </Link>

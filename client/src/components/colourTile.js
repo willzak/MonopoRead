@@ -4,6 +4,6 @@ export default function Colour(props) {
   let type = "colour " + props.colour;
 
   return (
-    <div class={type}></div>
+    <div className={type}></div>
   )
 }
