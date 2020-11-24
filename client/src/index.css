@@ -61,6 +61,13 @@ code {
   margin-top: 10em;
 }
 
+._3dface {
+  box-shadow: unset!important;
+}
+.defaultFace span {
+  box-shadow: unset!important;
+}
+
 /* PROPERTY TILES  */
 
 .colour {
@@ -152,7 +159,13 @@ code {
 }
 
 .square-text-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: 60px 60px;
   transform: rotateZ(180deg);
+  width: 9em;
+  text-align: center;
 }
 
 .bottom-square {
@@ -170,8 +183,13 @@ code {
 }
 
 .square-text-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: 60px 60px;
   transform: rotateZ(90deg);
-  width: left-square height;
+  width: 9em;
+  text-align: center;
 }
 
 .right-square {
@@ -180,8 +198,13 @@ code {
 }
 
 .square-text-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: 60px 60px;
   transform: rotateZ(270deg);
-  width: square height;
+  width: 9em;
+  text-align: center;
 }
 
 /* CHANCE CARDS */

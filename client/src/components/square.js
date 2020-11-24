@@ -4,15 +4,20 @@ import { useRouteMatch } from "react-router-dom";
 
 export default function Square(props) {
   let type = "square " + props.direction + "-square";
-  let text = "square-text-" + props.direction;
+  let textType = "square-text-" + props.direction;
+
+  let text = props.name;
+  if (text && text.length > 13) {
+    text.replace(/(.{12})/g, "\n");
+  }
 
   return (
-    <div class={type}>
-      <span class={text}>
+    <div className={type}>
+      <div className={textType}>
         <Link to = {`/tiles/${props.id}`}>
-        <h4>{props.name}</h4>
+        <h4>{text}</h4>
         </Link>
-      </span>
+      </div>
     </div>
   )
 }
