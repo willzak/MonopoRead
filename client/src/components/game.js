@@ -12,11 +12,20 @@ export default function Game(props) {
   const [tiles, setTiles] = useState([])
 
   const rollDice = function(number, player) {
-    setPositions((current) => {
-      const newPositions = [...current]
-      newPositions[player] = {...newPositions[player], current_tile: ((newPositions[player].current_tile + number) % 24) }
-      return newPositions
-    })
+    let ran = 0;
+
+    const interval = setInterval(() => {
+      setPositions((current) => {
+        const newPositions = [...current]
+        newPositions[player] = {...newPositions[player], current_tile: ((newPositions[player].current_tile + 1) % 24) }
+        console.log(newPositions)
+        return newPositions
+      })
+
+      if (++ran === number) {
+          window.clearInterval(interval);
+      }
+    }, 300);
   }
 
   useEffect(() => {
