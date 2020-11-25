@@ -5,7 +5,7 @@ import './tileInfo.css'
 import Form from './bookForm.js'
 import Description from "./tileDescription.js"
 
-export default function TileInfo( {data}, props ) {
+export default function TileInfo( {data, submit}) {
 
   const  {tileId}  = useParams(); 
 
@@ -17,9 +17,9 @@ export default function TileInfo( {data}, props ) {
   const [showButton, setShowButton] = useState(true)
   
   useEffect(() => {
-    console.log("This is props.submit",  props.submit)
-    setShowButton(props.submit)
-  }, [props.submit])
+    console.log("This is props.submit",  submit)
+    setShowButton(submit)
+  }, [submit])
 
 
   const onClick = () => {

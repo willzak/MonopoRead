@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Token from "./token";
 
@@ -26,7 +26,7 @@ export default function Square(props) {
   //if props.player is true render the token component in the square component
   const activePlayers = function() {
     submit = false; 
-    return props.players.map((player, index) => {
+    const players =  props.players.map((player, index) => {
       
       if (props.pos === player.player.position) {
         if (props.currentPlayer === index) submit = true; 
@@ -34,7 +34,12 @@ export default function Square(props) {
       } 
       else return null
       })
+      console.log("Submit", props.id, submit)
+      return players; 
   }
+  
+  const active = activePlayers()
+
   
   return (
 
@@ -48,7 +53,7 @@ export default function Square(props) {
             <div className="hidden">View</div>
           </div>
         </div>
-        {activePlayers()}
+        {active}
       </div>
     </Link> 
   )
