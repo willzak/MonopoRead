@@ -87,6 +87,11 @@ class Api::PlayersController < ApplicationController
     }
   end
 
+  def has_unfinished_tile?
+    @player_tile = PlayerTile.where(player_id: params[:player_id], board_tile_id: params[:board_tile_id])
+    render :json => @player_tile[:ended_at] == nil ? true : false
+  end
+
   private
     def player_params
       params.permit(:user_id, :game_id, :color_id, :token_id, :position)
