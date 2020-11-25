@@ -45,7 +45,6 @@ export default function Game(props) {
 
   useEffect(() => {
     if (players.length > 0 && chanceUsed !== -1) {
-      console.log(players[chanceUsed])
       axios.get(`/api/boards/${board}/players/${players[chanceUsed].player.id}/draw_chance`)
       .then((response) => {
         setChance(response.data)
@@ -88,7 +87,7 @@ export default function Game(props) {
           return {
             tile: tile,
             id: tile.tile.id,
-            board_tile_id: tile.id,
+            board_tile_id: tile.board_tile.id,
             name: tile.tile.name,
             colour: tile.color.hexcode,
             description: tile.tile.description,
