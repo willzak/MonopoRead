@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Token from "./token";
 
@@ -21,16 +21,28 @@ export default function Square(props) {
     text.replace(/(.{12})/g, "\n");
   }
 
+  let submit = false; 
+
   //if props.player is true render the token component in the square component
   const activePlayers = function() {
-    return props.players.map((player) => {
-      if (props.pos === player.player.position) return <Token key={player.player.id} color={player.color.hexcode} />
+    submit = false; 
+    const players =  props.players.map((player, index) => {
+      
+      if (props.pos === player.player.position) {
+        if (props.currentPlayer === index) submit = true; 
+        return <Token key={player.player.id} color={player.color.hexcode} />
+      } 
       else return null
-    })
+      })
+      return players; 
   }
   
+  const active = activePlayers()
+
+  
   return (
-    <Link to = {`/tiles/${props.id}`}>
+
+    <Link to = { submit ? `/tiles/${props.id}/submit` : `/tiles/${props.id}`}>
       <div className={type}>
         <div className={textType}>
           <div className="link-text">
@@ -40,9 +52,9 @@ export default function Square(props) {
             <div className="hidden">View</div>
           </div>
         </div>
-        {activePlayers()}
+        {active}
       </div>
-    </Link>
+    </Link> 
   )
 }
 
