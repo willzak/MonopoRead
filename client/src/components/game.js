@@ -65,6 +65,7 @@ export default function Game(props) {
             name: tile.tile.name,
             colour: tile.color.hexcode,
             description: tile.tile.description,
+            books: tile.books.map(b => b.name),
             recommendation: tile.recommendations.map(rec => rec.book.name)
           }
         }));
