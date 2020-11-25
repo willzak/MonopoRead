@@ -47,25 +47,21 @@ class Api::PlayersController < ApplicationController
   end
 
   def player_tiles
-    @board = Board.find(params[:board_id])
-    @board_tiles = BoardTile.where(board: @board)
+    @board_tiles = BoardTile.where(board_id: params[:board_id])
     @player_tiles = PlayerTile.where(player_id: params[:player_id], board_tile: @board_tiles)
 
     render :json => @player_tiles
   end
 
   def player_chance
-    @board = Board.find(params[:board_id])
-    @player_cards = PlayerCard.where(player_id: params[:player_id], board: @board)
+    @player_cards = PlayerCard.where(player_id: params[:player_id], board_id: params[:board_id])
 
     render :json => @player_cards
   end
 
   def draw_chance
-    @board = Board.find(params[:board_id])
-    @player = Player.find(params[:player_id])
     @card = Card.order(Arel.sql('random()')).first
-    @player_card = PlayerCard.new(player: @player, board: @board, card: @card)
+    @player_card = PlayerCard.new(player_id: params[:player_id], board_id: params[:board_id], card: @card)
 
     if @player_card.save
       render :json => {
@@ -77,6 +73,18 @@ class Api::PlayersController < ApplicationController
         error: 'Player Card was not saved'
       }
     end
+  end
+
+  def submit
+    @player_tile = PlayerTile.where(player_id: params[:player_id], board_tile_id: params[:board_tile_id])
+    @book = Book.where(title: params[:title]).first
+    if !@book @book = Book.create(title: params[:title], author: 'N/G', isbn: 0)
+    @player_tile.update(book: @book, review: params[:review], ended_at: Time.new)
+
+    render :json => {
+      player_tile: @player_tile,
+      book: @book
+    }
   end
 
   private

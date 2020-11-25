@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     get '/boards/:board_id/players/:player_id/player_tiles' => 'players#player_tiles' # All player tiles for a player for a board
     get '/boards/:board_id/players/:player_id/player_chance' => 'players#player_chance' # Current chance cards for a player for a board
     get '/boards/:board_id/players/:player_id/draw_chance' => 'players#draw_chance' # Draws a chance card for a player for a board
+    post '/boards/:board_id/players/:player_id/submit' => 'players#submit' # Submits a book (need board_tile_id, title and optional review)
 
     get '/tile_groups/:tile_group_id/tiles' => 'tile_groups#tiles' # All games for a user
 
