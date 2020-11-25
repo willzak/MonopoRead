@@ -19,7 +19,7 @@ export default function SideBar(props) {
             color: player.color.hexcode,
             name: player.user.name,
             points: player.points,
-            last_play: player.last_play
+            last_play: player.player.updated_at
           }
         }));
       })
@@ -32,8 +32,8 @@ export default function SideBar(props) {
     return playerStats.map((player, index) => {
       const then = new Date(player.last_play);
       let last_move = 0;
-      if (Math.round((now - then)/(1000*60*60*24)) < 2) last_move = `${Math.round((now - then)/(1000*60*60))} hours ago`
-      else last_move = `${Math.round((now - then)/(1000*60*60*24))} days ago`
+      if (Math.round((now - then)/(1000*60*60*24)) < 2) last_move = `${Math.round((now - then)/(1000*60*60))} hour${Math.round((now - then)/(1000*60*60)) === 1 ? '' : 's'} ago`
+      else last_move = `${Math.round((now - then)/(1000*60*60*24))} day${Math.round((now - then)/(1000*60*60*24)) === 1 ? '' : 's'} ago`
 
       return (
         <div className="player-status" onClick={() => props.setCurrentPlayer(index)} style={{borderColor: ((index === props.currentPlayer) ? 'white' : 'black'), backgroundColor: player.color}} key={player.id}>
@@ -42,7 +42,7 @@ export default function SideBar(props) {
           </div>
           <br></br>
           <div className="stats">
-            • Books Read: {player.points}
+            • Points: {player.points}
           </div>
           <div className="stats">
             • Last Move: {last_move}
