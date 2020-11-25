@@ -15,6 +15,8 @@ class Api::BoardsController < ApplicationController
     @board = Board.new(board_params)
     @board_tiles = []
     @tile_groups = TileGroup.all.pluck(:id)
+    @players = Game.find(@board[:game_id]).players.all
+    @players.each { |player| player.update(position: 0)}
     i = 0
     while i < 16 do
       if i == 0
@@ -88,14 +90,6 @@ class Api::BoardsController < ApplicationController
     @player_cards = @players.map { |player| { player: player, player_cards: PlayerCard.where(player: player, board: @board) } }
 
     render :json => @player_cards
-  end
-
-  def current_tiles
-    @board = Board.find(params[:board_id])
-    @game = Game.find(@board[:game_id])
-    @current_tiles = Player.where(game: @game).map { |player| { player: player, color: Color.find(player[:color_id]), current_tile: current_tile_for_player(params[:board_id], player[:id]) } }
-
-    render :json => @current_tiles
   end
 
   def player_stats

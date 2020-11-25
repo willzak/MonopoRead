@@ -46,12 +46,6 @@ class Api::PlayersController < ApplicationController
     }
   end
 
-  def current_tile
-    @current_tile = current_tile_for_player(params[:board_id], params[:player_id])
-
-    render :json => @current_tile
-  end
-
   def player_tiles
     @board = Board.find(params[:board_id])
     @board_tiles = BoardTile.where(board: @board)
