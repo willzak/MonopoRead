@@ -16,7 +16,7 @@ export default function Square(props) {
     view += '-v3';
   }
 
-  let text = props.name;
+  let text = props.tile ? props.tile.name : "";
   if (text && text.length > 13) {
     text.replace(/(.{12})/g, "\n");
   }
@@ -38,11 +38,10 @@ export default function Square(props) {
   }
   
   const active = activePlayers()
-
   
   return (
 
-    <Link to = { submit ? `/tiles/${props.id}/submit` : `/tiles/${props.id}`}>
+    <Link to = {`/tiles/${props.tile ? props.tile.id : 0}${submit ? '/submit' : ''}`}>
       <div className={type}>
         <div className={textType}>
           <div className="link-text">
