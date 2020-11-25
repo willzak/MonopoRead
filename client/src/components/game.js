@@ -10,7 +10,7 @@ export default function Game(props) {
   const [players, setPlayers] = useState([])
   const [currentPlayer, setCurrentPlayer] = useState(0)
   const [tiles, setTiles] = useState([])
-  const [chance, setChance] =useState(0)
+  const [chance, setChance] = useState(0)
   const [chanceUsed, setChanceUsed] = useState([])
 
   const drawChance = function(player) {
@@ -96,6 +96,8 @@ export default function Game(props) {
     }
   }, [board])
 
+  console.log('CHANCE: ', chance)
+
   return (
     <section className="game-view">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
@@ -105,7 +107,7 @@ export default function Game(props) {
       </div>
       <div className="game-play">
         <Router>
-          <Board drawChance={drawChance} tiles={tiles} players={players} board={board} />
+          <Board drawChance={drawChance} tiles={tiles} players={players} board={board} chance={chance} />
         </Router>
       </div>
     </section>

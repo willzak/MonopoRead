@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Token from './token'
 
 export default function Chance(props) {
@@ -44,15 +45,25 @@ export default function Chance(props) {
     })
   }
 
+  let id;
+
+  if (props.chance.card) {
+    id = props.chance.card.id;
+  } else {
+    id = 0;
+  }
+
   return (
-    <div className={type}>
-      <div className={text}>
-        <strong>?</strong>
+    <Link to={`/cards/${id}`}>
+      <div className={type}>
+        <div className={text}>
+          <strong>?</strong>
+        </div>
+        <div className={label}>
+          Chance
+        </div>
+        {activePlayers()}
       </div>
-      <div className={label}>
-        Chance
-      </div>
-      {activePlayers()}
-    </div>
+    </Link>
   )
 }

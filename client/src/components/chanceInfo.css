@@ -1,0 +1,15 @@
+.individual-card {
+  margin: 50px;
+  width: 70%;
+  height: 300px;
+  border: solid;
+  background-color: white; 
+}
+
+.individual-card-header {
+  padding: 10px;
+}
+
+.individual-card-body {
+  padding: 10px;
+}

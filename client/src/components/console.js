@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import TileInfo from "./tileInfo.js"
+import TileInfo from "./tileInfo.js";
+import ChanceInfo from "./chanceInfo";
 
 export default function Console(props) {
   const tileData = [
@@ -37,9 +38,19 @@ export default function Console(props) {
       recommendation: ["BookD", "BookE", "BookF"]
     },
   ];
+
+  const chanceData = [{
+    id: 1,
+    name: "name",
+    description: "desc",
+    effect: "points",
+    outcome: 2
+  }];
+
   return (
     <div className="console">
        <Route path="/tiles/:tileId"><TileInfo data={props.tiles.length > 0 ? props.tiles : tileData} /></Route>
+       <Route path="/cards/:cardId"><ChanceInfo data={props.chance.card ? props.chance : chanceData} /></Route>
     </div>
   )
 }
