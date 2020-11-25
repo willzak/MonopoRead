@@ -25,7 +25,7 @@ export default function Game(props) {
       setPlayers((current) => {
         const newPlayers = [...current]
         newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: ((newPlayers[player].player.position + 1) % 24), done: (ran === number) ? true : false } }
-        if (ran === number) axios.post(`/api/players/${newPlayers[player].player.id}`, { position: newPlayers[player].player.position })
+        if (ran === number) axios.put(`/api/games/${game}/players/${newPlayers[player].player.id}`, { position: newPlayers[player].player.position })
         return newPlayers
       })
 
@@ -47,7 +47,6 @@ export default function Game(props) {
       axios.get(`/api/boards/${board}/players/${players[0].player.id}/draw_chance`)
       .then((response) => {
         setChance(response.data)
-        console.log(response.data)
       })
     }
   }, [chanceUsed])
@@ -73,7 +72,6 @@ export default function Game(props) {
     if (board !== 0) {
       axios.get(`/api/boards/${board}/players`)
       .then((response) => {
-        // handle success
         setPlayers(response.data);
       })
     }
@@ -83,7 +81,6 @@ export default function Game(props) {
     if (board !== 0) {
       axios.get(`/api/boards/${board}/board_tiles`)
       .then((response) => {
-        // handle success
         setTiles(response.data.map(tile => {
           return {
             tile: tile,
