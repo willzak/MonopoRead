@@ -34,7 +34,6 @@ export default function Square(props) {
       } 
       else return null
       })
-      console.log("Submit", props.id, submit)
       return players; 
   }
   

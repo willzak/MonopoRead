@@ -17,7 +17,6 @@ export default function TileInfo( {data, submit}) {
   const [showButton, setShowButton] = useState(true)
   
   useEffect(() => {
-    console.log("This is props.submit",  submit)
     setShowButton(submit)
   }, [submit])
 
