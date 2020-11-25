@@ -11,10 +11,10 @@ export default function Game(props) {
   const [currentPlayer, setCurrentPlayer] = useState(0)
   const [tiles, setTiles] = useState([])
   const [chance, setChance] =useState(0)
-  const [chanceUsed, setChanceUsed] = useState([])
+  const [chanceUsed, setChanceUsed] = useState(-1)
 
   const drawChance = function(player) {
-    setChanceUsed((current) => current + 1)
+    setChanceUsed(player)
   }
 
   const rollDice = function(number, player) {
@@ -44,10 +44,12 @@ export default function Game(props) {
   }, [])
 
   useEffect(() => {
-    if (players.length > 0) {
-      axios.get(`/api/boards/${board}/players/${players[0].player.id}/draw_chance`)
+    if (players.length > 0 && chanceUsed !== -1) {
+      console.log(players[chanceUsed])
+      axios.get(`/api/boards/${board}/players/${players[chanceUsed].player.id}/draw_chance`)
       .then((response) => {
         setChance(response.data)
+        setChanceUsed(-1)
       })
     }
   }, [chanceUsed])
@@ -105,7 +107,7 @@ export default function Game(props) {
       </div>
       <div className="game-play">
         <Router>
-          <Board drawChance={drawChance} tiles={tiles} players={players} board={board} />
+          <Board drawChance={drawChance} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} />
         </Router>
       </div>
     </section>
