@@ -29,14 +29,14 @@ export default function SideBar(props) {
   const playerData = function() {
     const now = new Date();
 
-    return playerStats.map(player => {
+    return playerStats.map((player, index) => {
       const then = new Date(player.last_play);
       let last_move = 0;
       if (Math.round((now - then)/(1000*60*60*24)) < 2) last_move = `${Math.round((now - then)/(1000*60*60))} hours ago`
       else last_move = `${Math.round((now - then)/(1000*60*60*24))} days ago`
 
       return (
-        <div className="player-status" style={{backgroundColor: player.color}} key={player.id}>
+        <div className="player-status" onClick={() => props.setCurrentPlayer(index)} style={{borderColor: ((index === props.currentPlayer) ? 'white' : 'black'), backgroundColor: player.color}} key={player.id}>
           <div>
             <strong>{player.name}</strong>
           </div>
@@ -55,7 +55,7 @@ export default function SideBar(props) {
   return (
     <div className="side-bar">
       {playerData()}
-      <Roll players={props.players} rollDice={props.rollDice} board={props.board} />
+      <Roll currentPlayer={props.currentPlayer} rollDice={props.rollDice} players={props.players} board={props.board} />
     </div>
   )
 }
