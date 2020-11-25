@@ -8,6 +8,7 @@ export default function Game(props) {
   const [game, setGame] = useState(0)
   const [board, setBoard] = useState(0)
   const [players, setPlayers] = useState([])
+  const [currentPlayer, setCurrentPlayer] = useState(0)
   const [tiles, setTiles] = useState([])
   const [chance, setChance] =useState(0)
   const [chanceUsed, setChanceUsed] = useState([])
@@ -100,7 +101,7 @@ export default function Game(props) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <div className="side-console">
         <div className='title' >MONOPOREAD</div>
-        <SideBar chance={chance} players={players} rollDice={rollDice} board={board} />
+        <SideBar currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer} rollDice={rollDice} chance={chance} players={players} board={board} />
       </div>
       <div className="game-play">
         <Router>
