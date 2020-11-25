@@ -87,7 +87,7 @@ export default function Game(props) {
         setTiles(response.data.map(tile => {
           return {
             tile: tile,
-            id: tile.tile.id,
+            id: tile.id,
             name: tile.tile.name,
             colour: tile.color.hexcode,
             description: tile.tile.description,
