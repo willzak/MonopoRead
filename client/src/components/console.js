@@ -42,6 +42,7 @@ export default function Console(props) {
   // <Route exact path = "/tiles/:tileId/completed"><Form data={props.tiles.length > 0 ? props.tiles : tileData} /></Route>
   return (
     <div className="console">
+      <Route exact path="/"></Route>
         <Route exact path="/tiles/:tileId/submit">
           <TileInfo data={props.tiles.length > 0 ? props.tiles : null} submit={true}  />
         </Route>
