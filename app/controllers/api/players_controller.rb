@@ -68,7 +68,10 @@ class Api::PlayersController < ApplicationController
     @player_card = PlayerCard.new(player: @player, board: @board, card: @card)
 
     if @player_card.save
-      render :json => @player_card
+      render :json => {
+        player_card: @player_card,
+        card: @card
+      }
     else
       render :json => {
         error: 'Player Card was not saved'
