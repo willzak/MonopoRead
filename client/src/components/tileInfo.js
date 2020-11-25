@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import './tileInfo.css'
@@ -16,6 +16,12 @@ export default function TileInfo( {data}, props ) {
   const [showInfo, setShowInfo] = useState(true)
   const [showButton, setShowButton] = useState(true)
   
+  useEffect(() => {
+    console.log("This is props.submit",  props.submit)
+    setShowButton(props.submit)
+  }, [props.submit])
+
+
   const onClick = () => {
     setShowInfo(false);
     setShowButton(false); 
