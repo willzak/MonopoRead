@@ -78,7 +78,9 @@ class Api::PlayersController < ApplicationController
   def submit
     @player_tile = PlayerTile.where(player_id: params[:player_id], board_tile_id: params[:board_tile_id])
     @book = Book.where(title: params[:title]).first
-    if !@book @book = Book.create(title: params[:title], author: 'N/G', isbn: 0)
+    if !@book
+      @book = Book.create(title: params[:title], author: 'N/G', isbn: 0)
+    end
     @player_tile.update(book: @book, review: params[:review], ended_at: Time.new)
 
     render :json => {
