@@ -34,11 +34,9 @@ Rails.application.routes.draw do
     get '/games/:game_id/current_board' => 'games#current_board' # Current board for a game
 
     get '/boards/:board_id/player_tiles' => 'boards#player_tiles' # All player tiles for all players for a board
-    get '/boards/:board_id/current_tiles' => 'boards#current_tiles' # Current tiles for all players for a board
     get '/boards/:board_id/player_chance' => 'boards#player_chance' # Current chance cards for all players for a board
     get '/boards/:board_id/player_stats' => 'boards#player_stats' # Books read and last play for all players for a board
     get '/boards/:board_id/players/:player_id/player_tiles' => 'players#player_tiles' # All player tiles for a player for a board
-    get '/boards/:board_id/players/:player_id/current_tile' => 'players#current_tile' # Current tile for a player for a board
     get '/boards/:board_id/players/:player_id/player_chance' => 'players#player_chance' # Current chance cards for a player for a board
     get '/boards/:board_id/players/:player_id/draw_chance' => 'players#draw_chance' # Draws a chance card for a player for a board
 

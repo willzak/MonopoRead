@@ -8,7 +8,6 @@ export default function Game(props) {
   const [game, setGame] = useState(0)
   const [board, setBoard] = useState(0)
   const [players, setPlayers] = useState([])
-  const [positions, setPositions] = useState([])
   const [tiles, setTiles] = useState([])
   const [chance, setChance] =useState(0)
   const [chanceUsed, setChanceUsed] = useState([])
@@ -18,17 +17,16 @@ export default function Game(props) {
   }
 
   const rollDice = function(number, player) {
-    // setChanceUsed((current) => current + 1)
-
     let ran = 0;
 
     const interval = setInterval(() => {
       ran++;
-
-      setPositions((current) => {
-        const newPositions = [...current]
-        newPositions[player] = {...newPositions[player], current_tile: ((newPositions[player].current_tile + 1) % 24), done: (ran === number) ? true : false }
-        return newPositions
+      
+      setPlayers((current) => {
+        const newPlayers = [...current]
+        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: ((newPlayers[player].player.position + 1) % 24), done: (ran === number) ? true : false } }
+        if (ran === number) axios.post(`/api/players/${newPlayers[player].player.id}`, { position: newPlayers[player].player.position })
+        return newPlayers
       })
 
       if (ran === number) {
@@ -73,7 +71,7 @@ export default function Game(props) {
 
   useEffect(() => {
     if (board !== 0) {
-      axios.get(`/api/boards/${board}/current_tiles`)
+      axios.get(`/api/boards/${board}/players`)
       .then((response) => {
         // handle success
         setPlayers(response.data);
@@ -100,18 +98,6 @@ export default function Game(props) {
     }
   }, [board])
 
-  useEffect(() => {
-    const startPositions = []
-    for (const player in players) {
-      let p = { player: { ...players[player] } }
-      let current_tile = 0
-      if (players[player].current_tile) for (let i = 0; i < tiles.length; i++) if (tiles[i].id === current_tile.board_tile_id) current_tile = i
-      p.current_tile = current_tile
-      startPositions.push(p)
-    }
-    setPositions(startPositions)
-  }, [players, tiles])
-
   return (
     <section className="game-view">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
@@ -121,7 +107,7 @@ export default function Game(props) {
       </div>
       <div className="game-play">
         <Router>
-          <Board drawChance={drawChance} tiles={tiles} players={positions} board={board} />
+          <Board drawChance={drawChance} tiles={tiles} players={players} board={board} />
         </Router>
       </div>
     </section>
