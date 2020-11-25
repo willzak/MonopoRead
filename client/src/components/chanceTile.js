@@ -29,7 +29,7 @@ export default function Chance(props) {
     for (const player of props.players) {
       if (props.pos === player.player.position) {
         if (player.player.done) {
-          props.drawChance(player.player.id)
+          props.drawChance(props.currentPlayer)
         }
       }
     }
