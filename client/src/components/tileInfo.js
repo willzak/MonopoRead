@@ -33,6 +33,7 @@ export default function TileInfo( {data, submit}) {
         <div className="individual-tile-header" style={ {background: `${tile.colour}`} } >
         <h2> This is ID: {tileId}</h2>
         <h1> {tile.name}</h1>
+        <Link to="/" >Click to return to game </Link>
         </div>
         { showInfo ? <Description 
           description = {tile.description} 
@@ -42,7 +43,7 @@ export default function TileInfo( {data, submit}) {
           thirdbookrec = {tile.recommendation[2]} 
           /> : null }
         { showButton ? <button onClick = {onClick}>Completed!</button> : null }
-        { showForm ? <Form /> : null }
+        { showForm ? <Form currentPlayer={props.currentPlayer} players={props.players} board={props.board}/> : null }
       </div>
     )
   } else {
