@@ -1,15 +1,15 @@
 import React from "react";
 
-import "./chanceInfo.css";
+import "./hiddenChance.css";
 
 export default function HiddenChance(props) {
   return (
-    <div className="indvidual-card" >
-      <div className="individual-card-header">
+    <div className="hidden-card" >
+      <div className="hidden-card-header">
         <h1>?</h1>
       </div>
-      <div className="individual-card-body">
-        <h3>CHANCE</h3>
+      <div className="hidden-card-body">
+        <h3>Chance</h3>
       </div>
     </div>
   )

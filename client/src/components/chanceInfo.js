@@ -14,17 +14,29 @@ export default function CardInfo({data}, props) {
 
   const card = data.card;
 
-  let cardData; 
+  let cardData;
 
+  let effect = "points";
+  let type = "outcome "
+
+  
   if (card) {
+    if (card.outcome === 1 || card.outcome === -1) {
+      effect = "point";
+    }
+
+    if (card.outcome < 0) {
+      type += 'bad';
+    }
+
     cardData = (
-      <div className="indvidual-card" >
+      <div className="individual-card" >
         <div className="individual-card-header">
         <h1> {card.name}</h1>
         </div>
         <div className="individual-card-body">
         <h3> {card.description}</h3>
-        <h3 className="outcome"> {card.outcome} {card.effect}</h3>
+        <h3 className={type}> {card.outcome} {effect}</h3>
         </div>
       </div>
     )

@@ -1,0 +1,24 @@
+.hidden-card {
+  opacity: 0.75;
+  margin: 50px;
+  width: 70%;
+  height: 300px;
+  border: solid;
+  background-color: #BFDBAE; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden-card-header {
+  padding: 10px;
+  padding-bottom: 0%;
+  font-size: 5em;
+}
+
+.hidden-card-body {
+  padding: 10px;
+  padding-top: 0%;
+  font-size: 3em;
+}
