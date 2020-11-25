@@ -26,7 +26,7 @@ export default function Board(props) {
           <Tile pos={8} colour="orange-tile" currentPlayer={props.currentPlayer} players={props.players} direction="left" id={props.tiles[6] ? props.tiles[6].id : ""} name ={props.tiles[6] ? props.tiles[6].name : ""}/>
           <Tile pos={7} colour="orange-tile" currentPlayer={props.currentPlayer} players={props.players} direction="left" id={props.tiles[7] ? props.tiles[7].id : ""} name ={props.tiles[7] ? props.tiles[7].name : ""}/>
         </div>
-        <Console tiles={props.tiles} />
+        <Console tiles={props.tiles} currentPlayer={props.currentPlayer} players={props.players} board={props.board} />
         <div>
           <Tile pos={19} colour="green-tile" currentPlayer={props.currentPlayer} players={props.players} direction="right" id={props.tiles[8] ? props.tiles[8].id : ""} name ={props.tiles[8] ? props.tiles[8].name : ""}/>
           <Tile pos={20} colour="green-tile" currentPlayer={props.currentPlayer} players={props.players} direction="right" id={props.tiles[9] ? props.tiles[9].id : ""} name ={props.tiles[9] ? props.tiles[9].name : ""}/>

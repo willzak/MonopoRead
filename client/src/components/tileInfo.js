@@ -43,7 +43,7 @@ export default function TileInfo( {data, submit}) {
           thirdbookrec = {tile.recommendation[2]} 
           /> : null }
         { showButton ? <button onClick = {onClick}>Completed!</button> : null }
-        { showForm ? <Form /> : null }
+        { showForm ? <Form currentPlayer={props.currentPlayer} players={props.players} board={props.board}/> : null }
       </div>
     )
   } else {
