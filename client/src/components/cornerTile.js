@@ -5,7 +5,7 @@ export default function Corner(props) {
 
   const activePlayers = function() {
     return props.players.map((player) => {
-      if (props.pos === player.current_tile) return <Token key={player.player.player.id} color={player.player.color.hexcode} />
+      if (props.pos === player.player.position) return <Token key={player.player.id} color={player.color.hexcode} />
       else return null
     })
   }

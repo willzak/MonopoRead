@@ -27,7 +27,7 @@ export default function Chance(props) {
 
   useEffect(() => {
     for (const player of props.players) {
-      if (props.pos === player.player.player.position) {
+      if (props.pos === player.player.position) {
         if (player.done) props.drawChance(player.player.id)
       }
     }
@@ -35,8 +35,8 @@ export default function Chance(props) {
 
   const activePlayers = function() {
     return props.players.map((player) => {
-      if (props.pos === player.player.player.position) {
-        return <Token key={player.player.player.id} color={player.player.color.hexcode} />
+      if (props.pos === player.player.position) {
+        return <Token key={player.player.id} color={player.color.hexcode} />
       }
       else return null
     })

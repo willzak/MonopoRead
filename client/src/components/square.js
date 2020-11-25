@@ -24,7 +24,7 @@ export default function Square(props) {
   //if props.player is true render the token component in the square component
   const activePlayers = function() {
     return props.players.map((player) => {
-      if (props.pos === player.player.player.position) return <Token key={player.player.player.id} color={player.player.color.hexcode} />
+      if (props.pos === player.player.position) return <Token key={player.player.id} color={player.color.hexcode} />
       else return null
     })
   }
