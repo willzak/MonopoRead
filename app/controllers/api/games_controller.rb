@@ -58,7 +58,6 @@ class Api::GamesController < ApplicationController
   end
 
   def free_colors
-    @game = Game.find(params[:game_id])
     @used_colors = Game.find(params[:game_id]).players.all.pluck(:color_id)
     @colors = Color.all.select { |color| !@used_colors.include?(color[:id])}
 
@@ -66,17 +65,15 @@ class Api::GamesController < ApplicationController
   end
 
   def boards
-    @game = Game.find(params[:game_id])
-    @boards = Board.where(game: @game)
+    @boards = Board.where(game_id: params[:game_id])
 
     render :json => @boards
   end
 
   def current_board
-    @game = Game.find(params[:game_id])
-    @current_board = Board.where(game: @game, ended_at: nil).first
+    @current_board = Board.where(game_id: params[:game_id], ended_at: nil).first
     if !@current_board
-      @current_board = Board.where(game: @game).order("ended_at").last
+      @current_board = Board.where(game_id: params[:game_id]).order("ended_at").last
     end
 
     render :json => @current_board

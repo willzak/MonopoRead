@@ -76,8 +76,7 @@ class Api::BoardsController < ApplicationController
   def player_tiles
     @board = Board.find(params[:board_id])
     @board_tiles = BoardTile.where(board: @board)
-    @game = Game.find(@board[:game_id])
-    @players = Player.where(game: @game)
+    @players = Player.where(game_id: @board[:game_id])
     @player_tiles = @players.map { |player| { player: player, player_tiles: PlayerTile.where(player: player, board_tile: @board_tiles) } }
 
     render :json => @player_tiles
@@ -85,8 +84,7 @@ class Api::BoardsController < ApplicationController
 
   def player_chance
     @board = Board.find(params[:board_id])
-    @game = Game.find(@board[:game_id])
-    @players = Player.where(game: @game)
+    @players = Player.where(game_id: @board[:game_id])
     @player_cards = @players.map { |player| { player: player, player_cards: PlayerCard.where(player: player, board: @board) } }
 
     render :json => @player_cards
@@ -95,8 +93,7 @@ class Api::BoardsController < ApplicationController
   def player_stats
     @board = Board.find(params[:board_id])
     @board_tiles = BoardTile.where(board: @board)
-    @game = Game.find(@board[:game_id])
-    @players = Player.where(game: @game)
+    @players = Player.where(game_id: @board[:game_id])
     @cards = @players.map { |player| PlayerCard.where(player: player, board: @board) }
     @cards = @cards.map { |player| player.empty? ? [] : player.map { |card| Card.where(id: card[:card_id], effect: 'Points').first ? Card.where(id: card[:card_id], effect: 'Points').first[:outcome] : 0 } }
     @cards = @cards.map { |player| player.inject(0){|sum,x| sum + x }}
