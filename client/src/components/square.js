@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Token from "./token";
 
-
-
-
 export default function Square(props) {
   let type = "square " + props.direction + "-square";
   let textType = "square-text-" + props.direction;
@@ -40,7 +37,9 @@ export default function Square(props) {
             <div className="hidden">View</div>
           </div>
         </div>
-        {activePlayers()}
+          <div className="active-square">
+            {activePlayers()}
+          </div>
       </div>
     </Link>
   )

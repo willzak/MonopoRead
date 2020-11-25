@@ -61,17 +61,21 @@ export default function Chance(props) {
 
   return (
     <Link to={`/cards/${id}`}>
-      <div className={type}>
-        <div className={text}>
-          <strong>?</strong>
-        </div>
-        <div className={label}>
-          Chance
+      <div className="chance-container">
+        <div className={type}>
+          <div className={text}>
+            <strong>?</strong>
+          </div>
+          <div className={label}>
+            Chance
+          </div>
         </div>
         <div className={view}>
           <div className="chance-hidden">View</div>
         </div>
-        {activePlayers()}
+        <div className="active-players">
+          {activePlayers()}
+        </div>
       </div>
     </Link>
   )
