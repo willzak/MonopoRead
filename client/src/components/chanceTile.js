@@ -7,23 +7,29 @@ export default function Chance(props) {
   let type = "tile chance chance";
   let text = "chance-icon-";
   let label = "label-";
+  let view = "chance-click-view chance-click-view";
+
 
   if (props.direction === 'left') {
     type += '-left';
     text += 'left';
     label += 'left';
+    view += '-left';
   } else if (props.direction === 'right') {
     type += '-right';
     text += 'right';
     label += 'right';
+    view += '-right';
   } else if (props.direction === 'top') {
     type += '-top';
     text += 'top';
     label += 'top';
+    view += '-top';
   } else {
     type += '-bottom';
     text += 'bottom';
     label += 'bottom';
+    view += '-bottom';
   }
 
   useEffect(() => {
@@ -61,6 +67,9 @@ export default function Chance(props) {
         </div>
         <div className={label}>
           Chance
+        </div>
+        <div className={view}>
+          <div className="chance-hidden">View</div>
         </div>
         {activePlayers()}
       </div>
