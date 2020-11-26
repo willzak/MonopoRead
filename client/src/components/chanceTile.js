@@ -39,11 +39,7 @@ export default function Chance(props) {
 
   useEffect(() => {
     for (const player of props.players) {
-      if (props.pos === player.player.position) {
-        if (player.player.done) {
-          props.drawChance(player.player.id)
-        }
-      }
+      if (props.pos === player.player.position && player.player.done) props.drawChance(props.currentPlayer)
     }
   }, [props.players])
 

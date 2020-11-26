@@ -4,6 +4,7 @@ import TileInfo from "./tileInfo.js";
 import ChanceInfo from "./chanceInfo";
 
 export default function Console(props) {
+<<<<<<< HEAD
   const tileData = [
     {
       id: 1,
@@ -51,6 +52,18 @@ export default function Console(props) {
     <div className="console">
        <Route path="/tiles/:tileId"><TileInfo data={props.tiles.length > 0 ? props.tiles : tileData} /></Route>
        <Route path="/cards/:cardId"><ChanceInfo data={props.chance.card ? props.chance : chanceData} /></Route>
+=======
+  return (
+    <div className="console">
+      <Route exact path="/"></Route>
+        <Route exact path="/tiles/:tileId/submit">
+          <TileInfo saveBook={props.saveBook} data={props.tiles} submit={true} currentPlayer={props.currentPlayer} players={props.players} board={props.board}  />
+        </Route>
+       <Route exact path="/tiles/:tileId">
+          <TileInfo data={props.tiles} submit={false} />
+        </Route>
+
+>>>>>>> 0cbea671a24151838fa4c7c53e85c03618011cc1
     </div>
   )
 }

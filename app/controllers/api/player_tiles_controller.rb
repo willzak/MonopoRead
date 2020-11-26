@@ -1,4 +1,4 @@
-class Api::PlayerTileTilesController < ApplicationController
+class Api::PlayerTilesController < ApplicationController
   def index
     render :json => {
       error: "Player Tiles only accessible through '/boards/:board_id/player_tiles' (player tiles for specific board) or '/boards/:board_id/players/:player_id/player_tiles' (player tiles for specific player on specific board)"

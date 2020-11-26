@@ -1,41 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Token from "./token";
+import axios from 'axios';
+
+
 
 export default function Square(props) {
+  const [submit, setSubmit] = useState(false)
+  const [active, setActive] = useState([])
+
   let type = "square " + props.direction + "-square";
   let textType = "square-text-" + props.direction;
-  let active;
+  let position;
 
   let view = "click-view";
   if (props.direction === 'right') {
     view += '-v2';
-    active = "active-square-right";
+    position = "active-square-right";
   } else if (props.direction === 'top') {
     view += '-v2';
-    active = "active-square-top";
+    position = "active-square-top";
   } else if (props.direction === 'bottom') {
     view += '-v3';
-    active = "active-square-bottom";
+    position = "active-square-bottom";
   } else if (props.direction === 'left') {
-    active = "active-square-left";
+    position = "active-square-left";
   }
 
-  let text = props.name;
+  let text = props.tile ? props.tile.name : "";
   if (text && text.length > 13) {
     text.replace(/(.{12})/g, "\n");
   }
 
   //if props.player is true render the token component in the square component
   const activePlayers = function() {
-    return props.players.map((player) => {
-      if (props.pos === player.player.position) return <Token key={player.player.id} color={player.color.hexcode} />
+    setSubmit(false); 
+    return props.players.map((player, index) => {
+      if (props.pos === player.player.position) {
+        if (props.currentPlayer === index && props.tile) {
+          axios.get(`/api/boards/${props.board}/players/${player.player.id}/open_tile/${props.tile.board_tile_id}`)
+          .then((response) => {
+            if (response.data) setSubmit(true); 
+          })
+        }  
+        return <Token key={player.player.id} color={player.color.hexcode} />
+      } 
       else return null
-    })
+      })
   }
+
+  useEffect(() => {
+    setActive(activePlayers())
+    for (const player of props.players) {
+      if (props.pos === player.player.position && player.player.done) props.landTile(props.currentPlayer, props.tile)
+    }
+  }, [props.players, props.tile, props.currentPlayer])
   
   return (
-    <Link to = {`/tiles/${props.id}`}>
+
+    <Link to = {`/tiles/${props.tile ? props.tile.id : 0}${submit ? '/submit' : ''}`}>
       <div className={type}>
         <div className={textType}>
           <div className="link-text">
@@ -45,11 +68,10 @@ export default function Square(props) {
             <div className="hidden">View</div>
           </div>
         </div>
-        <div className={active}>
-          {activePlayers()}
+        <div className={position}>
+          {active}
         </div>
       </div>
-    </Link>
+    </Link> 
   )
 }
-

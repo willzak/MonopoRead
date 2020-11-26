@@ -9,7 +9,7 @@ export default function Tile(props) {
   return (
     <div className={type}>
       <Colour colour={props.colour} />
-      <Square pos={props.pos} direction={props.direction} name={props.name} id={props.id} players={props.players} />
+      <Square pos={props.pos} landTile={props.landTile} direction={props.direction} board={props.board} tile={props.tile} players={props.players} currentPlayer={props.currentPlayer} />
     </div>
   )
 };
