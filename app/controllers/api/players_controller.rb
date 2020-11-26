@@ -78,7 +78,7 @@ class Api::PlayersController < ApplicationController
   def submit
     @player = Player.find(params[:player_id])
     @user = User.find(@player[:user_id])
-    @player_tile = PlayerTile.where(player_id: params[:player_id], board_tile_id: params[:board_tile_id])
+    @player_tile = PlayerTile.where(player_id: params[:player_id], board_tile_id: params[:board_tile_id], ended_at: nil).first
     @book = Book.where(name: params[:title]).first
     if !@book
       @book = Book.create(name: params[:title], author: 'N/G', isbn: 0)
