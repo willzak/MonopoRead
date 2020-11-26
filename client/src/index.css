@@ -211,6 +211,8 @@ a {
   transform: rotateZ(0deg);
   width: 9em;
   text-align: center;
+  position: relative;
+  z-index: 100;
 }
 
 .left-square {
@@ -226,6 +228,8 @@ a {
   transform: rotateZ(90deg);
   width: 9em;
   text-align: center;
+  position: relative;
+  z-index: 100;
 }
 
 .right-square {
@@ -310,8 +314,38 @@ a {
 .active-square {
   display: flex;
   flex-wrap: wrap;
-  transform-origin: 58px 25px;
+  position: relative;
+  z-index: 10;
+}
+
+.active-square-left {
+  display: flex;
+  flex-wrap: wrap;
+  transform: translate(0, -40%);
+  position: relative;
+  z-index: 10;
+}
+
+.active-square-top {
+  display: flex;
+  flex-wrap: wrap;
+  transform: translate(0, -25px);
+  position: relative;
+  z-index: 10;
+}
+
+.active-square-right {
+  display: flex;
+  flex-wrap: wrap;
+  transform-origin: 56px 24px;
   transform: rotateZ(180deg);
+  position: relative;
+  z-index: 10;
+}
+
+.active-square-bottom {
+  display: flex;
+  flex-wrap: wrap;
   position: relative;
   z-index: 10;
 }
@@ -474,13 +508,46 @@ a {
   position: relative;
 }
 
-.active-players {
+.active-players-right {
   z-index: 10;
+  height: 9em;
   position: absolute;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  transform-origin: 50px 30px;
+  transform: rotateZ(270deg);
+}
+
+.active-players-top {
+  z-index: 10;
+  height: 9em;
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   transform-origin: 25px 25px;
-  transform: rotateZ(270deg);
+  transform: rotateZ(0deg);
+}
+
+.active-players-bottom {
+  z-index: 10;
+  height: 9em;
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  transform: translate(2px, 25px);
+}
+
+.active-players-left {
+  z-index: 10;
+  height: 9em;
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  transform: translate(40px, 0px);
 }
 
 /* OTHER BOARD ELEMENTS */

@@ -5,16 +5,20 @@ import Token from "./token";
 export default function Square(props) {
   let type = "square " + props.direction + "-square";
   let textType = "square-text-" + props.direction;
-  let active = "";
-  if (props.direction === 'right') {
-    active = "active-square";
-  }
+  let active;
 
   let view = "click-view";
-  if (props.direction === 'right' || props.direction === 'top') {
+  if (props.direction === 'right') {
     view += '-v2';
-  } if (props.direction === 'bottom') {
+    active = "active-square-right";
+  } else if (props.direction === 'top') {
+    view += '-v2';
+    active = "active-square-top";
+  } else if (props.direction === 'bottom') {
     view += '-v3';
+    active = "active-square-bottom";
+  } else if (props.direction === 'left') {
+    active = "active-square-left";
   }
 
   let text = props.name;
