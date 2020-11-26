@@ -6,7 +6,6 @@ import ChanceInfo from "./chanceInfo";
 
 export default function Console(props) {
   let chanceData = [];
-  console.log("Console Props: ", props)
 
   return (
     <div className="console">
