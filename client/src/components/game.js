@@ -12,6 +12,8 @@ export default function Game(props) {
   const [tiles, setTiles] = useState([])
   const [chance, setChance] =useState(0)
   const [chanceUsed, setChanceUsed] = useState(-1)
+  const [showReview, setShowReview] = useState(false)
+  const [review, setReview] = useState("")
 
   const drawChance = function(player) {
     setChanceUsed(player)
@@ -152,9 +154,13 @@ export default function Game(props) {
       </div>
       <div className="game-play">
         <Router>
-          <Board landTile={landTile} drawChance={drawChance} saveBook={saveBook} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} chance={chance} />
+          <Board setReview = {setReview} setShowReview = {setShowReview} landTile={landTile} drawChance={drawChance} saveBook={saveBook} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} chance={chance} />
         </Router>
       </div>
+      {showReview &&
+      <div className="review-popup">
+        {review}
+      </div> }
     </section>
   )
 }

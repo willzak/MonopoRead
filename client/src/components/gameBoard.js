@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Tile from "./gameTile";
 import Console from "./console";
 import Corner from "./cornerTile";
 import Chance from "./chanceTile";
 
 export default function Board(props) {
-
+  console.log("GameBoard Props: ", props)
   return (
     <div className="game-board">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
@@ -26,7 +26,7 @@ export default function Board(props) {
           <Tile pos={8} colour="orange-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="left" tile={props.tiles[6]}/>
           <Tile pos={7} colour="orange-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="left" tile={props.tiles[7]}/>
         </div>
-        <Console tiles={props.tiles} saveBook={props.saveBook} currentPlayer={props.currentPlayer} players={props.players} board={props.board} chance={props.chance} />
+        <Console setReview = {props.setReview} setShowReview = {props.setShowReview} tiles={props.tiles} saveBook={props.saveBook} currentPlayer={props.currentPlayer} players={props.players} board={props.board} chance={props.chance} />
         <div>
           <Tile pos={19} colour="green-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="right" tile={props.tiles[8]}/>
           <Tile pos={20} colour="green-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="right" tile={props.tiles[9]}/>
