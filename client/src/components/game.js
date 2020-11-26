@@ -37,6 +37,21 @@ export default function Game(props) {
         newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false, tiles: newPlayers[player].player.tiles - 1 } }
         return newPlayers
       })
+      return axios.get(`/api/boards/${board}/board_tiles`)
+    })
+    .then((response) => {
+      setTiles(response.data.map(tile => {
+        return {
+          tile: tile,
+          id: tile.tile.id,
+          board_tile_id: tile.board_tile.id,
+          name: tile.tile.name,
+          colour: tile.color.hexcode,
+          description: tile.tile.description,
+          books: tile.books.map(b => b.name),
+          recommendation: tile.recommendations.map(rec => rec.book.name)
+        }
+      }));
     })
   }
 
