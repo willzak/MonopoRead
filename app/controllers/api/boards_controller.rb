@@ -60,7 +60,7 @@ class Api::BoardsController < ApplicationController
 
   def players
     @board = Board.find(params[:board_id])
-    @players = Game.find(@board[:game_id]).players.all
+    @players = Game.find(@board[:game_id]).players.order(:id)
     @players = @players.map { |player| { player: player, color: Color.find(player[:color_id]), user: User.find(player[:user_id]) } }
 
     render :json => @players
@@ -93,7 +93,7 @@ class Api::BoardsController < ApplicationController
   def player_stats
     @board = Board.find(params[:board_id])
     @board_tiles = BoardTile.where(board: @board)
-    @players = Player.where(game_id: @board[:game_id])
+    @players = Player.where(game_id: @board[:game_id]).order(:id)
     @cards = @players.map { |player| PlayerCard.where(player: player, board: @board) }
     @cards = @cards.map { |player| player.empty? ? [] : player.map { |card| Card.where(id: card[:card_id], effect: 'Points').first ? Card.where(id: card[:card_id], effect: 'Points').first[:outcome] : 0 } }
     @cards = @cards.map { |player| player.inject(0){|sum,x| sum + x }}
