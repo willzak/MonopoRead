@@ -62,6 +62,7 @@ code {
   margin: 20px;
   padding: 0.5em;
   width: 20vw;
+  height: 90vh;
   min-width: 250px;
   background-color: #BFDBAE;
   border-radius: 10px;
@@ -87,7 +88,7 @@ a {
 }
 
 .dice {
-  margin: 5em;
+  margin: 2em;
 }
 
 ._3dface {
@@ -490,15 +491,19 @@ a {
   transform: rotateZ(270deg);
 }
 
-.tile:hover .icon {
+.chance-container:hover .icon {
   opacity: 0.3;
 }
 
-.tile:hover .label {
+.chance-container:hover .icon {
   opacity: 0.3;
 }
 
-.tile:hover .chance-click-view {
+.chance-container:hover .label {
+  opacity: 0.3;
+}
+
+.chance-container:hover .chance-click-view {
   opacity: 2;
 }
 
