@@ -5,6 +5,10 @@ import Token from "./token";
 export default function Square(props) {
   let type = "square " + props.direction + "-square";
   let textType = "square-text-" + props.direction;
+  let active = "";
+  if (props.direction === 'right') {
+    active = "active-square";
+  }
 
   let view = "click-view";
   if (props.direction === 'right' || props.direction === 'top') {
@@ -37,9 +41,9 @@ export default function Square(props) {
             <div className="hidden">View</div>
           </div>
         </div>
-          <div className="active-square">
-            {activePlayers()}
-          </div>
+        <div className={active}>
+          {activePlayers()}
+        </div>
       </div>
     </Link>
   )

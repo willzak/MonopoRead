@@ -240,6 +240,8 @@ a {
   transform: rotateZ(270deg);
   width: 8.5em;
   text-align: center;
+  position: relative;
+  z-index: 100;
 }
 
 .click-view {
@@ -307,6 +309,8 @@ a {
 
 .active-square {
   transform-origin: 60px 40px;
+  position: relative;
+  z-index: 10;
   transform: rotateZ(90deg);
 }
 
