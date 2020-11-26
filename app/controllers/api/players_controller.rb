@@ -76,22 +76,33 @@ class Api::PlayersController < ApplicationController
   end
 
   def submit
+    @player = Player.find(params[:player_id])
+    @user = User.find(@player[:user_id])
     @player_tile = PlayerTile.where(player_id: params[:player_id], board_tile_id: params[:board_tile_id])
     @book = Book.where(title: params[:title]).first
     if !@book
       @book = Book.create(title: params[:title], author: 'N/G', isbn: 0)
     end
-    @player_tile.update(book: @book, review: params[:review], ended_at: Time.new)
-
+    if params[:review]
+      @review = Review.create(book: @book, review_text: params[:review], user: @user)
+      @player_tile.update(book: @book, review: @review, ended_at: Time.new)  
+    else
+      @player_tile.update(book: @book, ended_at: Time.new)  
+    end
     render :json => {
       player_tile: @player_tile,
       book: @book
     }
   end
 
-  def has_unfinished_tile?
-    @player_tile = PlayerTile.where(player_id: params[:player_id], board_tile_id: params[:board_tile_id])
-    render :json => @player_tile[:ended_at] == nil ? true : false
+  def open_tile?
+    @player_tile = PlayerTile.where(player_id: params[:player_id], board_tile_id: params[:board_tile_id], ended_at: nil).first
+    render :json => @player_tile ? true : false
+  end
+
+  def any_open_tile?
+    @player_tile = PlayerTile.where(player_id: params[:player_id], ended_at: nil).first
+    render :json => @player_tile ? true : false
   end
 
   private
