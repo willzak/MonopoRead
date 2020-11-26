@@ -7,7 +7,6 @@ import Description from "./tileDescription.js";
 import CancelIcon from '@material-ui/icons/Cancel';
 
 export default function TileInfo( {data, submit, players, currentPlayer, board, saveBook, setShowReview, setReview}) {
-  console.log("TileInfo setshowreview: ", setShowReview)
   const  {tileId}  = useParams(); 
 
   const tile = data.find((t) => t.id === Number(tileId));
