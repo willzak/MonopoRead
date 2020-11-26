@@ -12,7 +12,7 @@ export default function useApplicationData() {
   const [chanceUsed, setChanceUsed] = useState(-1)
 
   useEffect(() => {
-    const cable = ActionCable.createConsumer("ws://localhost:3001/cable");
+    const cable = ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL);
     const subscription = cable.subscriptions.create("ApplicationCable::Channel", {
       connected: function() {
         console.log("You've subscribed to the channel");

@@ -83,7 +83,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   
-  config.action_cable.url = "ws://localhost:3001/cable"
+  config.action_cable.url = "ws://monoporead.herokuapp.com:3001/cable"
   config.action_cable.disable_request_forgery_protection = true
   config.action_cable.allowed_request_origins = %r{http://*}
 end
