@@ -5,9 +5,9 @@ import Token from './token'
 export default function Chance(props) {
 
   let type = "tile chance chance";
-  let text = "chance-icon-";
-  let label = "label-";
-  let view = "chance-click-view chance-click-view";
+  let text = "icon chance-icon-";
+  let label = "label label-";
+  let view = "chance-click-view";
   let active = "";
 
 

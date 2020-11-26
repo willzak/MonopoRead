@@ -490,7 +490,11 @@ a {
   transform: rotateZ(270deg);
 }
 
-.tile:hover .tile {
+.tile:hover .icon {
+  opacity: 0.3;
+}
+
+.tile:hover .label {
   opacity: 0.3;
 }
 
