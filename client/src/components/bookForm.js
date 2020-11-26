@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
+
 import axios from "axios"; 
 // import './bookForm.css'
 
@@ -8,11 +10,7 @@ export default function Form( props ) {
   const [review, setReview] = useState("")
   
   const save = () => {
-    console.log ("this has saved as", title)
-    console.log("this review is", review)
     const playerID = props.players[props.currentPlayer].player.id
-    console.log(playerID)
-    console.log(props.tile.board_tile_id)
     axios.post(`/api/boards/${props.board}/players/${playerID}/submit`, {title: title, review: review, board_tile_id: props.tile.board_tile_id})
     .then (res => console.log(res.data))
   }
