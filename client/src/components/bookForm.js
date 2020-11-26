@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import TextField from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField'; 
+import LinearProgress from '@material-ui/core/LinearProgress';
 import "./bookForm.css"
 
 // styling the material-ui text field components  - can i do this in just css? - look into
@@ -39,7 +40,7 @@ export default function Form( props ) {
           <TextField  id="outlined-multiline-static" label="Leave A Review (optional)"  multiline rows={4} variant="outlined" type="text" name="review" value={review} onChange={(event) => setReview(event.target.value)}/>
         </form>
         <br />
-        {loading && <h1>Spinner!</h1>}
+        {loading && <LinearProgress />}
         { !loading &&  <button onClick={clickHandler}>Submit!</button>}
     </div>
     )
