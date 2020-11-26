@@ -61,7 +61,9 @@ export default function useApplicationData() {
           name: tile.tile.name,
           colour: tile.color.hexcode,
           description: tile.tile.description,
-          books: tile.books.map(b => b.name),
+          books: tile.books.map(b => {
+            return { name: b.book.name, review: b.review.review_text } 
+          }),
           recommendation: tile.recommendations.map(rec => rec.book.name)
         }
       }));
@@ -148,7 +150,9 @@ export default function useApplicationData() {
             name: tile.tile.name,
             colour: tile.color.hexcode,
             description: tile.tile.description,
-            books: tile.books.map(b => b.name),
+            books: tile.books.map(b => {
+              return { name: b.book.name, review: b.review.review_text } 
+            }),
             recommendation: tile.recommendations.map(rec => rec.book.name)
           }
         }));

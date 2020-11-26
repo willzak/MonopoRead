@@ -5,7 +5,7 @@ class Api::BoardTilesController < ApplicationController
       board_tile: board_tile,
       tile: Tile.find(board_tile[:tile_id]),
       color: Color.find(TileGroup.find(Tile.find(board_tile[:tile_id])[:tile_group_id])[:color_id]),
-      books: board_tile.player_tiles.all.map { |player_tile| player_tile[:book_id] == nil ? [] : Book.find(player_tile[:book_id]) },
+      books: board_tile.player_tiles.all.map { |player_tile| { book: player_tile[:book_id] == nil ? [] : Book.find(player_tile[:book_id]), review: player_tile[:review_id] == nil ? [] : Review.find(player_tile[:review_id]) } },
       recommendations: Tile.find(board_tile[:tile_id]).recommendations.all.map { |recommendation| { recommendation: recommendation, book: Book.find(recommendation[:book_id]) } }
     } }
 
