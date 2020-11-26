@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+import ActionCable from 'actioncable'
 
 export default function useApplicationData() {
   const [game, setGame] = useState(0)
@@ -9,6 +10,21 @@ export default function useApplicationData() {
   const [tiles, setTiles] = useState([])
   const [chance, setChance] =useState(0)
   const [chanceUsed, setChanceUsed] = useState(-1)
+
+  useEffect(() => {
+    const cable = ActionCable.createConsumer("ws://localhost:3000/cable");
+    const subscription = cable.subscriptions.create("ApplicationCable::Channel", {
+      connected: function() {
+        console.log("You've subscribed to the channel");
+      },
+      disconnected: function() {
+        console.log("You've disconnected from the channel");
+      },
+      received: function (received_data) {
+        console.log('Message from channel:', received_data);
+      }
+    })
+  }, []);
 
   const drawChance = function(player) {
     setChanceUsed(player)
