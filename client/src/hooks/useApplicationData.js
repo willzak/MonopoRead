@@ -12,10 +12,11 @@ export default function useApplicationData() {
   const [chanceUsed, setChanceUsed] = useState(-1)
   const [showReview, setShowReview] = useState(false)
   const [review, setReview] = useState("")
+  const [update, setUpdate] = useState({})
 
   useEffect(() => {
     const cable = ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL);
-    const subscription = cable.subscriptions.create("ApplicationCable::Channel", {
+    cable.subscriptions.create("ApplicationCable::Channel", {
       connected: function() {
         console.log("You've subscribed to the channel");
       },
@@ -23,10 +24,34 @@ export default function useApplicationData() {
         console.log("You've disconnected from the channel");
       },
       received: function (received_data) {
-        console.log('Message from channel:', received_data);
+        setUpdate(received_data)
       }
     })
   }, []);
+
+  useEffect(() => {
+    if (update.message === 'Player changed' && update.player.game_id === game && update.player.id !== players[currentPlayer].player.id) {
+      let player = -1
+      for (let i = 0; i < players.length; i++) if (players[i].player.id === update.player.id) player = i
+
+      if (player === -1) return
+      let ran = players[player].player.position;
+
+      const interval = setInterval(() => {
+        ran++;
+        
+        setPlayers((current) => {
+          const newPlayers = [...current]
+          newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: ((newPlayers[player].player.position + 1) % 24) } }
+          return newPlayers
+        })
+
+        if (ran === update.player.position) {
+            window.clearInterval(interval);
+        }
+      }, 300);
+    }
+  }, [update])
 
   const drawChance = function(player) {
     setChanceUsed(player)
@@ -45,8 +70,7 @@ export default function useApplicationData() {
 
   const saveBook = function(player, title, review, board_tile_id) {
     axios.post(`/api/boards/${board}/players/${players[player].player.id}/submit`, {title, review, board_tile_id})
-    .then ((response) => {
-      console.log(response)
+    .then (() => {
       setPlayers((current) => {
         const newPlayers = [...current]
         newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false, tiles: newPlayers[player].player.tiles - 1 } }
