@@ -1,11 +1,24 @@
 .indvidual-tile {
   margin: 50px;
   width: 70%;
-  height: 300px;
+  height: 350px;
   border: solid;
+  border-width: thin; 
   background-color: white;
 }
 
 .individual-tile-header {
-  margin-top: -4%;
+  border: solid; 
+  margin: 7px; 
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-between;
+  align-items: center;
+  height: 18%; 
+}
+
+.individual-tile-body {
+  margin-left: 10px; 
 }

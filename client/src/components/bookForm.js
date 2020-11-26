@@ -1,20 +1,34 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
+import TextField from '@material-ui/core/TextField';
+import "./bookForm.css"
+
+// styling the material-ui text field components  - can i do this in just css? - look into
+// import { makeStyles } from '@material-ui/core/styles';
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//       margin: theme.spacing(1),
+//       display: 'flex', 
+//       flexDirection: 'column', 
+//       alignItems: 'center',
+//     },
+// }));
+
 
 export default function Form( props ) {
   const [title, setTitle] = useState("")
   const [review, setReview] = useState("")
   
+  // const classes = useStyles();
   return (
     <div>
         <form className="book-form">
-        <h3>Book Title(ISBN??)</h3>
-          <input type="text"  name="title" value={title} onChange={(event) => setTitle(event.target.value)}/>
-   
-        <h3>Leave a Review (optional)</h3>
-          <input type="text" name="review" value={review} onChange={(event) => setReview(event.target.value)}/>
-        
+          <h3> Submit Your Book! </h3>
+          <TextField id="standard-basic" label="Book Title" type="text"  name="title" value={title} onChange={(event) => setTitle(event.target.value)}/>
+          <br /> 
+          <TextField  id="outlined-multiline-static" label="Leave A Review (optional)"  multiline rows={4} variant="outlined" type="text" name="review" value={review} onChange={(event) => setReview(event.target.value)}/>
         </form>
+        <br />
         <button onClick={() => props.saveBook(props.currentPlayer, title, review, props.tile.board_tile_id)}>Submit!</button>
     </div>
     )
