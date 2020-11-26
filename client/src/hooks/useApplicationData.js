@@ -30,28 +30,31 @@ export default function useApplicationData() {
   }, []);
 
   useEffect(() => {
-    if (update.message === 'Player changed' && update.player.game_id === game && update.player.position !== players[currentPlayer].player.position) {
-      let player = -1
-      for (let i = 0; i < players.length; i++) if (players[i].player.id === update.player.id) player = i
-
-      if (player === -1) return
-      let ran = players[player].player.position;
-
-      const interval = setInterval(() => {
-        ran++;
-        
-        setPlayers((current) => {
-          const newPlayers = [...current]
-          newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: ((newPlayers[player].player.position + 1) % 24) } }
-          return newPlayers
-        })
-
-        if (ran === update.player.position) {
-            window.clearInterval(interval);
-        }
-      }, 300);
-    }
+    if (update.message === 'Player changed' && update.player.game_id === game && update.player.position !== players[currentPlayer].player.position) updatePlayerPosition(update)
+    if (update.message === 'Book submitted') getTiles()
   }, [update])
+
+  const updatePlayerPosition = function(update) {
+    let player = -1
+    for (let i = 0; i < players.length; i++) if (players[i].player.id === update.player.id) player = i
+
+    if (player === -1) return
+    let ran = players[player].player.position;
+
+    const interval = setInterval(() => {
+      ran++;
+      
+      setPlayers((current) => {
+        const newPlayers = [...current]
+        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: ((newPlayers[player].player.position + 1) % 24) } }
+        return newPlayers
+      })
+
+      if (ran === update.player.position) {
+          window.clearInterval(interval);
+      }
+    }, 300);
+  }
 
   const drawChance = function(player) {
     setChanceUsed(player)
@@ -68,16 +71,8 @@ export default function useApplicationData() {
     })
   }
 
-  const saveBook = function(player, title, review, board_tile_id) {
-    return axios.post(`/api/boards/${board}/players/${players[player].player.id}/submit`, {title, review, board_tile_id})
-    .then (() => {
-      setPlayers((current) => {
-        const newPlayers = [...current]
-        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false, tiles: newPlayers[player].player.tiles - 1 } }
-        return newPlayers
-      })
-      return axios.get(`/api/boards/${board}/board_tiles`)
-    })
+  const getTiles = function() {
+    axios.get(`/api/boards/${board}/board_tiles`)
     .then((response) => {
       setTiles(response.data.map(tile => {
         return {
@@ -93,6 +88,18 @@ export default function useApplicationData() {
           recommendation: tile.recommendations.map(rec => rec.book.name)
         }
       }));
+    })
+  }
+
+  const saveBook = function(player, title, review, board_tile_id) {
+    return axios.post(`/api/boards/${board}/players/${players[player].player.id}/submit`, {title, review, board_tile_id})
+    .then (() => {
+      setPlayers((current) => {
+        const newPlayers = [...current]
+        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false, tiles: newPlayers[player].player.tiles - 1 } }
+        return newPlayers
+      })
+      getTiles();
     })
   }
 

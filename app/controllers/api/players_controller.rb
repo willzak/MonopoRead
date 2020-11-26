@@ -90,6 +90,7 @@ class Api::PlayersController < ApplicationController
     else
       @player_tile.update(book: @book, ended_at: Time.new)  
     end
+    ActionCable.server.broadcast('channel', { message: 'Book submitted'})
     render :json => {
       player_tile: @player_tile,
       book: @book
