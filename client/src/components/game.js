@@ -8,6 +8,8 @@ export default function Game(props) {
   const {
     board, players, tiles, chance,
     currentPlayer, setCurrentPlayer,
+    review, setReview,
+    showReview, setShowReview,
     drawChance, landTile, saveBook, rollDice, 
   } = useApplicationData();
 
@@ -20,9 +22,13 @@ export default function Game(props) {
       </div>
       <div className="game-play">
         <Router>
-          <Board landTile={landTile} drawChance={drawChance} saveBook={saveBook} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} chance={chance} />
+          <Board setReview = {setReview} setShowReview = {setShowReview} landTile={landTile} drawChance={drawChance} saveBook={saveBook} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} chance={chance} />
         </Router>
       </div>
+      {showReview &&
+      <div className="review-popup">
+        {review}
+      </div> }
     </section>
   )
 }

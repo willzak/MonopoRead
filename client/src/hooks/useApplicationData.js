@@ -10,6 +10,8 @@ export default function useApplicationData() {
   const [tiles, setTiles] = useState([])
   const [chance, setChance] =useState(0)
   const [chanceUsed, setChanceUsed] = useState(-1)
+  const [showReview, setShowReview] = useState(false)
+  const [review, setReview] = useState("")
 
   useEffect(() => {
     const cable = ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL);
@@ -168,6 +170,8 @@ export default function useApplicationData() {
     tiles, setTiles,
     chance, setChance,
     chanceUsed, setChanceUsed,
+    showReview, setShowReview,
+    review, setReview,
     drawChance, landTile, saveBook, rollDice, 
   }
 }

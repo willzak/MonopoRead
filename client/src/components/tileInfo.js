@@ -6,8 +6,8 @@ import Form from './bookForm.js';
 import Description from "./tileDescription.js";
 import CancelIcon from '@material-ui/icons/Cancel';
 
-export default function TileInfo( {data, submit, players, currentPlayer, board, saveBook}) {
-
+export default function TileInfo( {data, submit, players, currentPlayer, board, saveBook, setShowReview, setReview}) {
+  console.log("TileInfo setshowreview: ", setShowReview)
   const  {tileId}  = useParams(); 
 
   const tile = data.find((t) => t.id === Number(tileId));
@@ -38,7 +38,9 @@ export default function TileInfo( {data, submit, players, currentPlayer, board, 
         <Link to="/" ><CancelIcon></CancelIcon> </Link>
         </div>
         <div className= "individual-tile-body">
-        { showInfo ? <Description 
+        { showInfo ? <Description
+          setReview = {setReview}
+          setShowReview = {setShowReview}
           description = {tile.description} 
           books = {tile.books} 
           firstbookrec = {tile.recommendation[0]} 
