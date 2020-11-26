@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import './tileInfo.css'
-import Form from './bookForm.js'
-import Description from "./tileDescription.js"
+import './tileInfo.css';
+import Form from './bookForm.js';
+import Description from "./tileDescription.js";
+import CancelIcon from '@material-ui/icons/Cancel';
 
 export default function TileInfo( {data, submit, players, currentPlayer, board, saveBook}) {
 
@@ -27,15 +28,16 @@ export default function TileInfo( {data, submit, players, currentPlayer, board, 
     setShowForm(true);
    }
 
+
   if (tile) {
 
     tileData = (
       <div className="indvidual-tile" >
         <div className="individual-tile-header" style={ {background: `${tile.colour}`} } >
-        <h2> This is ID: {tileId}</h2>
         <h1> {tile.name}</h1>
-        <Link to="/" >Click to return to game </Link>
+        <Link to="/" ><CancelIcon></CancelIcon> </Link>
         </div>
+        <div className= "individual-tile-body">
         { showInfo ? <Description 
           description = {tile.description} 
           books = {tile.books} 
@@ -45,6 +47,7 @@ export default function TileInfo( {data, submit, players, currentPlayer, board, 
           /> : null }
         { showButton ? <button onClick = {onClick}>Completed!</button> : null }
         { showForm ? <Form saveBook={saveBook} tile={tile} currentPlayer={currentPlayer} players={players} board={board}/> : null }
+        </div>
       </div>
     )
   } else {
