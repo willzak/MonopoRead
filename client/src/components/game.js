@@ -147,7 +147,6 @@ export default function Game(props) {
     <section className="game-view">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <div className="side-console">
-        <div className='title' >MONOPOREAD</div>
         <SideBar currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer} rollDice={rollDice} chance={chance} players={players} board={board} />
       </div>
       <div className="game-play">

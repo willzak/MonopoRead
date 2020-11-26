@@ -1,6 +1,8 @@
 import React from "react";
 import Token from "./token";
 
+import "./cornerTile.css";
+
 export default function Corner(props) {
 
   const activePlayers = function() {
@@ -11,6 +13,16 @@ export default function Corner(props) {
   }
 
   return (
-    <div className="corner">{activePlayers()}</div>
+    <div className="corner">
+      <div className="corner-style-container">
+        <div className="corner-text">
+          GO
+        </div>
+        <div className="arrow">
+          ➯
+        </div>
+      </div>
+      {activePlayers()}
+    </div>
   )
 }

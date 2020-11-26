@@ -1,0 +1,26 @@
+.corner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 15em;
+  width: 15em;
+  outline:1px solid black;
+  background-color: #BFDBAE;
+}
+
+.corner-style-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 5em;
+  color: red;
+}
+
+.corner-text {
+  font-size: 1em;
+  transform: rotateZ(315deg);
+}
+
+.arrow {
+  transform: scaleX(-1);
+}

@@ -45,17 +45,9 @@ code {
 }
 
 .title {
-  width: 20vw;
+  width: 25vw;
   padding: 0.25em;
   min-width: 270px;
-  font-size: 3em;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  text-align: center;
-  text-shadow: 5px 5px 5px #000000;
-  color: white;
-  background-color: red;
-  border-radius: 10px;
-  box-shadow: 3px 5px 10px #888888;
 }
 
 .side-bar {
@@ -179,7 +171,7 @@ a {
 }
 
 .square {
-  background-color: white;
+  background-color: #BFDBAE;
   outline: black solid 1px;
 }
 
@@ -578,10 +570,10 @@ a {
   background-color: #BFDBAE;
 }
 
-.corner {
-  height: 15em;
-  width: 15em;
-  outline:1px solid black;
-  background-color: burlywood;
+.board-logo {
+  width: 40em;
+  position: relative;
+  transform-origin: 370px 110px;
+  transform: rotateZ(-45deg);
 }
 

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import axios from 'axios';
 
 import Roll from "./dice";
-import './sideBar.css'
+import './sideBar.css';
 
 export default function SideBar(props) {
   const [playerStats, setPlayerStats] = useState([])
