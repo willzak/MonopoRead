@@ -6,6 +6,7 @@ import './sideBar.css'
 
 export default function SideBar(props) {
   const [playerStats, setPlayerStats] = useState([])
+  const [disabled, setDisabled] = useState(false)
 
   useEffect(() => {
     if (props.board !== 0) {
@@ -18,13 +19,23 @@ export default function SideBar(props) {
             id: player.player.id,
             color: player.color.hexcode,
             name: player.user.name,
+            books: player.books,
             points: player.points,
             last_play: player.player.updated_at
           }
         }));
       })
     }
-  }, [props.board, props.chance])
+  }, [props.board, props.players])
+
+  useEffect(() => {
+    if (props.players[props.currentPlayer]) {
+      axios.get(`/api/boards/${props.board}/players/${props.players[props.currentPlayer].player.id}/open_tile`)
+      .then((response) => {
+        setDisabled(response.data);
+      })
+    }
+  }, [props.players, props.currentPlayer])
 
   const playerData = function() {
     const now = new Date();
@@ -42,7 +53,10 @@ export default function SideBar(props) {
           </div>
           <br></br>
           <div className="stats">
-            • Points: {player.points}
+            • Books Read: {player.books}
+          </div>
+          <div className="stats">
+            • Total Points: {player.points}
           </div>
           <div className="stats">
             • Last Move: {last_move}
@@ -55,7 +69,7 @@ export default function SideBar(props) {
   return (
     <div className="side-bar">
       {playerData()}
-      <Roll currentPlayer={props.currentPlayer} rollDice={props.rollDice} players={props.players} board={props.board} />
+      <Roll disabled={disabled} currentPlayer={props.currentPlayer} rollDice={props.rollDice} players={props.players} board={props.board} />
     </div>
   )
 }
