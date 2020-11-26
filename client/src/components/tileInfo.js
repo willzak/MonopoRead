@@ -5,7 +5,7 @@ import './tileInfo.css'
 import Form from './bookForm.js'
 import Description from "./tileDescription.js"
 
-export default function TileInfo( {data, submit, players, currentPlayer, board}) {
+export default function TileInfo( {data, submit, players, currentPlayer, board, saveBook}) {
 
   const  {tileId}  = useParams(); 
 
@@ -44,7 +44,7 @@ export default function TileInfo( {data, submit, players, currentPlayer, board})
           thirdbookrec = {tile.recommendation[2]} 
           /> : null }
         { showButton ? <button onClick = {onClick}>Completed!</button> : null }
-        { showForm ? <Form tile = {tile} currentPlayer={currentPlayer} players={players} board={board}/> : null }
+        { showForm ? <Form saveBook={saveBook} tile={tile} currentPlayer={currentPlayer} players={players} board={board}/> : null }
       </div>
     )
   } else {

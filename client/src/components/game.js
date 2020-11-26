@@ -19,10 +19,22 @@ export default function Game(props) {
 
   const landTile = function(player, tile) {
     axios.post(`/api/games/${game}/players/${players[player].player.id}/player_tiles`, { board_tile_id: tile.board_tile_id })
-    .then((response) => {
+    .then(() => {
       setPlayers((current) => {
         const newPlayers = [...current]
         newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false, tiles: newPlayers[player].player.tiles ? newPlayers[player].player.tiles + 1 : 1 } }
+        return newPlayers
+      })
+    })
+  }
+
+  const saveBook = function(player, title, review, board_tile_id) {
+    axios.post(`/api/boards/${board}/players/${players[player].player.id}/submit`, {title, review, board_tile_id})
+    .then ((response) => {
+      console.log(response)
+      setPlayers((current) => {
+        const newPlayers = [...current]
+        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false, tiles: newPlayers[player].player.tiles - 1 } }
         return newPlayers
       })
     })
@@ -58,8 +70,14 @@ export default function Game(props) {
     if (players.length > 0 && chanceUsed !== -1) {
       axios.get(`/api/boards/${board}/players/${players[chanceUsed].player.id}/draw_chance`)
       .then((response) => {
+        setPlayers((current) => {
+          const newPlayers = [...current]
+          newPlayers[chanceUsed] = {...newPlayers[chanceUsed], player: {...newPlayers[chanceUsed].player, chance: newPlayers[chanceUsed].player.chance ? newPlayers[chanceUsed].player.chance - 1 : 1 } }
+          return newPlayers
+        })
         setChance(response.data)
         setChanceUsed(-1)
+      
       })
     }
   }, [chanceUsed])
@@ -119,7 +137,7 @@ export default function Game(props) {
       </div>
       <div className="game-play">
         <Router>
-          <Board landTile={landTile} drawChance={drawChance} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} />
+          <Board landTile={landTile} drawChance={drawChance} saveBook={saveBook} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} />
         </Router>
       </div>
     </section>
