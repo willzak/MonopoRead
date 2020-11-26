@@ -101,6 +101,7 @@ class Api::BoardsController < ApplicationController
       player: player,
       color: Color.find(player[:color_id]),
       user: User.find(player[:user_id]),
+      books: PlayerTile.where.not(ended_at: nil).where(player: player, board_tile: @board_tiles).length,
       points: (PlayerTile.where.not(ended_at: nil).where(player: player, board_tile: @board_tiles).length * 3) + @cards[index],
       last_play: current_tile_for_player(params[:board_id], player[:id]) ? (current_tile_for_player(params[:board_id], player[:id])[:ended_at] || current_tile_for_player(params[:board_id], player[:id])[:created_at]) : @player[:created_at]
     } }
