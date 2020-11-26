@@ -17,6 +17,17 @@ export default function Game(props) {
     setChanceUsed(player)
   }
 
+  const landTile = function(player, tile) {
+    axios.post(`/api/games/${game}/players/${players[player].player.id}/player_tiles`, { board_tile_id: tile.board_tile_id })
+    .then((response) => {
+      setPlayers((current) => {
+        const newPlayers = [...current]
+        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false, tiles: newPlayers[player].player.tiles ? newPlayers[player].player.tiles + 1 : 1 } }
+        return newPlayers
+      })
+    })
+  }
+
   const rollDice = function(number, player) {
     let ran = 0;
 
@@ -108,7 +119,7 @@ export default function Game(props) {
       </div>
       <div className="game-play">
         <Router>
-          <Board drawChance={drawChance} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} />
+          <Board landTile={landTile} drawChance={drawChance} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} />
         </Router>
       </div>
     </section>
