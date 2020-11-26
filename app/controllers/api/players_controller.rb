@@ -29,6 +29,7 @@ class Api::PlayersController < ApplicationController
     @player = Player.find(params[:id])
 
     if @player.update(player_params)
+      ActionCable.server.broadcast('channel', { message: 'Player changed', player: @player})
       render :json => @player
     else
       render :json => {
