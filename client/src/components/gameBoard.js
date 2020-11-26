@@ -13,7 +13,7 @@ export default function Board(props) {
         <Corner pos={12} id="Corner1" currentPlayer={props.currentPlayer} players={props.players}/>
         <Tile pos={13} colour="red-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="top" tile={props.tiles[0]}/>
         <Tile pos={14} colour="red-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="top" tile={props.tiles[1]}/>
-        <Chance drawChance={props.drawChance} currentPlayer={props.currentPlayer}  pos={15} id="Chance1" players={props.players} board={props.board} landTile={props.landTile} direction="top" />
+        <Chance drawChance={props.drawChance} currentPlayer={props.currentPlayer}  pos={15} id="Chance1" players={props.players} board={props.board} landTile={props.landTile} direction="top" chance={props.chance} />
         <Tile pos={16} colour="yellow-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="top" tile={props.tiles[2]}/>
         <Tile pos={17} colour="yellow-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="top" tile={props.tiles[3]}/>
         <Corner pos={18} id="Corner2" currentPlayer={props.currentPlayer} players={props.players}/>
@@ -22,15 +22,15 @@ export default function Board(props) {
         <div>
           <Tile pos={11} colour="fuchsia-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="left" tile={props.tiles[4]}/>
           <Tile pos={10} colour="fuchsia-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="left" tile={props.tiles[5]}/>
-          <Chance drawChance={props.drawChance} currentPlayer={props.currentPlayer}  pos={9} id="Chance2" players={props.players} board={props.board} landTile={props.landTile} direction="left" />
+          <Chance drawChance={props.drawChance} currentPlayer={props.currentPlayer}  pos={9} id="Chance2" players={props.players} board={props.board} landTile={props.landTile} direction="left" chance={props.chance} />
           <Tile pos={8} colour="orange-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="left" tile={props.tiles[6]}/>
           <Tile pos={7} colour="orange-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="left" tile={props.tiles[7]}/>
         </div>
-        <Console tiles={props.tiles} saveBook={props.saveBook} currentPlayer={props.currentPlayer} players={props.players} board={props.board} />
+        <Console tiles={props.tiles} saveBook={props.saveBook} currentPlayer={props.currentPlayer} players={props.players} board={props.board} chance={props.chance} />
         <div>
           <Tile pos={19} colour="green-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="right" tile={props.tiles[8]}/>
           <Tile pos={20} colour="green-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="right" tile={props.tiles[9]}/>
-          <Chance drawChance={props.drawChance} currentPlayer={props.currentPlayer}  pos={21} id="Chance3" players={props.players} board={props.board} landTile={props.landTile} direction="right" />
+          <Chance drawChance={props.drawChance} currentPlayer={props.currentPlayer}  pos={21} id="Chance3" players={props.players} board={props.board} landTile={props.landTile} direction="right" chance={props.chance} />
           <Tile pos={22} colour="blue-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="right" tile={props.tiles[10]}/>
           <Tile pos={23} colour="blue-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="right" tile={props.tiles[11]}/>
         </div>
@@ -39,7 +39,7 @@ export default function Board(props) {
         <Corner pos={6} id="Corner3" currentPlayer={props.currentPlayer} players={props.players}/>
         <Tile pos={5} colour="skyblue-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="bottom" tile={props.tiles[12]}/>
         <Tile pos={4} colour="skyblue-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="bottom" tile={props.tiles[13]}/>
-        <Chance drawChance={props.drawChance} currentPlayer={props.currentPlayer}  pos={3} id="Chance4" players={props.players} board={props.board} landTile={props.landTile} direction="bottom"/>
+        <Chance drawChance={props.drawChance} currentPlayer={props.currentPlayer}  pos={3} id="Chance4" players={props.players} board={props.board} landTile={props.landTile} direction="bottom" chance={props.chance} />
         <Tile pos={2} colour="brown-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="bottom" tile={props.tiles[14]}/>
         <Tile pos={1} colour="brown-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="bottom" tile={props.tiles[15]}/>
         <Corner pos={0} id="Corner4" currentPlayer={props.currentPlayer} players={props.players}/>

@@ -143,8 +143,6 @@ export default function Game(props) {
     }
   }, [board])
 
-  console.log('CHANCE: ', chance)
-
   return (
     <section className="game-view">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
@@ -154,7 +152,7 @@ export default function Game(props) {
       </div>
       <div className="game-play">
         <Router>
-          <Board landTile={landTile} drawChance={drawChance} saveBook={saveBook} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} />
+          <Board landTile={landTile} drawChance={drawChance} saveBook={saveBook} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} chance={chance} />
         </Router>
       </div>
     </section>

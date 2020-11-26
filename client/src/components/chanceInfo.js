@@ -11,7 +11,7 @@ export default function CardInfo({data}, props) {
   if (cardId === 0) {
     return <HiddenChance />
   }
-
+  
   const card = data.card;
 
   let cardData;

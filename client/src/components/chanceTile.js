@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Token from './token'
+import Token from './token';
 
 export default function Chance(props) {
 
@@ -8,7 +8,7 @@ export default function Chance(props) {
   let text = "icon chance-icon-";
   let label = "label label-";
   let view = "chance-click-view";
-  let active = "";
+  let tokenHolder;
 
 
   if (props.direction === 'left') {
@@ -16,25 +16,25 @@ export default function Chance(props) {
     text += 'left';
     label += 'left';
     view += '-left';
-    active = "active-players-left";
+    tokenHolder = "active-players-left";
   } else if (props.direction === 'right') {
     type += '-right';
     text += 'right';
     label += 'right';
     view += '-right';
-    active = "active-players-right";
+    tokenHolder = "active-players-right";
   } else if (props.direction === 'top') {
     type += '-top';
     text += 'top';
     label += 'top';
     view += '-top';
-    active = "active-players-top";
+    tokenHolder = "active-players-top";
   } else {
     type += '-bottom';
     text += 'bottom';
     label += 'bottom';
     view += '-bottom';
-    active = "active-players-bottom";
+    tokenHolder = "active-players-bottom";
   }
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function Chance(props) {
         <div className={view}>
           <div className="chance-hidden">View</div>
         </div>
-        <div className={active}>
+        <div className={tokenHolder}>
           {activePlayers()}
         </div>
       </div>

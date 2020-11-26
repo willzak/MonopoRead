@@ -337,7 +337,7 @@ a {
 .active-square-right {
   display: flex;
   flex-wrap: wrap;
-  transform-origin: 56px 24px;
+  transform-origin: 56px 20px;
   transform: rotateZ(180deg);
   position: relative;
   z-index: 10;
@@ -519,7 +519,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  transform-origin: 50px 30px;
+  transform-origin: 50px 32px;
   transform: rotateZ(270deg);
 }
 
