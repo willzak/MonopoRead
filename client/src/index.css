@@ -308,10 +308,12 @@ a {
 }
 
 .active-square {
-  transform-origin: 60px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  transform-origin: 58px 25px;
+  transform: rotateZ(180deg);
   position: relative;
   z-index: 10;
-  transform: rotateZ(90deg);
 }
 
 /* CHANCE CARDS */
