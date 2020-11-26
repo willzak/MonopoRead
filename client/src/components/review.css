@@ -1,0 +1,8 @@
+.book-review {
+  border: solid; 
+  background: rgb(211, 211, 211); 
+  width: 25%; 
+  position: absolute; 
+  right: 30px; 
+  top: 300px; 
+}

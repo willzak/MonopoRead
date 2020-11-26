@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import TileInfo from "./tileInfo.js";
 import ChanceInfo from "./chanceInfo";
 
+
 export default function Console(props) {
   let chanceData = [];
 

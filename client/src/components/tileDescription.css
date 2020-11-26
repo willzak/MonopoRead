@@ -1,0 +1,4 @@
+.submitted-books {
+  display: flex; 
+  flex-direction: row;
+}

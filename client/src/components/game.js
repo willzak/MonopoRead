@@ -29,7 +29,7 @@ export default function Game(props) {
   }
 
   const saveBook = function(player, title, review, board_tile_id) {
-    axios.post(`/api/boards/${board}/players/${players[player].player.id}/submit`, {title, review, board_tile_id})
+    return axios.post(`/api/boards/${board}/players/${players[player].player.id}/submit`, {title, review, board_tile_id})
     .then ((response) => {
       console.log(response)
       setPlayers((current) => {
