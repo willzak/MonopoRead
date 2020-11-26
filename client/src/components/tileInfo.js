@@ -14,7 +14,7 @@ export default function TileInfo( {data, submit, players, currentPlayer, board, 
 
   const [showForm, setShowForm] = useState(false)
   const [showInfo, setShowInfo] = useState(true)
-  const [showButton, setShowButton] = useState(true)
+  const [showButton, setShowButton] = useState(false)
   
   useEffect(() => {
     setShowButton(submit)
