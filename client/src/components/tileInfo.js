@@ -5,7 +5,7 @@ import './tileInfo.css'
 import Form from './bookForm.js'
 import Description from "./tileDescription.js"
 
-export default function TileInfo( {data, submit}) {
+export default function TileInfo( {data, submit, players, currentPlayer, board}) {
 
   const  {tileId}  = useParams(); 
 
@@ -28,11 +28,13 @@ export default function TileInfo( {data, submit}) {
    }
 
   if (tile) {
+
     tileData = (
       <div className="indvidual-tile" >
         <div className="individual-tile-header" style={ {background: `${tile.colour}`} } >
         <h2> This is ID: {tileId}</h2>
         <h1> {tile.name}</h1>
+        <Link to="/" >Click to return to game </Link>
         </div>
         { showInfo ? <Description 
           description = {tile.description} 
@@ -42,7 +44,7 @@ export default function TileInfo( {data, submit}) {
           thirdbookrec = {tile.recommendation[2]} 
           /> : null }
         { showButton ? <button onClick = {onClick}>Completed!</button> : null }
-        { showForm ? <Form /> : null }
+        { showForm ? <Form tile = {tile} currentPlayer={currentPlayer} players={players} board={board}/> : null }
       </div>
     )
   } else {

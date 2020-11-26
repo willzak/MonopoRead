@@ -79,9 +79,9 @@ class Api::PlayersController < ApplicationController
     @player = Player.find(params[:player_id])
     @user = User.find(@player[:user_id])
     @player_tile = PlayerTile.where(player_id: params[:player_id], board_tile_id: params[:board_tile_id])
-    @book = Book.where(title: params[:title]).first
+    @book = Book.where(name: params[:title]).first
     if !@book
-      @book = Book.create(title: params[:title], author: 'N/G', isbn: 0)
+      @book = Book.create(name: params[:title], author: 'N/G', isbn: 0)
     end
     if params[:review]
       @review = Review.create(book: @book, review_text: params[:review], user: @user)
