@@ -4,10 +4,11 @@ import './index.css';
 import Game from "./components/game"
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from "react-router-dom";
+import App from "./components/App.js"
 
 ReactDOM.render(
   <Router> 
-    <Game />
+    <App />
   </Router>, 
   document.getElementById('root')
   );
