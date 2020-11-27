@@ -145,7 +145,6 @@ will = User.create({ name: 'Will', email: 'email@email.com', password_digest: 'p
 
 game = Game.create({ user: marcello, name: 'My Game' })
 
-player1 = Player.create({user: marcello, game: game, color: light_blue})
 player2 = Player.create({user: avvai, game: game, color: yellow})
 player3 = Player.create({user: will, game: game, color: green})
 

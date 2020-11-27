@@ -3,6 +3,7 @@ import axios from 'axios';
 import ActionCable from 'actioncable'
 
 export default function useApplicationData() {
+  const [user, setUser] = useState(0)
   const [game, setGame] = useState(0)
   const [board, setBoard] = useState(0)
   const [players, setPlayers] = useState([])
@@ -41,7 +42,7 @@ export default function useApplicationData() {
     })
   }
 
-  const getTiles = function() {
+  const getTiles = function(board) {
     axios.get(`/api/boards/${board}/board_tiles`)
     .then((response) => {
       setTiles(response.data.map(tile => {
@@ -58,6 +59,23 @@ export default function useApplicationData() {
           recommendation: tile.recommendations.map(rec => rec.book.name)
         }
       }));
+    })
+  }
+
+  const getCurrentBoard = function(game) {
+    return axios.get(`/api/games/${game}/current_board`)
+    .then((response) => {
+      if (!response.data) return axios.post(`/api/boards`, {game_id: game})
+      return response
+    })
+    .then((response) => {
+      setBoard(response.data.id);
+      getTiles(response.data.id);
+      return axios.get(`/api/boards/${response.data.id}/players`)
+    })
+    .then((response) => {
+      setPlayers(response.data);
+      setPlayersInitialized(1)
     })
   }
 
@@ -113,7 +131,7 @@ export default function useApplicationData() {
         newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false, tiles: newPlayers[player].player.tiles - 1 } }
         return newPlayers
       })
-      getTiles();
+      getTiles(board);
     })
   }
 
@@ -132,8 +150,11 @@ export default function useApplicationData() {
         setUpdate(received_data)
       }
     })
-
-    axios.get(`/api/games`)
+    axios.get(`/api/users`)
+    .then((response) => {
+      setUser(response.data[0].id)
+      return axios.get(`/api/games`)
+    })
     .then((response) => {
       setGame(response.data[0].id)
     })
@@ -141,27 +162,9 @@ export default function useApplicationData() {
 
   useEffect(() => {
     if (game !== 0) {
-      axios.get(`/api/games/${game}/current_board`)
-      .then((response) => {
-        if (!response.data) return axios.post(`/api/boards`, {game_id: game})
-        return response
-      })
-      .then((response) => {
-        setBoard(response.data.id);
-      })
+      getCurrentBoard(game)
     }
   }, [game])
-
-  useEffect(() => {
-    if (board !== 0) {
-      axios.get(`/api/boards/${board}/players`)
-      .then((response) => {
-        setPlayers(response.data);
-        setPlayersInitialized(1)
-        getTiles();
-      })
-    }
-  }, [board])
 
   useEffect(() => {
     if (playersInitialized !== 0) {
@@ -175,7 +178,7 @@ export default function useApplicationData() {
   useEffect(() => {
     if (update.message === 'Player moved' && update.player.game_id === game && update.player.position !== players[currentPlayer].player.position) updatePlayerPosition(update)
     if (update.message === 'Player passed go') updatePlayerScore(update)
-    if (update.message === 'Book submitted') getTiles()
+    if (update.message === 'Book submitted') getTiles(board)
   }, [update])
 
   useEffect(() => {
@@ -195,6 +198,7 @@ export default function useApplicationData() {
   }, [chanceUsed])
 
   return {
+    user, setUser,
     game, setGame,
     board, setBoard,
     players, setPlayers,
@@ -204,6 +208,7 @@ export default function useApplicationData() {
     chanceUsed, setChanceUsed,
     showReview, setShowReview,
     review, setReview,
+    getCurrentBoard,
     rollDice, passGo, landTile, saveBook, transport
   }
 }

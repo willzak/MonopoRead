@@ -7,10 +7,12 @@ import useApplicationData from '../hooks/useApplicationData'
 
 export default function App( props ) {
   const {
-    board, players, tiles, chance,
+    board, players, tiles, chance, user,
     currentPlayer, setCurrentPlayer,
+    game, setGame,
     review, setReview,
     showReview, setShowReview,
+    getCurrentBoard,
     setChanceUsed, rollDice, passGo, landTile, saveBook, transport
   } = useApplicationData();
 
@@ -30,7 +32,12 @@ export default function App( props ) {
                 setChanceUsed={setChanceUsed} rollDice={rollDice} passGo={passGo} landTile={landTile} saveBook={saveBook} transport={transport} />
               )}
             />
-            <Route path="/board" component={Game} />
+            <Route
+              path="/player"
+              render={(props) => (
+                <Player {...props} getCurrentBoard={getCurrentBoard} user={user} game={game} setGame={setGame} />
+              )}
+            />
             <Route path = "/player" component = {Player} />
           </Switch>
       </div>

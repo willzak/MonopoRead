@@ -6,7 +6,10 @@ export default function Home( props ) {
     <div>
       <h1> Home Page </h1>
       <Link to = {`/board/`}>
-        <h1>Play Game</h1>
+        <h3>Play Game</h3>
+      </Link> 
+      <Link to = {`/player/`}>
+        <h3>Join Game</h3>
       </Link> 
     </div>
   )
