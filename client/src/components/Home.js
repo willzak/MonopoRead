@@ -8,7 +8,7 @@ export default function Home( props ) {
       <Link to = {`/board/`}>
         <h3>Play Game</h3>
       </Link> 
-      <Link to = {`/player/`}>
+      <Link to = {`/game/join/`}>
         <h3>Join Game</h3>
       </Link> 
     </div>

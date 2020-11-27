@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import Home from "./Home.js"
 import Game from "./game.js"
 import Player from "./Player.js"
+import Setgame from "./Setgame.js"
 import useApplicationData from '../hooks/useApplicationData'
 
 export default function App( props ) {
@@ -33,12 +34,12 @@ export default function App( props ) {
               )}
             />
             <Route
-              path="/player"
+              path="/game/join"
               render={(props) => (
                 <Player {...props} getCurrentBoard={getCurrentBoard} user={user} game={game} setGame={setGame} />
               )}
             />
-            <Route path = "/player" component = {Player} />
+            <Route path="/game" component={Setgame} />
           </Switch>
       </div>
     </Router>
