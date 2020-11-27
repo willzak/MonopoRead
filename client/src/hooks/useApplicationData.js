@@ -17,12 +17,6 @@ export default function useApplicationData() {
   useEffect(() => {
     const cable = ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL);
     cable.subscriptions.create("ApplicationCable::Channel", {
-      connected: function() {
-        console.log("You've subscribed to the channel");
-      },
-      disconnected: function() {
-        console.log("You've disconnected from the channel");
-      },
       received: function (received_data) {
         setUpdate(received_data)
       }

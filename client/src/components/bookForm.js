@@ -26,9 +26,11 @@ export default function Form( props ) {
   // const classes = useStyles();
 
   const clickHandler = () => {
-    setLoading(true)
-    props.saveBook(props.currentPlayer, title, review, props.tile.board_tile_id)
-    .then ( () => {history.push("/")})
+    if (title) {
+      setLoading(true)
+      props.saveBook(props.currentPlayer, title, review, props.tile.board_tile_id)
+      .then ( () => {history.push("/")})
+    }
   }
 
   return (
