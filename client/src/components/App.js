@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom"
 import Home from "./Home.js"
 import Game from "./game.js"
 import Player from "./Player.js"
+import Setgame from "./Setgame.js"
 
 export default function App( props ) {
   return (
@@ -12,7 +13,8 @@ export default function App( props ) {
           <Switch>
             <Route exact path = "/" component={Home} />
             <Route path="/board" component={Game} />
-            <Route path = "/player" component = {Player} />
+            <Route path = "/game/join" component = {Player} />
+            <Route path = "/game" component = {Setgame} />
           </Switch>
       </div>
     </Router>

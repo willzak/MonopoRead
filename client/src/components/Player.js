@@ -14,7 +14,7 @@ useEffect(() => {
       })
   }, [])
 
-  useEffect(() => {
+useEffect(() => {
    axios.get(`api/games/1/free_colors`)
       .then((response) => {
         setColors(response.data.map(color=> color.name))
