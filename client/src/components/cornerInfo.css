@@ -1,0 +1,28 @@
+.individual-card {
+  margin: 50px;
+  width: 70%;
+  height: 300px;
+  border: solid;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.individual-card-header {
+  padding: 15px;
+  background-color: #BFDBAE;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.individual-card-body {
+  padding: 2em;
+  font-size: 1.5em;
+}
+
+.outcome {
+  text-align: center;
+  font-weight: bolder;
+  color: green
+}

@@ -1,4 +1,6 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 import Token from "./token";
 
 import "./cornerTile.css";
@@ -63,5 +65,9 @@ export default function Corner(props) {
     )
   }
 
-  return tileStyle
+  return (
+    <Link to={`/corner/${props.id}`}>
+      {tileStyle}
+    </Link>
+    )
 }
