@@ -14,7 +14,10 @@ export default function Description( props ) {
     <h3> {props.description}</h3>
     <div className="submitted-books">
       <h2> {props.books[0] ? "What others have read:" : ''}</h2>
-      {props.books.map((book, index) => <h3 key={index} onMouseEnter={() => onMouseEnter(book.review)} onMouseLeave={() => props.setShowReview(false)}>{book.name}</h3> )}
+      {props.books.map((book, index) => {
+      if (index < 5) return <h3 key={index} onMouseEnter={() => onMouseEnter(book.review)} onMouseLeave={() => props.setShowReview(false)}>{book.name}</h3>
+      else return null
+      })}
     </div>
     <h2> We Recommend: </h2>
     <h3> {props.firstbookrec} </h3>
