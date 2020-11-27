@@ -28,7 +28,7 @@ export default function Form( props ) {
     if (title) {
       setLoading(true)
       props.saveBook(props.currentPlayer, title, review, props.tile.board_tile_id)
-      .then ( () => {history.push("/")})
+      .then ( () => {history.push("/board")})
     }
   }
 
