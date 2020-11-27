@@ -16,14 +16,13 @@ export default function Game(props) {
   return (
     <section className="game-view">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-      <div className="side-console">
-        <div className='title' >MONOPOREAD</div>
-        <SideBar currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer} rollDice={rollDice} chance={chance} players={players} board={board} />
-      </div>
       <div className="game-play">
         <Router>
           <Board setReview = {setReview} setShowReview = {setShowReview} landTile={landTile} drawChance={drawChance} saveBook={saveBook} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} chance={chance} />
         </Router>
+      </div>
+      <div className="side-console">
+        <SideBar currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer} rollDice={rollDice} chance={chance} players={players} board={board} />
       </div>
       {showReview &&
       <div className="review-popup">
