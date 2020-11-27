@@ -75,7 +75,7 @@ export default function Corner(props) {
   }
 
   return (
-    <Link to={`/corner/${props.id}`}>
+    <Link to={`/board/corner/${props.id}`}>
       {tileStyle}
     </Link>
     )

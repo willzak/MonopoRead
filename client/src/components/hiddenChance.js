@@ -11,7 +11,7 @@ export default function HiddenChance(props) {
         <h1>?</h1>
       </div>
       <div className="hidden-card-body">
-        <h3>Chance <Link to="/" ><CancelIcon></CancelIcon> </Link></h3>
+        <h3>Chance <Link to="/board" ><CancelIcon></CancelIcon> </Link></h3>
       </div>
     </div>
   )
