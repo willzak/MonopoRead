@@ -1,5 +1,6 @@
 import React from "react";
-// import "./tileDescription.css"
+import { FixedSizeList as List } from 'react-window';
+import "./tileDescription.css"
 
 export default function Description( props ) {
 
@@ -8,16 +9,26 @@ export default function Description( props ) {
     if (review) props.setShowReview(true)
   }
 
+  const submittedBooks = ({ index, style }) => (
+    <h3 style={style} key={index} onMouseEnter={() => onMouseEnter(props.books[index].review)} onMouseLeave={() => props.setShowReview(false)}>{props.books[index].name}</h3>
+  );
+
 
   return (
     <div>
     <h3> {props.description}</h3>
     <div className="submitted-books">
-      <h2> {props.books[0] ? "What others have read:" : ''}</h2>
-      {props.books.map((book, index) => {
-      if (index < 5) return <h3 key={index} onMouseEnter={() => onMouseEnter(book.review)} onMouseLeave={() => props.setShowReview(false)}>{book.name}</h3>
-      else return null
-      })}
+      <h2 style={{marginBottom: '0'}}> {props.books[0] ? "What others have read:" : ''}</h2>
+      {props.books[0] && props.books.length > 5 ? (
+        <List className='no-scrollbars'
+          height={100}
+          itemCount={props.books.length}
+          itemSize={20}
+          width={'100%'}
+        >
+          {submittedBooks}
+        </List>
+      ) : (props.books.map((book, index) => <h3 key={index} onMouseEnter={() => onMouseEnter(book.review)} onMouseLeave={() => props.setShowReview(false)}>{book.name}</h3>))}
     </div>
     <h2> We Recommend: </h2>
     <h3> {props.firstbookrec} </h3>
