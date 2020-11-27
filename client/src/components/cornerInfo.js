@@ -18,20 +18,22 @@ export default function CornerInfo(props) {
           <Link to="/" ><CancelIcon></CancelIcon> </Link>
         </div>
         <div className="individual-card-body">
-        <h3>Everytime you pass one of the GO spaces you get one point! Just for showing up! Happy reading!</h3>
-        <h3 className="outcome">+1 Point</h3>
+          <h3>Everytime you pass one of the GO spaces you get one point! Just for showing up! Happy reading!</h3>
+          <h3 className="outcome">+1 Point</h3>
         </div>
       </div>)
   } else if (cornerId === 'Corner2') {
     type = (<div className="individual-card" >
         <div className="individual-card-header">
-        <h1>Welcome to the Reading Railroad!</h1>
-        <Link to="/" ><CancelIcon></CancelIcon> </Link>
+          <h1>Welcome to the Reading Railroad!</h1>
+          <Link to="/" ><CancelIcon></CancelIcon> </Link>
         </div>
         <div className="individual-card-body">
-        <h3>Would you like to take a one way trip to Central Station? (It's free!)</h3>
-        <Button variant="contained" color="primary" className="btn">Let's Go!</Button>
-        <Button variant="contained" color="secondary">I'll Pass</Button>
+          <h3>Would you like to take a one way trip to Central Station? (It's free!)</h3>
+          <div className="btn-container">
+            <Button variant="contained" color="primary" className="btn">Let's Go!</Button>
+            <Button variant="contained" color="secondary">I'll Pass</Button>
+          </div>
         </div>
       </div>)
   } else if (cornerId === 'Corner3') {
@@ -41,9 +43,11 @@ export default function CornerInfo(props) {
           <Link to="/" ><CancelIcon></CancelIcon> </Link>
         </div>
         <div className="individual-card-body">
-        <h3>Would you like to take a one way trip to the Reading Railroad? (It's free!)</h3>
-        <Button variant="contained" color="primary" className="btn">Let's Go!</Button>
-        <Button variant="contained" color="secondary">I'll Pass</Button>
+          <h3>Would you like to take a one way trip to the Reading Railroad? (It's free!)</h3>
+          <div className="btn-container">
+            <Button variant="contained" color="primary" className="btn">Let's Go!</Button>
+            <Button variant="contained" color="secondary">I'll Pass</Button>
+          </div>
         </div>
       </div>)
   } else {
