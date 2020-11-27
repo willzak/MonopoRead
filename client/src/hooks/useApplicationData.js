@@ -90,7 +90,7 @@ export default function useApplicationData() {
           name: tile.tile.name,
           colour: tile.color.hexcode,
           description: tile.tile.description,
-          books: tile.books.map(b => {
+          books: tile.books.filter(b => !Array.isArray(b.book)).map(b => {
             return { name: b.book.name, review: b.review.review_text } 
           }),
           recommendation: tile.recommendations.map(rec => rec.book.name)
@@ -191,25 +191,7 @@ export default function useApplicationData() {
   }, [board])
 
   useEffect(() => {
-    if (board !== 0) {
-      axios.get(`/api/boards/${board}/board_tiles`)
-      .then((response) => {
-        setTiles(response.data.map(tile => {
-          return {
-            tile: tile,
-            id: tile.tile.id,
-            board_tile_id: tile.board_tile.id,
-            name: tile.tile.name,
-            colour: tile.color.hexcode,
-            description: tile.tile.description,
-            books: tile.books.map(b => {
-              return { name: b.book.name, review: b.review.review_text } 
-            }),
-            recommendation: tile.recommendations.map(rec => rec.book.name)
-          }
-        }));
-      })
-    }
+    if (board !== 0) getTiles()
   }, [board])
 
   return {

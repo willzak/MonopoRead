@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // import "./tileDescription.css"
 
 export default function Description( props ) {
@@ -13,7 +13,7 @@ export default function Description( props ) {
     <div>
     <h3> {props.description}</h3>
     <div className="submitted-books">
-      <h2> {props.books[0] && props.books.length > 0 ? "What others have read:" : ''}</h2>
+      <h2> {props.books[0] ? "What others have read:" : ''}</h2>
       {props.books.map((book, index) => <h3 key={index} onMouseEnter={() => onMouseEnter(book.review)} onMouseLeave={() => props.setShowReview(false)}>{book.name}</h3> )}
     </div>
     <h2> We Recommend: </h2>
