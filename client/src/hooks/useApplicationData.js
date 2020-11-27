@@ -13,6 +13,7 @@ export default function useApplicationData() {
   const [showReview, setShowReview] = useState(false)
   const [review, setReview] = useState("")
   const [update, setUpdate] = useState({})
+  const [playersInitialized, setPlayersInitialized] = useState(0)
 
   const updatePlayerScore = function(update) {
     let player = -1
@@ -32,21 +33,12 @@ export default function useApplicationData() {
     for (let i = 0; i < players.length; i++) if (players[i].player.id === update.player.id) player = i
 
     if (player === -1) return
-    let ran = players[player].player.position;
-
-    const interval = setInterval(() => {
-      ran++;
       
-      setPlayers((current) => {
-        const newPlayers = [...current]
-        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: ((newPlayers[player].player.position + 1) % 24) } }
-        return newPlayers
-      })
-
-      if (ran === update.player.position) {
-          window.clearInterval(interval);
-      }
-    }, 300);
+    setPlayers((current) => {
+      const newPlayers = [...current]
+      newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: update.player.position } }
+      return newPlayers
+    })
   }
 
   const getTiles = function() {
@@ -71,6 +63,7 @@ export default function useApplicationData() {
 
   const rollDice = function(number, player) {
     let ran = 0;
+    axios.put(`/api/games/${game}/players/${players[player].player.id}`, { final_position: ((players[player].player.position + number) % 24), moving: true })
 
     const interval = setInterval(() => {
       ran++;
@@ -79,9 +72,11 @@ export default function useApplicationData() {
         const done = (ran === number)
         const newPlayers = [...current]
         newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: ((newPlayers[player].player.position + 1) % 24), moving: !done, done: done } }
-        if (ran === number) axios.put(`/api/games/${game}/players/${newPlayers[player].player.id}`, { position: newPlayers[player].player.position })
+        axios.put(`/api/games/${game}/players/${newPlayers[player].player.id}`, { position: newPlayers[player].player.position, moving: !done })
         return newPlayers
       })
+
+      
 
       if (ran === number) {
           window.clearInterval(interval);
@@ -158,10 +153,20 @@ export default function useApplicationData() {
       axios.get(`/api/boards/${board}/players`)
       .then((response) => {
         setPlayers(response.data);
+        setPlayersInitialized(1)
         getTiles();
       })
     }
   }, [board])
+
+  useEffect(() => {
+    if (playersInitialized !== 0) {
+      players.forEach((player, index) => {
+        if (player.player.moving) rollDice(Math.abs(player.player.final_position - player.player.position), index)
+      })
+      setPlayersInitialized(0)
+    }
+  }, [playersInitialized])
 
   useEffect(() => {
     if (update.message === 'Player moved' && update.player.game_id === game && update.player.position !== players[currentPlayer].player.position) updatePlayerPosition(update)
