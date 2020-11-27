@@ -30,7 +30,7 @@ export default function useApplicationData() {
 
   const updatePlayerPosition = function(update) {
     let player = -1
-    for (let i = 0; i < players.length; i++) if (players[i].player.id === update.player.id) player = i
+    for (let i = 0; i < players.length; i++) if (update.player.id !== players[currentPlayer].player.id && players[i].player.id === update.player.id) player = i
 
     if (player === -1) return
       
@@ -133,16 +133,12 @@ export default function useApplicationData() {
 
   useEffect(() => {
     if (game !== 0) {
-      axios.get(`/api/games/${game}`)
-      .then(() => {
-        return axios.get(`/api/games/${game}/current_board`)
-      })
+      axios.get(`/api/games/${game}/current_board`)
       .then((response) => {
         if (!response.data) return axios.post(`/api/boards`, {game_id: game})
         return response
       })
       .then((response) => {
-        if (!response.data) return
         setBoard(response.data.id);
       })
     }
