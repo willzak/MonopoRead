@@ -34,3 +34,9 @@
 .btn {
   margin-right: 10px;
 }
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
