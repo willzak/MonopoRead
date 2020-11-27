@@ -10,17 +10,17 @@ export default function Console(props) {
 
   return (
     <div className="console">
-      <Route exact path="/"><img src={window.location.origin + '/MonopoRead.png'} alt="MonopoRead Logo" className="board-logo" /></Route>
-        <Route exact path="/tiles/:tileId/submit">
+      <Route exact path="/board"><img src={window.location.origin + '/MonopoRead.png'} alt="MonopoRead Logo" className="board-logo" /></Route>
+        <Route exact path="/board/tiles/:tileId/submit">
           <TileInfo setReview = {props.setReview} setShowReview = {props.setShowReview} saveBook={props.saveBook} data={props.tiles} submit={true} currentPlayer={props.currentPlayer} players={props.players} board={props.board}  />
         </Route>
-       <Route exact path="/tiles/:tileId">
+       <Route exact path="/board/tiles/:tileId">
           <TileInfo setReview = {props.setReview} setShowReview = {props.setShowReview} data={props.tiles} submit={false} />
       </Route>
-      <Route path="/cards/:cardId">
+      <Route exact path="/board/cards/:cardId">
         <ChanceInfo data={props.chance.card ? props.chance : chanceData} />
       </Route>
-      <Route path="/corner/:cornerId">
+      <Route path="/board/corner/:cornerId">
         <CornerInfo transport={props.transport} currentPlayer={props.currentPlayer} players={props.players}/>
       </Route>
 

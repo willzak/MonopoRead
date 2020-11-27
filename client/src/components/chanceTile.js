@@ -63,7 +63,7 @@ export default function Chance(props) {
   }
 
   return (
-    <Link to={`/cards/${id}`}>
+    <Link to={`/board/cards/${id}`}>
       <div className="chance-container">
         <div className={type}>
           <div className={label}>

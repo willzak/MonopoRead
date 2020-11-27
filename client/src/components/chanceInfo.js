@@ -34,7 +34,7 @@ export default function CardInfo({data}, props) {
       <div className="individual-card" >
         <div className="individual-card-header">
           <h1> {card.name}</h1>
-          <Link to="/" ><CancelIcon></CancelIcon> </Link>
+          <Link to="/board" ><CancelIcon></CancelIcon> </Link>
         </div>
         <div className="individual-card-body">
         <h3> {card.description}</h3>
