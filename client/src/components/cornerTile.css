@@ -11,7 +11,7 @@
 }
 
 .corner:hover {
-  opacity: 0.3;
+  opacity: 0.7;
 }
 
 .corner-style-container {
@@ -44,7 +44,7 @@
 }
 
 .corner-flipped:hover {
-  opacity: 0.3;
+  opacity: 0.7;
 }
 
 .corner-style-container-flipped {
@@ -75,7 +75,7 @@
 }
 
 .Corner3:hover {
-  opacity: 0.3;
+  opacity: 0.7;
 }
 
 /* CORNER 2 */
@@ -87,5 +87,5 @@
 }
 
 .Corner2:hover {
-  opacity: 0.3;
+  opacity: 0.7;
 }

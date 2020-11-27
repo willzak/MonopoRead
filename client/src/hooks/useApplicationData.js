@@ -24,9 +24,23 @@ export default function useApplicationData() {
   }, []);
 
   useEffect(() => {
-    if (update.message === 'Player changed' && update.player.game_id === game && update.player.position !== players[currentPlayer].player.position) updatePlayerPosition(update)
+    if (update.message === 'Player moved' && update.player.game_id === game && update.player.position !== players[currentPlayer].player.position) updatePlayerPosition(update)
+    if (update.message === 'Player passed go') updatePlayerScore(update)
     if (update.message === 'Book submitted') getTiles()
   }, [update])
+
+  const updatePlayerScore = function(update) {
+    let player = -1
+    for (let i = 0; i < players.length; i++) if (players[i].player.id === update.player.id) player = i
+
+    if (player === -1) return
+
+    setPlayers((current) => {
+      const newPlayers = [...current]
+      newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, score: update.player.score } }
+      return newPlayers
+    })
+  }
 
   const updatePlayerPosition = function(update) {
     let player = -1
@@ -97,6 +111,16 @@ export default function useApplicationData() {
     })
   }
 
+  const passGo = function(player) {
+    axios.put(`/api/games/${game}/players/${players[player].player.id}`, { score: players[player].player.score + 1 })
+      
+    setPlayers((current) => {
+      const newPlayers = [...current]
+      newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false } }
+      return newPlayers
+    })
+  }
+
   const rollDice = function(number, player) {
     let ran = 0;
 
@@ -104,8 +128,9 @@ export default function useApplicationData() {
       ran++;
       
       setPlayers((current) => {
+        const done = (ran === number)
         const newPlayers = [...current]
-        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: ((newPlayers[player].player.position + 1) % 24), done: (ran === number) ? true : false } }
+        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: ((newPlayers[player].player.position + 1) % 24), moving: !done, done: done } }
         if (ran === number) axios.put(`/api/games/${game}/players/${newPlayers[player].player.id}`, { position: newPlayers[player].player.position })
         return newPlayers
       })
@@ -197,6 +222,6 @@ export default function useApplicationData() {
     chanceUsed, setChanceUsed,
     showReview, setShowReview,
     review, setReview,
-    drawChance, landTile, saveBook, rollDice, 
+    drawChance, landTile, saveBook, rollDice, passGo
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Tile from "./gameTile";
 import Console from "./console";
 import Corner from "./cornerTile";
@@ -9,7 +9,7 @@ export default function Board(props) {
     <div className="game-board">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <div className="bottom-row">
-        <Corner pos={12} id="Corner1" currentPlayer={props.currentPlayer} players={props.players}/>
+        <Corner passGo={props.passGo} pos={12} id="Corner1" currentPlayer={props.currentPlayer} players={props.players}/>
         <Tile pos={13} colour="red-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="top" tile={props.tiles[0]}/>
         <Tile pos={14} colour="red-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="top" tile={props.tiles[1]}/>
         <Chance drawChance={props.drawChance} currentPlayer={props.currentPlayer}  pos={15} id="Chance1" players={props.players} board={props.board} landTile={props.landTile} direction="top" chance={props.chance} />
@@ -41,7 +41,7 @@ export default function Board(props) {
         <Chance drawChance={props.drawChance} currentPlayer={props.currentPlayer}  pos={3} id="Chance4" players={props.players} board={props.board} landTile={props.landTile} direction="bottom" chance={props.chance} />
         <Tile pos={2} colour="brown-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="bottom" tile={props.tiles[14]}/>
         <Tile pos={1} colour="brown-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="bottom" tile={props.tiles[15]}/>
-        <Corner pos={0} id="Corner4" currentPlayer={props.currentPlayer} players={props.players}/>
+        <Corner passGo={props.passGo} pos={0} id="Corner4" currentPlayer={props.currentPlayer} players={props.players}/>
       </div>
     </div>
   )
