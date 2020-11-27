@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_27_013822) do
+ActiveRecord::Schema.define(version: 2020_11_27_172223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,8 @@ ActiveRecord::Schema.define(version: 2020_11_27_013822) do
     t.bigint "token_id"
     t.integer "position"
     t.integer "score"
+    t.boolean "moving"
+    t.integer "final_position"
     t.index ["color_id"], name: "index_players_on_color_id"
     t.index ["game_id"], name: "index_players_on_game_id"
     t.index ["token_id"], name: "index_players_on_token_id"

@@ -16,7 +16,7 @@ class Api::BoardsController < ApplicationController
     @board_tiles = []
     @tile_groups = TileGroup.all.pluck(:id)
     @players = Game.find(@board[:game_id]).players.all
-    @players.each { |player| player.update(position: 0, score: 0)}
+    @players.each { |player| player.update(position: 0, score: 0, moving: false, final_position: 0)}
     i = 0
     while i < 16 do
       if i == 0
