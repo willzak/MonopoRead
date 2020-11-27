@@ -14,21 +14,6 @@ export default function useApplicationData() {
   const [review, setReview] = useState("")
   const [update, setUpdate] = useState({})
 
-  useEffect(() => {
-    const cable = ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL);
-    cable.subscriptions.create("ApplicationCable::Channel", {
-      received: function (received_data) {
-        setUpdate(received_data)
-      }
-    })
-  }, []);
-
-  useEffect(() => {
-    if (update.message === 'Player moved' && update.player.game_id === game && update.player.position !== players[currentPlayer].player.position) updatePlayerPosition(update)
-    if (update.message === 'Player passed go') updatePlayerScore(update)
-    if (update.message === 'Book submitted') getTiles()
-  }, [update])
-
   const updatePlayerScore = function(update) {
     let player = -1
     for (let i = 0; i < players.length; i++) if (players[i].player.id === update.player.id) player = i
@@ -64,21 +49,6 @@ export default function useApplicationData() {
     }, 300);
   }
 
-  const drawChance = function(player) {
-    setChanceUsed(player)
-  }
-
-  const landTile = function(player, tile) {
-    axios.post(`/api/games/${game}/players/${players[player].player.id}/player_tiles`, { board_tile_id: tile.board_tile_id })
-    .then(() => {
-      setPlayers((current) => {
-        const newPlayers = [...current]
-        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false, tiles: newPlayers[player].player.tiles ? newPlayers[player].player.tiles + 1 : 1 } }
-        return newPlayers
-      })
-    })
-  }
-
   const getTiles = function() {
     axios.get(`/api/boards/${board}/board_tiles`)
     .then((response) => {
@@ -96,28 +66,6 @@ export default function useApplicationData() {
           recommendation: tile.recommendations.map(rec => rec.book.name)
         }
       }));
-    })
-  }
-
-  const saveBook = function(player, title, review, board_tile_id) {
-    return axios.post(`/api/boards/${board}/players/${players[player].player.id}/submit`, {title, review, board_tile_id})
-    .then (() => {
-      setPlayers((current) => {
-        const newPlayers = [...current]
-        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false, tiles: newPlayers[player].player.tiles - 1 } }
-        return newPlayers
-      })
-      getTiles();
-    })
-  }
-
-  const passGo = function(player) {
-    axios.put(`/api/games/${game}/players/${players[player].player.id}`, { score: players[player].player.score + 1 })
-      
-    setPlayers((current) => {
-      const newPlayers = [...current]
-      newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false } }
-      return newPlayers
     })
   }
 
@@ -141,28 +89,52 @@ export default function useApplicationData() {
     }, 300);
   }
 
+  const passGo = function(player) {
+    axios.put(`/api/games/${game}/players/${players[player].player.id}`, { score: players[player].player.score + 1 })
+      
+    setPlayers((current) => {
+      const newPlayers = [...current]
+      newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false } }
+      return newPlayers
+    })
+  }
+
+  const landTile = function(player, tile) {
+    axios.post(`/api/games/${game}/players/${players[player].player.id}/player_tiles`, { board_tile_id: tile.board_tile_id })
+    .then(() => {
+      setPlayers((current) => {
+        const newPlayers = [...current]
+        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false, tiles: newPlayers[player].player.tiles ? newPlayers[player].player.tiles + 1 : 1 } }
+        return newPlayers
+      })
+    })
+  }
+
+  const saveBook = function(player, title, review, board_tile_id) {
+    return axios.post(`/api/boards/${board}/players/${players[player].player.id}/submit`, {title, review, board_tile_id})
+    .then (() => {
+      setPlayers((current) => {
+        const newPlayers = [...current]
+        newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, done: false, tiles: newPlayers[player].player.tiles - 1 } }
+        return newPlayers
+      })
+      getTiles();
+    })
+  }
+
   useEffect(() => {
+    const cable = ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL);
+    cable.subscriptions.create("ApplicationCable::Channel", {
+      received: function (received_data) {
+        setUpdate(received_data)
+      }
+    })
+
     axios.get(`/api/games`)
     .then((response) => {
       setGame(response.data[0].id)
     })
-  }, [])
-
-  useEffect(() => {
-    if (players.length > 0 && chanceUsed !== -1) {
-      axios.get(`/api/boards/${board}/players/${players[chanceUsed].player.id}/draw_chance`)
-      .then((response) => {
-        setPlayers((current) => {
-          const newPlayers = [...current]
-          newPlayers[chanceUsed] = {...newPlayers[chanceUsed], player: {...newPlayers[chanceUsed].player, chance: newPlayers[chanceUsed].player.chance ? newPlayers[chanceUsed].player.chance - 1 : 1 } }
-          return newPlayers
-        })
-        setChance(response.data)
-        setChanceUsed(-1)
-      
-      })
-    }
-  }, [chanceUsed])
+  }, []);
 
   useEffect(() => {
     if (game !== 0) {
@@ -186,13 +158,32 @@ export default function useApplicationData() {
       axios.get(`/api/boards/${board}/players`)
       .then((response) => {
         setPlayers(response.data);
+        getTiles();
       })
     }
   }, [board])
 
   useEffect(() => {
-    if (board !== 0) getTiles()
-  }, [board])
+    if (update.message === 'Player moved' && update.player.game_id === game && update.player.position !== players[currentPlayer].player.position) updatePlayerPosition(update)
+    if (update.message === 'Player passed go') updatePlayerScore(update)
+    if (update.message === 'Book submitted') getTiles()
+  }, [update])
+
+  useEffect(() => {
+    if (players.length > 0 && chanceUsed !== -1) {
+      axios.get(`/api/boards/${board}/players/${players[chanceUsed].player.id}/draw_chance`)
+      .then((response) => {
+        setPlayers((current) => {
+          const newPlayers = [...current]
+          newPlayers[chanceUsed] = {...newPlayers[chanceUsed], player: {...newPlayers[chanceUsed].player, chance: newPlayers[chanceUsed].player.chance ? newPlayers[chanceUsed].player.chance - 1 : 1 } }
+          return newPlayers
+        })
+        setChance(response.data)
+        setChanceUsed(-1)
+      
+      })
+    }
+  }, [chanceUsed])
 
   return {
     game, setGame,
@@ -204,6 +195,6 @@ export default function useApplicationData() {
     chanceUsed, setChanceUsed,
     showReview, setShowReview,
     review, setReview,
-    drawChance, landTile, saveBook, rollDice, passGo
+    rollDice, passGo, landTile, saveBook
   }
 }
