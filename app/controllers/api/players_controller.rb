@@ -29,7 +29,11 @@ class Api::PlayersController < ApplicationController
     @player = Player.find(params[:id])
 
     if @player.update(player_params)
-      ActionCable.server.broadcast('channel', { message: 'Player changed', player: @player})
+      if !params[:score]
+        ActionCable.server.broadcast('channel', { message: 'Player moved', player: @player})
+      else
+        ActionCable.server.broadcast('channel', { message: 'Player passed go', player: @player})
+      end
       render :json => @player
     else
       render :json => {
@@ -109,6 +113,6 @@ class Api::PlayersController < ApplicationController
 
   private
     def player_params
-      params.permit(:user_id, :game_id, :color_id, :token_id, :position)
+      params.permit(:user_id, :game_id, :color_id, :token_id, :position, :score)
     end
 end
