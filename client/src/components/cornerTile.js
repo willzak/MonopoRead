@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 import Token from "./token";
 
 import "./cornerTile.css";
@@ -21,40 +23,60 @@ export default function Corner(props) {
     })
   }
 
+  let tileStyle;
+
   if (props.id === "Corner4") {
-    return (
+    tileStyle = (
       <div className="corner">
         <div className="corner-style-container">
-          <div className="corner-text">
+          <div className="players-container">
+            {activePlayers()}
+          </div>
+          <div>
             <img src={window.location.origin + '/Go_Text.png'} alt="MonopoRead Go" className="go-text" />
           </div>
-          <div className="arrow-contaier">
+          <div>
             <img src={window.location.origin + '/Monopoly_Go_Arrow.png'} alt="MonopoRead Arrow" className="arrow" />
           </div>
         </div>
-        {activePlayers()}
+
       </div>
-    )
+  )
   } else if (props.id === "Corner1") {
-    return (
+    tileStyle = (
       <div className="corner-flipped">
         <div className="corner-style-container-flipped">
-          <div>
-            <img src={window.location.origin + '/Go_Text.png'} alt="MonopoRead Go" className="go-text-flipped" />
+          <div className="players-container">
+            {activePlayers()}
           </div>
+          <img src={window.location.origin + '/Go_Text.png'} alt="MonopoRead Go" className="go-text-flipped" />
           <img src={window.location.origin + '/Monopoly_Go_Arrow.png'} alt="MonopoRead Arrow" className="arrow-flipped" />
         </div>
-        {activePlayers()}
       </div>
     )
   } else if (props.id === "Corner3") {
-      return (
+    tileStyle = (
+      <div className="corner">
+        <div className="players-container">
+          {activePlayers()}
+        </div>
         <img src={window.location.origin + '/central-station.png'} alt="Railroad 1" className="Corner3" />
-      )
+      </div>
+    )
   } else {
-    return (
-      <img src={window.location.origin + '/reading-railroad.png'} alt="Railroad 2" className="Corner2"/>
+    tileStyle = (
+      <div className='corner'>
+        <div className="players-container">
+          {activePlayers()}
+        </div>
+        <img src={window.location.origin + '/reading-railroad.png'} alt="Railroad 2" className="Corner2"/>
+      </div>
     )
   }
 
+  return (
+    <Link to={`/corner/${props.id}`}>
+      {tileStyle}
+    </Link>
+    )
 }

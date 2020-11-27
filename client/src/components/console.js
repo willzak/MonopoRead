@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import TileInfo from "./tileInfo.js";
 import ChanceInfo from "./chanceInfo";
+import CornerInfo from "./cornerInfo";
 
 
 export default function Console(props) {
@@ -18,6 +19,9 @@ export default function Console(props) {
       </Route>
       <Route path="/cards/:cardId">
         <ChanceInfo data={props.chance.card ? props.chance : chanceData} />
+      </Route>
+      <Route path="/corner/:cornerId">
+        <CornerInfo />
       </Route>
 
     </div>
