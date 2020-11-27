@@ -1,17 +1,36 @@
-import React, { useState } from "react";
-import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom"
+import React from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import Home from "./Home.js"
 import Game from "./game.js"
 import Player from "./Player.js"
 import Setgame from "./Setgame.js"
+import useApplicationData from '../hooks/useApplicationData'
 
 export default function App( props ) {
+  const {
+    board, players, tiles, chance,
+    currentPlayer, setCurrentPlayer,
+    review, setReview,
+    showReview, setShowReview,
+    setChanceUsed, rollDice, passGo, landTile, saveBook, transport
+  } = useApplicationData();
+
   return (
     <Router>
       <div>
         <h1>Nav</h1>
           <Switch>
             <Route exact path = "/" component={Home} />
+            <Route
+              path="/board"
+              render={(props) => (
+                <Game {...props} board={board} players={players} tiles={tiles} chance={chance}
+                currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer}
+                review={review} setReview={setReview}
+                showReview={showReview} setShowReview={setShowReview}
+                setChanceUsed={setChanceUsed} rollDice={rollDice} passGo={passGo} landTile={landTile} saveBook={saveBook} transport={transport} />
+              )}
+            />
             <Route path="/board" component={Game} />
             <Route path = "/game/join" component = {Player} />
             <Route path = "/game" component = {Setgame} />
