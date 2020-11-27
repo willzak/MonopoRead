@@ -12,17 +12,42 @@ export default function Corner(props) {
     })
   }
 
-  return (
-    <div className="corner">
-      <div className="corner-style-container">
-        <div className="corner-text">
-          GO
+  let corner;
+
+  if (props.id === "Corner4") {
+    return (
+      <div className="corner">
+        <div className="corner-style-container">
+          <div className="corner-text">
+            <img src={window.location.origin + '/Go_Text.png'} alt="MonopoRead Go" className="go-text" />
+          </div>
+          <div className="arrow-contaier">
+            <img src={window.location.origin + '/Monopoly_Go_Arrow.png'} alt="MonopoRead Arrow" className="arrow" />
+          </div>
         </div>
-        <div className="arrow">
-          ➯
-        </div>
+        {activePlayers()}
       </div>
-      {activePlayers()}
-    </div>
-  )
+    )
+  } else if (props.id === "Corner1") {
+    return (
+      <div className="corner-flipped">
+        <div className="corner-style-container-flipped">
+          <div>
+            <img src={window.location.origin + '/Go_Text.png'} alt="MonopoRead Go" className="go-text-flipped" />
+          </div>
+          <img src={window.location.origin + '/Monopoly_Go_Arrow.png'} alt="MonopoRead Arrow" className="arrow-flipped" />
+        </div>
+        {activePlayers()}
+      </div>
+    )
+  } else if (props.id === "Corner3") {
+      return (
+        <img src={window.location.origin + '/central-station.png'} alt="Railroad 1" className="Corner3" />
+      )
+  } else {
+    return (
+      <img src={window.location.origin + '/reading-railroad.png'} alt="Railroad 2" className="Corner2"/>
+    )
+  }
+
 }

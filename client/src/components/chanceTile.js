@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Token from './token';
 
+import './chance.css';
+
 export default function Chance(props) {
 
   let type = "tile chance chance";
@@ -64,11 +66,11 @@ export default function Chance(props) {
     <Link to={`/cards/${id}`}>
       <div className="chance-container">
         <div className={type}>
-          <div className={text}>
-            <strong>?</strong>
-          </div>
           <div className={label}>
             Chance
+          </div>
+          <div className={text}>
+            <strong>?</strong>
           </div>
         </div>
         <div className={view}>
