@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField'; 
 import LinearProgress from '@material-ui/core/LinearProgress';

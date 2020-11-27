@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import TileInfo from "./tileInfo.js";
 import ChanceInfo from "./chanceInfo";
 import CornerInfo from "./cornerInfo";
