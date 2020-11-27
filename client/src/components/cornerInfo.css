@@ -14,6 +14,10 @@
   background-color: #BFDBAE;
   font-size: 1.5em;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
 }
 
 .individual-card-body {
