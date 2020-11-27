@@ -10,7 +10,7 @@ export default function Game(props) {
     currentPlayer, setCurrentPlayer,
     review, setReview,
     showReview, setShowReview,
-    setChanceUsed, rollDice, passGo, landTile, saveBook
+    setChanceUsed, rollDice, passGo, landTile, saveBook, transport
   } = useApplicationData();
 
   return (
@@ -18,7 +18,7 @@ export default function Game(props) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <div className="game-play">
         <Router>
-          <Board setReview={setReview} setShowReview={setShowReview} passGo={passGo} landTile={landTile} drawChance={setChanceUsed} saveBook={saveBook} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} chance={chance} />
+          <Board transport={transport} setReview={setReview} setShowReview={setShowReview} passGo={passGo} landTile={landTile} drawChance={setChanceUsed} saveBook={saveBook} currentPlayer={currentPlayer} tiles={tiles} players={players} board={board} chance={chance} />
         </Router>
       </div>
       <div className="side-console">

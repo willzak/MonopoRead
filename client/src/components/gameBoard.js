@@ -25,7 +25,7 @@ export default function Board(props) {
           <Tile pos={8} colour="orange-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="left" tile={props.tiles[6]}/>
           <Tile pos={7} colour="orange-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="left" tile={props.tiles[7]}/>
         </div>
-        <Console setReview = {props.setReview} setShowReview = {props.setShowReview} tiles={props.tiles} saveBook={props.saveBook} currentPlayer={props.currentPlayer} players={props.players} board={props.board} chance={props.chance} />
+        <Console transport={props.transport} setReview={props.setReview} setShowReview={props.setShowReview} tiles={props.tiles} saveBook={props.saveBook} currentPlayer={props.currentPlayer} players={props.players} board={props.board} chance={props.chance} />
         <div>
           <Tile pos={19} colour="green-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="right" tile={props.tiles[8]}/>
           <Tile pos={20} colour="green-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="right" tile={props.tiles[9]}/>

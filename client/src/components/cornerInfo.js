@@ -20,7 +20,6 @@ export default function CornerInfo(props) {
       occupied['corner3'].push(user);
     }
   }
-  console.log("OCCUPIED", occupied)
   const {cornerId} = useParams();
   let type;
 
@@ -44,7 +43,7 @@ export default function CornerInfo(props) {
         <div className="individual-card-body">
           <h3>Would you like to take a one way trip to Central Station? (It's free!)</h3>
           <div className="btn-container">
-            <Button variant="contained" color="primary" className="btn">Let's Go!</Button>
+            <Button onClick={() => props.transport(props.currentPlayer)} variant="contained" color="primary" className="btn">Let's Go!</Button>
             <Button variant="contained" color="secondary">I'll Pass</Button>
           </div>
         </div>
@@ -58,7 +57,7 @@ export default function CornerInfo(props) {
         <div className="individual-card-body">
           <h3>Would you like to take a one way trip to the Reading Railroad? (It's free!)</h3>
           <div className="btn-container">
-            <Button variant="contained" color="primary" className="btn">Let's Go!</Button>
+            <Button onClick={() => props.transport(props.currentPlayer)} variant="contained" color="primary" className="btn">Let's Go!</Button>
             <Button variant="contained" color="secondary">I'll Pass</Button>
           </div>
         </div>

@@ -117,6 +117,14 @@ export default function useApplicationData() {
     })
   }
 
+  const transport = function(player) {
+    setPlayers((current) => {
+      const newPlayers = [...current]
+      newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: (newPlayers[player].player.position + 12) % 24 } }
+      return newPlayers
+    })
+  }
+
   useEffect(() => {
     const cable = ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL);
     cable.subscriptions.create("ApplicationCable::Channel", {
@@ -196,6 +204,6 @@ export default function useApplicationData() {
     chanceUsed, setChanceUsed,
     showReview, setShowReview,
     review, setReview,
-    rollDice, passGo, landTile, saveBook
+    rollDice, passGo, landTile, saveBook, transport
   }
 }

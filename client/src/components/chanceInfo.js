@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import HiddenChance from "./hiddenChance";
 import CancelIcon from '@material-ui/icons/Cancel';
