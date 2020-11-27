@@ -5,14 +5,6 @@
   z-index: 100;
 }
 
-.corner-cont {
-  width: 15em;
-  height: 15em;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-}
-
 /* CORNER 1 */
 
 .corner-flipped {
@@ -21,7 +13,7 @@
   justify-content: center;
   height: 15em;
   width: 15em;
-  outline:1px solid black;
+  outline: 1px solid black;
   background-color: #BFDBAE;
 }
 
@@ -67,7 +59,7 @@
 .Corner3 {
   width: 15em;
   height: 15em;
-  outline:1px solid black;
+  outline: 1px solid black;
   position: relative;
   z-index: 1;
 }

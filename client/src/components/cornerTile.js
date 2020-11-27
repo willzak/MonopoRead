@@ -45,7 +45,7 @@ export default function Corner(props) {
     )
   } else if (props.id === "Corner3") {
     tileStyle = (
-      <div>
+      <div className="corner">
         <div className="players-container">
           {activePlayers()}
         </div>
@@ -54,7 +54,7 @@ export default function Corner(props) {
     )
   } else {
     tileStyle = (
-      <div className='corner-cont'>
+      <div className='corner'>
         <div className="players-container">
           {activePlayers()}
         </div>
@@ -63,9 +63,5 @@ export default function Corner(props) {
     )
   }
 
-  return (
-    <div>
-      {tileStyle}
-    </div>
-  )
+  return tileStyle
 }
