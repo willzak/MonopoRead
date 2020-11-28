@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     post '/books/goodreads_search' => 'books#goodreads_search' # Goodreads call for search term provided
     post '/books/google_search' => 'books#google_search' # Google call for search term provided
 
+    get '/colors' => 'games#colors' # All colors
     get '/games/:game_id/free_colors' => 'games#free_colors' # All free colors for a game
     get '/games/:game_id/current_board' => 'games#current_board' # Current board for a game
 

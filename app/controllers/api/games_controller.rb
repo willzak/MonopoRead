@@ -79,6 +79,12 @@ class Api::GamesController < ApplicationController
     render :json => @current_board
   end
 
+  def colors
+    @colors = Color.order(:id)
+
+    render :json => @colors
+  end
+
   private
     def game_params
       params.permit(:name, :password_digest, :max_players, :ended_at, :user_id)
