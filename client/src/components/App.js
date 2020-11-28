@@ -39,7 +39,12 @@ export default function App( props ) {
                 <Player {...props} getCurrentBoard={getCurrentBoard} user={user} game={game} setGame={setGame} />
               )}
             />
-            <Route path="/game" component={GameNameForm} />
+            <Route
+              path="/game"
+              render={(props) => (
+                <GameNameForm {...props} getCurrentBoard={getCurrentBoard} user={user} setGame={setGame} />
+              )}
+            />
           </Switch>
       </div>
     </Router>

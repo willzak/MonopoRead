@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function Player( props ) {
   const [colors, setColors] = useState([])
   const [name, setName] = useState('')
-  const [color, setColor] = useState('')
+  const [color, setColor] = useState(0)
 
   const history =  useHistory ()
 
