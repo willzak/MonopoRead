@@ -5,15 +5,17 @@ import axios from 'axios';
 export default function Player( props ) {
   // const [game, setGame] = useState(1)
   const [colors, setColors] = useState([])
-  const [name, setName] = useState("")
+  const [gameName, setGameName] = useState("")
 
+  //accessing the game name
 useEffect(() => {
     axios.get(`/api/games/1`)
       .then((response) => {
-        setName(response.data.name)
+        setGameName(response.data.name)
       })
   }, [])
 
+  //accessing the player token colors that are available
 useEffect(() => {
    axios.get(`api/games/1/free_colors`)
       .then((response) => {
@@ -25,7 +27,7 @@ useEffect(() => {
   return (
     <div>
       <h1> Player Form  </h1>
-      <h2> Game Name: {name}</h2>
+      <h2> Game Name: {gameName}</h2>
       <form>
       <label for="player-color">Choose a Color: </label>
         <select name="colors">
