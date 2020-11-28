@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react"
 import axios from 'axios';
 import TextField from '@material-ui/core/TextField'; 
-import "./setgame.css";
+import "./GameNameForm.css";
 
 
 
-export default function Player( props ) {
+export default function GameNameForm( props ) {
   const [gameName, setGameName] = useState("")
 
 

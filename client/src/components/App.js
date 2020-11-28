@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import Home from "./Home.js"
 import Game from "./game.js"
 import Player from "./Player.js"
-import Setgame from "./Setgame.js"
+import GameNameForm from "./GameNameForm.js"
 import useApplicationData from '../hooks/useApplicationData'
 
 export default function App( props ) {
@@ -39,7 +39,7 @@ export default function App( props ) {
                 <Player {...props} getCurrentBoard={getCurrentBoard} user={user} game={game} setGame={setGame} />
               )}
             />
-            <Route path="/game" component={Setgame} />
+            <Route path="/game" component={GameNameForm} />
           </Switch>
       </div>
     </Router>
