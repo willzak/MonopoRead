@@ -6,6 +6,8 @@ export default function useApplicationData() {
   const [users, setUsers] = useState([])
   const [user, setUser] = useState(0)
   const [cable] = useState(ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL))
+  const [games, setGames] = useState([])
+  const [joinableGames, setJoinableGames] = useState([])
   const [game, setGame] = useState(0)
   const [board, setBoard] = useState(0)
   const [players, setPlayers] = useState([])
@@ -18,28 +20,33 @@ export default function useApplicationData() {
   const [update, setUpdate] = useState({})
   const [playersInitialized, setPlayersInitialized] = useState(0)
 
-  const updatePlayerScore = function(update) {
-    let player = -1
-    for (let i = 0; i < players.length; i++) if (players[i].player.id === update.player.id) player = i
+  const updateGames = function(game) {
+    setJoinableGames((current) => {
+      return [ ...current, game ]
+    })
+  }
 
-    if (player === -1) return
+  const updatePlayerScore = function(player) {
+    let index = -1
+    for (let i = 0; i < players.length; i++) if (players[i].player.id === player.id) index = i
+    if (index === -1) return
 
     setPlayers((current) => {
       const newPlayers = [...current]
-      newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, score: update.player.score } }
+      newPlayers[index] = {...newPlayers[index], player: {...newPlayers[index].player, score: player.score } }
       return newPlayers
     })
   }
 
-  const updatePlayerPosition = function(update) {
-    let player = -1
-    for (let i = 0; i < players.length; i++) if (update.player.id !== players[currentPlayer].player.id && players[i].player.id === update.player.id) player = i
-
-    if (player === -1) return
+  const updatePlayerPosition = function(player) {
+    if (player.id === players[currentPlayer].player.id) return
+    let index = -1
+    for (let i = 0; i < players.length; i++) if (players[i].player.id === player.id) index = i
+    if (index === -1) return
       
     setPlayers((current) => {
       const newPlayers = [...current]
-      newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: update.player.position } }
+      newPlayers[index] = {...newPlayers[index], player: {...newPlayers[index].player, position: player.position } }
       return newPlayers
     })
   }
@@ -182,8 +189,9 @@ export default function useApplicationData() {
   }, [playersInitialized])
 
   useEffect(() => {
-    if (update.message === 'Player moved' && update.player.game_id === game && update.player.position !== players[currentPlayer].player.position) updatePlayerPosition(update)
-    if (update.message === 'Player passed go') updatePlayerScore(update)
+    if (update.message === 'Game created') updateGames(update.game)
+    if (update.message === 'Player moved') updatePlayerPosition(update.player)
+    if (update.message === 'Player passed go') updatePlayerScore(update.player)
     if (update.message === 'Book submitted') getTiles(board)
   }, [update])
 
@@ -204,8 +212,10 @@ export default function useApplicationData() {
   }, [chanceUsed])
 
   return {
-    user, setUser,
     users, setUsers,
+    user, setUser,
+    games, setGames,
+    joinableGames, setJoinableGames,
     game, setGame,
     board, setBoard,
     players, setPlayers,

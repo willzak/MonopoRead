@@ -15,6 +15,7 @@ class Api::GamesController < ApplicationController
     @game = Game.new(game_params)
 
     if @game.save
+      ActionCable.server.broadcast("channel", { message: 'Game created', game: @game})
       render :json => @game
     else
       render :json => {
