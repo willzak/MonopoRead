@@ -21,9 +21,16 @@ export default function useApplicationData() {
   const [playersInitialized, setPlayersInitialized] = useState(0)
 
   const updateGames = function(game) {
-    setJoinableGames((current) => {
-      return [ ...current, game ]
-    })
+    if (game.user_id === user) {
+      setGames((current) => {
+        return [ ...current, game ]
+      })
+    }
+    else {
+      setJoinableGames((current) => {
+        return [ ...current, game ]
+      })
+    }
   }
 
   const addPlayer = function(player) {
