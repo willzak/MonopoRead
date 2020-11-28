@@ -25,7 +25,7 @@ export default function App( props ) {
             <Route
               exact path="/"
               render={(props) => (
-                <Home {...props} user={user} />
+                <Home {...props} setGame={setGame} user={user} />
               )}
             />
             <Route

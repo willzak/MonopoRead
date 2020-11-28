@@ -22,16 +22,18 @@ export default function Home(props) {
   return (
     <div>
       <h1> Home Page </h1>
-      <Link to={`/board`}>
         <h2>Play Game:</h2>
+        {games.length === 0 && <h3>You have joined no games.</h3>}
+      <Link to={`/board`}>
         {games.map((game, index) => {
-          return <h3 key={index}>{game.name}</h3>
+          return <h3 onClick={() => props.setGame(game.id)} key={index}>{game.name}</h3>
         })}
       </Link> 
-      <Link to={`/game/join`}>
         <h2>Join Game:</h2>
+        {joinableGames.length === 0 && <h3>There are no games to join.</h3>}
+      <Link to={`/game/join`}>
         {joinableGames.map((game, index) => {
-          return <h3 key={index}>{game.name}</h3>
+          return <h3 onClick={() => props.setGame(game.id)} key={index}>{game.name}</h3>
         })}
       </Link> 
       <Link to={`/game`}>
