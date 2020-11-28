@@ -28,8 +28,7 @@ export default function GameNameForm( props ) {
       return axios.post(`/api/games/${game}/players`, { user_id: props.user, color_id: color, score: 0, position: 0, moving: false, final_position: 0 })
     })
     .then(() => {
-      props.getCurrentBoard(game)
-      .then(() => history.push("/board"))
+      history.push("/board")
     })
   }
 
