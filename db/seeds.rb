@@ -143,11 +143,6 @@ marcello = User.create({ name: 'Marcello', email: 'email@email.com', password_di
 avvai = User.create({ name: 'Avvai', email: 'email@email.com', password_digest: 'password' })
 will = User.create({ name: 'Will', email: 'email@email.com', password_digest: 'password' })
 
-game = Game.create({ user: marcello, name: 'My Game' })
-
-player2 = Player.create({user: avvai, game: game, color: yellow})
-player3 = Player.create({user: will, game: game, color: green})
-
 papercut = Card.create({name: 'Papercut', description: 'OW! You got a papercut and lost track of what page you are on.', effect: 'Points', outcome: -2 })
 spelling = Card.create({name: 'Spelling', description: 'Your latest book gets published! But it looks like there are a few spelling mistakes on the cover…', effect: 'Points', outcome: -2 })
 coffee = Card.create({name: 'Coffee', description: 'Ugh oh! You drink some coffee while reading and spill it all over yourself.', effect: 'Points', outcome: -1 })
