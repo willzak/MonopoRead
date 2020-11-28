@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-import TextField from '@material-ui/core/TextField'; 
+import TextField from '@material-ui/core/TextField';
+import Token from "./token";
 import "./GameNameForm.css";
 
 export default function GameNameForm( props ) {
@@ -15,7 +16,7 @@ export default function GameNameForm( props ) {
     axios.get(`/api/colors`)
     .then((response) => {
       setColors(response.data)
-      setColor(response.data[0].id)
+      setColor(response.data[0])
     })
   }, [])
 
@@ -25,7 +26,7 @@ export default function GameNameForm( props ) {
     .then((response) => {
       game = response.data.id
       props.setGame(game)
-      return axios.post(`/api/games/${game}/players`, { user_id: props.user, color_id: color, score: 0, position: 0, moving: false, final_position: 0 })
+      return axios.post(`/api/games/${game}/players`, { user_id: props.user, color_id: color.id, score: 0, position: 0, moving: false, final_position: 0 })
     })
     .then(() => {
       history.push("/board")
@@ -33,7 +34,7 @@ export default function GameNameForm( props ) {
   }
 
   const changeHandler = function(event) {
-    for (const color of colors) if (color.name === event.target.value) setColor(color.id)
+    for (const color of colors) if (color.name === event.target.value) setColor(color)
   }
 
   return (
@@ -49,6 +50,7 @@ export default function GameNameForm( props ) {
           return <option key={index}>{color.name}</option>
           })}
         </select>
+      <Token color={color.hexcode} />
     <button onClick={clickHandler}>Submit</button>
     </div>
   )

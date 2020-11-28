@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
-
+import Token from "./token";
 
 export default function Player( props ) {
   const [colors, setColors] = useState([])
@@ -19,13 +19,13 @@ export default function Player( props ) {
       })
       .then((response) => {
         setColors(response.data)
-        setColor(response.data[0].id)
+        setColor(response.data[0])
       })
     }
   }, [props.game])
 
   const clickHandler = () => {
-    axios.post(`/api/games/${props.game}/players`, { user_id: props.user, color_id: color, score: 0, position: 0, moving: false, final_position: 0 })
+    axios.post(`/api/games/${props.game}/players`, { user_id: props.user, color_id: color.id, score: 0, position: 0, moving: false, final_position: 0 })
     .then(() => {
       props.getCurrentBoard(props.game)
       .then(() => history.push("/board"))
@@ -33,7 +33,7 @@ export default function Player( props ) {
   }
 
   const changeHandler = function(event) {
-    for (const color of colors) if (color.name === event.target.value) setColor(color.id)
+    for (const color of colors) if (color.name === event.target.value) setColor(color)
   }
 
   return (
@@ -48,6 +48,7 @@ export default function Player( props ) {
           })}
         </select>
       </form>
+      <Token color={color.hexcode} />
       <button onClick={clickHandler}> Submit </button>
     </div>
   )
