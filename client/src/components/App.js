@@ -22,7 +22,12 @@ export default function App( props ) {
       <div>
         <h1>Nav</h1>
           <Switch>
-            <Route exact path = "/" component={Home} />
+            <Route
+              exact path="/"
+              render={(props) => (
+                <Home {...props} user={user} />
+              )}
+            />
             <Route
               path="/board"
               render={(props) => (
