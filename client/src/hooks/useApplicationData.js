@@ -153,10 +153,6 @@ export default function useApplicationData() {
     axios.get(`/api/users`)
     .then((response) => {
       setUser(response.data[0].id)
-      return axios.get(`/api/games`)
-    })
-    .then((response) => {
-      setGame(response.data[0].id)
     })
   }, []);
 
@@ -164,6 +160,11 @@ export default function useApplicationData() {
     if (game !== 0) {
       getCurrentBoard(game)
     }
+    else {
+      setBoard(0)
+      setPlayers([])
+      setTiles([])
+    } 
   }, [game])
 
   useEffect(() => {

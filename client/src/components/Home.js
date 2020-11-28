@@ -7,6 +7,10 @@ export default function Home(props) {
   const [joinableGames, setjoinableGames] = useState([])
 
   useEffect(() => {
+    props.setGame(0)
+  }, [])
+
+  useEffect(() => {
     if (props.user !== 0) {
       axios.get(`/api/users/${props.user}/games`)
       .then((response) => {
