@@ -21,7 +21,7 @@ export default function Home(props) {
         setjoinableGames(response.data)
       })
     }
-  }, [props.user]);
+  }, [props.user, props.game]);
 
   return (
     <div>
@@ -45,7 +45,7 @@ export default function Home(props) {
       </Link>
         <h2>Change User</h2>
         {props.users.map((user, index) => {
-          return <h3 style={{border: (props.user === user.id) ? '1px solid black' : 'none'}} onClick={() => props.setUser(user.id)} key={index}>{user.name}</h3>
+          return <h3 style={{width: '100px', border: (props.user === user.id) ? '1px solid black' : 'none'}} onClick={() => props.setUser(user.id)} key={index}>{user.name}</h3>
         })}
     </div>
   )
