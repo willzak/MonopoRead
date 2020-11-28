@@ -26,6 +26,12 @@ export default function useApplicationData() {
     })
   }
 
+  const addPlayer = function(player) {
+    setPlayers((current) => {
+      return [ ...current, player ]
+    })
+  }
+
   const updatePlayerScore = function(player) {
     let index = -1
     for (let i = 0; i < players.length; i++) if (players[i].player.id === player.id) index = i
@@ -190,6 +196,7 @@ export default function useApplicationData() {
 
   useEffect(() => {
     if (update.message === 'Game created') updateGames(update.game)
+    if (update.message === 'Player joined') addPlayer(update.player)
     if (update.message === 'Player moved') updatePlayerPosition(update.player)
     if (update.message === 'Player passed go') updatePlayerScore(update.player)
     if (update.message === 'Book submitted') getTiles(board)
