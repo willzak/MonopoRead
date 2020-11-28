@@ -47,7 +47,7 @@ export default function SideBar(props) {
       else last_move = `${Math.round((now - then)/(1000*60*60*24))} day${Math.round((now - then)/(1000*60*60*24)) === 1 ? '' : 's'} ago`
 
       return (
-        <div className="player-status" onClick={() => props.setCurrentPlayer(index)} style={{borderColor: ((index === props.currentPlayer) ? 'white' : 'black'), backgroundColor: player.color}} key={player.id}>
+        <div className="player-status" style={{borderColor: ((index === props.currentPlayer) ? 'white' : 'black'), backgroundColor: player.color}} key={player.id}>
           <div>
             <strong>{player.name}</strong>
           </div>
