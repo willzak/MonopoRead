@@ -30,9 +30,9 @@ class Api::PlayersController < ApplicationController
 
     if @player.update(player_params)
       if !params[:score]
-        ActionCable.server.broadcast('channel', { message: 'Player moved', player: @player})
+        ActionCable.server.broadcast("game#{@player[:game_id]}_channel", { message: 'Player moved', player: @player})
       else
-        ActionCable.server.broadcast('channel', { message: 'Player passed go', player: @player})
+        ActionCable.server.broadcast("game#{@player[:game_id]}_channel", { message: 'Player passed go', player: @player})
       end
       render :json => @player
     else

@@ -3,8 +3,9 @@ import axios from 'axios';
 import ActionCable from 'actioncable'
 
 export default function useApplicationData() {
-  const [user, setUser] = useState(0)
   const [users, setUsers] = useState([])
+  const [user, setUser] = useState(0)
+  const [cable] = useState(ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL))
   const [game, setGame] = useState(0)
   const [board, setBoard] = useState(0)
   const [players, setPlayers] = useState([])
@@ -146,12 +147,6 @@ export default function useApplicationData() {
   }
 
   useEffect(() => {
-    const cable = ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL);
-    cable.subscriptions.create("ApplicationCable::Channel", {
-      received: function (received_data) {
-        setUpdate(received_data)
-      }
-    })
     axios.get(`/api/users`)
     .then((response) => {
       setUser(response.data[0].id)
@@ -160,14 +155,21 @@ export default function useApplicationData() {
   }, []);
 
   useEffect(() => {
+    let channel
     if (game !== 0) {
+      channel = cable.subscriptions.create(
+        { channel: "ApplicationCable::GameChannel", game_id: game },
+        { received: (data) => setUpdate(data) })
       getCurrentBoard(game)
     }
     else {
+      channel = cable.subscriptions.create("ApplicationCable::Channel",
+        { received: (data) => setUpdate(data) })
       setBoard(0)
       setPlayers([])
       setTiles([])
-    } 
+    }
+    return () => channel.unsubscribe()
   }, [game])
 
   useEffect(() => {
