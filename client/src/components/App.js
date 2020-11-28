@@ -32,7 +32,7 @@ export default function App( props ) {
             <Route
               path="/board"
               render={(props) => (
-                <Game {...props} board={board} players={players} tiles={tiles} chance={chance}
+                <Game {...props} game={game} board={board} players={players} tiles={tiles} chance={chance}
                 currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer}
                 review={review} setReview={setReview}
                 showReview={showReview} setShowReview={setShowReview}

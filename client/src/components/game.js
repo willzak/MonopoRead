@@ -1,8 +1,11 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import Board from "./gameBoard";
 import SideBar from "./sideBar";
 
 export default function Game(props) {
+  const history =  useHistory ()
+  if (!props.game) history.push("/")
 
   return (
     <section className="game-view">
