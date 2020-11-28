@@ -19,12 +19,12 @@ export default function Player( props ) {
       })
       .then((response) => {
         setColors(response.data)
+        setColor(response.data[0].id)
       })
     }
   }, [props.game])
 
   const clickHandler = () => {
-    props.setGame(props.game)
     axios.post(`/api/games/${props.game}/players`, { user_id: props.user, color_id: color, score: 0, position: 0, moving: false, final_position: 0 })
     .then(() => {
       props.getCurrentBoard(props.game)
