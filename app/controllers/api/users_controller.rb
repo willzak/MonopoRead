@@ -50,6 +50,13 @@ class Api::UsersController < ApplicationController
     render :json => @games
   end
 
+  def joinable_games
+    @joined_games = Player.where(user_id: params[:user_id]).pluck(:game_id)
+    @games = Game.where.not(id: @joined_games)
+
+    render :json => @games
+  end
+
   private
     def user_params
       params.permit(:name, :email, :password_digest)
