@@ -42,7 +42,11 @@ export default function Home(props) {
       </Link> 
       <Link to={`/game`}>
         <h2>Create Game</h2>
-      </Link> 
+      </Link>
+        <h2>Change User</h2>
+        {props.users.map((user, index) => {
+          return <h3 style={{border: (props.user === user.id) ? '1px solid black' : 'none'}} onClick={() => props.setUser(user.id)} key={index}>{user.name}</h3>
+        })}
     </div>
   )
 }

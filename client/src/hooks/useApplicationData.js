@@ -4,6 +4,7 @@ import ActionCable from 'actioncable'
 
 export default function useApplicationData() {
   const [user, setUser] = useState(0)
+  const [users, setUsers] = useState([])
   const [game, setGame] = useState(0)
   const [board, setBoard] = useState(0)
   const [players, setPlayers] = useState([])
@@ -74,6 +75,7 @@ export default function useApplicationData() {
       return axios.get(`/api/boards/${response.data.id}/players`)
     })
     .then((response) => {
+      for (let i = 0; i < response.data.length; i++) if (response.data[i].player.user_id === user) setCurrentPlayer(i)
       setPlayers(response.data);
       setPlayersInitialized(1)
     })
@@ -153,6 +155,7 @@ export default function useApplicationData() {
     axios.get(`/api/users`)
     .then((response) => {
       setUser(response.data[0].id)
+      setUsers(response.data)
     })
   }, []);
 
@@ -200,6 +203,7 @@ export default function useApplicationData() {
 
   return {
     user, setUser,
+    users, setUsers,
     game, setGame,
     board, setBoard,
     players, setPlayers,
