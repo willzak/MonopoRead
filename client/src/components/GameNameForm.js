@@ -15,6 +15,7 @@ export default function GameNameForm( props ) {
     axios.get(`/api/colors`)
     .then((response) => {
       setColors(response.data)
+      setColor(response.data[0].id)
     })
   }, [])
 
