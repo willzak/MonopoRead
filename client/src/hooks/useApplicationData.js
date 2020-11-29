@@ -107,7 +107,7 @@ export default function useApplicationData() {
   const getCurrentBoard = function(game) {
     return axios.get(`/api/games/${game}/current_board`)
     .then((response) => {
-      if (!response.data) return axios.post(`/api/boards`, {game_id: game})
+      if (!response.data) return axios.post(`/api/boards`, {game_id: game.id})
       return response
     })
     .then((response) => {
