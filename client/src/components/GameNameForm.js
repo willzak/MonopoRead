@@ -22,10 +22,9 @@ export default function GameNameForm( props ) {
   }, [])
 
   const clickHandler = function() {
-    let game
     axios.post(`/api/games/`, { user_id: props.user.id, name: gameName, win_requirement: points ? 'points' : null, win_points: points ? points : null })
     .then((response) => {
-      game = response.data.id
+      const game = response.data.id
       props.setGame(game)
       return axios.post(`/api/games/${game}/players`, { user_id: props.user.id, color_id: color.id, score: 0, position: 0, moving: false, final_position: 0 })
     })
@@ -40,7 +39,7 @@ export default function GameNameForm( props ) {
 
   const pointsHandler = function(event) {
     if (event.target.value === 'Never') setPoints(0)
-    else setPoints(event.target.value.split(' ').first)
+    else setPoints(event.target.value.split(' ')[0])
   }
 
   const pointOptions = function(value) {
