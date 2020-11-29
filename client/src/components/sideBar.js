@@ -30,7 +30,7 @@ export default function SideBar(props) {
           }
         })
         setPlayerStats(newPlayerStats);
-        if (ended) props.endBoard(winner, newPlayerStats)
+        if (ended && !props.game.ended_at) props.endBoard(winner, newPlayerStats)
       })
     }
   }, [props.board, props.players])
@@ -39,7 +39,8 @@ export default function SideBar(props) {
     if (props.players[props.currentPlayer]) {
       axios.get(`/api/boards/${props.board}/players/${props.players[props.currentPlayer].player.id}/open_tile`)
       .then((response) => {
-        setDisabled(response.data);
+        if (props.game.ended_at) setDisabled(true)
+        else setDisabled(response.data);
       })
     }
   }, [props.players, props.currentPlayer])
