@@ -17,7 +17,7 @@ export default function App( props ) {
     game, setGame,
     review, setReview,
     showReview, setShowReview,
-    getCurrentBoard, login,
+    getCurrentBoard, login, logout,
     setChanceUsed, rollDice, passGo, landTile, saveBook, transport
   } = useApplicationData();
 
@@ -29,7 +29,7 @@ export default function App( props ) {
             <Route
               exact path="/"
               render={(props) => (
-                <Home {...props} login={login} games={games} setGames={setGames} joinableGames={joinableGames} setJoinableGames={setJoinableGames}
+                <Home {...props} login={login} logout={logout} games={games} setGames={setGames} joinableGames={joinableGames} setJoinableGames={setJoinableGames}
                 game={game} setGame={setGame} user={user} setUser={setUser} users={users} />
               )}
             />

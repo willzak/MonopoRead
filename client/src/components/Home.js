@@ -44,6 +44,7 @@ export default function Home(props) {
         {props.users.map((user, index) => {
           return <h3 style={{width: '100px', border: (props.user.id === user.id) ? '1px solid black' : 'none'}} onClick={() => props.login(user.email, 'password')} key={index}>{user.name}</h3>
         })}
+      <button onClick={props.logout}>Logout</button>
     </div>
   )
 }
