@@ -139,9 +139,9 @@ adeyemiR = Recommendation.create({ tile: fantasy, book: adeyemi })
 nicholsonR = Recommendation.create({ tile: fantasy, book: nicholson })
 moreon_garciaR = Recommendation.create({ tile: fantasy, book: moreon_garcia })
 
-marcello = User.create({ name: 'Marcello', email: 'email@email.com', password_digest: 'password' })
-avvai = User.create({ name: 'Avvai', email: 'email@email.com', password_digest: 'password' })
-will = User.create({ name: 'Will', email: 'email@email.com', password_digest: 'password' })
+marcello = User.create({ name: 'Marcello', email: 'marcello@email.com', password: 'password' })
+avvai = User.create({ name: 'Avvai', email: 'avvai@email.com', password: 'password' })
+will = User.create({ name: 'Will', email: 'will@email.com', password: 'password' })
 
 papercut = Card.create({name: 'Papercut', description: 'OW! You got a papercut and lost track of what page you are on.', effect: 'Points', outcome: -2 })
 spelling = Card.create({name: 'Spelling', description: 'Your latest book gets published! But it looks like there are a few spelling mistakes on the cover…', effect: 'Points', outcome: -2 })

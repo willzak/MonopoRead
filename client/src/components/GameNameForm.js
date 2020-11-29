@@ -22,11 +22,11 @@ export default function GameNameForm( props ) {
 
   const clickHandler = function() {
     let game
-    axios.post(`/api/games/`, { user_id: props.user, name: gameName })
+    axios.post(`/api/games/`, { user_id: props.user.id, name: gameName })
     .then((response) => {
       game = response.data.id
       props.setGame(game)
-      return axios.post(`/api/games/${game}/players`, { user_id: props.user, color_id: color.id, score: 0, position: 0, moving: false, final_position: 0 })
+      return axios.post(`/api/games/${game}/players`, { user_id: props.user.id, color_id: color.id, score: 0, position: 0, moving: false, final_position: 0 })
     })
     .then(() => {
       history.push("/board")

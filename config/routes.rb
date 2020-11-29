@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   mount ActionCable.server => '/cable'
 
+  post '/login' => 'auth#login'
+
   namespace :api do
     
     resources :users 
@@ -19,6 +21,7 @@ Rails.application.routes.draw do
     resources :tiles
     resources :cards
 
+    get '/logged_in' => 'users#logged_in'
     get '/users/:user_id/games' => 'users#games' # All joined games for a user
     get '/users/:user_id/joinable_games' => 'users#joinable_games' # All joinable games for a user
     get '/games/:game_id/users' => 'games#users' # All users for a game

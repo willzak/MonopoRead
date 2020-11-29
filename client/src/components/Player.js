@@ -25,7 +25,7 @@ export default function Player( props ) {
   }, [props.game])
 
   const clickHandler = () => {
-    axios.post(`/api/games/${props.game}/players`, { user_id: props.user, color_id: color.id, score: 0, position: 0, moving: false, final_position: 0 })
+    axios.post(`/api/games/${props.game}/players`, { user_id: props.user.id, color_id: color.id, score: 0, position: 0, moving: false, final_position: 0 })
     .then(() => {
       props.getCurrentBoard(props.game)
       .then(() => history.push("/board"))

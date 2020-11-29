@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 import ActionCable from 'actioncable'
+import Cookies from 'universal-cookie';
 
 export default function useApplicationData() {
+  const cookies = new Cookies();
+
   const [users, setUsers] = useState([])
   const [user, setUser] = useState(0)
   const [cable] = useState(ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL))
@@ -61,6 +64,14 @@ export default function useApplicationData() {
       const newPlayers = [...current]
       newPlayers[index] = {...newPlayers[index], player: {...newPlayers[index].player, position: player.position } }
       return newPlayers
+    })
+  }
+
+  const login = function(email, password) {
+    axios.post('/login', { email, password })
+    .then((response) => {
+      setUser(response.data.user)
+      cookies.set('user_id', response.data.auth_token, { path: '/' });
     })
   }
 
@@ -169,9 +180,13 @@ export default function useApplicationData() {
   useEffect(() => {
     axios.get(`/api/users`)
     .then((response) => {
-      setUser(response.data[0].id)
       setUsers(response.data)
     })
+    axios.get(`/api/logged_in`, { headers: { Authorization: `${cookies.get('user_id')}` } })
+    .then((response) => {
+      setUser(response.data)
+    })
+    .catch(() => { setUser(0) })
   }, []);
 
   useEffect(() => {
@@ -226,7 +241,7 @@ export default function useApplicationData() {
   }, [chanceUsed])
 
   return {
-    users, setUsers,
+    cookies, users, setUsers,
     user, setUser,
     games, setGames,
     joinableGames, setJoinableGames,
@@ -239,7 +254,7 @@ export default function useApplicationData() {
     chanceUsed, setChanceUsed,
     showReview, setShowReview,
     review, setReview,
-    getCurrentBoard,
+    getCurrentBoard, login,
     rollDice, passGo, landTile, saveBook, transport
   }
 }

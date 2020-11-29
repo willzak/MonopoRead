@@ -9,10 +9,10 @@ export default function Home(props) {
 
   useEffect(() => {
     if (props.user !== 0) {
-      axios.get(`/api/users/${props.user}/games`)
+      axios.get(`/api/users/${props.user.id}/games`)
       .then((response) => {
         props.setGames(response.data)
-        return axios.get(`/api/users/${props.user}/joinable_games`)
+        return axios.get(`/api/users/${props.user.id}/joinable_games`)
       })
       .then((response) => {
         props.setJoinableGames(response.data)
@@ -42,7 +42,7 @@ export default function Home(props) {
       </Link>
         <h2>Change User</h2>
         {props.users.map((user, index) => {
-          return <h3 style={{width: '100px', border: (props.user === user.id) ? '1px solid black' : 'none'}} onClick={() => props.setUser(user.id)} key={index}>{user.name}</h3>
+          return <h3 style={{width: '100px', border: (props.user.id === user.id) ? '1px solid black' : 'none'}} onClick={() => props.login(user.email, 'password')} key={index}>{user.name}</h3>
         })}
     </div>
   )
