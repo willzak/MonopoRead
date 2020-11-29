@@ -88,6 +88,6 @@ class Api::GamesController < ApplicationController
 
   private
     def game_params
-      params.permit(:name, :password_digest, :max_players, :ended_at, :user_id)
+      params.permit(:name, :password_digest, :max_players, :win_requirement, :win_points, :isbn_trust, :isbn_master, :isbn_vote, :turn_delay, :turn_reminder, :ended_at, :user_id)
     end
 end
