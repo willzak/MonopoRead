@@ -236,6 +236,10 @@ export default function useApplicationData() {
   }, [game, user])
 
   useEffect(() => {
+    if (players.length > 0) for (let i = 0; i < players.length; i++) if (players[i].player.user_id === user.id) setCurrentPlayer(i)
+  }, [players, user])
+
+  useEffect(() => {
     if (playersInitialized !== 0) {
       players.forEach((player, index) => {
         if (player.player.moving) rollDice(Math.abs(player.player.final_position - player.player.position), index)
