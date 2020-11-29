@@ -12,10 +12,10 @@ export default function Player( props ) {
 
   useEffect(() => {
     if (props.game !== 0) {
-      axios.get(`/api/games/${props.game}`)
+      axios.get(`/api/games/${props.game.id}`)
       .then((response) => {
         setName(response.data.name)
-        return axios.get(`/api/games/${props.game}/free_colors`)
+        return axios.get(`/api/games/${props.game.id}/free_colors`)
       })
       .then((response) => {
         setColors(response.data)
@@ -25,9 +25,9 @@ export default function Player( props ) {
   }, [props.game])
 
   const clickHandler = () => {
-    axios.post(`/api/games/${props.game}/players`, { user_id: props.user.id, color_id: color.id, score: 0, position: 0, moving: false, final_position: 0 })
+    axios.post(`/api/games/${props.game.id}/players`, { user_id: props.user.id, color_id: color.id, score: 0, position: 0, moving: false, final_position: 0 })
     .then(() => {
-      props.getCurrentBoard(props.game)
+      props.getCurrentBoard(props.game.id)
       .then(() => history.push("/board"))
     })
   }

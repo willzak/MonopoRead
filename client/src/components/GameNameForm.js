@@ -26,7 +26,7 @@ export default function GameNameForm( props ) {
     if (gameName) {
       axios.post(`/api/games/`, { user_id: props.user.id, name: gameName, win_requirement: win === 'Never' ? null : win, win_points: points ? points : null })
       .then((response) => {
-        props.setGame(response.data.id)
+        props.setGame(response.data)
         return axios.post(`/api/games/${response.data.id}/players`, { user_id: props.user.id, color_id: color.id, score: 0, position: 0, moving: false, final_position: 0 })
       })
       .then(() => {
