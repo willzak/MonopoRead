@@ -123,9 +123,13 @@ export default function useApplicationData() {
   }
 
   const endBoard = function(winner, playerStats) {
-    axios.put(`/api/boards/${board}`, { ended_at: new Date() })
+    const now = new Date()
+    setGame(current => {
+      return {...current, ended_at : now }
+    })
+    axios.put(`/api/boards/${board}`, { ended_at: now })
       .then(() => {
-        return axios.put(`/api/games/${game.id}`, { ended_at: new Date() })
+        return axios.put(`/api/games/${game.id}`, { ended_at: now })
       })
       .then(() => {
         axios.post(`/api/boards/${board}/results`, { winner, playerStats })
