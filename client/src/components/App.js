@@ -5,6 +5,7 @@ import Game from "./game.js"
 import Player from "./Player.js"
 import GameNameForm from "./GameNameForm.js"
 import useApplicationData from '../hooks/useApplicationData'
+import Nav from "./Nav.js"
 
 export default function App( props ) {
   const {
@@ -23,7 +24,7 @@ export default function App( props ) {
   return (
     <Router>
       <div>
-        <h1>Nav</h1>
+        <Nav />
           <Switch>
             <Route
               exact path="/"
