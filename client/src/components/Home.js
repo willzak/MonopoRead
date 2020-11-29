@@ -4,7 +4,12 @@ import axios from 'axios'
 import "./Home.css"
 import Button from "@material-ui/core/Button"
 
+
+
+
 export default function Home(props) {
+
+
   useEffect(() => {
     props.setGame(0)
   }, [])
@@ -46,23 +51,28 @@ export default function Home(props) {
         <div className= "game-card">
             <h2 className="card-header-play">PLAY GAME</h2>
             {props.games.length === 0 && <h3>You have joined no games.</h3>}
-            <div className="card-body-play">
+            
+            <div className="card-body">
             <Link to={`/board`}>
               {props.games.map((game, index) => {
-                return <Button className="button" onClick={() => props.setGame(game.id)} key={index}>{game.name}</Button>
+                return <div><Button style={{ fontSize: '1em', "font-weight": 'bolder' }}onClick={() => props.setGame(game.id)} key={index}>{game.name}</Button></div>
               })}
             </Link> 
             </div>
+         
          </div>
       
         <div className="game-card">
           <h2 className="card-header-join">JOIN GAME</h2>
             {props.joinableGames.length === 0 && <h3>There are no games to join.</h3>}
-          <Link to={`/game/join`}>
-            {props.joinableGames.map((game, index) => {
-              return <h3 onClick={() => props.setGame(game.id)} key={index}>{game.name}</h3>
-            })}
-          </Link> 
+
+          <div className="card-body">
+            <Link to={`/game/join`}>
+              {props.joinableGames.map((game, index) => {
+                return <div><Button style={{ fontSize: '1em', "font-weight": 'bolder' }} onClick={() => props.setGame(game.id)} key={index}>{game.name}</Button></div>
+              })}
+            </Link> 
+          </div>
         </div>
       </div>
 

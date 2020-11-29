@@ -40,8 +40,9 @@
   background-color: green; 
 }
 
-.card-body-play {
+.card-body {
   display: flex;
+  flex-wrap: nowrap; 
   flex-direction: column;
 }
 
