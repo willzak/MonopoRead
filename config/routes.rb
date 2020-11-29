@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     post '/boards/:board_id/players/:player_id/submit' => 'players#submit' # Submits a book (need board_tile_id, title and optional review)
     get '/boards/:board_id/players/:player_id/open_tile/:board_tile_id' => 'players#open_tile?' # Checks if the player has already started the tile but hasn't submitted the book (need board_tile_id)
     get '/boards/:board_id/players/:player_id/open_tile' => 'players#any_open_tile?' # Checks if the player has already started any tile but hasn't submitted the book (need board_tile_id)
+    get '/boards/:board_id/players/:player_id/result' => 'players#result' # Returns the result for the given player and board
 
     get '/tile_groups/:tile_group_id/tiles' => 'tile_groups#tiles' # All games for a user
 

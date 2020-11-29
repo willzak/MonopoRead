@@ -1,6 +1,6 @@
 class Api::ResultController < ApplicationController
   def index
-    @results = Result.all
+    @results = Result.where(board_id: params[:board_id])
 
     render :json => @results
   end

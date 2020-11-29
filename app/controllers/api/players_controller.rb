@@ -105,12 +105,20 @@ class Api::PlayersController < ApplicationController
 
   def open_tile?
     @player_tile = PlayerTile.where(player_id: params[:player_id], board_tile_id: params[:board_tile_id], ended_at: nil).first
+
     render :json => @player_tile ? true : false
   end
 
   def any_open_tile?
     @player_tile = PlayerTile.where(player_id: params[:player_id], ended_at: nil).first
+
     render :json => @player_tile ? true : false
+  end
+
+  def result
+    @result = Result.where(board_id: params[:board_id], player_id: params[:player_id]).first
+
+    render :json => @result
   end
 
   private
