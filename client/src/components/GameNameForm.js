@@ -9,6 +9,7 @@ export default function GameNameForm( props ) {
   const [gameName, setGameName] = useState("")
   const [colors, setColors] = useState([])
   const [color, setColor] = useState(0)
+  const [points, setPoints] = useState(0)
   
   const history =  useHistory ()
 
@@ -22,7 +23,7 @@ export default function GameNameForm( props ) {
 
   const clickHandler = function() {
     let game
-    axios.post(`/api/games/`, { user_id: props.user.id, name: gameName })
+    axios.post(`/api/games/`, { user_id: props.user.id, name: gameName, win_requirement: points ? 'points' : null, win_points: points ? points : null })
     .then((response) => {
       game = response.data.id
       props.setGame(game)
@@ -33,8 +34,22 @@ export default function GameNameForm( props ) {
     })
   }
 
-  const changeHandler = function(event) {
+  const colorHandler = function(event) {
     for (const color of colors) if (color.name === event.target.value) setColor(color)
+  }
+
+  const pointsHandler = function(event) {
+    if (event.target.value === 'Never') setPoints(0)
+    else setPoints(event.target.value.split(' ').first)
+  }
+
+  const pointOptions = function(value) {
+    const options = []
+    options.push(<option key='0'>Never</option>)
+    for(let i = 1; i <= value; i++) {
+      options.push(<option key={i}>{`${i} point${i === 1 ? '' : 's'}`}</option>)
+    }
+    return options
   }
 
   return (
@@ -45,10 +60,14 @@ export default function GameNameForm( props ) {
         <br/>
     </div>
       <label htmlFor="player-color">Choose a Color: </label>
-        <select onChange={changeHandler} name="colors">
+        <select onChange={colorHandler} name="colors">
           {colors.map ((color, index) =>{
           return <option key={index}>{color.name}</option>
           })}
+        </select>
+      <label htmlFor="points">Game Ends: </label>
+        <select onChange={pointsHandler} name="points">
+          {pointOptions(20)}
         </select>
       <Token color={color.hexcode} />
     <button onClick={clickHandler}>Submit</button>
