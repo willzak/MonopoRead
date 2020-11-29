@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     end
     resources :boards do
       resources :board_tiles
+      resources :results
     end
     resources :books
     resources :tile_groups

@@ -6,4 +6,5 @@ class Player < ApplicationRecord
 
   has_many :player_tiles
   has_many :player_badges
+  has_many :results
 end
