@@ -11,9 +11,19 @@ export default function Square(props) {
 
   let type = "square " + props.direction + "-square";
   let textType = "square-text-" + props.direction;
+
   let position;
 
   let view = "click-view";
+
+  let boxText;
+  if (props.pos === props.occupied) {
+    boxText = "Click Me!";
+    view += "-notify"
+  } else {
+    boxText = "View";
+  }
+
   if (props.direction === 'right') {
     view += '-v2';
     position = "active-square-right";
@@ -65,7 +75,7 @@ export default function Square(props) {
             <h4>{text}</h4>
           </div>
           <div className={view}>
-            <div className="hidden">View</div>
+            <div className="hidden">{boxText}</div>
           </div>
         </div>
         <div className={position}>

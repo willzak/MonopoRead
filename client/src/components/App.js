@@ -14,6 +14,7 @@ export default function App( props ) {
     game, setGame,
     review, setReview,
     showReview, setShowReview,
+    currentOccupied, setCurrentOccupied,
     getCurrentBoard,
     setChanceUsed, rollDice, passGo, landTile, saveBook, transport
   } = useApplicationData();
@@ -36,6 +37,7 @@ export default function App( props ) {
                 currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer}
                 review={review} setReview={setReview}
                 showReview={showReview} setShowReview={setShowReview}
+                occupied={currentOccupied}
                 setChanceUsed={setChanceUsed} rollDice={rollDice} passGo={passGo} landTile={landTile} saveBook={saveBook} transport={transport} />
               )}
             />

@@ -16,6 +16,9 @@ export default function useApplicationData() {
   const [review, setReview] = useState("")
   const [update, setUpdate] = useState({})
   const [playersInitialized, setPlayersInitialized] = useState(0)
+  const [occupied, setOccupied] = useState([])
+  const [prevOccupied, setPrevOccupied] = useState([])
+  const [currentOccupied, setCurrentOccupied] = useState(0)
 
   const updatePlayerScore = function(update) {
     let player = -1
@@ -201,6 +204,26 @@ export default function useApplicationData() {
     }
   }, [chanceUsed])
 
+  useEffect(() => {
+    let tileIds = [];
+    for (let user of players) {
+      tileIds.push(user.player.position);
+    }
+
+    setPrevOccupied([...occupied])
+    setOccupied(tileIds);
+    console.log(occupied)
+  }, [players])
+
+  useEffect(() => {
+    for (let i = 0; i <= occupied.length; i++) {
+      if (occupied[i] !== prevOccupied[i]) {
+        setCurrentOccupied(occupied[i]);
+        console.log(occupied[i])
+      }
+    }
+  }, [occupied, prevOccupied])
+
   return {
     user, setUser,
     users, setUsers,
@@ -213,6 +236,7 @@ export default function useApplicationData() {
     chanceUsed, setChanceUsed,
     showReview, setShowReview,
     review, setReview,
+    currentOccupied, setCurrentOccupied,
     getCurrentBoard,
     rollDice, passGo, landTile, saveBook, transport
   }
