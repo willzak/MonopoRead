@@ -17,7 +17,7 @@ export default function SideBar(props) {
         const newPlayerStats = response.data.map(player => {
           if (props.game.win_requirement === 'Points' && player.points >= props.game.win_points) {
             ended = true;
-            winner = player;
+            winner = player.player.id;
           }
           return {
             player: player,

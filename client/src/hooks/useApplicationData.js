@@ -105,7 +105,7 @@ export default function useApplicationData() {
   }
 
   const getCurrentBoard = function(game) {
-    return axios.get(`/api/games/${game}/current_board`)
+    return axios.get(`/api/games/${game.id}/current_board`)
     .then((response) => {
       if (!response.data) return axios.post(`/api/boards`, {game_id: game.id})
       return response
@@ -123,13 +123,19 @@ export default function useApplicationData() {
   }
 
   const endBoard = function(winner, playerStats) {
-    // set board to ended, set game to ended, create results for each player
+    axios.put(`/api/boards/${board}`, { ended_at: new Date() })
+      .then(() => {
+        return axios.put(`/api/games/${game.id}`, { ended_at: new Date() })
+      })
+      .then(() => {
+        axios.post(`/api/boards/${board}/results`, { winner, playerStats })
+      })
     // elsewhere, game can't be joined, if viewed by player show results for that player
   }
 
   const rollDice = function(number, player) {
     let ran = 0;
-    axios.put(`/api/games/${game}/players/${players[player].player.id}`, { final_position: ((players[player].player.position + number) % 24), moving: true })
+    axios.put(`/api/games/${game.id}/players/${players[player].player.id}`, { final_position: ((players[player].player.position + number) % 24), moving: true })
 
     const interval = setInterval(() => {
       ran++;
@@ -138,7 +144,7 @@ export default function useApplicationData() {
         const done = (ran === number)
         const newPlayers = [...current]
         newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: ((newPlayers[player].player.position + 1) % 24), moving: !done, done: done } }
-        axios.put(`/api/games/${game}/players/${newPlayers[player].player.id}`, { position: newPlayers[player].player.position, moving: !done })
+        axios.put(`/api/games/${game.id}/players/${newPlayers[player].player.id}`, { position: newPlayers[player].player.position, moving: !done })
         return newPlayers
       })
 
@@ -151,7 +157,7 @@ export default function useApplicationData() {
   }
 
   const passGo = function(player) {
-    axios.put(`/api/games/${game}/players/${players[player].player.id}`, { score: players[player].player.score + 1 })
+    axios.put(`/api/games/${game.id}/players/${players[player].player.id}`, { score: players[player].player.score + 1 })
       
     setPlayers((current) => {
       const newPlayers = [...current]
@@ -161,7 +167,7 @@ export default function useApplicationData() {
   }
 
   const landTile = function(player, tile) {
-    axios.post(`/api/games/${game}/players/${players[player].player.id}/player_tiles`, { board_tile_id: tile.board_tile_id })
+    axios.post(`/api/games/${game.id}/players/${players[player].player.id}/player_tiles`, { board_tile_id: tile.board_tile_id })
     .then(() => {
       setPlayers((current) => {
         const newPlayers = [...current]
@@ -210,7 +216,7 @@ export default function useApplicationData() {
     let channel
     if (game !== 0) {
       channel = cable.subscriptions.create(
-        { channel: "ApplicationCable::GameChannel", game_id: game },
+        { channel: "ApplicationCable::GameChannel", game_id: game.id },
         { received: (data) => setUpdate(data) })
       getCurrentBoard(game)
     }

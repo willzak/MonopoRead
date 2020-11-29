@@ -1,4 +1,4 @@
-class Api::ResultController < ApplicationController
+class Api::ResultsController < ApplicationController
   def index
     @results = Result.where(board_id: params[:board_id])
 
@@ -12,13 +12,19 @@ class Api::ResultController < ApplicationController
   end
 
   def create
-    @result = Result.new(result_params)
+    @results = params[:playerStats].map { |player| Result.create(board_id: params[:board_id], player_id: player[:id], score: player[:points], books: player[:books], winner: params[:winner] == player[:id] ? true : false) }
+    error = false
+    @results.each do |result| 
+      if !result
+        error = true
+      end
+    end
 
-    if @result.save
-      render :json => @result
+    if !error
+      render :json => @results
     else
       render :json => {
-        error: 'Result was not saved'
+        error: 'Results were not saved'
       }
     end
   end

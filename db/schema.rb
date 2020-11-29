@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_27_172223) do
+ActiveRecord::Schema.define(version: 2020_11_29_202112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,6 +146,18 @@ ActiveRecord::Schema.define(version: 2020_11_27_172223) do
     t.index ["tile_id"], name: "index_recommendations_on_tile_id"
   end
 
+  create_table "results", force: :cascade do |t|
+    t.integer "score"
+    t.integer "books"
+    t.boolean "winner"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "player_id"
+    t.bigint "board_id"
+    t.index ["board_id"], name: "index_results_on_board_id"
+    t.index ["player_id"], name: "index_results_on_player_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.text "review_text"
     t.datetime "created_at", null: false
@@ -209,6 +221,8 @@ ActiveRecord::Schema.define(version: 2020_11_27_172223) do
   add_foreign_key "players", "users"
   add_foreign_key "recommendations", "books"
   add_foreign_key "recommendations", "tiles"
+  add_foreign_key "results", "boards"
+  add_foreign_key "results", "players"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
   add_foreign_key "tile_groups", "colors"
