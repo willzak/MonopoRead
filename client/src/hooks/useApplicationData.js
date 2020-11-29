@@ -8,7 +8,7 @@ export default function useApplicationData() {
 
   const [users, setUsers] = useState([])
   const [user, setUser] = useState(0)
-  const [cable] = useState(ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL))
+  const [cable, setCable] = useState(ActionCable.createConsumer(`${process.env.REACT_APP_WEBSOCKET_URL}?token=${cookies.get('user_id')}`))
   const [games, setGames] = useState([])
   const [joinableGames, setJoinableGames] = useState([])
   const [game, setGame] = useState(0)
@@ -70,9 +70,18 @@ export default function useApplicationData() {
   const login = function(email, password) {
     axios.post('/login', { email, password })
     .then((response) => {
-      setUser(response.data.user)
       cookies.set('user_id', response.data.auth_token, { path: '/' });
+      setCable(ActionCable.createConsumer(`${process.env.REACT_APP_WEBSOCKET_URL}?token=${response.data.auth_token}`))
+      setUser(response.data.user)
     })
+  }
+
+  const logout = function() {
+    cookies.set('user_id', '', { path: '/' });
+    setGames([])
+    setJoinableGames([])
+    setGame(0)
+    setUser(0)
   }
 
   const getTiles = function(board) {
@@ -182,14 +191,17 @@ export default function useApplicationData() {
     .then((response) => {
       setUsers(response.data)
     })
-    axios.get(`/api/logged_in`, { headers: { Authorization: `${cookies.get('user_id')}` } })
-    .then((response) => {
-      setUser(response.data)
-    })
-    .catch(() => { setUser(0) })
+    if (cookies.get('user_id')) {
+      axios.get(`/logged_in`, { headers: { Authorization: `${cookies.get('user_id')}` } })
+      .then((response) => {
+        setUser(response.data)
+      })
+      .catch(() => { setUser(0) })
+    }
   }, []);
 
   useEffect(() => {
+    if (!user) return
     let channel
     if (game !== 0) {
       channel = cable.subscriptions.create(
@@ -198,14 +210,15 @@ export default function useApplicationData() {
       getCurrentBoard(game)
     }
     else {
-      channel = cable.subscriptions.create("ApplicationCable::Channel",
+      channel = cable.subscriptions.create(
+        { channel: "ApplicationCable::Channel" },
         { received: (data) => setUpdate(data) })
       setBoard(0)
       setPlayers([])
       setTiles([])
     }
     return () => channel.unsubscribe()
-  }, [game])
+  }, [game, user])
 
   useEffect(() => {
     if (playersInitialized !== 0) {
@@ -254,7 +267,7 @@ export default function useApplicationData() {
     chanceUsed, setChanceUsed,
     showReview, setShowReview,
     review, setReview,
-    getCurrentBoard, login,
+    getCurrentBoard, login, logout,
     rollDice, passGo, landTile, saveBook, transport
   }
 }
