@@ -122,6 +122,11 @@ export default function useApplicationData() {
     })
   }
 
+  const endBoard = function(winner, playerStats) {
+    // set board to ended, set game to ended, create results for each player
+    // elsewhere, game can't be joined, if viewed by player show results for that player
+  }
+
   const rollDice = function(number, player) {
     let ran = 0;
     axios.put(`/api/games/${game}/players/${players[player].player.id}`, { final_position: ((players[player].player.position + number) % 24), moving: true })
@@ -267,7 +272,7 @@ export default function useApplicationData() {
     chanceUsed, setChanceUsed,
     showReview, setShowReview,
     review, setReview,
-    getCurrentBoard, login, logout,
+    getCurrentBoard, login, logout, endBoard,
     rollDice, passGo, landTile, saveBook, transport
   }
 }

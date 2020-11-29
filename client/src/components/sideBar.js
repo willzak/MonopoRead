@@ -12,8 +12,13 @@ export default function SideBar(props) {
     if (props.board !== 0) {
       axios.get(`/api/boards/${props.board}/player_stats`)
       .then((response) => {
-        // handle success
-        setPlayerStats(response.data.map(player => {
+        let ended = false;
+        let winner;
+        const newPlayerStats = response.data.map(player => {
+          if (props.game.win_requirement === 'Points' && player.points >= props.game.win_points) {
+            ended = true;
+            winner = player;
+          }
           return {
             player: player,
             id: player.player.id,
@@ -23,7 +28,9 @@ export default function SideBar(props) {
             points: player.points,
             last_play: player.player.updated_at
           }
-        }));
+        })
+        setPlayerStats(newPlayerStats);
+        if (ended) props.endBoard(winner, newPlayerStats)
       })
     }
   }, [props.board, props.players])

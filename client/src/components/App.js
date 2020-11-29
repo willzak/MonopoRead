@@ -17,7 +17,7 @@ export default function App( props ) {
     game, setGame,
     review, setReview,
     showReview, setShowReview,
-    getCurrentBoard, login, logout,
+    getCurrentBoard, login, logout, endBoard,
     setChanceUsed, rollDice, passGo, landTile, saveBook, transport
   } = useApplicationData();
 
@@ -39,7 +39,7 @@ export default function App( props ) {
                 <Game {...props} game={game} board={board} players={players} tiles={tiles} chance={chance}
                 currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer}
                 review={review} setReview={setReview}
-                showReview={showReview} setShowReview={setShowReview}
+                showReview={showReview} setShowReview={setShowReview} endBoard={endBoard}
                 setChanceUsed={setChanceUsed} rollDice={rollDice} passGo={passGo} landTile={landTile} saveBook={saveBook} transport={transport} />
               )}
             />
