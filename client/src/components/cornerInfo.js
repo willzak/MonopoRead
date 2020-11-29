@@ -13,12 +13,10 @@ export default function CornerInfo(props) {
     corner3: []
   }
 
-  for (let user of props.players) {
-    if (!user.player.moving && user.player.position === 18) {
-      occupied['corner2'].push(user);
-    } else if (!user.player.moving && user.player.position === 6) {
-      occupied['corner3'].push(user);
-    }
+  if (!props.game.ended_at && !props.players[props.currentPlayer].player.moving && props.players[props.currentPlayer].player.position === 18) {
+    occupied['corner2'].push(props.players[props.currentPlayer]);
+  } else if (!props.game.ended_at && !props.players[props.currentPlayer].player.moving && props.players[props.currentPlayer].player.position === 6) {
+    occupied['corner3'].push(props.players[props.currentPlayer]);
   }
   const {cornerId} = useParams();
   let type;

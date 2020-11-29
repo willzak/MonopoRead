@@ -21,7 +21,7 @@ export default function Console(props) {
         <ChanceInfo data={props.chance.card ? props.chance : chanceData} />
       </Route>
       <Route path="/board/corner/:cornerId">
-        <CornerInfo transport={props.transport} currentPlayer={props.currentPlayer} players={props.players}/>
+        <CornerInfo game={props.game} transport={props.transport} currentPlayer={props.currentPlayer} players={props.players}/>
       </Route>
 
     </div>

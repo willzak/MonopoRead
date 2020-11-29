@@ -9,7 +9,7 @@ export default function Corner(props) {
 
   useEffect(() => {
     const player = props.players[props.currentPlayer]
-    if (props.passGo && props.players.length > 0 && props.pos === player.player.position && (player.player.moving || player.player.done)) {
+    if (!props.game.ended_at && props.passGo && props.players.length > 0 && props.pos === player.player.position && (player.player.moving || player.player.done)) {
       props.passGo(props.currentPlayer)
     }
   }, [props.players[props.currentPlayer] ? props.players[props.currentPlayer].player.position : []])
