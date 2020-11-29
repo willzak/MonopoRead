@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   post '/login' => 'auth#login'
+  get '/logged_in' => 'auth#logged_in'
 
   namespace :api do
     
@@ -21,7 +22,6 @@ Rails.application.routes.draw do
     resources :tiles
     resources :cards
 
-    get '/logged_in' => 'users#logged_in'
     get '/users/:user_id/games' => 'users#games' # All joined games for a user
     get '/users/:user_id/joinable_games' => 'users#joinable_games' # All joinable games for a user
     get '/games/:game_id/users' => 'games#users' # All users for a game

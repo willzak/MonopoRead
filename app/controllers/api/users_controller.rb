@@ -57,21 +57,6 @@ class Api::UsersController < ApplicationController
     render :json => @games
   end
 
-  def logged_in
-    unless user_id_in_token?
-      render json: { message: 'Not authenticated' }, status: :unauthorized
-      return
-    end
-    @current_user = User.find(auth_token[:user_id])
-    if @current_user.present? && @current_user.is_a?(User)
-      render :json => @current_user
-    else
-      render json: { message: 'No user' }, status: 401
-    end
-  rescue JWT::VerificationError, JWT::DecodeError
-    render json: { message: 'Not authenticated' }, status: :unauthorized
-  end
-
   private
     def user_params
       params.permit(:name, :email, :password_digest)
