@@ -18,7 +18,7 @@ class AuthController < ApplicationController
       render json: { message: 'Not authenticated' }, status: :unauthorized
       return
     end
-    @current_user = User.find(auth_token[:user_id])
+    @current_user = User.find(@auth_token[:user_id])
     if @current_user.present? && @current_user.is_a?(User)
       @current_user = { id: @current_user.id, email: @current_user.email, name: @current_user.name }
       render :json => @current_user
