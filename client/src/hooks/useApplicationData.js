@@ -72,14 +72,14 @@ export default function useApplicationData() {
   const login = function(email, password) {
     axios.post('/login', { email, password })
     .then((response) => {
-      cookies.set('user_id', response.data.auth_token, { path: '/' });
+      cookies.set('user_id', response.data.auth_token, { path: '/', domain: process.env.REACT_APP_DOMAIN });
       setCable(ActionCable.createConsumer(`${process.env.REACT_APP_WEBSOCKET_URL}?token=${response.data.auth_token}`))
       setUser(response.data.user)
     })
   }
 
   const logout = function() {
-    cookies.set('user_id', '', { path: '/' });
+    cookies.set('user_id', '', { path: '/', domain: process.env.REACT_APP_DOMAIN });
     setGames([])
     setJoinableGames([])
     setGame(0)
