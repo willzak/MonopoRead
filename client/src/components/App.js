@@ -1,11 +1,11 @@
 import React from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
-import Home from "./Home.js"
-import Game from "./game.js"
-import Player from "./Player.js"
-import GameNameForm from "./GameNameForm.js"
-import useApplicationData from '../hooks/useApplicationData'
-import Nav from "./Nav.js"
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Home from "./Home.js";
+import Game from "./game.js";
+import Player from "./Player.js";
+import GameNameForm from "./GameNameForm.js";
+import useApplicationData from '../hooks/useApplicationData';
+import Nav from "./Nav.js";
 
 export default function App( props ) {
   const {

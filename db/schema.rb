@@ -67,9 +67,6 @@ ActiveRecord::Schema.define(version: 2020_11_29_202112) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.string "name"
-    t.string "password_digest"
-    t.integer "max_players"
     t.string "win_requirement"
     t.integer "win_points"
     t.boolean "isbn_trust"
@@ -77,6 +74,9 @@ ActiveRecord::Schema.define(version: 2020_11_29_202112) do
     t.boolean "isbn_vote"
     t.integer "turn_delay"
     t.integer "turn_reminder"
+    t.string "name"
+    t.string "password_digest"
+    t.integer "max_players"
     t.datetime "ended_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
