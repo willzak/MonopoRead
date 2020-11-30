@@ -33,7 +33,7 @@ export default function Home(props) {
     <div className="home-page">
 
       <div className="user-menu">
-        <h2>Hi User</h2>
+        <h2>{props.user ? `Hi ${props.user.name}` : 'Not logged in'}</h2>
         {props.users.map((user, index) => {
           return <h3 style={{width: '100px', border: (props.user.id === user.id) ? '1px solid black' : 'none'}} onClick={() => props.login(user.email, 'password')} key={index}>{user.name}</h3>
         })}
