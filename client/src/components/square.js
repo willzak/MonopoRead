@@ -38,9 +38,10 @@ export default function Square(props) {
     return props.players.map((player, index) => {
       if (props.pos === player.player.position) {
         if (!props.game.ended_at && props.currentPlayer === index && props.tile) {
+          if (player.player.done) setSubmit(true)
           axios.get(`/api/boards/${props.board}/players/${player.player.id}/open_tile/${props.tile.board_tile_id}`)
           .then((response) => {
-            if (response.data) setSubmit(true); 
+            setSubmit(response.data); 
           })
         }  
         return <Token key={player.player.id} color={player.color.hexcode} />
