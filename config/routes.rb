@@ -23,13 +23,15 @@ Rails.application.routes.draw do
     resources :tiles
     resources :cards
 
-    get '/users/:user_id/games' => 'users#games' # All joined games for a user
+    get '/users/:user_id/playable_games' => 'users#playable_games' # All playable games for a user
     get '/users/:user_id/joinable_games' => 'users#joinable_games' # All joinable games for a user
+    get '/users/:user_id/ended_games' => 'users#ended_games' # All ended games for a user
     get '/games/:game_id/users' => 'games#users' # All users for a game
     get '/games/:game_id/players' => 'games#players' # All players for a game
     get '/games/:game_id/boards' => 'games#boards' # All boards for a game
     get '/boards/:board_id/users' => 'boards#users' # All users for a board
     get '/boards/:board_id/players' => 'boards#players' # All players for a board
+    get '/boards/:board_id/winner' => 'boards#winner' # Winning player for a board
 
     get '/books/:book_id/goodreads' => 'books#goodreads' # Goodreads call for specific book with ISBN
     get '/books/:book_id/google' => 'books#google' # Google call for specific book with ISBN

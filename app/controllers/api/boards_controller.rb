@@ -109,6 +109,15 @@ class Api::BoardsController < ApplicationController
     render :json => @players
   end
 
+  def winner
+    @result = Result.where(board_id: params[:board_id], winner: true).first
+    @player = Player.find(@result[:player_id])
+    @player = { player: @player, color: Color.find(@player[:color_id]), user: User.find(@player[:user_id]) }
+    @winner = { result: @result, player: @player }
+
+    render :json => @winner
+  end
+
   private
     def board_params
       params.permit(:ended_at, :game_id)
