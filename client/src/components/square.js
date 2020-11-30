@@ -12,17 +12,15 @@ export default function Square(props) {
 
   let type = "square " + props.direction + "-square";
   let textType = "square-text-" + props.direction;
-
   let position;
-
   let view = "click-view";
-
   let boxText = 'View';
-  if (props.pos === props.occupied) {
+  const player = props.players[props.currentPlayer]
+
+  if (props.pos === props.occupied && player.player.done) {
     boxText = "Click Me!";
     view += "-notify"
   }
-
 
   if (props.direction === 'right') {
     view += '-v2';

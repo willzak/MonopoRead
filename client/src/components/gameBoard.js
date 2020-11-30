@@ -5,6 +5,7 @@ import Corner from "./cornerTile";
 import Chance from "./chanceTile";
 
 export default function Board(props) {
+
   return (
     <div className="game-board">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>

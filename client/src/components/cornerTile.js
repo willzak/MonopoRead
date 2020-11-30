@@ -1,11 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useVisualMode from "../hooks/useVisualMode";
 
 import Token from "./token";
+import Notification from "./notification";
 
 import "./cornerTile.css";
 
 export default function Corner(props) {
+    
+  const { mode, notify, cancel } = useVisualMode(
+    props.occupied === props.pos ? "occupied" : "empty"
+  );
 
   useEffect(() => {
     const player = props.players[props.currentPlayer]
@@ -23,8 +29,11 @@ export default function Corner(props) {
     })
   }
 
+  const removeNotify = () => {
+    cancel();
+  }
+  
   let tileStyle;
-
   if (props.id === "Corner4") {
     tileStyle = (
       <div className="corner">
@@ -35,9 +44,8 @@ export default function Corner(props) {
           <div>
             <img src={window.location.origin + '/Go_Text.png'} alt="MonopoRead Go" className="go-text" />
           </div>
-          <div className="corner-click-view">
-            <div className="hidden">Click Me!</div>
-          </div>
+          { mode === "occupied" && (<Notification type={"corner-click-view"}/>) }
+          { mode === "empty" }
           <div>
             <img src={window.location.origin + '/Monopoly_Go_Arrow.png'} alt="MonopoRead Arrow" className="arrow" />
           </div>
@@ -53,9 +61,8 @@ export default function Corner(props) {
             {activePlayers()}
           </div>
           <img src={window.location.origin + '/Go_Text.png'} alt="MonopoRead Go" className="go-text-flipped" />
-          <div className="corner-flipped-click-view">
-            <div className="hidden">Click Me!</div>
-          </div>
+          { mode === "occupied" && (<Notification type="corner-flipped-click-view" />) }
+          { mode === "empty" }
           <img src={window.location.origin + '/Monopoly_Go_Arrow.png'} alt="MonopoRead Arrow" className="arrow-flipped" />
         </div>
       </div>
@@ -66,9 +73,8 @@ export default function Corner(props) {
         <div className="players-container">
           {activePlayers()}
         </div>
-        <div className="central-station-click-view">
-          <div className="hidden">Click Me!</div>
-        </div>
+        { mode === "occupied" && (<Notification type="central-station-click-view" />) }
+        { mode === "empty" }
         <img src={window.location.origin + '/central-station.png'} alt="Railroad 1" className="Corner3" />
       </div>
     )
@@ -78,9 +84,8 @@ export default function Corner(props) {
         <div className="players-container">
           {activePlayers()}
         </div>
-        <div className="reading-railroad-click-view">
-          <div className="hidden">Click Me!</div>
-        </div>
+        { mode === "occupied" && (<Notification type="reading-railroad-click-view" />) }
+        { mode === "empty" }
         <img src={window.location.origin + '/reading-railroad.png'} alt="Railroad 2" className="Corner2"/>
       </div>
     )

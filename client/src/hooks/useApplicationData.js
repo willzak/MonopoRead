@@ -212,14 +212,12 @@ export default function useApplicationData() {
 
     setPrevOccupied([...occupied])
     setOccupied(tileIds);
-    console.log(occupied)
   }, [players])
 
   useEffect(() => {
     for (let i = 0; i <= occupied.length; i++) {
       if (occupied[i] !== prevOccupied[i]) {
         setCurrentOccupied(occupied[i]);
-        console.log(occupied[i])
       }
     }
   }, [occupied, prevOccupied])

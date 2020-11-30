@@ -35,15 +35,15 @@ export default function Chance(props) {
     tokenHolder = "active-players-bottom";
   }
 
-
-  if (props.occupied === props.pos) {
-    text += " rainbow rainbow_text_animated";
-    shadow = "shadowBox";
-  }
-
   useEffect(() => {
     for (const player of props.players) {
-      if (props.pos === player.player.position && player.player.done) props.drawChance(props.currentPlayer)
+      if (props.pos === player.player.position && player.player.done) {
+        props.drawChance(props.currentPlayer)
+        if (shadow !== "shadowBox" && !text.includes("rainbow")) {
+          text += " rainbow rainbow_text_animated";
+          shadow = "shadowBox";
+        }
+      }
     }
   }, [props.players])
 
