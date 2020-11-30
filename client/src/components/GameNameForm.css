@@ -14,16 +14,15 @@
   align-items: center; 
   border: solid; 
   width: 400px; 
-  height: 600px; 
+  height: 560px; 
   margin-top: 50px; 
   background-color: white;
-  padding-top: 20px; 
   text-align: center; 
 }
 
 .lightbulb {
   width: 185px;
-  height: 150px; 
+  height: 170px; 
 }
 
 .card-title {
@@ -32,12 +31,13 @@
   margin-bottom: 5px; 
 }
 
-.color-picker {
+.game-options {
   display: flex; 
   flex-direction: row; 
   margin-top: 20px; 
   align-items: center;
 }
+
 
 
 select {
@@ -46,8 +46,4 @@ select {
 
 label {
   font-size: 20px; 
-}
-
-.button {
-  margin-top: 10px; 
 }
