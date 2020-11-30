@@ -10,6 +10,7 @@ export default function useApplicationData() {
   const [user, setUser] = useState(0)
   const [cable, setCable] = useState(ActionCable.createConsumer(`${process.env.REACT_APP_WEBSOCKET_URL}?token=${cookies.get('user_id')}`))
   const [games, setGames] = useState([])
+  const [endedGames, setEndedGames] = useState([])
   const [joinableGames, setJoinableGames] = useState([])
   const [game, setGame] = useState(0)
   const [board, setBoard] = useState(0)
@@ -276,6 +277,7 @@ export default function useApplicationData() {
     cookies, users, setUsers,
     user, setUser,
     games, setGames,
+    endedGames, setEndedGames,
     joinableGames, setJoinableGames,
     game, setGame,
     board, setBoard,

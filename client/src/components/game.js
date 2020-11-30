@@ -6,6 +6,7 @@ import SideBar from "./sideBar";
 export default function Game(props) {
   const history =  useHistory ()
   if (!props.game) history.push("/")
+  if (props.game.ended_at && history.location.pathname !== '/board/result') history.push("/board/result")
 
   return (
     <section className="game-view">

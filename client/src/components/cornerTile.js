@@ -75,7 +75,7 @@ export default function Corner(props) {
   }
 
   return (
-    <Link to={`/board/corner/${props.id}`}>
+    <Link className={props.game.ended_at ? 'disabled-link' : 'link'} to={`/board/corner/${props.id}`}>
       {tileStyle}
     </Link>
     )

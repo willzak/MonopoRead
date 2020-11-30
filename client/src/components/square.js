@@ -58,7 +58,7 @@ export default function Square(props) {
   
   return (
 
-    <Link to = {`/board/tiles/${props.tile ? props.tile.id : 0}${submit ? '/submit' : ''}`}>
+    <Link className={props.game.ended_at ? 'disabled-link' : 'link'} to={`/board/tiles/${props.tile ? props.tile.id : 0}${submit ? '/submit' : ''}`}>
       <div className={type}>
         <div className={textType}>
           <div className="link-text">

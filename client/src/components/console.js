@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import TileInfo from "./tileInfo.js";
 import ChanceInfo from "./chanceInfo";
 import CornerInfo from "./cornerInfo";
-
+import ResultInfo from "./resultInfo";
 
 export default function Console(props) {
   let chanceData = [];
@@ -23,7 +23,9 @@ export default function Console(props) {
       <Route path="/board/corner/:cornerId">
         <CornerInfo game={props.game} transport={props.transport} currentPlayer={props.currentPlayer} players={props.players}/>
       </Route>
-
+      <Route path='/board/result'>
+        <ResultInfo currentPlayer={props.currentPlayer} players={props.players} board={props.board} />
+      </Route>
     </div>
   )
 }

@@ -7,16 +7,15 @@ import './sideBar.css';
 export default function SideBar(props) {
   const [playerStats, setPlayerStats] = useState([])
   const [disabled, setDisabled] = useState(false)
+  const [ended, setEnded] = useState(false)
 
   useEffect(() => {
     if (props.board !== 0) {
       axios.get(`/api/boards/${props.board}/player_stats`)
       .then((response) => {
-        let ended = false;
-        let winner;
+        let winner = false;
         const newPlayerStats = response.data.map(player => {
           if (props.game.win_requirement === 'Points' && player.points >= props.game.win_points) {
-            ended = true;
             winner = player.player.id;
           }
           return {
@@ -30,10 +29,14 @@ export default function SideBar(props) {
           }
         })
         setPlayerStats(newPlayerStats);
-        if (ended && !props.game.ended_at) props.endBoard(winner, newPlayerStats)
+        if (winner) setEnded({winner, newPlayerStats});
       })
     }
   }, [props.board, props.players])
+
+  useEffect(() => {
+    if (ended && !props.game.ended_at) props.endBoard(ended.winner, ended.newPlayerStats)
+  }, [ended])
 
   useEffect(() => {
     if (props.players[props.currentPlayer]) {

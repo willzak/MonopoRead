@@ -63,7 +63,7 @@ export default function Chance(props) {
   }
 
   return (
-    <Link to={`/board/cards/${id}`}>
+    <Link className={props.game.ended_at ? 'disabled-link' : 'link'} to={`/board/cards/${id}`}>
       <div className="chance-container">
         <div className={type}>
           <div className={label}>
