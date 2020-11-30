@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Token from "./token";
 import "./GameNameForm.css";
+import Button from "@material-ui/core/Button"
 
 export default function GameNameForm( props ) {
   const [gameName, setGameName] = useState("")
@@ -38,20 +39,29 @@ export default function GameNameForm( props ) {
   }
 
   return (
-    <div>
-      <div className="game-name-form">
-        <h1>Choose A Game Name</h1>
-        <TextField id="standard-basic" label="Type your game name here" type="text"  name="title" value={gameName} onChange={(event) => setGameName(event.target.value)}/>
+    <div className="game-name-form">
+      <div>
+        <img src = "Lightbulb_Icon.png" alt="lightbulb" className="lightbulb" />
+        <hr />
+        <p className="card-title">Create A Game </p>
+        <hr />
+        <TextField id="standard-basic" label="Game Name" type="text"  name="title" value={gameName} onChange={(event) => setGameName(event.target.value)}/>
         <br/>
     </div>
-      <label htmlFor="player-color">Choose a Color: </label>
-        <select onChange={changeHandler} name="colors">
-          {colors.map ((color, index) =>{
-          return <option key={index}>{color.name}</option>
-          })}
-        </select>
-      <Token color={color.hexcode} />
-    <button onClick={clickHandler}>Submit</button>
+    <div className="color-picker">
+      <div>
+        <label htmlFor="player-color">Choose a Color: </label>
+          <select onChange={changeHandler} name="colors">
+            {colors.map ((color, index) =>{
+            return <option key={index}>{color.name}</option>
+            })}
+          </select>
+        </div>
+        <Token color={color.hexcode} />
+      </div>
+      <div className="button">
+        <Button style={{ fontSize: '1em', "font-weight": 'bolder' }} onClick={clickHandler}>Submit</Button>
+      </div>
     </div>
   )
 }
