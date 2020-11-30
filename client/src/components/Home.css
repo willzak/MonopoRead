@@ -12,8 +12,18 @@
   gap: 20px; 
 }
 
-.user-menu {
-  margin-right: 50px; 
+.user-info {
+  display: flex; 
+  flex-direction: row;
+  align-items: center;
+  gap: 10px; 
+  align-content: center;
+}
+
+.users {
+  display: flex; 
+  flex-direction: row; 
+  margin-bottom: 20px; 
 }
 
 .game-card {
@@ -30,14 +40,21 @@
   border: solid; 
   padding: 7px; 
   text-align: center;
-  background-color: yellow; 
+  background-color: #FFFF00; 
 }
 
 .card-header-play {
   border: solid; 
   padding: 7px; 
   text-align: center;
-  background-color: green; 
+  background-color: #008000; 
+}
+
+.card-header-view {
+  border: solid; 
+  padding: 7px; 
+  text-align: center;
+  background-color: #AAE0F7; 
 }
 
 .card-body {
