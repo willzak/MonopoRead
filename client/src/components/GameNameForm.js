@@ -75,7 +75,7 @@ export default function GameNameForm( props ) {
           <br/>
         </div>
 
-        <div className="color-picker">
+        <div className="game-options">
           <div>
             <label htmlFor="player-color">Choose a Color: </label>
               <select onChange={colorHandler} name="colors">
@@ -88,7 +88,7 @@ export default function GameNameForm( props ) {
         </div>
 
 
-        <div className="game-ender"> 
+        <div className="game-options"> 
         <label htmlFor="win">Game Ends: </label>
           <select onChange={winHandler} name="win">
             {winOptions()}
