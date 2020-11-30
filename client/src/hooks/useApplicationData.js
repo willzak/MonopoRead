@@ -16,6 +16,7 @@ export default function useApplicationData() {
   const [board, setBoard] = useState(0)
   const [players, setPlayers] = useState([])
   const [currentPlayer, setCurrentPlayer] = useState(0)
+  const [playerStats, setPlayerStats] = useState([])
   const [tiles, setTiles] = useState([])
   const [chance, setChance] =useState(0)
   const [chanceUsed, setChanceUsed] = useState(-1)
@@ -85,6 +86,111 @@ export default function useApplicationData() {
     setUser(0)
   }
 
+  const createGame = function(game, player, history) {
+    axios.post('/api/create_game', { user_id: user.id, name: game.name, win_requirement: game.win_requirement, win_points: game.win_points, color_id: player.color})
+      .then((response) => {
+        setGame(response.data.game)
+        setBoard(response.data.board.id)
+        setPlayers([response.data.player])
+        setTiles(response.data.board_tiles.map(tile => {
+          return {
+            tile: tile,
+            id: tile.tile.id,
+            board_tile_id: tile.board_tile.id,
+            name: tile.tile.name,
+            colour: tile.color.hexcode,
+            description: tile.tile.description,
+            books: tile.books.filter(b => !Array.isArray(b.book)).map(b => {
+              return { name: b.book.name, review: b.review.review_text } 
+            }),
+            recommendation: tile.recommendations.map(rec => rec.book.name)
+          }
+        }))
+        setPlayerStats(response.data.player_stats.map(player => {
+          return {
+            player: player,
+            id: player.player.id,
+            color: player.color.hexcode,
+            name: player.user.name,
+            books: player.books,
+            points: player.points,
+            last_play: player.player.updated_at
+          }
+        }))
+        history.push('/board')
+      })
+  }
+
+  const joinGame = function(game, player, history) {
+    axios.post('/api/join_game', { game_id: game.id, user_id: user.id, color_id: player.color_id })
+      .then((response) => {
+        setGame(response.data.game)
+        setBoard(response.data.board.id)
+        setPlayers(response.data.players)
+        setTiles(response.data.board_tiles.map(tile => {
+          return {
+            tile: tile,
+            id: tile.tile.id,
+            board_tile_id: tile.board_tile.id,
+            name: tile.tile.name,
+            colour: tile.color.hexcode,
+            description: tile.tile.description,
+            books: tile.books.filter(b => !Array.isArray(b.book)).map(b => {
+              return { name: b.book.name, review: b.review.review_text } 
+            }),
+            recommendation: tile.recommendations.map(rec => rec.book.name)
+          }
+        }))
+        setPlayerStats(response.data.player_stats.map(player => {
+          return {
+            player: player,
+            id: player.player.id,
+            color: player.color.hexcode,
+            name: player.user.name,
+            books: player.books,
+            points: player.points,
+            last_play: player.player.updated_at
+          }
+        }))
+        history.push('/board')
+      })
+  }
+
+  const playGame = function(game, history) {
+    axios.post('/api/play_game', { user_id: user.id, game_id: game.id })
+    .then((response) => {
+      setGame(response.data.game)
+      setBoard(response.data.board.id)
+      setPlayers(response.data.players)
+      setTiles(response.data.board_tiles.map(tile => {
+        return {
+          tile: tile,
+          id: tile.tile.id,
+          board_tile_id: tile.board_tile.id,
+          name: tile.tile.name,
+          colour: tile.color.hexcode,
+          description: tile.tile.description,
+          books: tile.books.filter(b => !Array.isArray(b.book)).map(b => {
+            return { name: b.book.name, review: b.review.review_text } 
+          }),
+          recommendation: tile.recommendations.map(rec => rec.book.name)
+        }
+      }))
+      setPlayerStats(response.data.player_stats.map(player => {
+        return {
+          player: player,
+          id: player.player.id,
+          color: player.color.hexcode,
+          name: player.user.name,
+          books: player.books,
+          points: player.points,
+          last_play: player.player.updated_at
+        }
+      }))
+      history.push('/board')
+    })
+  }
+
   const getTiles = function(board) {
     axios.get(`/api/boards/${board}/board_tiles`)
     .then((response) => {
@@ -105,37 +211,48 @@ export default function useApplicationData() {
     })
   }
 
-  const getCurrentBoard = function(game) {
-    return axios.get(`/api/games/${game.id}/current_board`)
-    .then((response) => {
-      if (!response.data) return axios.post(`/api/boards`, {game_id: game.id})
-      return response
-    })
-    .then((response) => {
-      setBoard(response.data.id);
-      getTiles(response.data.id);
-      return axios.get(`/api/boards/${response.data.id}/players`)
-    })
-    .then((response) => {
-      for (let i = 0; i < response.data.length; i++) if (response.data[i].player.user_id === user) setCurrentPlayer(i)
-      setPlayers(response.data);
-      setPlayersInitialized(1)
-    })
+  const endGame = function(endedGame) {
+    if (game && !game.ended_at) {
+      setGame(current => {
+        return {...current, ended_at : new Date() }
+      })
+    }
+    else {
+      let index = -1
+      games.forEach((game, i) => {
+        if (game.id === endedGame.id) index = i
+      })
+      if (index !== -1) {
+        const newGames = [...games]
+        newGames.splice(index, 1)
+        setGames(newGames)
+        setEndedGames([...endedGames, endedGame])
+      }
+      else {
+        joinableGames.forEach((game, i) => {
+          if (game.id === endedGame.id) index = i
+        })
+        if (index !== -1) {
+          const newGames = [...joinableGames]
+          newGames.splice(index, 1)
+          setJoinableGames(newGames)
+        }
+      }
+    }
   }
 
   const endBoard = function(winner, playerStats) {
     const now = new Date()
-    setGame(current => {
-      return {...current, ended_at : now }
-    })
     axios.put(`/api/boards/${board}`, { ended_at: now })
       .then(() => {
-        return axios.put(`/api/games/${game.id}`, { ended_at: now })
+        return axios.post(`/api/boards/${board}/results`, { winner, playerStats })
       })
       .then(() => {
-        axios.post(`/api/boards/${board}/results`, { winner, playerStats })
+        setGame(current => {
+          return {...current, ended_at : now }
+        })
+        axios.put(`/api/games/${game.id}`, { ended_at: now })
       })
-    // elsewhere, game can't be joined, if viewed by player show results for that player
   }
 
   const rollDice = function(number, player) {
@@ -223,7 +340,6 @@ export default function useApplicationData() {
       channel = cable.subscriptions.create(
         { channel: "ApplicationCable::GameChannel", game_id: game.id },
         { received: (data) => setUpdate(data) })
-      getCurrentBoard(game)
     }
     else {
       channel = cable.subscriptions.create(
@@ -251,6 +367,7 @@ export default function useApplicationData() {
 
   useEffect(() => {
     if (update.message === 'Game created') updateGames(update.game)
+    if (update.message === 'Game ended') endGame(update.game)
     if (update.message === 'Player joined') addPlayer(update.player)
     if (update.message === 'Player moved') updatePlayerPosition(update.player)
     if (update.message === 'Player passed go') updatePlayerScore(update.player)
@@ -283,12 +400,14 @@ export default function useApplicationData() {
     board, setBoard,
     players, setPlayers,
     currentPlayer, setCurrentPlayer,
+    playerStats, setPlayerStats,
     tiles, setTiles,
     chance, setChance,
     chanceUsed, setChanceUsed,
     showReview, setShowReview,
     review, setReview,
-    getCurrentBoard, login, logout, endBoard,
+    createGame, joinGame, playGame,
+    login, logout, endBoard,
     rollDice, passGo, landTile, saveBook, transport
   }
 }

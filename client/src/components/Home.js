@@ -1,8 +1,11 @@
 import React, { useEffect } from "react"
 import { Link } from "react-router-dom";
 import axios from 'axios'
+import { useHistory } from "react-router-dom";
 
 export default function Home(props) {
+  const history = useHistory()
+
   useEffect(() => {
     props.setGame(0)
   }, [])
@@ -29,18 +32,14 @@ export default function Home(props) {
       <h1> Home Page </h1>
         <h2>Play Game:</h2>
         {props.games.length === 0 && <h3>You have no playable games.</h3>}
-      <Link to={`/board`}>
         {props.games.map((game, index) => {
-          return <h3 onClick={() => props.setGame(game)} key={index}>{game.name}</h3>
+          return <h3 onClick={() => props.playGame(game, history)} key={index}>{game.name}</h3>
         })}
-      </Link> 
         <h2>View Results:</h2>
         {props.endedGames.length === 0 && <h3>You have finished no games.</h3>}
-      <Link to={`/board`}>
         {props.endedGames.map((game, index) => {
-          return <h3 onClick={() => props.setGame(game)} key={index}>{game.name}</h3>
+          return <h3 onClick={() => props.playGame(game, history)} key={index}>{game.name}</h3>
         })}
-      </Link> 
         <h2>Join Game:</h2>
         {props.joinableGames.length === 0 && <h3>There are no games to join.</h3>}
       <Link to={`/game/join`}>

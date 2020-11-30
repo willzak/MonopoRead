@@ -5,7 +5,6 @@ import Roll from "./dice";
 import './sideBar.css';
 
 export default function SideBar(props) {
-  const [playerStats, setPlayerStats] = useState([])
   const [disabled, setDisabled] = useState(false)
   const [ended, setEnded] = useState(false)
 
@@ -28,7 +27,7 @@ export default function SideBar(props) {
             last_play: player.player.updated_at
           }
         })
-        setPlayerStats(newPlayerStats);
+        props.setPlayerStats(newPlayerStats);
         if (winner) setEnded({winner, newPlayerStats});
       })
     }
@@ -51,7 +50,7 @@ export default function SideBar(props) {
   const playerData = function() {
     const now = new Date();
 
-    return playerStats.map((player, index) => {
+    return props.playerStats.map((player, index) => {
       const then = new Date(player.last_play);
       let last_move = 0;
       if (Math.round((now - then)/(1000*60*60*24)) < 2) last_move = `${Math.round((now - then)/(1000*60*60))} hour${Math.round((now - then)/(1000*60*60)) === 1 ? '' : 's'} ago`

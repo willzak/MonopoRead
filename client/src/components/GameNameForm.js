@@ -11,7 +11,7 @@ export default function GameNameForm( props ) {
   const [color, setColor] = useState(0)
   const [points, setPoints] = useState(0)
   const [win, setWin] = useState('Never')
-  
+
   const history =  useHistory ()
 
   useEffect(() => {
@@ -24,14 +24,7 @@ export default function GameNameForm( props ) {
 
   const submitHandler = function() {
     if (gameName) {
-      axios.post(`/api/games/`, { user_id: props.user.id, name: gameName, win_requirement: win === 'Never' ? null : win, win_points: points ? points : null })
-      .then((response) => {
-        props.setGame(response.data)
-        return axios.post(`/api/games/${response.data.id}/players`, { user_id: props.user.id, color_id: color.id, score: 0, position: 0, moving: false, final_position: 0 })
-      })
-      .then(() => {
-        history.push("/board")
-      })
+      props.createGame({ name: gameName, win_requirement: win === 'Never' ? null : win, win_points: points ? points : null }, { color: color.id }, history)
     }
   }
 

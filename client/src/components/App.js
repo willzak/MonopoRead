@@ -12,13 +12,15 @@ export default function App( props ) {
     board, players, tiles, chance, user,
     setUser, users,
     currentPlayer, setCurrentPlayer,
+    playerStats, setPlayerStats,
     games, setGames,
     endedGames, setEndedGames,
     joinableGames, setJoinableGames,
     game, setGame,
     review, setReview,
     showReview, setShowReview,
-    getCurrentBoard, login, logout, endBoard,
+    createGame, joinGame, playGame,
+    login, logout, endBoard,
     setChanceUsed, rollDice, passGo, landTile, saveBook, transport
   } = useApplicationData();
 
@@ -31,14 +33,14 @@ export default function App( props ) {
               exact path="/"
               render={(props) => (
                 <Home {...props} login={login} logout={logout} games={games} setGames={setGames} endedGames={endedGames} setEndedGames={setEndedGames} joinableGames={joinableGames} setJoinableGames={setJoinableGames}
-                game={game} setGame={setGame} user={user} setUser={setUser} users={users} />
+                playGame={playGame} game={game} setGame={setGame} user={user} setUser={setUser} users={users} />
               )}
             />
             <Route
               path="/board"
               render={(props) => (
                 <Game {...props} game={game} board={board} players={players} tiles={tiles} chance={chance}
-                currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer}
+                currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer} playerStats={playerStats} setPlayerStats={setPlayerStats}
                 review={review} setReview={setReview}
                 showReview={showReview} setShowReview={setShowReview} endBoard={endBoard}
                 setChanceUsed={setChanceUsed} rollDice={rollDice} passGo={passGo} landTile={landTile} saveBook={saveBook} transport={transport} />
@@ -47,13 +49,13 @@ export default function App( props ) {
             <Route
               path="/game/join"
               render={(props) => (
-                <Player {...props} getCurrentBoard={getCurrentBoard} user={user} game={game} setGame={setGame} />
+                <Player {...props} joinGame={joinGame} user={user} game={game} setGame={setGame} />
               )}
             />
             <Route
               path="/game"
               render={(props) => (
-                <GameNameForm {...props} getCurrentBoard={getCurrentBoard} user={user} setGame={setGame} />
+                <GameNameForm {...props} createGame={createGame} user={user} setGame={setGame} />
               )}
             />
           </Switch>

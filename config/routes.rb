@@ -33,6 +33,10 @@ Rails.application.routes.draw do
     get '/boards/:board_id/players' => 'boards#players' # All players for a board
     get '/boards/:board_id/winner' => 'boards#winner' # Winning player for a board
 
+    post '/create_game' => 'games#create_game' # Create a game
+    post '/join_game' => 'games#join_game' # Join a game
+    post '/play_game' => 'games#play_game' # Play a game
+
     get '/books/:book_id/goodreads' => 'books#goodreads' # Goodreads call for specific book with ISBN
     get '/books/:book_id/google' => 'books#google' # Google call for specific book with ISBN
     post '/books/goodreads_search' => 'books#goodreads_search' # Goodreads call for search term provided
