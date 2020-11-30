@@ -39,6 +39,7 @@ export default function GameNameForm( props ) {
   }
 
   return (
+    <div className= "form-page">
     <div className="game-name-form">
       <div>
         <img src = "Lightbulb_Icon.png" alt="lightbulb" className="lightbulb" />
@@ -62,6 +63,7 @@ export default function GameNameForm( props ) {
       <div className="button">
         <Button style={{ fontSize: '1em', "font-weight": 'bolder' }} onClick={clickHandler}>Submit</Button>
       </div>
+    </div>
     </div>
   )
 }
