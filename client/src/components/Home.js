@@ -9,13 +9,17 @@ export default function Home(props) {
 
   useEffect(() => {
     if (props.user !== 0) {
-      axios.get(`/api/users/${props.user.id}/games`)
+      axios.get(`/api/users/${props.user.id}/playable_games`)
       .then((response) => {
         props.setGames(response.data)
         return axios.get(`/api/users/${props.user.id}/joinable_games`)
       })
       .then((response) => {
         props.setJoinableGames(response.data)
+        return axios.get(`/api/users/${props.user.id}/ended_games`)
+      })
+      .then((response) => {
+        props.setEndedGames(response.data)
       })
     }
   }, [props.user, props.game]);
@@ -24,9 +28,16 @@ export default function Home(props) {
     <div>
       <h1> Home Page </h1>
         <h2>Play Game:</h2>
-        {props.games.length === 0 && <h3>You have joined no games.</h3>}
+        {props.games.length === 0 && <h3>You have no playable games.</h3>}
       <Link to={`/board`}>
         {props.games.map((game, index) => {
+          return <h3 onClick={() => props.setGame(game)} key={index}>{game.name}</h3>
+        })}
+      </Link> 
+        <h2>View Results:</h2>
+        {props.endedGames.length === 0 && <h3>You have finished no games.</h3>}
+      <Link to={`/board`}>
+        {props.endedGames.map((game, index) => {
           return <h3 onClick={() => props.setGame(game)} key={index}>{game.name}</h3>
         })}
       </Link> 

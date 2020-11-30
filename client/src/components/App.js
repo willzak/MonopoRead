@@ -13,6 +13,7 @@ export default function App( props ) {
     setUser, users,
     currentPlayer, setCurrentPlayer,
     games, setGames,
+    endedGames, setEndedGames,
     joinableGames, setJoinableGames,
     game, setGame,
     review, setReview,
@@ -29,7 +30,7 @@ export default function App( props ) {
             <Route
               exact path="/"
               render={(props) => (
-                <Home {...props} login={login} logout={logout} games={games} setGames={setGames} joinableGames={joinableGames} setJoinableGames={setJoinableGames}
+                <Home {...props} login={login} logout={logout} games={games} setGames={setGames} endedGames={endedGames} setEndedGames={setEndedGames} joinableGames={joinableGames} setJoinableGames={setJoinableGames}
                 game={game} setGame={setGame} user={user} setUser={setUser} users={users} />
               )}
             />
