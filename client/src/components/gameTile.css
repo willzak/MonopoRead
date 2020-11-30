@@ -199,6 +199,18 @@
   opacity: 0.3;
 }
 
+.tile:hover .click-view {
+  opacity: 2;
+}
+
+.tile:hover .click-view-v2 {
+  opacity: 2;
+}
+
+.tile:hover .click-view-v3 {
+  opacity: 2;
+}
+
 .hidden {
   background-color: #ffffff;
   color: black;
@@ -217,7 +229,7 @@
   100% { box-shadow: 0 0 -10px #da2809; }
 }
 
-.click-view-notify > div{
+.click-view-notify > div {
   position: absolute;
   top: 75%;
   left: 50%;
@@ -232,7 +244,7 @@
   animation: glowing 5000ms infinite;
 }
 
-.click-view-notify-v2 > div{
+.click-view-notify-v2 > div {
   position: absolute;
   top: 100%;
   left: 50%;
@@ -246,7 +258,7 @@
   animation: glowing 5000ms infinite;
 }
 
-.click-view-notify-v3 > div{
+.click-view-notify-v3 > div {
   position: absolute;
   top: 75%;
   left: 50%;

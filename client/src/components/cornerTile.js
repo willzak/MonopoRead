@@ -35,6 +35,9 @@ export default function Corner(props) {
           <div>
             <img src={window.location.origin + '/Go_Text.png'} alt="MonopoRead Go" className="go-text" />
           </div>
+          <div className="corner-click-view">
+            <div className="hidden">Click Me!</div>
+          </div>
           <div>
             <img src={window.location.origin + '/Monopoly_Go_Arrow.png'} alt="MonopoRead Arrow" className="arrow" />
           </div>
@@ -50,6 +53,9 @@ export default function Corner(props) {
             {activePlayers()}
           </div>
           <img src={window.location.origin + '/Go_Text.png'} alt="MonopoRead Go" className="go-text-flipped" />
+          <div className="corner-flipped-click-view">
+            <div className="hidden">Click Me!</div>
+          </div>
           <img src={window.location.origin + '/Monopoly_Go_Arrow.png'} alt="MonopoRead Arrow" className="arrow-flipped" />
         </div>
       </div>
@@ -60,6 +66,9 @@ export default function Corner(props) {
         <div className="players-container">
           {activePlayers()}
         </div>
+        <div className="central-station-click-view">
+          <div className="hidden">Click Me!</div>
+        </div>
         <img src={window.location.origin + '/central-station.png'} alt="Railroad 1" className="Corner3" />
       </div>
     )
@@ -68,6 +77,9 @@ export default function Corner(props) {
       <div className='corner'>
         <div className="players-container">
           {activePlayers()}
+        </div>
+        <div className="reading-railroad-click-view">
+          <div className="hidden">Click Me!</div>
         </div>
         <img src={window.location.origin + '/reading-railroad.png'} alt="Railroad 2" className="Corner2"/>
       </div>

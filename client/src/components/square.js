@@ -8,6 +8,7 @@ import axios from 'axios';
 export default function Square(props) {
   const [submit, setSubmit] = useState(false)
   const [active, setActive] = useState([])
+  const [clicked, setClicked] = useState()
 
   let type = "square " + props.direction + "-square";
   let textType = "square-text-" + props.direction;
@@ -16,13 +17,12 @@ export default function Square(props) {
 
   let view = "click-view";
 
-  let boxText;
+  let boxText = 'View';
   if (props.pos === props.occupied) {
     boxText = "Click Me!";
     view += "-notify"
-  } else {
-    boxText = "View";
   }
+
 
   if (props.direction === 'right') {
     view += '-v2';
@@ -62,7 +62,9 @@ export default function Square(props) {
   useEffect(() => {
     setActive(activePlayers())
     for (const player of props.players) {
-      if (props.pos === player.player.position && player.player.done) props.landTile(props.currentPlayer, props.tile)
+      if (props.pos === player.player.position && player.player.done) {
+        props.landTile(props.currentPlayer, props.tile)
+      }
     }
   }, [props.players, props.tile, props.currentPlayer])
   
