@@ -13,7 +13,7 @@ export default function CornerInfo(props) {
     corner3: []
   }
 
-  if (!props.game.ended_at && !props.players[props.currentPlayer].player.moving && props.players[props.currentPlayer].player.position === 18) {
+  if (props.players > 0 && !props.game.ended_at && !props.players[props.currentPlayer].player.moving && props.players[props.currentPlayer].player.position === 18) {
     occupied['corner2'].push(props.players[props.currentPlayer]);
   } else if (!props.game.ended_at && !props.players[props.currentPlayer].player.moving && props.players[props.currentPlayer].player.position === 6) {
     occupied['corner3'].push(props.players[props.currentPlayer]);
@@ -28,7 +28,9 @@ export default function CornerInfo(props) {
           <Link to="/board" ><CancelIcon></CancelIcon> </Link>
         </div>
         <div className="individual-card-body">
-          <h3>Everytime you pass one of the GO spaces you get one point! Just for showing up! Happy reading!</h3>
+          <h3>Everytime you pass one of the GO spaces you get one point!</h3>
+          <br></br>
+          <h3> Click on any tile you land on like you did here to get awesome book recommendations!</h3>
           <h3 className="outcome">+1 Point</h3>
         </div>
       </div>)

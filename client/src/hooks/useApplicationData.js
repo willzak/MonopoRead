@@ -428,7 +428,6 @@ export default function useApplicationData() {
     showReview, setShowReview,
     review, setReview,
     currentOccupied, setCurrentOccupied,
-    getCurrentBoard,
     createGame, joinGame, playGame,
     login, logout, endBoard,
     rollDice, passGo, landTile, saveBook, transport
