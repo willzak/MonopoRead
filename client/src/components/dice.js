@@ -9,6 +9,7 @@ export default function Roll(props) {
   const cheat = [3, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]
 
   const roll = function(value, currentPlayer) {
+    props.setDisabled(true)
     props.rollDice(value, currentPlayer)
     setIndex(current => current + 1)
   }
