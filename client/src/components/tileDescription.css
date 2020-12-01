@@ -18,3 +18,17 @@
 .no-scrollbars::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
 }
+
+.book-recs {
+  display: flex; 
+  flex-direction: row;
+  
+  
+}
+
+.indv-book-recs {
+  border: solid; 
+  height: 65px;
+  flex-grow: 1; 
+
+}

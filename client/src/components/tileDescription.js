@@ -41,9 +41,17 @@ export default function Description( props ) {
       ) : (props.books.map((book, index) => <h3 key={index} onMouseEnter={() => onMouseEnter(book.review)} onMouseLeave={() => props.setShowReview(false)}>{book.name}</h3>))}
     </div>
     <h2> We Recommend: </h2>
-    <h3> {props.firstbookrec} </h3>
-    <h3> {props.secondbookrec} </h3>
-    <h3> {props.thirdbookrec} </h3>
+    <div className="book-recs">
+
+   <div className="indv-book-recs">{props.firstbookrec} </div>
+
+
+   <div className="indv-book-recs">{props.secondbookrec} </div>
+
+
+   <div className="indv-book-recs">{props.thirdbookrec}</div>
+
+    </div>
     </div>)
   )
 }
