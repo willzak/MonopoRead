@@ -26,7 +26,7 @@ code {
   background-color: #FFF4E5;
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 90vh;
 }
 
 .game-play {
@@ -34,11 +34,9 @@ code {
 }
 
 .game-board {
-  font-size: 0.6em;
+  font-size: 0.55em;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
   -webkit-box-shadow: 3px 3px 5px 6px rgb(221, 221, 221);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    3px 3px 5px 6px  rgb(221, 221, 221);  /* Firefox 3.5 - 3.6 */
   box-shadow:         3px 3px 5px 6px  rgb(221, 221, 221);
@@ -46,10 +44,6 @@ code {
 }
 
 .side-console {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin: 20px;
 }
 
@@ -57,16 +51,6 @@ code {
   width: 25vw;
   padding: 0.25em;
   min-width: 270px;
-}
-
-.player-status {
-  margin: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: black;
-}
-
-.stats {
-  margin-left: 20px;
 }
 
 a {
