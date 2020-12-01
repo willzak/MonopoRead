@@ -1,9 +1,15 @@
+.tile-info-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
 .individual-card {
-  margin: 50px;
+  margin: 8%;
   width: 70%;
   height: 300px;
   border: solid;
-  background-color: white;
+  background-color: rgb(114, 108, 108);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

@@ -1,5 +1,11 @@
+.tile-info-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
 .individual-tile {
-  margin: 50px;
+  margin-top: 5%;
   width: 70%;
   height: 350px;
   border: solid;
