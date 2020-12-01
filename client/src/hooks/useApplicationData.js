@@ -357,7 +357,7 @@ export default function useApplicationData() {
 
   useEffect(() => {
     if (players.length > 0) for (let i = 0; i < players.length; i++) if (players[i].player.user_id === user.id) setCurrentPlayer(i)
-  }, [players, user])
+  }, [players.length, user])
 
   useEffect(() => {
     if (playersInitialized !== 0) {
