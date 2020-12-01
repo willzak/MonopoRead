@@ -203,7 +203,7 @@
   opacity: 1;
   position: absolute;
   top: 80%;
-  left: 41%;
+  left: 64%;
   transform: translate(-50%, 100%);
   -ms-transform: translate(-50%, 100%);
   text-align: center;
@@ -216,8 +216,8 @@
   position: absolute;
   top: 25%;
   left: 50%;
-  transform: translate(-55%, 175%);
-  -ms-transform: translate(-55%, 175%);
+  transform: translate(-55%, 100%);
+  -ms-transform: translate(-55%, 100%);
   text-align: center;
   margin-bottom: 20px;
   opacity: 2;
