@@ -72,6 +72,8 @@ a {
 .bottom-row {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .column-organiser {
@@ -89,7 +91,7 @@ a {
 .board-logo {
   width: 40em;
   position: relative;
-  transform-origin: 370px 110px;
+  transform-origin: 95% 80%;
   transform: rotateZ(-45deg);
 }
 
