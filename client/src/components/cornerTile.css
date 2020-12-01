@@ -201,8 +201,6 @@
   transition: .5s ease;
   opacity: 1;
   position: absolute;
-  top: 80%;
-  left: 41%;
   transform: translate(-50%, 100%);
   -ms-transform: translate(-50%, 100%);
   text-align: center;
