@@ -18,7 +18,11 @@ export default function Nav (props) {
           <h2 style={{margin: '10px'}}>{props.user ? `Logged in as ${props.user.name}` : 'Not logged in'}</h2>
         </div>
         <div>
-          <Button variant= "outlined" style={{ fontSize: '1em', fontWeight: 'bolder' }} onClick={props.user ? props.logout : props.login}>{props.user ? 'Logout' : 'Login'}</Button>
+          {props.user ? (<Button variant= "outlined" style={{ fontSize: '1em', fontWeight: 'bolder' }} onClick={props.logout}>Logout</Button>) : (
+            <Link to={`/login`}>
+              <Button variant= "outlined" style={{ fontSize: '1em', fontWeight: 'bolder' }}>Login</Button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import React from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./Home.js";
 import Game from "./game.js";
+import Login from "./Login.js";
 import Player from "./Player.js";
 import GameNameForm from "./GameNameForm.js";
 import useApplicationData from '../hooks/useApplicationData';
@@ -33,8 +34,14 @@ export default function App( props ) {
             <Route
               exact path="/"
               render={(props) => (
-                <Home {...props} login={login} logout={logout} games={games} setGames={setGames} endedGames={endedGames} setEndedGames={setEndedGames} joinableGames={joinableGames} setJoinableGames={setJoinableGames}
+                <Home {...props} login={login} games={games} setGames={setGames} endedGames={endedGames} setEndedGames={setEndedGames} joinableGames={joinableGames} setJoinableGames={setJoinableGames}
                 playGame={playGame} game={game} setGame={setGame} user={user} setUser={setUser} users={users} />
+              )}
+            />
+            <Route
+              exact path="/login"
+              render={(props) => (
+                <Login {...props} login={login} user={user} setUser={setUser} users={users} />
               )}
             />
             <Route
