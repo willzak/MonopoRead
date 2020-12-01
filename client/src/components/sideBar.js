@@ -28,7 +28,10 @@ export default function SideBar(props) {
           }
         })
         props.setPlayerStats(newPlayerStats);
-        if (winner) setEnded({winner, newPlayerStats});
+        if (winner) {
+          setDisabled(true)
+          setEnded({winner, newPlayerStats});
+        }
       })
     }
   }, [props.board, props.players])
