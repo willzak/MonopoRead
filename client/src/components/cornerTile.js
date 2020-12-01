@@ -36,7 +36,7 @@ export default function Corner(props) {
   let tileStyle;
   if (props.id === "Corner4") {
     tileStyle = (
-      <div className="corner">
+      <div className="corner" onClick={removeNotify}>
         <div className="corner-style-container">
           <div className="players-container">
             {activePlayers()}
@@ -44,7 +44,7 @@ export default function Corner(props) {
           <div>
             <img src={window.location.origin + '/Go_Text.png'} alt="MonopoRead Go" className="go-text" />
           </div>
-          { mode === "occupied" && (<Notification type={"corner-click-view"}/>) }
+          { mode === "occupied" && (<Notification type="corner-click-view" />) }
           { mode === "empty" }
           <div>
             <img src={window.location.origin + '/Monopoly_Go_Arrow.png'} alt="MonopoRead Arrow" className="arrow" />
@@ -55,7 +55,7 @@ export default function Corner(props) {
   )
   } else if (props.id === "Corner1") {
     tileStyle = (
-      <div className="corner-flipped">
+      <div className="corner-flipped" onClick={removeNotify}>
         <div className="corner-style-container-flipped">
           <div className="players-container">
             {activePlayers()}
@@ -69,7 +69,7 @@ export default function Corner(props) {
     )
   } else if (props.id === "Corner3") {
     tileStyle = (
-      <div className="corner">
+      <div className="corner" onClick={removeNotify}>
         <div className="players-container">
           {activePlayers()}
         </div>
@@ -80,7 +80,7 @@ export default function Corner(props) {
     )
   } else {
     tileStyle = (
-      <div className='corner'>
+      <div className='corner' onClick={removeNotify}>
         <div className="players-container">
           {activePlayers()}
         </div>

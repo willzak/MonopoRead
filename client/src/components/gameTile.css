@@ -299,7 +299,7 @@
 .active-square-right {
   display: flex;
   flex-wrap: wrap;
-  transform-origin: 56px 20px;
+  transform-origin: 56px 0px;
   transform: rotateZ(180deg);
   position: relative;
   z-index: 10;
