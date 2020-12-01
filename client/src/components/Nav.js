@@ -9,7 +9,7 @@ export default function Nav (props) {
       <div className="nav-bar-left">
         <img src="Monoporead_Icon.png" alt="Monoporead Logo of Mr.Monopoly" className="nav-icon" />
         <Link to={`/`}>
-          <h1> MONOPOREAD </h1>
+        <img src="MonopoRead.png" alt="Monoporead Logo" className="logo" />
         </Link>
       </div>
       <div className="nav-bar-right">
