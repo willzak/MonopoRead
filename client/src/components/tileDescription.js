@@ -1,6 +1,7 @@
 import React from "react";
 import { FixedSizeList as List } from 'react-window';
-import "./tileDescription.css"
+import "./tileDescription.css"; 
+import Confetti from 'react-confetti';
 
 export default function Description( props ) {
 
@@ -15,6 +16,7 @@ export default function Description( props ) {
 
   return (props.congrats ?
     (<div>
+      <Confetti />
       <h3>Congratulations! You read:</h3>
       <h3>{props.congrats}</h3>
     </div>) :
