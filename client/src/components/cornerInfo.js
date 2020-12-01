@@ -95,7 +95,7 @@ export default function CornerInfo(props) {
   }
 
   return (
-    <div>
+    <div className="tile-info-container">
       {type}
     </div>
   )

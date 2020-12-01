@@ -61,7 +61,7 @@ export default function SideBar(props) {
 
       return (
         <div className="player-status" style={{borderColor: ((player.player.user.id === props.user.id) ? 'white' : 'black'), backgroundColor: player.color}} key={player.id}>
-          <div>
+          <div className="player-name">
             <strong>{player.name}</strong>
           </div>
           <br></br>
