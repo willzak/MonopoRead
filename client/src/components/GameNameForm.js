@@ -25,7 +25,7 @@ export default function GameNameForm( props ) {
 
   const submitHandler = function() {
     if (gameName) {
-      props.createGame({ name: gameName, win_requirement: win === 'Never' ? null : win, win_points: points ? points : null }, { color: color.id }, history)
+      props.createGame({ name: gameName, win_requirement: win === 'Never' ? null : win, win_points: points ? points : null }, { color: color ? color.id : 1 }, history)
     }
   }
 

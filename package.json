@@ -14,7 +14,8 @@
   "scripts": {
     "build": "cd client && npm install && npm run build && cd ..",
     "deploy": "cp -a client/build/. public/",
-    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
+    "postinstall": "npm run build && npm run deploy && echo 'Client built!'",
+    "cypress": "cypress open -P ."
   },
   "repository": {
     "type": "git",
@@ -31,5 +32,8 @@
     "react": "^17.0.1",
     "react-dice-roll": "^1.1.1",
     "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "cypress": "^6.0.1"
   }
 }
