@@ -1,4 +1,28 @@
+
+.side-bar {
+  margin: 20px;
+  padding: 0.5em;
+  width: 20vw;
+  height: 90vh;
+  min-width: 250px;
+  background-color: #BFDBAE;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 3px 5px 10px #888888;
+}
+
 .player-status {
   border: 2px solid;
   padding: 4px;
+  border-radius: 10px;
+}
+
+.player-name {
+  font-family: sans-serif;
+}
+
+.stats {
+  font-family: serif;
 }
