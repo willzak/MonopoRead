@@ -13,9 +13,9 @@ export default function CornerInfo(props) {
     corner3: []
   }
 
-  if (!props.game.ended_at && props.players > 0 && !props.players[props.currentPlayer].player.moving && props.players[props.currentPlayer].player.position === 18) {
+  if (!props.game.ended_at && props.players.length > 0 && !props.players[props.currentPlayer].player.moving && props.players[props.currentPlayer].player.position === 18) {
     occupied['corner2'].push(props.players[props.currentPlayer]);
-  } else if (!props.game.ended_at && props.players > 0 && !props.players[props.currentPlayer].player.moving && props.players[props.currentPlayer].player.position === 6) {
+  } else if (!props.game.ended_at && props.players.length > 0 && !props.players[props.currentPlayer].player.moving && props.players[props.currentPlayer].player.position === 6) {
     occupied['corner3'].push(props.players[props.currentPlayer]);
   }
   const {cornerId} = useParams();
@@ -44,7 +44,6 @@ export default function CornerInfo(props) {
           <h3>Would you like to take a one way trip to Central Station? (It's free!)</h3>
           <div className="btn-container">
             <Button onClick={() => props.transport(props.currentPlayer)} variant="contained" color="primary" className="btn">Let's Go!</Button>
-            <Button variant="contained" color="secondary">I'll Pass</Button>
           </div>
         </div>
       </div>)
@@ -58,7 +57,6 @@ export default function CornerInfo(props) {
           <h3>Would you like to take a one way trip to the Reading Railroad? (It's free!)</h3>
           <div className="btn-container">
             <Button onClick={() => props.transport(props.currentPlayer)} variant="contained" color="primary" className="btn">Let's Go!</Button>
-            <Button variant="contained" color="secondary">I'll Pass</Button>
           </div>
         </div>
       </div>)
