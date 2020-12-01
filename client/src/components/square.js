@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Token from "./token";
 import axios from 'axios';
+import useVisualMode from "../hooks/useVisualMode";
 
 
 
@@ -12,8 +13,13 @@ export default function Square(props) {
   let type = "square " + props.direction + "-square";
   let textType = "square-text-" + props.direction;
   let position;
-
   let view = "click-view";
+  const player = props.players[props.currentPlayer];
+
+  const { mode, notify, cancel } = useVisualMode(
+    props.occupied === props.pos ? "occupied" : "empty"
+  );
+
   if (props.direction === 'right') {
     view += '-v2';
     position = "active-square-right";
@@ -59,15 +65,20 @@ export default function Square(props) {
   
   return (
 
-    <Link className={props.game.ended_at ? 'disabled-link' : 'link'} to={`/board/tiles/${props.tile ? props.tile.id : 0}${submit ? '/submit' : ''}`}>
-      <div className={type}>
+    <Link to = {`/board/tiles/${props.tile ? props.tile.id : 0}${submit ? '/submit' : ''}`}>
+      <div className={type} onClick={cancel}>
         <div className={textType}>
           <div className="link-text">
             <h4>{text}</h4>
           </div>
-          <div className={view}>
-            <div className="hidden">View</div>
-          </div>
+          { mode === "empty" && (
+            <div className={view}>
+              <div className="hidden">View</div>
+            </div>)}
+          { mode === "occupied" && (
+            <div className={view}>
+              <div className="hidden">Click Me!</div>
+            </div>)}
         </div>
         <div className={position}>
           {active}

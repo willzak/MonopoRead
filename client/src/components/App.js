@@ -19,6 +19,8 @@ export default function App( props ) {
     game, setGame,
     review, setReview,
     showReview, setShowReview,
+    currentOccupied, setCurrentOccupied,
+    getCurrentBoard,
     createGame, joinGame, playGame,
     login, logout, endBoard,
     setChanceUsed, rollDice, passGo, landTile, saveBook, transport
@@ -41,8 +43,8 @@ export default function App( props ) {
               render={(props) => (
                 <Game {...props} game={game} board={board} players={players} tiles={tiles} chance={chance}
                 currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer} playerStats={playerStats} setPlayerStats={setPlayerStats}
-                review={review} setReview={setReview} user={user} 
-                showReview={showReview} setShowReview={setShowReview} endBoard={endBoard}
+                review={review} setReview={setReview} user={user} occupied={currentOccupied}
+                showReview={showReview} setShowReview={setShowReview} endBoard={endBoard} 
                 setChanceUsed={setChanceUsed} rollDice={rollDice} passGo={passGo} landTile={landTile} saveBook={saveBook} transport={transport} />
               )}
             />

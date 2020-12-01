@@ -9,39 +9,41 @@ export default function Chance(props) {
   let type = "tile chance chance";
   let text = "icon chance-icon-";
   let label = "label label-";
-  let view = "chance-click-view";
+  let container = "chance-container";
+  let shadow;
   let tokenHolder;
-
 
   if (props.direction === 'left') {
     type += '-left';
     text += 'left';
     label += 'left';
-    view += '-left';
     tokenHolder = "active-players-left";
   } else if (props.direction === 'right') {
     type += '-right';
     text += 'right';
     label += 'right';
-    view += '-right';
     tokenHolder = "active-players-right";
   } else if (props.direction === 'top') {
     type += '-top';
     text += 'top';
     label += 'top';
-    view += '-top';
     tokenHolder = "active-players-top";
   } else {
     type += '-bottom';
     text += 'bottom';
     label += 'bottom';
-    view += '-bottom';
     tokenHolder = "active-players-bottom";
   }
 
   useEffect(() => {
     for (const player of props.players) {
-      if (!props.game.ended_at && props.pos === player.player.position && player.player.done) props.drawChance(props.currentPlayer)
+      if (props.pos === player.player.position && player.player.done) {
+        props.drawChance(props.currentPlayer)
+        if (shadow !== "shadowBox" && !text.includes("rainbow")) {
+          text += " rainbow rainbow_text_animated";
+          shadow = "shadowBox";
+        }
+      }
     }
   }, [props.players])
 
@@ -69,12 +71,9 @@ export default function Chance(props) {
           <div className={label}>
             Chance
           </div>
-          <div className={text}>
+          <div className={text} id={shadow}>
             <strong>?</strong>
           </div>
-        </div>
-        <div className={view}>
-          <div className="chance-hidden">View</div>
         </div>
         <div className={tokenHolder}>
           {activePlayers()}

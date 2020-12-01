@@ -24,6 +24,9 @@ export default function useApplicationData() {
   const [review, setReview] = useState("")
   const [update, setUpdate] = useState({})
   const [playersInitialized, setPlayersInitialized] = useState(0)
+  const [occupied, setOccupied] = useState([])
+  const [prevOccupied, setPrevOccupied] = useState([])
+  const [currentOccupied, setCurrentOccupied] = useState(0)
 
   const updateGames = function(game) {
     if (game.user_id === user) {
@@ -390,6 +393,24 @@ export default function useApplicationData() {
     }
   }, [chanceUsed])
 
+  useEffect(() => {
+    let tileIds = [];
+    for (let user of players) {
+      tileIds.push(user.player.position);
+    }
+
+    setPrevOccupied([...occupied])
+    setOccupied(tileIds);
+  }, [players])
+
+  useEffect(() => {
+    for (let i = 0; i <= occupied.length; i++) {
+      if (occupied[i] !== prevOccupied[i]) {
+        setCurrentOccupied(occupied[i]);
+      }
+    }
+  }, [occupied, prevOccupied])
+
   return {
     cookies, users, setUsers,
     user, setUser,
@@ -406,6 +427,8 @@ export default function useApplicationData() {
     chanceUsed, setChanceUsed,
     showReview, setShowReview,
     review, setReview,
+    currentOccupied, setCurrentOccupied,
+    getCurrentBoard,
     createGame, joinGame, playGame,
     login, logout, endBoard,
     rollDice, passGo, landTile, saveBook, transport
