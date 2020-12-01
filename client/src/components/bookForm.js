@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import TextField from '@material-ui/core/TextField'; 
 import LinearProgress from '@material-ui/core/LinearProgress';
-import "./bookForm.css"
+import "./bookForm.css";
+import Button from '@material-ui/core/Button'; 
 
 export default function Form( props ) {
   const [title, setTitle] = useState("")
@@ -30,7 +31,7 @@ export default function Form( props ) {
         </form>
         <br />
         {loading && <LinearProgress />}
-        { !loading &&  <button onClick={clickHandler}>Submit!</button>}
+        { !loading &&  <Button variant="outlined" style={{ fontSize: '1em', fontWeight: 'bolder' }} onClick={clickHandler}>Submit</Button>}
     </div>
     )
 };
