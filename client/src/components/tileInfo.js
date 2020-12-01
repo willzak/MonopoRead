@@ -59,7 +59,7 @@ export default function TileInfo( {data, submit, players, currentPlayer, board, 
   }
 return (
   <>
-  <div>
+  <div className="tile-info-container">
     {tileData}
   </div>
   </>

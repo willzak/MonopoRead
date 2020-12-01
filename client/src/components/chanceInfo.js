@@ -47,7 +47,7 @@ export default function CardInfo({data}, props) {
   }
 
   return (
-    <div>
+    <div className="tile-info-container">
       {cardData}
     </div>
   )

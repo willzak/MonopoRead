@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -26,7 +27,7 @@ code {
   background-color: #FFF4E5;
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 90vh;
 }
 
 .game-play {
@@ -34,11 +35,9 @@ code {
 }
 
 .game-board {
-  font-size: 0.6em;
+  font-size: 0.55em;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
   -webkit-box-shadow: 3px 3px 5px 6px rgb(221, 221, 221);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    3px 3px 5px 6px  rgb(221, 221, 221);  /* Firefox 3.5 - 3.6 */
   box-shadow:         3px 3px 5px 6px  rgb(221, 221, 221);
@@ -46,10 +45,6 @@ code {
 }
 
 .side-console {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin: 20px;
 }
 
@@ -57,30 +52,6 @@ code {
   width: 25vw;
   padding: 0.25em;
   min-width: 270px;
-}
-
-.side-bar {
-  margin: 20px;
-  padding: 0.5em;
-  width: 20vw;
-  height: 90vh;
-  min-width: 250px;
-  background-color: #BFDBAE;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 3px 5px 10px #888888;
-}
-
-.player-status {
-  margin: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: black;
-}
-
-.stats {
-  margin-left: 20px;
 }
 
 a {
@@ -102,6 +73,8 @@ a {
 .bottom-row {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .column-organiser {
@@ -119,7 +92,7 @@ a {
 .board-logo {
   width: 40em;
   position: relative;
-  transform-origin: 370px 110px;
+  transform-origin: 95% 80%;
   transform: rotateZ(-45deg);
 }
 

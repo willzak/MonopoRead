@@ -1,4 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 20vw;
+  min-width: 250px;
+  height: 80vh;
+  padding: 0.5em;
+  border-radius: 10px;
+  background-color: #BFDBAE;
+  box-shadow: 3px 5px 10px #888888;
+}
+
 .player-status {
+  padding: 5%;
+  margin: 5%;
   border: 2px solid;
-  padding: 4px;
+  border-radius: 10px;
+  color: black;
+}
+
+.player-name {
+  font-family: 'Roboto', sans-serif;
+}
+
+.stats {
+  font-family: 'Roboto Slab', serif;
 }

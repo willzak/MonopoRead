@@ -38,12 +38,12 @@
 
 .arrow-flipped {
   width: 2.5em;
-  transform: scaleX(-1);
+  transform: translate(0, -7px) scaleX(-1);
 }
 
 .go-text-flipped {
   width: 2em;
-  transform-origin: 45px 40px;
+  transform-origin: 45px 35px;
   transform: rotateZ(135deg);
 }
 
@@ -195,12 +195,15 @@
   
 .arrow {
   width: 2.5em;
+  transform: translate(0, 10px);
 }
 
 .corner-click-view {
   transition: .5s ease;
   opacity: 1;
   position: absolute;
+  top: 80%;
+  left: 64%;
   transform: translate(-50%, 100%);
   -ms-transform: translate(-50%, 100%);
   text-align: center;
@@ -213,8 +216,8 @@
   position: absolute;
   top: 25%;
   left: 50%;
-  transform: translate(-55%, 175%);
-  -ms-transform: translate(-55%, 175%);
+  transform: translate(-55%, 100%);
+  -ms-transform: translate(-55%, 100%);
   text-align: center;
   margin-bottom: 20px;
   opacity: 2;
