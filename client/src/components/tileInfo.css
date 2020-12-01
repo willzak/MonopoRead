@@ -21,5 +21,12 @@
 
 .individual-tile-body {
   margin-left: 10px; 
-  margin-right: 10px; 
+  margin-right: 10px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+}
+
+.button-div {
+  margin-top: 20px; 
 }

@@ -39,7 +39,8 @@ export default function TileInfo( {data, submit, players, currentPlayer, board, 
         <Link to="/board" ><CancelIcon></CancelIcon> </Link>
         </div>
         <div className= "individual-tile-body">
-        { showInfo ? <Description
+        
+        { showInfo ? <div><Description
           congrats={congrats}
           setReview = {setReview}
           setShowReview = {setShowReview}
@@ -48,8 +49,8 @@ export default function TileInfo( {data, submit, players, currentPlayer, board, 
           firstbookrec = {tile.recommendation[0]} 
           secondbookrec = {tile.recommendation[1]} 
           thirdbookrec = {tile.recommendation[2]} 
-          /> : null }
-        { showButton ? <Button variant="outlined" style={{ fontSize: '1em', fontWeight: 'bolder' }} onClick = {onClick}>Completed</Button> : null }
+          /></div> : null }
+        { showButton ? <div className="button-div"><Button variant="outlined" style={{ fontSize: '1em', fontWeight: 'bolder' }} onClick = {onClick}>Completed</Button></div> : null }
         { showForm ? <Form setShowInfo={setShowInfo} setCongrats={setCongrats} setShowForm={setShowForm} saveBook={saveBook} tile={tile} currentPlayer={currentPlayer} players={players} board={board}/> : null }
         </div>
       </div>
