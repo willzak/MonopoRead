@@ -29,7 +29,6 @@ export default function CornerInfo(props) {
         </div>
         <div className="individual-card-body">
           <h3>Everytime you pass one of the GO spaces you get one point!</h3>
-          <br></br>
           <h3> Click on any tile you land on like you did here to get awesome book recommendations!</h3>
           <h3 className="outcome">+1 Point</h3>
         </div>
