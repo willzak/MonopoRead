@@ -15,9 +15,14 @@ export default function Description( props ) {
 
   return (props.congrats ?
     (<div>
-      <h3>Congratulations! You read:</h3>
-      <h3>{props.congrats}</h3>
-    </div>) :
+      <div className="individual-congrats-header">
+        <h1>Congratulations</h1>
+      </div>
+      <div className="individual-card-body">
+        <h3>You read {props.congrats}</h3>
+        <h3 className="outcome">+3 Points</h3>
+      </div>
+      </div>) :
     (<div>
     <h3> {props.description}</h3>
     <div className="submitted-books">
