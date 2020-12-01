@@ -11,6 +11,7 @@ export default function Nav (props) {
         <Link to={`/`}>
           <h1> MONOPOREAD </h1>
         </Link>
+          <h2 style={{paddingLeft: '30px'}}>{props.game ? `Game: ${props.game.name}` : ''}</h2>
       </div>
       <div className="nav-bar-right">
         <div>

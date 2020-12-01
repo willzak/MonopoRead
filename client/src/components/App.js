@@ -28,7 +28,7 @@ export default function App( props ) {
   return (
     <Router>
       <div>
-        <Nav user={user} login={login} logout={logout} />
+        <Nav game={game} user={user} login={login} logout={logout} />
           <Switch>
             <Route
               exact path="/"
