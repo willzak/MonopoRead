@@ -18,3 +18,21 @@
 .no-scrollbars::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
 }
+
+.book-rec-list {
+  font-size: 16px;
+  font-weight: bold;
+  list-style-type: none;
+  margin: 0; 
+  padding: 0;
+  text-align: center;
+  
+}
+
+.outer-body {
+  text-align: center;
+}
+
+.book-description {
+  font-size: 18px; 
+}

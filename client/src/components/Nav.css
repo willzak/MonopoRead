@@ -24,4 +24,13 @@
   flex-direction: row; 
   align-items: center; 
   background-color: #D7BAAA;
+  margin-right: 20px; 
+}
+
+.logo {
+  width: 370px; 
+  height: 150px; 
+  margin-top: -30px;
+  margin-bottom: -30px;
+  margin-left: -20px;
 }
