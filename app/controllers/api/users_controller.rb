@@ -44,26 +44,38 @@ class Api::UsersController < ApplicationController
     }
   end
 
-  def playable_games
-    @joined_games = Player.where(user_id: params[:user_id]).pluck(:game_id)
-    @games = Game.where(id: @joined_games, ended_at: nil)
+  def game_lists
+    @playable_games = playable_games(params[:user_id])
+    @joinable_games = joinable_games(params[:user_id])
+    @ended_games = ended_games(params[:user_id])
 
-    render :json => @games
+    render :json => {
+      playable_games: @playable_games,
+      joinable_games: @joinable_games,
+      ended_games: @ended_games
+    }
   end
 
-  def joinable_games
-    @joined_games = Player.where(user_id: params[:user_id]).pluck(:game_id)
+  def playable_games(user_id)
+    @joined_games = Player.where(user_id: user_id).pluck(:game_id)
+    @games = Game.where(id: @joined_games, ended_at: nil)
+
+    return @games
+  end
+
+  def joinable_games(user_id)
+    @joined_games = Player.where(user_id: user_id).pluck(:game_id)
     @games = Game.where.not(id: @joined_games).where(ended_at: nil)
     @games = @games.select { |game| game.players.count < 4 }
 
-    render :json => @games
+    return @games
   end
 
-  def ended_games
-    @joined_games = Player.where(user_id: params[:user_id]).pluck(:game_id)
+  def ended_games(user_id)
+    @joined_games = Player.where(user_id: user_id).pluck(:game_id)
     @games = Game.where.not(ended_at: nil).where(id: @joined_games)
 
-    render :json => @games
+    return @games
   end
 
   private

@@ -23,9 +23,7 @@ Rails.application.routes.draw do
     resources :tiles
     resources :cards
 
-    get '/users/:user_id/playable_games' => 'users#playable_games' # All playable games for a user
-    get '/users/:user_id/joinable_games' => 'users#joinable_games' # All joinable games for a user
-    get '/users/:user_id/ended_games' => 'users#ended_games' # All ended games for a user
+    get '/users/:user_id/game_lists' => 'users#game_lists' # All playable, joinable and ended games for a user
     get '/games/:game_id/users' => 'games#users' # All users for a game
     get '/games/:game_id/players' => 'games#players' # All players for a game
     get '/games/:game_id/boards' => 'games#boards' # All boards for a game

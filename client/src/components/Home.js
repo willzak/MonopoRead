@@ -15,17 +15,11 @@ export default function Home(props) {
 
   useEffect(() => {
     if (props.user !== 0) {
-      axios.get(`/api/users/${props.user.id}/playable_games`)
+      axios.get(`/api/users/${props.user.id}/game_lists`)
       .then((response) => {
-        props.setGames(response.data)
-        return axios.get(`/api/users/${props.user.id}/joinable_games`)
-      })
-      .then((response) => {
-        props.setJoinableGames(response.data)
-        return axios.get(`/api/users/${props.user.id}/ended_games`)
-      })
-      .then((response) => {
-        props.setEndedGames(response.data)
+        props.setGames(response.data.playable_games)
+        props.setJoinableGames(response.data.joinable_games)
+        props.setEndedGames(response.data.ended_games)
       })
     }
   }, [props.user, props.game]);
