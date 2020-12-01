@@ -82,7 +82,7 @@ export default function SideBar(props) {
     <div className="side-bar">
       {props.game.win_requirement === 'Points' && <h3>Points to Win: {props.game.win_points}</h3>}
       {playerData()}
-      <Roll disabled={disabled} setDisabled={setDisabled} currentPlayer={props.currentPlayer} rollDice={props.rollDice} players={props.players} board={props.board} />
+      <Roll user={props.user} disabled={disabled} setDisabled={setDisabled} currentPlayer={props.currentPlayer} rollDice={props.rollDice} players={props.players} board={props.board} />
       {props.showReview &&
         <div className="individual-card" >
           <div className="individual-congrats-header">

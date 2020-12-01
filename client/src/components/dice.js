@@ -5,8 +5,8 @@ import Dice from "react-dice-roll";
 import './dice.css'
 
 export default function Roll(props) {
-  const [index, setIndex] = useState(0)
-  const cheat = [3, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]
+  const [index, setIndex] = useState(props.user.id - 1)
+  const cheat = [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]
 
   const roll = function(value, currentPlayer) {
     props.setDisabled(true)
