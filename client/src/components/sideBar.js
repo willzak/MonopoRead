@@ -77,6 +77,7 @@ export default function SideBar(props) {
   } 
   return (
     <div className="side-bar">
+      {props.game.win_requirement === 'Points' && <h3>Points to Win: {props.game.win_points}</h3>}
       {playerData()}
       <Roll disabled={disabled} currentPlayer={props.currentPlayer} rollDice={props.rollDice} players={props.players} board={props.board} />
       {props.showReview &&
