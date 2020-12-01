@@ -15,12 +15,8 @@ export default function Game(props) {
         <Board game={props.game} transport={props.transport} setReview={props.setReview} setShowReview={props.setShowReview} passGo={props.passGo} landTile={props.landTile} drawChance={props.setChanceUsed} saveBook={props.saveBook} currentPlayer={props.currentPlayer} tiles={props.tiles} players={props.players} board={props.board} chance={props.chance} />
       </div>
       <div className="side-console">
-        <SideBar playerStats={props.playerStats} setPlayerStats={props.setPlayerStats} game={props.game} endBoard={props.endBoard} currentPlayer={props.currentPlayer} rollDice={props.rollDice} chance={props.chance} players={props.players} board={props.board} />
+        <SideBar showReview={props.showReview} review={props.review} playerStats={props.playerStats} setPlayerStats={props.setPlayerStats} game={props.game} endBoard={props.endBoard} currentPlayer={props.currentPlayer} rollDice={props.rollDice} chance={props.chance} players={props.players} board={props.board} />
       </div>
-      {props.showReview &&
-      <div className="review-popup">
-        {props.review}
-      </div> }
     </section>
   )
 }

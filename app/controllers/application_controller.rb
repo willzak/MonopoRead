@@ -74,16 +74,16 @@ class ApplicationController < ActionController::API
   end
 
   def http_token
-      http_token ||= if request.headers['Authorization'].present?
+      @http_token ||= if request.headers['Authorization'].present?
         request.headers['Authorization']
       end
   end
 
   def auth_token
-    auth_token ||= JsonWebToken.decode(http_token)
+    @auth_token ||= JsonWebToken.decode(@http_token)
   end
 
   def user_id_in_token?
-    http_token && auth_token && auth_token[:user_id].to_i
+    http_token && auth_token && @auth_token[:user_id].to_i
   end
 end
