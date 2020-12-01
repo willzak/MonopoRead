@@ -23,12 +23,10 @@
   display: flex; 
   flex-direction: row;
   
-  
 }
 
 .indv-book-recs {
   border: solid; 
-  height: 65px;
-  flex-grow: 1; 
+  
 
 }
