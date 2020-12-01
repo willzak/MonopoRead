@@ -104,7 +104,7 @@ export default function useApplicationData() {
             colour: tile.color.hexcode,
             description: tile.tile.description,
             books: tile.books.filter(b => !Array.isArray(b.book)).map(b => {
-              return { name: b.book.name, review: b.review.review_text } 
+              return { user: b.player.user.name, color: b.player.color.hexcode, name: b.book.name, review: b.review.review_text } 
             }),
             recommendation: tile.recommendations.map(rec => rec.book.name)
           }
@@ -139,7 +139,7 @@ export default function useApplicationData() {
             colour: tile.color.hexcode,
             description: tile.tile.description,
             books: tile.books.filter(b => !Array.isArray(b.book)).map(b => {
-              return { name: b.book.name, review: b.review.review_text } 
+              return { user: b.player.user.name, color: b.player.color.hexcode, name: b.book.name, review: b.review.review_text } 
             }),
             recommendation: tile.recommendations.map(rec => rec.book.name)
           }
@@ -174,7 +174,7 @@ export default function useApplicationData() {
           colour: tile.color.hexcode,
           description: tile.tile.description,
           books: tile.books.filter(b => !Array.isArray(b.book)).map(b => {
-            return { name: b.book.name, review: b.review.review_text } 
+            return { user: b.player.user.name, color: b.player.color.hexcode, name: b.book.name, review: b.review.review_text } 
           }),
           recommendation: tile.recommendations.map(rec => rec.book.name)
         }
@@ -206,7 +206,7 @@ export default function useApplicationData() {
           colour: tile.color.hexcode,
           description: tile.tile.description,
           books: tile.books.filter(b => !Array.isArray(b.book)).map(b => {
-            return { name: b.book.name, review: b.review.review_text } 
+            return { user: b.player.user.name, color: b.player.color.hexcode, name: b.book.name, review: b.review.review_text } 
           }),
           recommendation: tile.recommendations.map(rec => rec.book.name)
         }

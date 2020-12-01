@@ -75,7 +75,6 @@ export default function SideBar(props) {
       )
     })
   } 
-
   return (
     <div className="side-bar">
       {playerData()}
@@ -83,9 +82,9 @@ export default function SideBar(props) {
       {props.showReview &&
         <div className="individual-card" >
           <div className="individual-congrats-header">
-            <h2 style={{fontSize: 20, margin: '0'}}>{props.user.name}'s Review</h2>
+            <h2 style={{fontSize: 20, margin: '0'}}>{props.review.name}'s Review</h2>
           </div>
-          <p style={{fontSize: 16, padding: '5px'}}>{props.review}</p>
+          <p style={{fontSize: 16, padding: '5px'}}>{props.review.text}</p>
         </div>}
     </div>
   )

@@ -5,13 +5,15 @@ import Confetti from 'react-confetti';
 
 export default function Description( props ) {
 
-  const onMouseEnter = (review) => {
-    props.setReview(review)
-    if (review) props.setShowReview(true)
+  const onMouseEnter = (text, name) => {
+    props.setReview({text: text, name: name})
+    if (text && name) props.setShowReview(true)
   }
 
   const submittedBooks = ({ index, style }) => (
-    <h3 style={style} key={index} onMouseEnter={() => onMouseEnter(props.books[index].review)} onMouseLeave={() => props.setShowReview(false)}>{props.books[index].name}</h3>
+    <div style={style}>
+      <h3 style={{color: props.books[index].color}} key={index} onMouseEnter={() => onMouseEnter(props.books[index].review, props.books[index].user)} onMouseLeave={() => props.setShowReview(false)}>{props.books[index].name}</h3>
+    </div>
   );
 
   return (props.congrats ?
@@ -38,7 +40,7 @@ export default function Description( props ) {
         >
           {submittedBooks}
         </List>
-      ) : (props.books.map((book, index) => <h3 key={index} onMouseEnter={() => onMouseEnter(book.review)} onMouseLeave={() => props.setShowReview(false)}>{book.name}</h3>))}
+      ) : (props.books.map((book, index) => <h3 style={{color: props.books[index].color}} key={index} onMouseEnter={() => onMouseEnter(props.books[index].review, props.books[index].user)} onMouseLeave={() => props.setShowReview(false)}>{book.name}</h3>))}
     </div>
     <h2> We Recommend: </h2>
     <h3> {props.firstbookrec} </h3>
