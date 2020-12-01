@@ -3,4 +3,5 @@ class Board < ApplicationRecord
 
   has_many :board_tiles
   has_many :player_badges
+  has_many :results
 end

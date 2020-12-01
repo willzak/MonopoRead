@@ -1,3 +1,7 @@
+.disabled-link {
+  pointer-events: none;
+}
+
 .chance {
   display: flex;
   flex-direction: column;

@@ -43,10 +43,11 @@ export default function Square(props) {
     setSubmit(false); 
     return props.players.map((player, index) => {
       if (props.pos === player.player.position) {
-        if (props.currentPlayer === index && props.tile) {
+        if (!props.game.ended_at && props.currentPlayer === index && props.tile) {
+          if (player.player.done) setSubmit(true)
           axios.get(`/api/boards/${props.board}/players/${player.player.id}/open_tile/${props.tile.board_tile_id}`)
           .then((response) => {
-            if (response.data) setSubmit(true); 
+            setSubmit(response.data); 
           })
         }  
         return <Token key={player.player.id} color={player.color.hexcode} />
@@ -58,9 +59,7 @@ export default function Square(props) {
   useEffect(() => {
     setActive(activePlayers())
     for (const player of props.players) {
-      if (props.pos === player.player.position && player.player.done) {
-        props.landTile(props.currentPlayer, props.tile)
-      }
+      if (!props.game.ended_at && props.pos === player.player.position && player.player.done) props.landTile(props.currentPlayer, props.tile)
     }
   }, [props.players, props.tile, props.currentPlayer])
   

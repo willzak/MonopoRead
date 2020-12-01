@@ -5,15 +5,18 @@ import Roll from "./dice";
 import './sideBar.css';
 
 export default function SideBar(props) {
-  const [playerStats, setPlayerStats] = useState([])
   const [disabled, setDisabled] = useState(false)
+  const [ended, setEnded] = useState(false)
 
   useEffect(() => {
     if (props.board !== 0) {
       axios.get(`/api/boards/${props.board}/player_stats`)
       .then((response) => {
-        // handle success
-        setPlayerStats(response.data.map(player => {
+        let winner = false;
+        const newPlayerStats = response.data.map(player => {
+          if (props.game.win_requirement === 'Points' && player.points >= props.game.win_points) {
+            winner = player.player.id;
+          }
           return {
             player: player,
             id: player.player.id,
@@ -23,16 +26,23 @@ export default function SideBar(props) {
             points: player.points,
             last_play: player.player.updated_at
           }
-        }));
+        })
+        props.setPlayerStats(newPlayerStats);
+        if (winner) setEnded({winner, newPlayerStats});
       })
     }
   }, [props.board, props.players])
 
   useEffect(() => {
+    if (ended && !props.game.ended_at) props.endBoard(ended.winner, ended.newPlayerStats)
+  }, [ended])
+
+  useEffect(() => {
     if (props.players[props.currentPlayer]) {
       axios.get(`/api/boards/${props.board}/players/${props.players[props.currentPlayer].player.id}/open_tile`)
       .then((response) => {
-        setDisabled(response.data);
+        if (props.game.ended_at) setDisabled(true)
+        else setDisabled(response.data);
       })
     }
   }, [props.players, props.currentPlayer])
@@ -40,7 +50,7 @@ export default function SideBar(props) {
   const playerData = function() {
     const now = new Date();
 
-    return playerStats.map((player, index) => {
+    return props.playerStats.map((player, index) => {
       const then = new Date(player.last_play);
       let last_move = 0;
       if (Math.round((now - then)/(1000*60*60*24)) < 2) last_move = `${Math.round((now - then)/(1000*60*60))} hour${Math.round((now - then)/(1000*60*60)) === 1 ? '' : 's'} ago`

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom";
 import axios from 'axios'
+import { useHistory } from "react-router-dom";
+import "./Home.css"
+import Button from "@material-ui/core/Button"
 
 export default function Home(props) {
-  const [games, setGames] = useState([])
-  const [joinableGames, setjoinableGames] = useState([])
+  const history = useHistory()
 
   useEffect(() => {
     props.setGame(0)
@@ -12,41 +14,84 @@ export default function Home(props) {
 
   useEffect(() => {
     if (props.user !== 0) {
-      axios.get(`/api/users/${props.user}/games`)
+      axios.get(`/api/users/${props.user.id}/playable_games`)
       .then((response) => {
-        setGames(response.data)
-        return axios.get(`/api/users/${props.user}/joinable_games`)
+        props.setGames(response.data)
+        return axios.get(`/api/users/${props.user.id}/joinable_games`)
       })
       .then((response) => {
-        setjoinableGames(response.data)
+        props.setJoinableGames(response.data)
+        return axios.get(`/api/users/${props.user.id}/ended_games`)
+      })
+      .then((response) => {
+        props.setEndedGames(response.data)
       })
     }
   }, [props.user, props.game]);
 
   return (
-    <div>
-      <h1> Home Page </h1>
-        <h2>Play Game:</h2>
-        {games.length === 0 && <h3>You have joined no games.</h3>}
-      <Link to={`/board`}>
-        {games.map((game, index) => {
-          return <h3 onClick={() => props.setGame(game.id)} key={index}>{game.name}</h3>
-        })}
-      </Link> 
-        <h2>Join Game:</h2>
-        {joinableGames.length === 0 && <h3>There are no games to join.</h3>}
-      <Link to={`/game/join`}>
-        {joinableGames.map((game, index) => {
-          return <h3 onClick={() => props.setGame(game.id)} key={index}>{game.name}</h3>
-        })}
-      </Link> 
-      <Link to={`/game`}>
-        <h2>Create Game</h2>
-      </Link>
-        <h2>Change User</h2>
+    <div className="home-page">
+
+      <div className="user-info">
+        <div>
+          <h2>{props.user ? `Hi ${props.user.name}` : 'Not logged in'}</h2>
+        </div>
+        <div>
+          <Button variant= "outlined" style={{ fontSize: '1em', "font-weight": 'bolder' }} onClick={props.logout}>Logout</Button>
+        </div>
+      </div>
+
+      <div className="users">
         {props.users.map((user, index) => {
-          return <h3 style={{width: '100px', border: (props.user === user.id) ? '1px solid black' : 'none'}} onClick={() => props.setUser(user.id)} key={index}>{user.name}</h3>
+          return <h3 style={{width: '100px', border: (props.user.id === user.id) ? '1px solid black' : 'none'}} onClick={() => props.login(user.email, 'password')} key={index}>{user.name}</h3>
         })}
+      </div>
+
+      <div className="game-options">
+
+        {props.user ? (
+          <Link to={`/game`}>
+            <div className= "create-game">
+              <h2>CREATE</h2>
+              <img src="Community_Chest.png" alt="treasure chest" className="community-chest" />
+              <h2>GAME</h2>
+            </div>
+          </Link>
+        ) : null}
+
+          <div className="game-card">
+            <h2 className="card-header-play">PLAY GAME</h2>
+            {props.games.length === 0 && <h3>You have no playable games.</h3>}
+            <div className="card-body">
+              {props.games.map((game, index) => {
+                return <div><Button variant="outlined"  style={{ fontSize: '1em', "font-weight": 'bolder' }} onClick={() => props.playGame(game, history)} key={index}>{game.name}</Button></div>
+              })}
+            </div>
+          </div>
+
+          <div className="game-card">
+            <h2 className="card-header-view">VIEW RESULTS</h2>
+              {props.endedGames.length === 0 && <h3>You haven't finished any games.</h3>}
+            <div className="card-body">
+              {props.endedGames.map((game, index) => {
+              return <div><Button variant="outlined"  style={{ fontSize: '1em', "font-weight": 'bolder' }} onClick={() => props.playGame(game, history)} key={index}>{game.name}</Button></div>
+              })}
+            </div>
+          </div>
+            
+          <div className="game-card">
+            <h2 className="card-header-join">JOIN GAME</h2>
+              {props.joinableGames.length === 0 && <h3>There are no games to join.</h3>}
+            <div className="card-body">
+              <Link to={`/game/join`}>
+                {props.joinableGames.map((game, index) => {
+                return <div><Button variant="outlined"  style={{ fontSize: '1em', "font-weight": 'bolder' }} onClick={() => props.setGame(game)} key={index}>{game.name}</Button></div>
+                })}
+              </Link>
+            </div>
+          </div>
+
+        </div>
     </div>
   )
 }

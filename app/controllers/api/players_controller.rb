@@ -17,6 +17,8 @@ class Api::PlayersController < ApplicationController
     @player = Player.new(player_params)
 
     if @player.save
+      @player_info = { player: @player, color: Color.find(@player[:color_id]), user: User.find(@player[:user_id]) }
+      ActionCable.server.broadcast("game#{@player[:game_id]}_channel", { message: 'Player joined', player: @player_info})
       render :json => @player
     else
       render :json => {
@@ -30,9 +32,9 @@ class Api::PlayersController < ApplicationController
 
     if @player.update(player_params)
       if !params[:score]
-        ActionCable.server.broadcast('channel', { message: 'Player moved', player: @player})
+        ActionCable.server.broadcast("game#{@player[:game_id]}_channel", { message: 'Player moved', player: @player})
       else
-        ActionCable.server.broadcast('channel', { message: 'Player passed go', player: @player})
+        ActionCable.server.broadcast("game#{@player[:game_id]}_channel", { message: 'Player passed go', player: @player})
       end
       render :json => @player
     else
@@ -94,7 +96,7 @@ class Api::PlayersController < ApplicationController
     else
       @player_tile.update(book: @book, ended_at: Time.new)  
     end
-    ActionCable.server.broadcast('channel', { message: 'Book submitted'})
+    ActionCable.server.broadcast("game#{@player[:game_id]}_channel", { message: 'Book submitted'})
     render :json => {
       player_tile: @player_tile,
       book: @book
@@ -103,12 +105,20 @@ class Api::PlayersController < ApplicationController
 
   def open_tile?
     @player_tile = PlayerTile.where(player_id: params[:player_id], board_tile_id: params[:board_tile_id], ended_at: nil).first
+
     render :json => @player_tile ? true : false
   end
 
   def any_open_tile?
     @player_tile = PlayerTile.where(player_id: params[:player_id], ended_at: nil).first
+
     render :json => @player_tile ? true : false
+  end
+
+  def result
+    @result = Result.where(board_id: params[:board_id], player_id: params[:player_id]).first
+
+    render :json => @result
   end
 
   private

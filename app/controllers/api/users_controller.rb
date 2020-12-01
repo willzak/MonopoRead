@@ -44,15 +44,23 @@ class Api::UsersController < ApplicationController
     }
   end
 
-  def games
-    @games = User.find(params[:user_id]).players.all.map { |player| Game.find(player[:game_id]) }
+  def playable_games
+    @joined_games = Player.where(user_id: params[:user_id]).pluck(:game_id)
+    @games = Game.where(id: @joined_games, ended_at: nil)
 
     render :json => @games
   end
 
   def joinable_games
     @joined_games = Player.where(user_id: params[:user_id]).pluck(:game_id)
-    @games = Game.where.not(id: @joined_games)
+    @games = Game.where.not(id: @joined_games).where(ended_at: nil)
+
+    render :json => @games
+  end
+
+  def ended_games
+    @joined_games = Player.where(user_id: params[:user_id]).pluck(:game_id)
+    @games = Game.where.not(ended_at: nil).where(id: @joined_games)
 
     render :json => @games
   end

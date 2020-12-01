@@ -1,14 +1,22 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 import ActionCable from 'actioncable'
+import Cookies from 'universal-cookie';
 
 export default function useApplicationData() {
-  const [user, setUser] = useState(0)
+  const cookies = new Cookies();
+
   const [users, setUsers] = useState([])
+  const [user, setUser] = useState(0)
+  const [cable, setCable] = useState(ActionCable.createConsumer(`${process.env.REACT_APP_WEBSOCKET_URL}?token=${cookies.get('user_id')}`))
+  const [games, setGames] = useState([])
+  const [endedGames, setEndedGames] = useState([])
+  const [joinableGames, setJoinableGames] = useState([])
   const [game, setGame] = useState(0)
   const [board, setBoard] = useState(0)
   const [players, setPlayers] = useState([])
   const [currentPlayer, setCurrentPlayer] = useState(0)
+  const [playerStats, setPlayerStats] = useState([])
   const [tiles, setTiles] = useState([])
   const [chance, setChance] =useState(0)
   const [chanceUsed, setChanceUsed] = useState(-1)
@@ -20,29 +28,169 @@ export default function useApplicationData() {
   const [prevOccupied, setPrevOccupied] = useState([])
   const [currentOccupied, setCurrentOccupied] = useState(0)
 
-  const updatePlayerScore = function(update) {
-    let player = -1
-    for (let i = 0; i < players.length; i++) if (players[i].player.id === update.player.id) player = i
+  const updateGames = function(game) {
+    if (game.user_id === user) {
+      setGames((current) => {
+        return [ ...current, game ]
+      })
+    }
+    else {
+      setJoinableGames((current) => {
+        return [ ...current, game ]
+      })
+    }
+  }
 
-    if (player === -1) return
+  const addPlayer = function(player) {
+    setPlayers((current) => {
+      return [ ...current, player ]
+    })
+  }
+
+  const updatePlayerScore = function(player) {
+    let index = -1
+    for (let i = 0; i < players.length; i++) if (players[i].player.id === player.id) index = i
+    if (index === -1) return
 
     setPlayers((current) => {
       const newPlayers = [...current]
-      newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, score: update.player.score } }
+      newPlayers[index] = {...newPlayers[index], player: {...newPlayers[index].player, score: player.score } }
       return newPlayers
     })
   }
 
-  const updatePlayerPosition = function(update) {
-    let player = -1
-    for (let i = 0; i < players.length; i++) if (update.player.id !== players[currentPlayer].player.id && players[i].player.id === update.player.id) player = i
-
-    if (player === -1) return
+  const updatePlayerPosition = function(player) {
+    if (player.id === players[currentPlayer].player.id) return
+    let index = -1
+    for (let i = 0; i < players.length; i++) if (players[i].player.id === player.id) index = i
+    if (index === -1) return
       
     setPlayers((current) => {
       const newPlayers = [...current]
-      newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: update.player.position } }
+      newPlayers[index] = {...newPlayers[index], player: {...newPlayers[index].player, position: player.position } }
       return newPlayers
+    })
+  }
+
+  const login = function(email, password) {
+    axios.post('/login', { email, password })
+    .then((response) => {
+      cookies.set('user_id', response.data.auth_token, { path: '/' });
+      setCable(ActionCable.createConsumer(`${process.env.REACT_APP_WEBSOCKET_URL}?token=${response.data.auth_token}`))
+      setUser(response.data.user)
+    })
+  }
+
+  const logout = function() {
+    cookies.set('user_id', '', { path: '/' });
+    setGames([])
+    setJoinableGames([])
+    setGame(0)
+    setUser(0)
+  }
+
+  const createGame = function(game, player, history) {
+    axios.post('/api/create_game', { user_id: user.id, name: game.name, win_requirement: game.win_requirement, win_points: game.win_points, color_id: player.color})
+      .then((response) => {
+        setGame(response.data.game)
+        setBoard(response.data.board.id)
+        setPlayers([response.data.player])
+        setTiles(response.data.board_tiles.map(tile => {
+          return {
+            tile: tile,
+            id: tile.tile.id,
+            board_tile_id: tile.board_tile.id,
+            name: tile.tile.name,
+            colour: tile.color.hexcode,
+            description: tile.tile.description,
+            books: tile.books.filter(b => !Array.isArray(b.book)).map(b => {
+              return { name: b.book.name, review: b.review.review_text } 
+            }),
+            recommendation: tile.recommendations.map(rec => rec.book.name)
+          }
+        }))
+        setPlayerStats(response.data.player_stats.map(player => {
+          return {
+            player: player,
+            id: player.player.id,
+            color: player.color.hexcode,
+            name: player.user.name,
+            books: player.books,
+            points: player.points,
+            last_play: player.player.updated_at
+          }
+        }))
+        history.push('/board')
+      })
+  }
+
+  const joinGame = function(game, player, history) {
+    axios.post('/api/join_game', { game_id: game.id, user_id: user.id, color_id: player.color_id })
+      .then((response) => {
+        setGame(response.data.game)
+        setBoard(response.data.board.id)
+        setPlayers(response.data.players)
+        setTiles(response.data.board_tiles.map(tile => {
+          return {
+            tile: tile,
+            id: tile.tile.id,
+            board_tile_id: tile.board_tile.id,
+            name: tile.tile.name,
+            colour: tile.color.hexcode,
+            description: tile.tile.description,
+            books: tile.books.filter(b => !Array.isArray(b.book)).map(b => {
+              return { name: b.book.name, review: b.review.review_text } 
+            }),
+            recommendation: tile.recommendations.map(rec => rec.book.name)
+          }
+        }))
+        setPlayerStats(response.data.player_stats.map(player => {
+          return {
+            player: player,
+            id: player.player.id,
+            color: player.color.hexcode,
+            name: player.user.name,
+            books: player.books,
+            points: player.points,
+            last_play: player.player.updated_at
+          }
+        }))
+        history.push('/board')
+      })
+  }
+
+  const playGame = function(game, history) {
+    axios.post('/api/play_game', { user_id: user.id, game_id: game.id })
+    .then((response) => {
+      setGame(response.data.game)
+      setBoard(response.data.board.id)
+      setPlayers(response.data.players)
+      setTiles(response.data.board_tiles.map(tile => {
+        return {
+          tile: tile,
+          id: tile.tile.id,
+          board_tile_id: tile.board_tile.id,
+          name: tile.tile.name,
+          colour: tile.color.hexcode,
+          description: tile.tile.description,
+          books: tile.books.filter(b => !Array.isArray(b.book)).map(b => {
+            return { name: b.book.name, review: b.review.review_text } 
+          }),
+          recommendation: tile.recommendations.map(rec => rec.book.name)
+        }
+      }))
+      setPlayerStats(response.data.player_stats.map(player => {
+        return {
+          player: player,
+          id: player.player.id,
+          color: player.color.hexcode,
+          name: player.user.name,
+          books: player.books,
+          points: player.points,
+          last_play: player.player.updated_at
+        }
+      }))
+      history.push('/board')
     })
   }
 
@@ -66,27 +214,53 @@ export default function useApplicationData() {
     })
   }
 
-  const getCurrentBoard = function(game) {
-    return axios.get(`/api/games/${game}/current_board`)
-    .then((response) => {
-      if (!response.data) return axios.post(`/api/boards`, {game_id: game})
-      return response
-    })
-    .then((response) => {
-      setBoard(response.data.id);
-      getTiles(response.data.id);
-      return axios.get(`/api/boards/${response.data.id}/players`)
-    })
-    .then((response) => {
-      for (let i = 0; i < response.data.length; i++) if (response.data[i].player.user_id === user) setCurrentPlayer(i)
-      setPlayers(response.data);
-      setPlayersInitialized(1)
-    })
+  const endGame = function(endedGame) {
+    if (game && !game.ended_at) {
+      setGame(current => {
+        return {...current, ended_at : new Date() }
+      })
+    }
+    else {
+      let index = -1
+      games.forEach((game, i) => {
+        if (game.id === endedGame.id) index = i
+      })
+      if (index !== -1) {
+        const newGames = [...games]
+        newGames.splice(index, 1)
+        setGames(newGames)
+        setEndedGames([...endedGames, endedGame])
+      }
+      else {
+        joinableGames.forEach((game, i) => {
+          if (game.id === endedGame.id) index = i
+        })
+        if (index !== -1) {
+          const newGames = [...joinableGames]
+          newGames.splice(index, 1)
+          setJoinableGames(newGames)
+        }
+      }
+    }
+  }
+
+  const endBoard = function(winner, playerStats) {
+    const now = new Date()
+    axios.put(`/api/boards/${board}`, { ended_at: now })
+      .then(() => {
+        return axios.post(`/api/boards/${board}/results`, { winner, playerStats })
+      })
+      .then(() => {
+        setGame(current => {
+          return {...current, ended_at : now }
+        })
+        axios.put(`/api/games/${game.id}`, { ended_at: now })
+      })
   }
 
   const rollDice = function(number, player) {
     let ran = 0;
-    axios.put(`/api/games/${game}/players/${players[player].player.id}`, { final_position: ((players[player].player.position + number) % 24), moving: true })
+    axios.put(`/api/games/${game.id}/players/${players[player].player.id}`, { final_position: ((players[player].player.position + number) % 24), moving: true })
 
     const interval = setInterval(() => {
       ran++;
@@ -95,7 +269,7 @@ export default function useApplicationData() {
         const done = (ran === number)
         const newPlayers = [...current]
         newPlayers[player] = {...newPlayers[player], player: {...newPlayers[player].player, position: ((newPlayers[player].player.position + 1) % 24), moving: !done, done: done } }
-        axios.put(`/api/games/${game}/players/${newPlayers[player].player.id}`, { position: newPlayers[player].player.position, moving: !done })
+        axios.put(`/api/games/${game.id}/players/${newPlayers[player].player.id}`, { position: newPlayers[player].player.position, moving: !done })
         return newPlayers
       })
 
@@ -108,7 +282,7 @@ export default function useApplicationData() {
   }
 
   const passGo = function(player) {
-    axios.put(`/api/games/${game}/players/${players[player].player.id}`, { score: players[player].player.score + 1 })
+    axios.put(`/api/games/${game.id}/players/${players[player].player.id}`, { score: players[player].player.score + 1 })
       
     setPlayers((current) => {
       const newPlayers = [...current]
@@ -118,7 +292,7 @@ export default function useApplicationData() {
   }
 
   const landTile = function(player, tile) {
-    axios.post(`/api/games/${game}/players/${players[player].player.id}/player_tiles`, { board_tile_id: tile.board_tile_id })
+    axios.post(`/api/games/${game.id}/players/${players[player].player.id}/player_tiles`, { board_tile_id: tile.board_tile_id })
     .then(() => {
       setPlayers((current) => {
         const newPlayers = [...current]
@@ -149,29 +323,41 @@ export default function useApplicationData() {
   }
 
   useEffect(() => {
-    const cable = ActionCable.createConsumer(process.env.REACT_APP_WEBSOCKET_URL);
-    cable.subscriptions.create("ApplicationCable::Channel", {
-      received: function (received_data) {
-        setUpdate(received_data)
-      }
-    })
     axios.get(`/api/users`)
     .then((response) => {
-      setUser(response.data[0].id)
       setUsers(response.data)
     })
+    if (cookies.get('user_id')) {
+      axios.get(`/logged_in`, { headers: { Authorization: `${cookies.get('user_id')}` } })
+      .then((response) => {
+        setUser(response.data)
+      })
+      .catch(() => { setUser(0) })
+    }
   }, []);
 
   useEffect(() => {
+    if (!user) return
+    let channel
     if (game !== 0) {
-      getCurrentBoard(game)
+      channel = cable.subscriptions.create(
+        { channel: "ApplicationCable::GameChannel", game_id: game.id },
+        { received: (data) => setUpdate(data) })
     }
     else {
+      channel = cable.subscriptions.create(
+        { channel: "ApplicationCable::Channel" },
+        { received: (data) => setUpdate(data) })
       setBoard(0)
       setPlayers([])
       setTiles([])
-    } 
-  }, [game])
+    }
+    return () => channel.unsubscribe()
+  }, [game, user])
+
+  useEffect(() => {
+    if (players.length > 0) for (let i = 0; i < players.length; i++) if (players[i].player.user_id === user.id) setCurrentPlayer(i)
+  }, [players, user])
 
   useEffect(() => {
     if (playersInitialized !== 0) {
@@ -183,8 +369,11 @@ export default function useApplicationData() {
   }, [playersInitialized])
 
   useEffect(() => {
-    if (update.message === 'Player moved' && update.player.game_id === game && update.player.position !== players[currentPlayer].player.position) updatePlayerPosition(update)
-    if (update.message === 'Player passed go') updatePlayerScore(update)
+    if (update.message === 'Game created') updateGames(update.game)
+    if (update.message === 'Game ended') endGame(update.game)
+    if (update.message === 'Player joined') addPlayer(update.player)
+    if (update.message === 'Player moved') updatePlayerPosition(update.player)
+    if (update.message === 'Player passed go') updatePlayerScore(update.player)
     if (update.message === 'Book submitted') getTiles(board)
   }, [update])
 
@@ -223,19 +412,28 @@ export default function useApplicationData() {
   }, [occupied, prevOccupied])
 
   return {
+    cookies, users, setUsers,
     user, setUser,
-    users, setUsers,
+    games, setGames,
+    endedGames, setEndedGames,
+    joinableGames, setJoinableGames,
     game, setGame,
     board, setBoard,
     players, setPlayers,
     currentPlayer, setCurrentPlayer,
+    playerStats, setPlayerStats,
     tiles, setTiles,
     chance, setChance,
     chanceUsed, setChanceUsed,
     showReview, setShowReview,
     review, setReview,
+<<<<<<< HEAD
     currentOccupied, setCurrentOccupied,
     getCurrentBoard,
+=======
+    createGame, joinGame, playGame,
+    login, logout, endBoard,
+>>>>>>> master
     rollDice, passGo, landTile, saveBook, transport
   }
 }
