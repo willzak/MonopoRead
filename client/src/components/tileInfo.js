@@ -15,6 +15,7 @@ export default function TileInfo( {data, submit, players, currentPlayer, board, 
   const [showForm, setShowForm] = useState(false)
   const [showInfo, setShowInfo] = useState(true)
   const [showButton, setShowButton] = useState(false)
+  const [congrats, setCongrats] = useState(false)
   
   useEffect(() => {
     setShowButton(submit)
@@ -38,6 +39,7 @@ export default function TileInfo( {data, submit, players, currentPlayer, board, 
         </div>
         <div className= "individual-tile-body">
         { showInfo ? <Description
+          congrats={congrats}
           setReview = {setReview}
           setShowReview = {setShowReview}
           description = {tile.description} 
@@ -47,7 +49,7 @@ export default function TileInfo( {data, submit, players, currentPlayer, board, 
           thirdbookrec = {tile.recommendation[2]} 
           /> : null }
         { showButton ? <button onClick = {onClick}>Completed!</button> : null }
-        { showForm ? <Form saveBook={saveBook} tile={tile} currentPlayer={currentPlayer} players={players} board={board}/> : null }
+        { showForm ? <Form setShowInfo={setShowInfo} setCongrats={setCongrats} setShowForm={setShowForm} saveBook={saveBook} tile={tile} currentPlayer={currentPlayer} players={players} board={board}/> : null }
         </div>
       </div>
     )

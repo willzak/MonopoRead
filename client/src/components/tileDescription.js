@@ -13,9 +13,12 @@ export default function Description( props ) {
     <h3 style={style} key={index} onMouseEnter={() => onMouseEnter(props.books[index].review)} onMouseLeave={() => props.setShowReview(false)}>{props.books[index].name}</h3>
   );
 
-
-  return (
-    <div>
+  return (props.congrats ?
+    (<div>
+      <h3>Congratulations! You read:</h3>
+      <h3>{props.congrats}</h3>
+    </div>) :
+    (<div>
     <h3> {props.description}</h3>
     <div className="submitted-books">
       <h2 style={{marginBottom: '0'}}> {props.books[0] ? "What others have read:" : ''}</h2>
@@ -34,6 +37,6 @@ export default function Description( props ) {
     <h3> {props.firstbookrec} </h3>
     <h3> {props.secondbookrec} </h3>
     <h3> {props.thirdbookrec} </h3>
-    </div>
+    </div>)
   )
 }
