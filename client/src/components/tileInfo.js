@@ -31,7 +31,7 @@ export default function TileInfo( {data, submit, players, currentPlayer, board, 
   if (tile) {
 
     tileData = (
-      <div className="indvidual-tile" >
+      <div className="individual-tile" >
         <div className="individual-tile-header" style={ {background: `${tile.colour}`} } >
         <h1> {tile.name}</h1>
         <Link to="/board" ><CancelIcon></CancelIcon> </Link>

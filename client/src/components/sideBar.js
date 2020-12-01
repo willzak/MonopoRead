@@ -80,6 +80,10 @@ export default function SideBar(props) {
     <div className="side-bar">
       {playerData()}
       <Roll disabled={disabled} currentPlayer={props.currentPlayer} rollDice={props.rollDice} players={props.players} board={props.board} />
+      {props.showReview &&
+      <div className="review-popup">
+        {props.review}
+      </div> }
     </div>
   )
 }
