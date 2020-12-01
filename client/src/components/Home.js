@@ -37,7 +37,7 @@ export default function Home(props) {
           <h2>{props.user ? `Hi ${props.user.name}` : 'Not logged in'}</h2>
         </div>
         <div>
-          <Button variant= "outlined" style={{ fontSize: '1em', "font-weight": 'bolder' }} onClick={props.logout}>Logout</Button>
+          <Button variant= "outlined" style={{ fontSize: '1em', fontWeight: 'bolder' }} onClick={props.logout}>Logout</Button>
         </div>
       </div>
 
@@ -64,7 +64,7 @@ export default function Home(props) {
             {props.games.length === 0 && <h3>You have no playable games.</h3>}
             <div className="card-body">
               {props.games.map((game, index) => {
-                return <div><Button variant="outlined"  style={{ fontSize: '1em', "font-weight": 'bolder' }} onClick={() => props.playGame(game, history)} key={index}>{game.name}</Button></div>
+                return <div key={index}><Button variant="outlined"  style={{ fontSize: '1em', fontWeight: 'bolder' }} onClick={() => props.playGame(game, history)} key={index}>{game.name}</Button></div>
               })}
             </div>
           </div>
@@ -74,7 +74,7 @@ export default function Home(props) {
               {props.endedGames.length === 0 && <h3>You haven't finished any games.</h3>}
             <div className="card-body">
               {props.endedGames.map((game, index) => {
-              return <div><Button variant="outlined"  style={{ fontSize: '1em', "font-weight": 'bolder' }} onClick={() => props.playGame(game, history)} key={index}>{game.name}</Button></div>
+              return <div key={index}><Button variant="outlined"  style={{ fontSize: '1em', fontWeight: 'bolder' }} onClick={() => props.playGame(game, history)} key={index}>{game.name}</Button></div>
               })}
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function Home(props) {
             <div className="card-body">
               <Link to={`/game/join`}>
                 {props.joinableGames.map((game, index) => {
-                return <div><Button variant="outlined"  style={{ fontSize: '1em', "font-weight": 'bolder' }} onClick={() => props.setGame(game)} key={index}>{game.name}</Button></div>
+                return <div key={index}><Button variant="outlined"  style={{ fontSize: '1em', fontWeight: 'bolder' }} onClick={() => props.setGame(game)} key={index}>{game.name}</Button></div>
                 })}
               </Link>
             </div>
