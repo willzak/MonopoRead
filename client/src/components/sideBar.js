@@ -42,10 +42,10 @@ export default function SideBar(props) {
 
   useEffect(() => {
     if (props.players[props.currentPlayer]) {
-      axios.get(`/api/boards/${props.board}/players/${props.players[props.currentPlayer].player.id}/open_tile`)
+      if (props.game.ended_at) setDisabled(true)
+      else axios.get(`/api/boards/${props.board}/players/${props.players[props.currentPlayer].player.id}/open_tile`)
       .then((response) => {
-        if (props.game.ended_at) setDisabled(true)
-        else setDisabled(response.data);
+        setDisabled(response.data);
       })
     }
   }, [props.players, props.currentPlayer])
@@ -82,7 +82,7 @@ export default function SideBar(props) {
     <div className="side-bar">
       {props.game.win_requirement === 'Points' && <h3>Points to Win: {props.game.win_points}</h3>}
       {playerData()}
-      <Roll disabled={disabled} currentPlayer={props.currentPlayer} rollDice={props.rollDice} players={props.players} board={props.board} />
+      <Roll disabled={disabled} setDisabled={setDisabled} currentPlayer={props.currentPlayer} rollDice={props.rollDice} players={props.players} board={props.board} />
       {props.showReview &&
         <div className="individual-card" >
           <div className="individual-congrats-header">
