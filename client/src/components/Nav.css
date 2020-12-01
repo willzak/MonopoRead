@@ -1,8 +1,8 @@
-
 .nav-bar {
   display: flex; 
   flex-direction: row; 
   align-items: center;
+  justify-content: space-between;
   width: 100%; 
   background-color: #D7BAAA;
 }
@@ -10,4 +10,18 @@
 .nav-icon {
   width: 90px;
   height: 90px; 
+}
+
+.nav-bar-left {
+  display: flex; 
+  flex-direction: row; 
+  align-items: center;
+  background-color: #D7BAAA;
+}
+
+.nav-bar-right {
+  display: flex; 
+  flex-direction: row; 
+  align-items: center; 
+  background-color: #D7BAAA;
 }
