@@ -54,6 +54,7 @@ class Api::UsersController < ApplicationController
   def joinable_games
     @joined_games = Player.where(user_id: params[:user_id]).pluck(:game_id)
     @games = Game.where.not(id: @joined_games).where(ended_at: nil)
+    @games = @games.select { |game| game.players.count < 4 }
 
     render :json => @games
   end

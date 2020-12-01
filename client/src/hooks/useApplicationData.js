@@ -244,6 +244,18 @@ export default function useApplicationData() {
     }
   }
 
+  const fullGame = function(fullGame) {
+    let index = -1
+    joinableGames.forEach((game, i) => {
+      if (game.id === fullGame.id) index = i
+    })
+    if (index !== -1) {
+      const newGames = [...joinableGames]
+      newGames.splice(index, 1)
+      setJoinableGames(newGames)
+    }
+  }
+
   const endBoard = function(winner, playerStats) {
     const now = new Date()
     axios.put(`/api/boards/${board}`, { ended_at: now })
@@ -372,6 +384,7 @@ export default function useApplicationData() {
     if (update.message === 'Game created') updateGames(update.game)
     if (update.message === 'Game ended') endGame(update.game)
     if (update.message === 'Player joined') addPlayer(update.player)
+    if (update.message === 'Player joined - game full') fullGame(update.game)
     if (update.message === 'Player moved') updatePlayerPosition(update.player)
     if (update.message === 'Player passed go') updatePlayerScore(update.player)
     if (update.message === 'Book submitted') getTiles(board)

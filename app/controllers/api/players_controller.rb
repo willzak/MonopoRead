@@ -19,6 +19,9 @@ class Api::PlayersController < ApplicationController
     if @player.save
       @player_info = { player: @player, color: Color.find(@player[:color_id]), user: User.find(@player[:user_id]) }
       ActionCable.server.broadcast("game#{@player[:game_id]}_channel", { message: 'Player joined', player: @player_info})
+      if Game.find(@player[:game_id]).players.count >= 4
+        ActionCable.server.broadcast("channel", { message: 'Player joined - game full', game: @game})
+      end
       render :json => @player
     else
       render :json => {
