@@ -29,7 +29,7 @@ export default function App( props ) {
   return (
     <Router>
       <div>
-        <Nav />
+        <Nav user={user} login={login} logout={logout} />
           <Switch>
             <Route
               exact path="/"
@@ -43,8 +43,8 @@ export default function App( props ) {
               render={(props) => (
                 <Game {...props} game={game} board={board} players={players} tiles={tiles} chance={chance}
                 currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer} playerStats={playerStats} setPlayerStats={setPlayerStats}
-                review={review} setReview={setReview}
-                showReview={showReview} setShowReview={setShowReview} endBoard={endBoard} occupied={currentOccupied}
+                review={review} setReview={setReview} user={user} occupied={currentOccupied}
+                showReview={showReview} setShowReview={setShowReview} endBoard={endBoard} 
                 setChanceUsed={setChanceUsed} rollDice={rollDice} passGo={passGo} landTile={landTile} saveBook={saveBook} transport={transport} />
               )}
             />

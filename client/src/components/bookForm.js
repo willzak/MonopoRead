@@ -1,34 +1,23 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField'; 
 import LinearProgress from '@material-ui/core/LinearProgress';
-import "./bookForm.css"
-
-// styling the material-ui text field components  - can i do this in just css? - look into
-// import { makeStyles } from '@material-ui/core/styles';
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//       margin: theme.spacing(1),
-//       display: 'flex', 
-//       flexDirection: 'column', 
-//       alignItems: 'center',
-//     },
-// }));
-
+import "./bookForm.css";
+import Button from '@material-ui/core/Button'; 
 
 export default function Form( props ) {
   const [title, setTitle] = useState("")
   const [review, setReview] = useState("")
   const [loading, setLoading] = useState(false)
 
- const history =  useHistory ()
-  // const classes = useStyles();
-
   const clickHandler = () => {
     if (title) {
       setLoading(true)
       props.saveBook(props.currentPlayer, title, review, props.tile.board_tile_id)
-        .then ( () => {history.push("/board")})
+        .then (() => {
+          props.setCongrats(title)
+          props.setShowInfo(true)
+          props.setShowForm(false)
+        })
     }
   }
 
@@ -42,7 +31,7 @@ export default function Form( props ) {
         </form>
         <br />
         {loading && <LinearProgress />}
-        { !loading &&  <button onClick={clickHandler}>Submit!</button>}
+        { !loading &&  <Button variant="outlined" style={{ fontSize: '1em', fontWeight: 'bolder' }} onClick={clickHandler}>Submit</Button>}
     </div>
     )
 };

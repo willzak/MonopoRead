@@ -63,7 +63,9 @@ export default function GameNameForm( props ) {
 
   return (
     <div className= "form-page">
+
       <div className="game-name-form">
+
         <div>
           <img src = "Lightbulb_Icon.png" alt="lightbulb" className="lightbulb" />
           <hr />
@@ -72,27 +74,39 @@ export default function GameNameForm( props ) {
           <TextField id="standard-basic" label="Game Name" type="text"  name="title" value={gameName} onChange={(event) => setGameName(event.target.value)}/>
           <br/>
         </div>
-        <label htmlFor="player-color">Choose a Color: </label>
-          <select onChange={colorHandler} name="colors">
-            {colors.map ((color, index) =>{
-            return <option key={index}>{color.name}</option>
-            })}
-          </select>
+
+        <div className="game-options">
+          <div>
+            <label htmlFor="player-color">Choose a Color: </label>
+              <select onChange={colorHandler} name="colors">
+                {colors.map ((color, index) =>{
+                return <option key={index}>{color.name}</option>
+                })}
+              </select>
+            </div>
+          <Token color={color.hexcode} />
+        </div>
+
+
+        <div className="game-options"> 
         <label htmlFor="win">Game Ends: </label>
           <select onChange={winHandler} name="win">
             {winOptions()}
           </select>
+        </div>
+          
         {win === 'Points' && (
           <Fragment>
-          <label htmlFor="points">Points to Win: </label>
+            <label htmlFor="points">Points to Win: </label>
             <select onChange={pointsHandler} name="points">
-              {pointOptions(20)}
+                {pointOptions(20)}
             </select>
           </Fragment>
+        
         )}
         
-        <Token color={color.hexcode} />
-      <button onClick={submitHandler}>Submit</button>
+
+      <Button variant="outlined"  style={{ fontSize: '1em', fontWeight: 'bolder', margin: "10px" }} onClick={submitHandler}>Submit</Button>
     </div>
     </div>
   )

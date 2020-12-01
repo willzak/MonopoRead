@@ -427,13 +427,10 @@ export default function useApplicationData() {
     chanceUsed, setChanceUsed,
     showReview, setShowReview,
     review, setReview,
-<<<<<<< HEAD
     currentOccupied, setCurrentOccupied,
     getCurrentBoard,
-=======
     createGame, joinGame, playGame,
     login, logout, endBoard,
->>>>>>> master
     rollDice, passGo, landTile, saveBook, transport
   }
 }

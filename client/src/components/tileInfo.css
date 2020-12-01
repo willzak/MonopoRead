@@ -1,4 +1,4 @@
-.indvidual-tile {
+.individual-tile {
   margin: 50px;
   width: 70%;
   height: 350px;
@@ -21,4 +21,5 @@
 
 .individual-tile-body {
   margin-left: 10px; 
+  margin-right: 10px; 
 }

@@ -1,0 +1,29 @@
+.color-form-page {
+  width: 100%;
+  height: 100%;
+  display: flex; 
+  flex-direction: column; 
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.color-picker-form {
+  display: flex; 
+  flex-direction: column; 
+  justify-items: center;
+  justify-content: center;
+  align-items: center; 
+  border: solid; 
+  width: 400px; 
+  height: 560px; 
+  margin-top: 50px; 
+  background-color: white;
+  text-align: center; 
+}
+
+.train {
+  width: 185px;
+  height: 170px; 
+}

@@ -80,6 +80,13 @@ export default function SideBar(props) {
     <div className="side-bar">
       {playerData()}
       <Roll disabled={disabled} currentPlayer={props.currentPlayer} rollDice={props.rollDice} players={props.players} board={props.board} />
+      {props.showReview &&
+        <div className="individual-card" >
+          <div className="individual-congrats-header">
+            <h2 style={{fontSize: 20, margin: '0'}}>{props.user.name}'s Review</h2>
+          </div>
+          <p style={{fontSize: 16, padding: '5px'}}>{props.review}</p>
+        </div>}
     </div>
   )
 }
