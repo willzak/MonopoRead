@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import Token from "./token";
+import "./Player.css"; 
+import Button from "@material-ui/core/Button"
+
 
 export default function Player( props ) {
   const [colors, setColors] = useState([])
@@ -34,19 +37,25 @@ export default function Player( props ) {
   }
 
   return (
-    <div>
-      <h1> Player Form  </h1>
-      <h2> Game Name: {name}</h2>
-      <form>
-      <label htmlFor="player-color">Choose a Color: </label>
-        <select onChange={changeHandler} name="colors">
-          {colors.map ((color, index) =>{
-          return <option key={index}>{color.name}</option>
-          })}
-        </select>
-      </form>
-      <Token color={color.hexcode} />
-      <button onClick={clickHandler}> Submit </button>
+    <div className ="color-form-page">
+      <div>
+        <h2> Joining Game: {name}</h2>
+      </div>
+      
+      <div className="color-picker-form">
+        <img src ="Monopoly_Train.png" alt="train" className="train" />
+        <h1> Pick A Color  </h1>
+
+        <form>
+          <select onChange={changeHandler} name="colors">
+            {colors.map ((color, index) =>{
+            return <option key={index}>{color.name}</option>
+            })}
+          </select>
+        </form>
+        <Token color={color.hexcode} />
+        <Button  variant="outlined"  style={{ fontSize: '1em', "font-weight": 'bolder', margin: "10px" }} onClick={clickHandler}> Submit </Button>
+      </div>
     </div>
   )
 }
