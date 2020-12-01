@@ -6,7 +6,11 @@ import './dice.css'
 
 export default function Roll(props) {
   const [index, setIndex] = useState(props.user.id - 1)
-  const cheat = [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]
+  const cheat = [2, 4, 3, 4, 6, 5, 3, 5]
+  //2, submit, 4, don't take train, 3, chance, 4, pass go, don't submit (ends with 2-6 points)
+  //6, take train, 5, submit book, 3, pass go and submit same book as first player, 5, submit book and win (ends with 10 points)
+  //winning points can be 8-10
+  //users need to be id 1 and 5
 
   const roll = function(value, currentPlayer) {
     props.setDisabled(true)
