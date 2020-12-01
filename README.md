@@ -22,7 +22,6 @@ In the other terminal, `cd` into `client`. Run `npm install`. Rename the `.env.e
 - Axios
 - React-window
 - Universal-cookie
-- React-dice-roll
 - Material-ui/core
 - Material-ui/icons
 - React-dice-roll
