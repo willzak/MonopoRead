@@ -140,6 +140,9 @@ nicholsonR = Recommendation.create({ tile: fantasy, book: nicholson })
 moreon_garciaR = Recommendation.create({ tile: fantasy, book: moreon_garcia })
 
 marcello = User.create({ name: 'Marcello', email: 'marcello@email.com', password: 'password' })
+user2 = User.create({ name: 'User2', email: 'user2@email.com', password: 'password' })
+user3 = User.create({ name: 'User3', email: 'user3@email.com', password: 'password' })
+user4 = User.create({ name: 'User4', email: 'user4@email.com', password: 'password' })
 avvai = User.create({ name: 'Avvai', email: 'avvai@email.com', password: 'password' })
 will = User.create({ name: 'Will', email: 'will@email.com', password: 'password' })
 

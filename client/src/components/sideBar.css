@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 20vw;
+  width: 15vw;
   min-width: 250px;
   height: 80vh;
   padding: 0.5em;
@@ -16,8 +16,10 @@
 }
 
 .player-status {
-  padding: 5%;
-  margin: 5%;
+  width: 43%;
+  min-width: 190px;
+  padding: 2.5%;
+  margin: 0.5%;
   border: 2px solid;
   border-radius: 10px;
   color: black;

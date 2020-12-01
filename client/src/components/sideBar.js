@@ -60,7 +60,7 @@ export default function SideBar(props) {
       else last_move = `${Math.round((now - then)/(1000*60*60*24))} day${Math.round((now - then)/(1000*60*60*24)) === 1 ? '' : 's'} ago`
 
       return (
-        <div className="player-status" style={{borderColor: ((player.player.user.id === props.user.id) ? 'white' : 'black'), backgroundColor: player.color}} key={player.id}>
+        <div className="player-status" style={{marginBottom: (props.players.length > 3) ? '0.5%' : '5%', borderColor: ((player.player.user.id === props.user.id) ? 'white' : 'black'), backgroundColor: player.color}} key={player.id}>
           <div className="player-name">
             <strong>{player.name}</strong>
           </div>
@@ -78,10 +78,13 @@ export default function SideBar(props) {
       )
     })
   } 
+  
   return (
-    <div className="side-bar">
+    <div style={props.players.length > 3 ? {width: '23vw', minWidth: '450px'} : {}} className="side-bar">
       {props.game.win_requirement === 'Points' && <h3>Points to Win: {props.game.win_points}</h3>}
-      {playerData()}
+      <div style={props.players.length > 3 ? {display: 'flex', flexDirection: 'row', flexWrap: 'wrap'} : {}} className="player-statuses">
+        {playerData()}
+      </div>
       <Roll user={props.user} disabled={disabled} setDisabled={setDisabled} currentPlayer={props.currentPlayer} rollDice={props.rollDice} players={props.players} board={props.board} />
       {props.showReview &&
         <div className="individual-card" >
