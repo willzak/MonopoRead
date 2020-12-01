@@ -106,7 +106,7 @@ export default function GameNameForm( props ) {
         )}
         
 
-      <Button variant="outlined"  style={{ fontSize: '1em', "font-weight": 'bolder', margin: "10px" }} onClick={submitHandler}>Submit</Button>
+      <Button variant="outlined"  style={{ fontSize: '1em', fontWeight: 'bolder', margin: "10px" }} onClick={submitHandler}>Submit</Button>
     </div>
     </div>
   )

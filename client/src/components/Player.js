@@ -43,7 +43,7 @@ export default function Player( props ) {
       </div>
       
       <div className="color-picker-form">
-        <img src ="Monopoly_Train.png" alt="train" className="train" />
+        <img src ="../Monopoly_Train.png" alt="train" className="train" />
         <h1> Pick A Color  </h1>
 
         <form>
@@ -54,7 +54,7 @@ export default function Player( props ) {
           </select>
         </form>
         <Token color={color.hexcode} />
-        <Button  variant="outlined"  style={{ fontSize: '1em', "font-weight": 'bolder', margin: "10px" }} onClick={clickHandler}> Submit </Button>
+        <Button  variant="outlined"  style={{ fontSize: '1em', fontWeight: 'bolder', margin: "10px" }} onClick={clickHandler}> Submit </Button>
       </div>
     </div>
   )
