@@ -81,12 +81,13 @@ export default function useApplicationData() {
     })
   }
 
-  const logout = function() {
+  const logout = function(history) {
     cookies.set('user_id', '', { path: '/' });
     setGames([])
     setJoinableGames([])
     setGame(0)
     setUser(0)
+    history.push('/')
   }
 
   const createGame = function(game, player, history) {

@@ -1,9 +1,11 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 import Button from "@material-ui/core/Button"
 
 export default function Nav (props) {
+  const history =  useHistory ()
   return (
     <div className='nav-bar'>
       <div className="nav-bar-left">
@@ -18,7 +20,7 @@ export default function Nav (props) {
           <h2 style={{margin: '10px'}}>{props.user ? `Logged in as ${props.user.name}` : 'Not logged in'}</h2>
         </div>
         <div>
-          {props.user ? (<Button variant= "outlined" style={{ fontSize: '1em', fontWeight: 'bolder' }} onClick={props.logout}>Logout</Button>) : (
+          {props.user ? (<Button variant= "outlined" style={{ fontSize: '1em', fontWeight: 'bolder' }} onClick={() => props.logout(history)}>Logout</Button>) : (
             <Link to={`/login`}>
               <Button variant= "outlined" style={{ fontSize: '1em', fontWeight: 'bolder' }}>Login</Button>
             </Link>
