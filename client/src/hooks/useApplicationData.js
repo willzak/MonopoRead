@@ -212,7 +212,7 @@ export default function useApplicationData() {
         }
       }));
     })
-    axios.get(`/api/board/${board}/player_stats`)
+    axios.get(`/api/boards/${board}/player_stats`)
       .then((response) => {
         setPlayerStats(response.data.players.map(player => {
           return {

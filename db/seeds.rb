@@ -156,7 +156,7 @@ no_sales = Card.create({name: 'No Sales', description: 'Congratulations you just
 # published = Card.create({name: 'Published', description: 'Congratulations you just got published! It’s a hit!', effect: 'Points', outcome: 2 })
 
 game1 = Game.create({name: 'The Riveting Book Club', user: cassie})
-game2 = Game.create({name: 'Book Buzz.', user: cassie})
+game2 = Game.create({name: 'Book Buzz', user: cassie})
 game4 = Game.create({name: 'Books & Beyond', user: cassie, ended_at: '2020-12-02 00:51:49'})
 game5 = Game.create({name: 'Page Turners', user: cassie, ended_at: '2020-12-02 00:51:49'})
 game6 = Game.create({name: 'Wise Words', user: cassie})
