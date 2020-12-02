@@ -7,9 +7,9 @@
 .individual-card {
   margin: 12%;
   width: 70%;
-  height: 300px;
-  border: solid;
+  height: 375px;
   background-color: white;
+  border: solid;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

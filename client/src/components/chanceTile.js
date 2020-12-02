@@ -6,10 +6,9 @@ import './chance.css';
 
 export default function Chance(props) {
 
-  let type = "tile chance chance";
+  let type = "chance chance";
   let text = "icon chance-icon-";
   let label = "label label-";
-  let container = "chance-container";
   let shadow;
   let tokenHolder;
 
