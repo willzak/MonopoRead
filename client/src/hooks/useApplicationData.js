@@ -212,6 +212,20 @@ export default function useApplicationData() {
         }
       }));
     })
+    axios.get(`/api/board/${board}/player_stats`)
+      .then((response) => {
+        setPlayerStats(response.data.players.map(player => {
+          return {
+            player: player,
+            id: player.player.id,
+            color: player.color.hexcode,
+            name: player.user.name,
+            books: player.books,
+            points: player.points,
+            last_play: player.player.updated_at
+          }
+        }))
+      })
   }
 
   const endGame = function(endedGame) {
