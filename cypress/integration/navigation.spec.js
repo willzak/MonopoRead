@@ -11,8 +11,8 @@ describe("Navigation", () => {
     cy.get(".community-chest").click();
     cy.get('input[name=title]').type('New Game')
     cy.contains('Submit').click();
-    cy.get(".small-token").click({ force: true });
     cy.wait(4000)
+    cy.get(".small-token").click({ force: true });
 
     var genArr = Array.from({length:30},(v,k)=>k+1)
     cy.wrap(genArr).each(() => {
