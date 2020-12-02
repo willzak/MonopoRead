@@ -16,7 +16,7 @@ describe("Navigation", () => {
     cy.wait(4000)
     cy.get(".small-token").click({ force: true });
 
-    var genArr = Array.from({length:30},(v,k)=>k+1)
+    var genArr = Array.from({length:250},(v,k)=>k+1)
     cy.wrap(genArr).each(() => {
       cy.get(".dice").click();
       cy.wait(4000)
