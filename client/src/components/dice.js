@@ -15,7 +15,7 @@ export default function Roll(props) {
   }
   return(
     <div className="dice">
-      <Dice disabled={props.disabled} onRoll={(value) => roll(value, props.currentPlayer)} size={100} cheatValue={props.user.id === 2 ? 5 : cheat[index] % cheat.length} />
+      <Dice disabled={props.disabled} onRoll={(value) => roll(value, props.currentPlayer)} size={100} cheatValue={props.user.id === 4 ? 5 : props.user.id === 2 ? 2 : cheat[index] % cheat.length} />
     </div>
   )
 }

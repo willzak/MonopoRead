@@ -142,6 +142,7 @@ moreon_garciaR = Recommendation.create({ tile: fantasy, book: moreon_garcia })
 jake = User.create({ name: 'Jake', email: 'jake@email.com', password: 'password' })
 cassie = User.create({ name: 'Cassie', email: 'cassie@email.com', password: 'password' })
 rachel = User.create({ name: 'Rachel', email: 'rachel@email.com', password: 'password' })
+marco = User.create({ name: 'Marco', email: 'marco@email.com', password: 'password' })
 
 papercut = Card.create({name: 'Papercut', description: 'OW! You got a papercut and lost track of what page you are on.', effect: 'Points', outcome: -2 })
 spelling = Card.create({name: 'Spelling', description: 'Your latest book gets published! But it looks like there are a few spelling mistakes on the cover…', effect: 'Points', outcome: -2 })
@@ -156,11 +157,11 @@ no_sales = Card.create({name: 'No Sales', description: 'Congratulations you just
 
 game1 = Game.create({name: 'Game1', user: jake})
 game2 = Game.create({name: 'Game2', user: jake})
-game3 = Game.create({name: 'Real Game', user: jake})
-game4 = Game.create({name: 'Game4', user: jake, ended_at: '10/27/20'})
-game5 = Game.create({name: 'Game5', user: jake, ended_at: '10/27/20'})
+game4 = Game.create({name: 'Game4', user: jake, ended_at: '2020-12-02 00:51:49'})
+game5 = Game.create({name: 'Game5', user: jake, ended_at: '2020-12-02 00:51:49'})
 game6 = Game.create({name: 'Game6', user: cassie})
 game7 = Game.create({name: 'Game7', user: cassie})
+game3 = Game.create({name: 'Real Game', user: jake})
 
 player1 = Player.create({game: game1, user: jake, color: light_blue})
 player2 = Player.create({game: game2, user: jake, color: light_blue})

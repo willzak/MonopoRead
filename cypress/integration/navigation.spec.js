@@ -7,7 +7,10 @@ describe("Navigation", () => {
 
     cy.visit("/");
 
-    cy.get(".users").contains("User2").click();
+    cy.contains("Logout").click();
+    cy.contains("Login").click();
+    cy.contains(".users").contains("Marco").click();
+    cy.visit("/");
     cy.get(".community-chest").click();
     cy.get('input[name=title]').type('New Game')
     cy.contains('Submit').click();
