@@ -214,7 +214,7 @@ export default function useApplicationData() {
     })
     axios.get(`/api/boards/${board}/player_stats`)
       .then((response) => {
-        setPlayerStats(response.data.players.map(player => {
+        setPlayerStats(response.data.map(player => {
           return {
             player: player,
             id: player.player.id,

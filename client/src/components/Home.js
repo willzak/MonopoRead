@@ -22,6 +22,11 @@ export default function Home(props) {
         props.setEndedGames(response.data.ended_games)
       })
     }
+    else {
+      props.setGames([])
+      props.setJoinableGames([])
+      props.setEndedGames([])
+    }
   }, [props.user, props.game]);
 
   const joinedGames = ({ index, style }) => (

@@ -155,14 +155,50 @@ no_sales = Card.create({name: 'No Sales', description: 'Congratulations you just
 # reading_to_children = Card.create({name: 'Reading to Children', description: 'You spend the afternoon reading to children, very saintly of you!', effect: 'Points', outcome: 1 })
 # published = Card.create({name: 'Published', description: 'Congratulations you just got published! It’s a hit!', effect: 'Points', outcome: 2 })
 
-game1 = Game.create({name: 'The Riveting Book Club', user: cassie})
-game2 = Game.create({name: 'Book Buzz', user: cassie})
-game4 = Game.create({name: 'Books & Beyond', user: cassie, ended_at: '2020-12-02 00:51:49'})
-game5 = Game.create({name: 'Page Turners', user: cassie, ended_at: '2020-12-02 00:51:49'})
-game6 = Game.create({name: 'Wise Words', user: cassie})
-game7 = Game.create({name: 'Word Worms', user: cassie})
+riveting = Game.create({name: 'The Riveting Book Club', user: cassie})
+buzz = Game.create({name: 'Book Buzz', user: cassie})
+beyond = Game.create({name: 'Books & Beyond', user: cassie, win_requirement: 'Points', win_points: 5, ended_at: '2020-12-02 00:51:49'})
+turners = Game.create({name: 'Page Turners', user: cassie, win_requirement: 'Points', win_points: 5, ended_at: '2020-12-02 00:51:49'})
+wise = Game.create({name: 'Wise Words', user: cassie})
+worms = Game.create({name: 'Word Worms', user: cassie})
+bookmarked = Game.create({name: 'Bookmarked', user: cassie})
 
-player1 = Player.create({game: game1, user: jake, color: light_blue})
-player2 = Player.create({game: game2, user: jake, color: light_blue})
-player4 = Player.create({game: game4, user: jake, color: light_blue})
-player5 = Player.create({game: game5, user: jake, color: light_blue})
+cassie_riveting = Player.create({game: riveting, user: cassie, color: brown, score: 0, position: 0, moving: false, final_position: 0})
+cassie_buzz = Player.create({game: buzz, user: cassie, color: brown, score: 0, position: 0, moving: false, final_position: 0})
+cassie_beyond = Player.create({game: beyond, user: cassie, color: brown, score: 0, position: 0, moving: false, final_position: 0})
+cassie_turners = Player.create({game: turners, user: cassie, color: brown, score: 0, position: 0, moving: false, final_position: 0})
+cassie_wise = Player.create({game: wise, user: cassie, color: brown, score: 0, position: 0, moving: false, final_position: 0})
+cassie_worms = Player.create({game: worms, user: cassie, color: brown, score: 0, position: 0, moving: false, final_position: 0})
+cassie_bookmarked = Player.create({game: bookmarked, user: cassie, color: brown, score: 0, position: 0, moving: false, final_position: 0})
+
+jake_riveting = Player.create({game: riveting, user: jake, color: light_blue, score: 0, position: 0, moving: false, final_position: 0})
+jake_buzz = Player.create({game: buzz, user: jake, color: light_blue, score: 0, position: 0, moving: false, final_position: 0})
+jake_beyond = Player.create({game: beyond, user: jake, color: light_blue, score: 5, position: 0, moving: false, final_position: 0})
+jake_turners = Player.create({game: turners, user: jake, color: light_blue, score: 5, position: 0, moving: false, final_position: 0})
+jake_bookmarked = Player.create({game: bookmarked, user: jake, color: light_blue, score: 0, position: 5, moving: false, final_position: 0})
+
+riveting_board = Board.create({game: riveting})
+buzz_board = Board.create({game: buzz})
+beyond_board = Board.create({game: beyond})
+turners_board = Board.create({game: turners})
+wise_board = Board.create({game: wise})
+worms_board = Board.create({game: worms})
+bookmarked_board = Board.create({game: bookmarked})
+
+Board.all.each do |board|
+  board_tiles = []
+  tile_groups = TileGroup.all.pluck(:id)
+  i = 0
+  while i < 16 do
+    if i == 0
+      tile = Tile.where(tile_group_id: tile_groups[(i / 2).floor]).order(Arel.sql('random()')).first
+    else
+      tile = Tile.where.not(id: board_tiles[i - 1][:tile_id]).where(tile_group_id: tile_groups[(i / 2).floor]).order(Arel.sql('random()')).first
+    end
+    board_tiles.push(BoardTile.create(board: board, tile: tile))
+    i += 1
+  end
+end
+
+jake_beyond_result = Result.create({player: jake_beyond, board: beyond_board, winner: true})
+jake_turners_result = Result.create({player: jake_turners, board: turners_board, winner: true})
