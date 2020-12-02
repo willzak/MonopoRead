@@ -21,9 +21,22 @@ export default function Form( props ) {
     }
   }
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (title) {
+      setLoading(true)
+      props.saveBook(props.currentPlayer, title, review, props.tile.board_tile_id)
+        .then (() => {
+          props.setCongrats(title)
+          props.setShowInfo(true)
+          props.setShowForm(false)
+        })
+    }
+  }
+
   return (
     <div>
-        <form className="book-form">
+        <form onSubmit={submitHandler} className="book-form">
           <h3> Submit Your Book! </h3>
           <TextField id="standard-basic" label="Book Title" type="text"  name="title" value={title} onChange={(event) => setTitle(event.target.value)}/>
           <br /> 
