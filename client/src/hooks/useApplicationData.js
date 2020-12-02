@@ -95,6 +95,7 @@ export default function useApplicationData() {
         setGame(response.data.game)
         setBoard(response.data.board.id)
         setPlayers([response.data.player])
+        setPlayersInitialized(1)
         setTiles(response.data.board_tiles.map(tile => {
           return {
             tile: tile,
@@ -130,6 +131,7 @@ export default function useApplicationData() {
         setGame(response.data.game)
         setBoard(response.data.board.id)
         setPlayers(response.data.players)
+        setPlayersInitialized(1)
         setTiles(response.data.board_tiles.map(tile => {
           return {
             tile: tile,
@@ -165,6 +167,7 @@ export default function useApplicationData() {
       setGame(response.data.game)
       setBoard(response.data.board.id)
       setPlayers(response.data.players)
+      setPlayersInitialized(1)
       setTiles(response.data.board_tiles.map(tile => {
         return {
           tile: tile,
@@ -386,13 +389,13 @@ export default function useApplicationData() {
   }, [players.length, user])
 
   useEffect(() => {
-    if (playersInitialized !== 0) {
+    if (playersInitialized !== 0 && players.length > 0) {
       players.forEach((player, index) => {
         if (player.player.moving) rollDice(Math.abs(player.player.final_position - player.player.position), index)
       })
       setPlayersInitialized(0)
     }
-  }, [playersInitialized])
+  }, [playersInitialized, players])
 
   useEffect(() => {
     if (update.message === 'Game created') updateGames(update.game)
