@@ -161,7 +161,7 @@ beyond = Game.create({name: 'Books & Beyond', user: cassie, win_requirement: 'Po
 turners = Game.create({name: 'Page Turners', user: cassie, win_requirement: 'Points', win_points: 5, ended_at: '2020-12-02 00:51:49'})
 wise = Game.create({name: 'Wise Words', user: cassie})
 worms = Game.create({name: 'Word Worms', user: cassie})
-bookmarked = Game.create({name: 'Bookmarked', user: cassie, win_requirement: 'Points', win_points: 4})
+bookmarked = Game.create({name: 'Bookmarked', user: cassie, win_requirement: 'Points', win_points: 5})
 
 cassie_riveting = Player.create({game: riveting, user: cassie, color: brown, score: 0, position: 0, moving: false, final_position: 0})
 cassie_buzz = Player.create({game: buzz, user: cassie, color: brown, score: 0, position: 0, moving: false, final_position: 0})
