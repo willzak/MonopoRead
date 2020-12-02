@@ -7,6 +7,9 @@ A React and Rails app
 (Screenshots of app to come!)
 
 ## Runtime Uses
+You can check out the game at `https://monoporead.herokuapp.com/`
+
+or run it on your machine: 
 
 You need **TWO** terminals for this.
 
