@@ -32,6 +32,8 @@ code {
 
 .game-play {
   margin: 20px;
+  display: flex;
+  align-self: center;
 }
 
 .game-board {
