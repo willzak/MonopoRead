@@ -43,7 +43,7 @@
 
 .go-text-flipped {
   width: 2em;
-  transform-origin: 45px 35px;
+  transform-origin: 52px 42px;
   transform: rotateZ(135deg);
 }
 
@@ -189,7 +189,7 @@
   
 .go-text {
   width: 2em;
-  transform-origin: 65px 35px;
+  transform-origin: 75px 40px;
   transform: rotateZ(315deg);
 }
   

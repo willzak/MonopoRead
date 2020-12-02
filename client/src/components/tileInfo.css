@@ -5,29 +5,31 @@
 }
 
 .individual-tile {
-  margin-top: 5%;
+  margin-top: 12%;
   width: 70%;
-  height: 350px;
+  height: 375px;
   border: solid;
   border-width: thin; 
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .individual-tile-header {
-  border: solid; 
-  margin: 7px; 
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 15px;
+  border: solid;
+  font-size: 1.5em;
   display: flex; 
   flex-direction: row; 
   justify-content: space-between;
   align-items: center;
-  height: 18%; 
+  align-content: center;
 }
 
 .individual-tile-body {
-  margin-left: 10px; 
-  margin-right: 10px;
+  padding: 1em;
+  padding-top: 0;
   display: flex; 
   flex-direction: column; 
   align-items: center; 

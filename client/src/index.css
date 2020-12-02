@@ -37,7 +37,7 @@ code {
 }
 
 .game-board {
-  font-size: 0.55em;
+  font-size: 0.7em;
   margin: 0;
   padding: 0;
   -webkit-box-shadow: 3px 3px 5px 6px rgb(221, 221, 221);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
@@ -83,6 +83,13 @@ a {
 .column-organiser {
   display: flex;
   flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 }
 
 .console {

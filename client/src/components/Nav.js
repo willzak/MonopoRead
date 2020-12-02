@@ -11,7 +11,7 @@ export default function Nav (props) {
         <Link to={`/`}>
         <img src="monoporead-noshadow.png" alt="Monoporead Logo" className="logo" />
         </Link>
-          <h2 style={{paddingLeft: '30px'}}>{props.game ? `Game: ${props.game.name}` : ''}</h2>
+          <h2 style={{paddingLeft: '30px'}}>{props.game ? `You are playing: ${props.game.name}` : ''}</h2>
       </div>
       <div className="nav-bar-right">
         <div>
