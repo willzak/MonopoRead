@@ -199,38 +199,21 @@
 }
 
 .corner-click-view {
-  transition: .5s ease;
   opacity: 1;
   position: absolute;
-  top: 80%;
-  transform: translate(-50%, 100%);
-  -ms-transform: translate(-50%, 100%);
   text-align: center;
-  margin-bottom: 20px;
   z-index: 100;
-  transform: rotateZ(315deg);
+  margin-right: 6%;
 }
 
 .corner-click-view > div {
   position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-55%, 100%);
-  -ms-transform: translate(-55%, 100%);
-  text-align: center;
-  margin-bottom: 20px;
+  display: flex;
   opacity: 2;
-  background-color: red;
   color: white;
+  text-align: center;
   font-weight: bolder;
-  animation: glowing 5000ms infinite;
-}
-
-.hidden {
-  background-color: #ffffff;
-  color: black;
   font-size: 0.5em;
-  padding: 8px 16px;
-  margin-bottom: 0px;
-  border-radius: 30px;
+  background-color: red;
+  animation: glowing 5000ms infinite;
 }
