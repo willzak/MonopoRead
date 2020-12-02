@@ -40,6 +40,7 @@ code {
   font-size: 0.7em;
   margin: 0;
   padding: 0;
+  background-color: #BFDBAE;
   -webkit-box-shadow: 3px 3px 5px 6px rgb(221, 221, 221);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    3px 3px 5px 6px  rgb(221, 221, 221);  /* Firefox 3.5 - 3.6 */
   box-shadow:         3px 3px 5px 6px  rgb(221, 221, 221);
@@ -85,11 +86,19 @@ a {
   flex-direction: row;
 }
 
-.column {
+.column-left {
   display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+  width: 15em;
+}
+
+.column-right {
+  border-right: black solid 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .console {

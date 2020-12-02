@@ -19,7 +19,7 @@ export default function Board(props) {
         <Corner game={props.game} pos={18} id="Corner2" currentPlayer={props.currentPlayer} players={props.players} occupied={props.occupied}/>
       </div>
       <div className="column-organiser">
-        <div className="column">
+        <div className="column-left">
           <Tile game={props.game} pos={11} colour="fuchsia-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="left" tile={props.tiles[4]} occupied={props.occupied}/>
           <Tile game={props.game} pos={10} colour="fuchsia-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="left" tile={props.tiles[5]} occupied={props.occupied}/>
           <Chance game={props.game} drawChance={props.drawChance} currentPlayer={props.currentPlayer} pos={9} id="Chance2" players={props.players} board={props.board} landTile={props.landTile} direction="left" chance={props.chance} occupied={props.occupied} />
@@ -27,7 +27,7 @@ export default function Board(props) {
           <Tile game={props.game} pos={7} colour="orange-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="left" tile={props.tiles[7]} occupied={props.occupied}/>
         </div>
         <Console game={props.game} transport={props.transport} setReview={props.setReview} setShowReview={props.setShowReview} tiles={props.tiles} saveBook={props.saveBook} currentPlayer={props.currentPlayer} players={props.players} board={props.board} chance={props.chance} />
-        <div className="column">
+        <div className="column-right">
           <Tile game={props.game} pos={19} colour="green-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="right" tile={props.tiles[8]} occupied={props.occupied}/>
           <Tile game={props.game} pos={20} colour="green-tile" currentPlayer={props.currentPlayer} players={props.players} board={props.board} landTile={props.landTile} direction="right" tile={props.tiles[9]} occupied={props.occupied}/>
           <Chance game={props.game} drawChance={props.drawChance} currentPlayer={props.currentPlayer} pos={21} id="Chance3" players={props.players} board={props.board} landTile={props.landTile} direction="right" chance={props.chance} occupied={props.occupied}/>
