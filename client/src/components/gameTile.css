@@ -127,7 +127,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform-origin: 70% 150%;
+  transform-origin: 71px 70px;
   transform: rotateZ(90deg);
   width: 9em;
   text-align: center;
