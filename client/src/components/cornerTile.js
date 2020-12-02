@@ -43,10 +43,10 @@ export default function Corner(props) {
           </div>
           <div>
             <img src={window.location.origin + '/Go_Text.png'} alt="MonopoRead Go" className="go-text" />
-          </div>
-          { mode === "occupied" && (<Notification type="corner-click-view" />) }
-          { mode === "empty" }
-          <div>
+            </div>
+            { mode === "occupied" && (<Notification type="corner-click-view" />) }
+            { mode === "empty" }
+            <div>
             <img src={window.location.origin + '/Monopoly_Go_Arrow.png'} alt="MonopoRead Arrow" className="arrow" />
           </div>
         </div>

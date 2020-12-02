@@ -41,7 +41,7 @@ export default function Home(props) {
 
       <div className="user-info">
         <div>
-          <h1>{props.user ? `Hi ${props.user.name}` : 'Not logged in'}</h1>
+          <h1>{props.user ? `Hi ${props.user.name}!` : 'Not logged in'}</h1>
         </div>
       </div>
 
