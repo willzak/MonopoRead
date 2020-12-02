@@ -17,20 +17,25 @@ In the other terminal, `cd` into `client`. Run `npm install`. Rename the `.env.e
 ## Dependencies
 
 - React
-- React-router-dom
-- Actioncable
-- Axios
-- React-window
-- Universal-cookie
-- Material-ui/core
-- Material-ui/icons
-- React-dice-roll
-- React-confetti
-
+  - React
+  - React-router-dom
+  - Actioncable
+  - Axios
+  - React-window
+  - Universal-cookie
+  - Material-ui/core
+  - Material-ui/icons
+  - React-dice-roll
+  - React-confetti
 
 - Ruby
-- Rails
-
+  - Ruby
+  - Rails
+  - pg
+  - puma
+  - bcrypt
+  - jwt
+  - rack-cors
 
 ## Contact
 
@@ -39,5 +44,3 @@ Please contact us if you have any questions or requests, or post an issue to thi
 - Will Zak `williamzak0@gmail.com`
 - Marcello Kuenzler `marcello.kuenzler@gmail.com`
 - Avvai Ketheeswaran `avvai.kethees@gmail.com`
-
-
