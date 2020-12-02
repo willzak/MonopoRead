@@ -161,7 +161,6 @@ game4 = Game.create({name: 'Game4', user: jake, ended_at: '2020-12-02 00:51:49'}
 game5 = Game.create({name: 'Game5', user: jake, ended_at: '2020-12-02 00:51:49'})
 game6 = Game.create({name: 'Game6', user: cassie})
 game7 = Game.create({name: 'Game7', user: cassie})
-game3 = Game.create({name: 'Real Game', user: jake})
 
 player1 = Player.create({game: game1, user: jake, color: light_blue})
 player2 = Player.create({game: game2, user: jake, color: light_blue})

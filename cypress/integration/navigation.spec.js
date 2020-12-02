@@ -7,12 +7,11 @@ describe("Navigation", () => {
 
     cy.visit("/");
 
-    cy.contains("Logout").click();
     cy.contains("Login").click();
-    cy.contains(".users").contains("Marco").click();
+    cy.contains("Marco").click();
     cy.visit("/");
     cy.get(".community-chest").click();
-    cy.get('input[name=title]').type('New Game')
+    cy.get('input[name=title]').type("Marco's Game")
     cy.contains('Submit').click();
     cy.wait(4000)
     cy.get(".small-token").click({ force: true });
