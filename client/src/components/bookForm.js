@@ -23,15 +23,6 @@ export default function Form( props ) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (title) {
-      setLoading(true)
-      props.saveBook(props.currentPlayer, title, review, props.tile.board_tile_id)
-        .then (() => {
-          props.setCongrats(title)
-          props.setShowInfo(true)
-          props.setShowForm(false)
-        })
-    }
   }
 
   return (
