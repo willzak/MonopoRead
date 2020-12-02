@@ -26,6 +26,18 @@ describe("Navigation", () => {
           cy.wait(1000)
           cy.get(".small-token").click({ force: true });
         }
+        if (response.includes('board/tiles') && !response.includes('board/tiles/submit')) {
+          cy.wait(1000)
+          cy.get(".small-token").click({ force: true });
+        }
+        if (response.includes('board/tiles') && !response.includes('board/tiles/submit')) {
+          cy.wait(1000)
+          cy.get(".small-token").click({ force: true });
+        }
+        if (response.includes('board/tiles') && !response.includes('board/tiles/submit')) {
+          cy.wait(1000)
+          cy.get(".small-token").click({ force: true });
+        }
         if (response.includes('board/tiles')) {
           cy.contains('Completed').click();
           cy.get('input[name=title]').type(books[bookPosition % books.length]);

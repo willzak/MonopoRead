@@ -123,6 +123,12 @@ export default function useApplicationData() {
           }
         }))
         history.push('/board')
+        axios.get(`/api/users/${user.id}/game_lists`)
+        .then((response) => {
+          setGames(response.data.playable_games)
+          setJoinableGames(response.data.joinable_games)
+          setEndedGames(response.data.ended_games)
+        })
       })
   }
 
@@ -159,6 +165,12 @@ export default function useApplicationData() {
           }
         }))
         history.push('/board')
+        axios.get(`/api/users/${user.id}/game_lists`)
+        .then((response) => {
+          setGames(response.data.playable_games)
+          setJoinableGames(response.data.joinable_games)
+          setEndedGames(response.data.ended_games)
+        })
       })
   }
 
@@ -195,6 +207,12 @@ export default function useApplicationData() {
         }
       }))
       history.push('/board')
+      axios.get(`/api/users/${user.id}/game_lists`)
+      .then((response) => {
+        setGames(response.data.playable_games)
+        setJoinableGames(response.data.joinable_games)
+        setEndedGames(response.data.ended_games)
+      })
     })
   }
 

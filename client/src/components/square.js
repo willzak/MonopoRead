@@ -41,6 +41,7 @@ export default function Square(props) {
   //if props.player is true render the token component in the square component
   const activePlayers = function() {
     setSubmit(false); 
+    const active = []
     return props.players.map((player, index) => {
       if (props.pos === player.player.position) {
         if (!props.game.ended_at && props.currentPlayer === index && props.tile) {
@@ -49,8 +50,12 @@ export default function Square(props) {
           .then((response) => {
             setSubmit(response.data); 
           })
-        }  
-        return <Token key={player.player.id} color={player.color.hexcode} />
+        }
+        if (!active.includes(player.player.id)) {
+          active.push(player.player.id)
+          return <Token key={player.player.id} color={player.color.hexcode} />
+        }
+        else return null
       } 
       else return null
       })
